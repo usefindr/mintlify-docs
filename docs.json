@@ -16,16 +16,9 @@
           {
             "group": "Get Started",
             "pages": [
-  {
-    "page": "index"
-  },
-  {
-    "page": "concepts",
-    "title": "Core Concepts"
-  },
-  {
-    "page": "quickstart"
-  }
+              "index",
+              "concepts",
+              "quickstart"
             ]
           },
           {
