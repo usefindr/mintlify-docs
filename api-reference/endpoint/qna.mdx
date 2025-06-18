@@ -1,0 +1,41 @@
+---
+title: 'QnA'
+openapi: 'POST /search/qna'
+---
+
+Ask a question based on uploaded documents or sessions.
+
+## Sample Request
+
+```bash
+curl -X POST https://api.usecortex.ai/search/qna \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "question": "What are the key features of our product?",
+    "session_id": "session_123",
+    "tenant_id": "tenant_456",
+    "stream": false,
+    "search_mode": ["creative"],
+    "top_n": 5,
+    "ai_generation": true,
+    "highlight_chunks": true
+  }'
+```
+
+### 🔐 Headers
+- `Authorization`: Bearer token
+
+### 🧾 Parameters
+- `question` (string, required): The user query  
+- `session_id` (string, required): Chat session ID  
+- `tenant_id` (string, required): Tenant identifier  
+- `sub_tenant_id` (string, optional): Sub-tenant identifier  
+- `stream` (boolean, optional): Enable streaming  
+- `context_list` (list of strings, optional): List of document IDs  
+- `search_mode` (list of strings, optional): e.g., 'creative', 'web'  
+- `top_n` (number, optional): Number of results to return  
+- `ai_generation` (boolean, optional): Enable AI answer generation  
+- `highlight_chunks` (boolean, optional): Return source chunks  
+- `search_alpha` (float, optional): Weight for semantic match  
+- `recency_bias` (float, optional): Recency preference

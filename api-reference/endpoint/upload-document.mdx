@@ -1,0 +1,25 @@
+---
+title: 'Upload Document'
+openapi: 'POST /upload/upload_document'
+---
+
+Uploads a document (e.g., PDF, DOCX) for processing and indexing.
+
+## Sample Request
+
+```bash
+curl -X POST https://api.usecortex.ai/upload/upload_document \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -F "file=@document.pdf" \
+  -F "tenant_id=tenant_456" \
+  -F "custom_metadata={\"author\":\"John Doe\",\"department\":\"Sales\",\"tags\":[\"contract\",\"Q1\"]}"
+```
+
+### 🔐 Headers
+- `Authorization`: Bearer token
+
+### 🧾 Parameters
+- `tenant_id` (string, required): Tenant identifier  
+- `sub_tenant_id` (string, optional): Sub-tenant identifier  
+- `file` (UploadFile, required): Document file  
+- `custom_metadata` (stringified JSON, optional): Metadata dictionary

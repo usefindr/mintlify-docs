@@ -1,0 +1,101 @@
+---
+title: "Responses"
+description: "Cortex generates smart, grounded, and personalized responses to every user query. This page explains how response generation works, how it adapts over time, and the advanced capabilities built into the system."
+---
+
+## Personalized Response Styles
+
+Cortex doesn't just answer — it learns how *you* like your answers.
+
+Over time, the system adapts to each user's preferences by observing their behavior, past queries, and feedback loops. This includes:
+
+- Preferred **formats** (e.g. tables, bullet points, summaries)
+- Preferred **tone** (e.g. concise, friendly, formal)
+- Preferred **depth** (e.g. quick summary vs detailed explanation)
+- Specific **content types** (e.g. Excel files, slide decks, contracts)
+
+You can also allow users to explicitly specify how they want answers — for example:
+
+```json
+"I prefer comparisons in a markdown table."
+"I like summaries with bullets, not long paragraphs."
+```
+
+This creates a highly tailored experience where answers feel personalized, not generic.
+
+---
+
+## Grounded with Citations
+
+Every response can be **grounded in source material** using Cortex's built-in citation system.
+
+When a user asks a question, the answer is generated using documents, web data, or memory — and the system:
+
+- Returns the **exact chunks** of source text used to build the answer
+- Provides **source IDs, titles, page numbers**, and optionally **bounding box coordinates** for PDFs
+- Allows the frontend to show inline citations, source previews, or even highlight regions in original files
+
+Example output:
+
+```json
+{
+  "answer": "The contract allows termination with a 30-day notice after 12 months.",
+  "sources": [
+    {
+      "source_id": "doc-123",
+      "title": "contract.pdf",
+      "page": 3
+    }
+  ],
+  "chunks": [
+    {
+      "text": "The contract specifies a 12-month term...",
+      "bounding_box": {
+        "x": 120, "y": 320, "width": 180, "height": 40
+      }
+    }
+  ]
+}
+```
+
+This keeps responses **auditable, explainable, and trustworthy** — especially useful in enterprise, legal, and compliance settings.
+
+---
+
+## Creative Mode
+
+Sometimes, users want answers that go beyond the facts.
+
+With `creative_mode` enabled, Cortex shifts from strictly grounded retrieval to **imaginative generation**, allowing it to:
+
+- Suggest new ideas or concepts
+- Generate content beyond the original sources
+- Expand on partial context using LLM capabilities
+
+Use this when you want the AI to help with:
+
+- Brainstorming product names
+- Writing summaries with flair
+- Exploring hypothetical ideas
+- Rewriting answers for tone and creativity
+
+You can toggle this mode using the `search_mode: ["creative"]` parameter in the `/search/qna` API call.
+
+```json
+{
+  "question": "Give me 5 fun blog title ideas about data privacy",
+  "search_mode": ["creative"]
+}
+```
+
+---
+
+## Combine All Modes
+
+Cortex's strength is in combining these capabilities into one flexible response system:
+
+- **Retrieval + Generation:** Factual answers grounded in sources
+- **Memory + Personalization:** Responses that evolve to match each user
+- **Creativity + Control:** Creative responses when needed, factual when not
+
+Whether you're building a research assistant, support bot, or content co-pilot — Cortex helps your AI speak with intelligence *and* personality.

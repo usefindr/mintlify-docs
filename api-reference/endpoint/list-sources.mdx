@@ -1,0 +1,20 @@
+---
+title: 'List Sources'
+openapi: 'GET /list/sources'
+---
+
+Fetches all sources/documents for a given tenant.
+
+## Sample Request
+
+```bash
+curl -X GET "https://api.usecortex.ai/list/sources?tenant_id=tenant_456" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### 🔐 Headers
+- `Authorization`: Bearer token
+
+### 🧾 Parameters
+- `tenant_id` (string, required): Tenant identifier  
+- `sub_tenant_id` (string, optional): Optional filter

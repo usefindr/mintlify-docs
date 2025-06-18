@@ -1,0 +1,21 @@
+---
+title: 'List Sources By ID'
+openapi: 'GET /list/sources_by_id'
+---
+
+Fetches specific sources/documents by their IDs.
+
+## Sample Request
+
+```bash
+curl -X GET "https://api.usecortex.ai/list/sources_by_id?tenant_id=tenant_456&source_ids=doc_123&source_ids=doc_456&source_ids=doc_789" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### 🔐 Headers
+- `Authorization`: Bearer token
+
+### 🧾 Parameters
+- `tenant_id` (string, required): Tenant identifier  
+- `sub_tenant_id` (string, optional): Optional filter  
+- `source_ids` (list of strings, required): IDs of documents

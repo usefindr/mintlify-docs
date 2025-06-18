@@ -3,9 +3,9 @@
   "theme": "mint",
   "name": "Cortex SDK",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#7C3AED",
+    "light": "#A78BFA",
+    "dark": "#5B21B6"
   },
   "favicon": "/favicon.svg",
   "navigation": {
@@ -24,12 +24,14 @@
           {
             "group": "Essentials",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+              "essentials/answers",
+              "essentials/customisation",
+              "essentials/metadata",
+              "essentials/multi-step",
+              "essentials/multi-tenant",
+              "essentials/retrievals",
+              "essentials/self-improving",
+              "essentials/web-search"
             ]
           }
         ]
@@ -44,12 +46,16 @@
             ]
           },
           {
-            "group": "Endpoint Examples",
+            "group": "Endpoints",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "api-reference/endpoint/qna",
+              "api-reference/endpoint/upload-document",
+              "api-reference/endpoint/batch-upload",
+              "api-reference/endpoint/scrape-webpage",
+              "api-reference/endpoint/list-sources",
+              "api-reference/endpoint/list-sources-by-id",
+              "api-reference/endpoint/delete-memory",
+              "api-reference/endpoint/verify-processing"
             ]
           }
         ]
