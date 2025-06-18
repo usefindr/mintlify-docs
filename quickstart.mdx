@@ -17,7 +17,7 @@ Authorization: Bearer <your_api_key>
 
 - Node.js / Python (or any backend language)
 - Basic knowledge of HTTP requests
-- An API key from [Cortex](https://useCortex.com/) (`Authorization: Bearer <your_api_key>`)
+- An API key from [Cortex](https://usecortex.ai/) (`Authorization: Bearer <your_api_key>`)
 - A document or webpage you want your AI to read
 
 ### **Step 1: Upload Your Knowledge Source**
@@ -46,7 +46,7 @@ POST /upload/scrape_webpage
 ```
 
 ```mdx
-curl -X POST 'https://api.useCortex.com/upload/scrape_webpage?web_url=https://example.com&tenant_id=your_tenant_id' \
+curl -X POST 'https://api.usecortex.ai/upload/scrape_webpage?web_url=https://example.com&tenant_id=your_tenant_id' \
   -H "Authorization: Bearer <your_api_key>"
 ```
 
@@ -82,7 +82,7 @@ POST /search/qna
 **Example (cURL):**
 
 ```mdx
-curl -X POST 'https://api.useCortex.com/search/qna' \
+curl -X POST 'https://api.usecortex.ai/search/qna' \
   -H "Authorization: Bearer <your_api_key>" \
   -H "Content-Type: application/json" \
   -d '{
