@@ -1,33 +1,56 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: "Introduction"
+description: "You can generate and manage API keys from your Cortex Dashboard. All endpoints require an API key sent as a Bearer token in the Authorization header."
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+Welcome to the Cortex SDK API Reference. This section documents every available endpoint and how to interact with them to power AI apps and agents with intelligent memory and retrieval.
 
-## Welcome
-
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
-
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
+> Base URL: `https://api.usecortex.ai`
 >
-  View the OpenAPI specification file
-</Card>
+> Contact us to get your API key at [founders@usecortex.ai](mailto:founders@usecortex.ai)
 
-## Authentication
-
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
-
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+```mdx
+Authorization: Bearer <your_api_key>
 ```
+
+### **Upload APIs**
+
+Send knowledge into Cortex. Upload documents, batch files, and scrape webpages.
+
+- `/upload/upload_document`
+- `/upload/batch_upload`
+- `/upload/scrape_webpage`
+
+### **Search API**
+
+Ask questions. Retrieve personalized answers from memory and indexed sources.
+
+- `/search/qna`
+
+### **Listing APIs**
+
+Browse what’s in your Cortex memory or knowledge store.
+
+- `/list/sources`
+- `/list/sources_by_id`
+
+### **Knowledge Management**
+
+Manage knowledge entries, delete outdated or unwanted context.
+
+- `/delete_memory`
+
+### **Processing Verification**
+
+Check if a file or page was successfully processed.
+
+- `/upload/verify_processing`
+
+## 💡 Best Practices
+
+- Use **sub-tenants** to support multi-user isolation in B2B use cases.
+- Leverage **metadata** for fine-grained filtering and agentic retrieval.
+- Tune **search_alpha** and **recency_bias** to control relevance.
+- Enable **highlight_chunks** for chunk-level citations.
+
+---
