@@ -1,6 +1,6 @@
 ---
 title: "Core Concepts"
-description: "Understands the core concepts of using Cortex"
+description: "Understand the core concepts of using Cortex"
 ---
 
 The Cortex SDK is designed to give you the most flexible developer experience for building AI apps and agents. Set up a global memory store for individual users (B2C), or configure organizations as tenants and onboard their users (B2B).
@@ -13,20 +13,20 @@ Tenants represent isolated knowledge stores for your application. Cortex support
 - In **B2B**, organizations are modeled as separate tenants, each with their own scoped environment where users, knowledge, memory, and policies are fully encapsulated.\
   Multi-tenancy ensures data isolation, access control, and efficient retrieval across contexts.
 
-### Knowledge 
+### Knowledge
 
-These are the atoms that power your retrievals. Any context you or your users add is treated as knowledge for the retrieval engine to search and retreive. This includes any type of documents, chats, images, webpages, presentations, reports, any form of unstructured information. Cortex can also digest CSVs. 
+These are the atoms that power your retrievals. Any context you or your users add is treated as knowledge for the retrieval engine to search and retreive. This includes any type of documents, chats, images, webpages, presentations, reports, any form of unstructured information. Cortex can also digest CSVs.
 
 Each piece of knowledge you add is meticulously cleaned, parsed using in-house parsers, chunked, embedded, and prepared for the most optimal retrieval experience.
 
-### AI Memory 
+### AI Memory
 
 Memory is where personalization lives. Unlike static knowledge, memory is dynamic and user-specific. Cortex stores evolving insights about users, their preferences, past interactions, and contextual signals.
 
-- Think of it as a **long-term cache of user profile**—not just what they said, but what they meant and what they’ve done before. Their preferences, intentions, and statements. 
+- Think of it as a **long-term cache of user profile**—not just what they said, but what they meant and what they’ve done before. Their preferences, intentions, and statements.
 - Cortex memories update automatically through conversation, queries, and usage, giving your app the ability to learn, remember, and adapt.
 
-### Querying 
+### Querying
 
 Querying is how you extract meaningful answers from your knowledge and memory layers. Cortex gives you control over **how retrieval works**, using a combination of:
 
@@ -37,7 +37,7 @@ Querying is how you extract meaningful answers from your knowledge and memory la
 - **Citations and Bounding Boxes**:\
   Every answer returned by Cortex is backed by **verifiable citations**—with exact source snippets and optional **bounding boxes** for visual references (e.g. PDFs, slides, or structured files). This builds trust and lets users trace every insight back to its origin.
 - **Mixture-of-Experts Routing**:\
-  Cortex dynamically routes each query through a Mixture-of-Experts engine to select the best answering strategy—whether it needs to use memory, search more deeply, dynamically adjust prompts, or chain multi-hop lookups. 
+  Cortex dynamically routes each query through a Mixture-of-Experts engine to select the best answering strategy—whether it needs to use memory, search more deeply, dynamically adjust prompts, or chain multi-hop lookups.
 
 ### Metadata (& Agentic Querying)
 
