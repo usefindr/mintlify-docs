@@ -62,23 +62,6 @@
       }
     ],
     "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://usecortex.ai/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Community",
-          "href": "https://usecortex.ai/community",
-          "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://usecortex.ai/blog",
-          "icon": "newspaper"
-        }
-      ]
     }
   },
   "logo": {
