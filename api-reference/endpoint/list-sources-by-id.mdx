@@ -1,6 +1,6 @@
 ---
 title: 'List Sources By ID'
-openapi: 'GET /list/sources_by_id'
+openapi: 'POST /list/sources_by_id'
 ---
 
 Fetches specific sources/documents by their IDs.
@@ -8,14 +8,19 @@ Fetches specific sources/documents by their IDs.
 ## Sample Request
 
 ```bash
-curl -X GET "https://api.usecortex.ai/list/sources_by_id?tenant_id=tenant_456&source_ids=doc_123&source_ids=doc_456&source_ids=doc_789" \
-  -H "Authorization: Bearer YOUR_API_KEY"
+curl -X POST https://api.usecortex.ai/list/sources_by_id \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "tenant_id": "tenant_456",
+    "source_ids": ["doc_123", "doc_456", "doc_789"]
+  }'
 ```
 
 ### 🔐 Headers
 - `Authorization`: Bearer token
 
-### 🧾 Parameters
+### 🧾 Body Parameters
 - `tenant_id` (string, required): Tenant identifier  
 - `sub_tenant_id` (string, optional): Optional filter  
 - `source_ids` (list of strings, required): IDs of documents
