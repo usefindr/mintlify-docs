@@ -25,6 +25,7 @@
             "group": "Essentials",
             "pages": [
               "essentials/answers",
+              "essentials/ai-memories",
               "essentials/customisation",
               "essentials/metadata",
               "essentials/multi-step",
