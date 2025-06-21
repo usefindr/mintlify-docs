@@ -1,0 +1,70 @@
+---
+title: 'App Upload'
+openapi: 'POST /upload/upload_app_sources'
+---
+
+Works similar to the upload endpoint but is specifically designed to upload multiple app sources (e.g., Gmail, Slack, Notion) in a single request for processing and indexing. 
+Each app upload is handled using specialized pipelines inside Cortex and can include various content types with rich metadata.
+
+## Sample Request
+
+```bash
+curl --location 'https://api.usecortex.ai/upload/upload_app_sources?tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}' \
+--header 'accept: application/json' \
+--header 'Authorization: Bearer {API_KEY}' \
+--header 'Content-Type: application/json' \
+--data '[
+  {
+    "collections": [""],
+    "id": "{SOURCE_ID}",
+    "title": "{SOURCE_TITLE}",
+    "type": "{SOURCE_TYPE}",
+    "description": "{SOURCE_DESCRIPTION}",
+    "note": "",
+    "url": "{SOURCE_URL}",
+    "timestamp": "{TIMESTAMP}",
+    "content": {
+      "text": "{CONTENT_TEXT}",
+      "html_base64": "",
+      "csv_base64": "",
+      "markdown": "",
+      "files": [],
+      "layout": []
+    },
+    "cortex_metadata": {},
+    "meta": {},
+    "attachments": []
+  }
+]'
+```
+
+### 🔐 Headers
+- `Authorization`: Bearer token
+- `accept`: application/json
+- `Content-Type`: application/json
+
+### 🧾 Query Parameters
+- `tenant_id` (string, required): Tenant identifier
+- `sub_tenant_id` (string, optional): Sub-tenant identifier
+
+### 📦 Request Body
+The request body is a JSON array of app source objects, where each object contains:
+
+- `collections` (array of strings, optional): Collection tags for organization
+- `id` (string, required): Unique identifier for the source
+- `title` (string, required): Title of the source
+- `type` (string, required): Type of app source (e.g., "gmail", "bookmark", "document")
+- `description` (string, optional): Description of the source
+- `note` (string, optional): Additional notes
+- `url` (string, optional): Source URL
+- `timestamp` (string, required): Unix timestamp of when the source was created/accessed
+- `content` (object, required): Content object containing:
+  - `text` (string, optional): Plain text content
+  - `html_base64` (string, optional): Base64 encoded HTML content
+  - `csv_base64` (string, optional): Base64 encoded CSV content
+  - `markdown` (string, optional): Markdown formatted content
+  - `files` (array, optional): Array of file objects
+  - `layout` (array, optional): Layout information
+- `cortex_metadata` (object, optional): Custom metadata for Cortex processing
+- `meta` (object, optional): Additional metadata
+- `attachments` (array, optional): Array of attachment objects with similar structure to content
