@@ -19,7 +19,8 @@ curl -X POST https://api.usecortex.ai/search/qna \
     "search_mode": ["creative"],
     "top_n": 5,
     "ai_generation": true,
-    "highlight_chunks": true
+    "highlight_chunks": true,
+    "multi_step_reasoning": true
   }'
 ```
 
@@ -41,3 +42,4 @@ curl -X POST https://api.usecortex.ai/search/qna \
 - `highlight_chunks` (boolean, optional): Return source chunks  
 - `search_alpha` (float, optional): Weight for semantic match  
 - `recency_bias` (float, optional): Recency preference
+- `multi_step_reasoning` (boolean, optional): Enable multi-step reasoning for complex questions

@@ -321,6 +321,102 @@
           }
         }
       }
+    },
+    "/search/qna": {
+      "post": {
+        "description": "Ask a question based on uploaded documents or sessions.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "question": {
+                    "type": "string",
+                    "description": "The user query"
+                  },
+                  "user_name": {
+                    "type": "string",
+                    "description": "User name"
+                  },
+                  "user_instructions": {
+                    "type": "string",
+                    "description": "Accept custom, specific instructions from the user"
+                  },
+                  "session_id": {
+                    "type": "string",
+                    "description": "Chat session ID"
+                  },
+                  "tenant_id": {
+                    "type": "string",
+                    "description": "Tenant identifier"
+                  },
+                  "sub_tenant_id": {
+                    "type": "string",
+                    "description": "Sub-tenant identifier"
+                  },
+                  "stream": {
+                    "type": "boolean",
+                    "description": "Enable streaming"
+                  },
+                  "context_list": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of document IDs"
+                  },
+                  "search_mode": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "e.g., 'creative', 'web'"
+                  },
+                  "top_n": {
+                    "type": "number",
+                    "description": "Number of results to return"
+                  },
+                  "ai_generation": {
+                    "type": "boolean",
+                    "description": "Enable AI answer generation"
+                  },
+                  "highlight_chunks": {
+                    "type": "boolean",
+                    "description": "Return source chunks"
+                  },
+                  "search_alpha": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Weight for semantic match"
+                  },
+                  "recency_bias": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Recency preference"
+                  },
+                  "multi_step_reasoning": {
+                    "type": "boolean",
+                    "description": "Enable multi-step reasoning for complex questions. Default is true, setting to false will disable auto-enable",
+                    "default": true
+                  }
+                },
+                "required": [
+                  "question",
+                  "session_id",
+                  "tenant_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Question answered successfully"
+          }
+        }
+      }
     }
   },
   "components": {
