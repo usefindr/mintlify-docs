@@ -30,7 +30,8 @@
             "description": "The public URL to scrape",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "https://example.com/article"
           },
           {
             "name": "tenant_id",
@@ -39,7 +40,8 @@
             "description": "Tenant identifier",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "tenant_456"
           },
           {
             "name": "sub_tenant_id",
@@ -48,7 +50,8 @@
             "description": "Sub-tenant identifier",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "subtenant_123"
           }
         ],
         "responses": {
@@ -69,7 +72,8 @@
             "description": "Tenant identifier",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "your_tenant_id"
           },
           {
             "name": "sub_tenant_id",
@@ -78,7 +82,8 @@
             "description": "Sub-tenant identifier",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "your_sub_tenant_id"
           }
         ],
         "requestBody": {
@@ -90,22 +95,53 @@
                 "properties": {
                   "file": {
                     "type": "string",
-                    "format": "binary"
+                    "format": "binary",
+                    "description": "Document file to upload (PDF, DOCX, TXT, etc.)",
+                    "example": "document.pdf"
                   },
                   "custom_metadata": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "JSON string containing custom metadata for the document",
+                    "example": "{\"author\":\"John Doe\",\"department\":\"Sales\"}"
                   }
                 },
                 "required": [
                   "file"
                 ]
+              },
+              "examples": {
+                "document_upload": {
+                  "summary": "Upload a PDF document",
+                  "description": "Example of uploading a PDF document with custom metadata",
+                  "value": {
+                    "file": "document.pdf",
+                    "custom_metadata": "{\"author\":\"John Doe\",\"department\":\"Sales\",\"tags\":[\"contract\",\"Q1\"]}"
+                  }
+                }
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Document uploaded and indexed successfully"
+            "description": "Document uploaded and indexed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Document uploaded successfully"
+                    },
+                    "document_id": {
+                      "type": "string",
+                      "example": "doc_123456"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -121,7 +157,8 @@
             "description": "Tenant identifier",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "your_tenant_id"
           },
           {
             "name": "sub_tenant_id",
@@ -130,7 +167,8 @@
             "description": "Sub-tenant identifier",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "your_sub_tenant_id"
           }
         ],
         "requestBody": {
@@ -145,22 +183,54 @@
                     "items": {
                       "type": "string",
                       "format": "binary"
-                    }
+                    },
+                    "description": "Multiple document files to upload (PDF, DOCX, TXT, etc.)"
                   },
                   "custom_metadata": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "JSON string containing custom metadata for the documents"
                   }
                 },
                 "required": [
                   "files"
                 ]
+              },
+              "examples": {
+                "batch_upload": {
+                  "summary": "Upload multiple documents",
+                  "description": "Example of uploading multiple documents with custom metadata",
+                  "value": {
+                    "files": ["document1.pdf", "document2.docx", "document3.txt"],
+                    "custom_metadata": "[{\"author\":\"John Doe\",\"department\":\"Sales\"},{\"author\":\"Jane Smith\",\"department\":\"Marketing\"}]"
+                  }
+                }
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Batch upload successful"
+            "description": "Batch upload successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Batch upload successful"
+                    },
+                    "document_ids": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "example": ["doc_123", "doc_456", "doc_789"]
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -367,7 +437,7 @@
                     },
                     "description": "List of document IDs"
                   },
-                  "search_mode": {
+                  "search_modes": {
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -416,6 +486,98 @@
             "description": "Question answered successfully"
           }
         }
+      }
+    },
+    "/list/sources": {
+      "get": {
+        "description": "Fetches all sources/documents for a given tenant.",
+        "parameters": [
+          {"name": "tenant_id", "in": "query", "required": true, "description": "Tenant identifier", "schema": {"type": "string"}, "example": "tenant_456"},
+          {"name": "sub_tenant_id", "in": "query", "required": false, "description": "Optional filter", "schema": {"type": "string"}, "example": "subtenant_123"}
+        ],
+        "responses": {"200": {"description": "List of sources returned successfully"}}
+      }
+    },
+    "/list/sources_by_id": {
+      "post": {
+        "description": "Fetches specific sources/documents by their IDs.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tenant_id": {"type": "string", "description": "Tenant identifier", "example": "tenant_456"},
+                  "sub_tenant_id": {"type": "string", "description": "Optional filter", "example": "subtenant_123"},
+                  "source_ids": {"type": "array", "items": {"type": "string"}, "description": "IDs of documents", "example": ["doc_123", "doc_456"]}
+                },
+                "required": ["tenant_id", "source_ids"]
+              }
+            }
+          }
+        },
+        "responses": {"200": {"description": "Sources returned successfully"}}
+      }
+    },
+    "/upload/delete_memory": {
+      "delete": {
+        "description": "Deletes specific documents or memories associated with a user.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tenant_id": {"type": "string", "description": "Tenant identifier", "example": "tenant_456"},
+                  "source_ids": {"type": "array", "items": {"type": "string"}, "description": "IDs of documents to delete", "example": ["doc_123", "doc_456"]}
+                },
+                "required": ["tenant_id", "source_ids"]
+              }
+            }
+          }
+        },
+        "responses": {"200": {"description": "Memory deleted successfully"}}
+      },
+      "post": {
+        "description": "Deletes specific documents or memories associated with a user (POST alternative).",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tenant_id": {"type": "string", "description": "Tenant identifier", "example": "tenant_456"},
+                  "source_ids": {"type": "array", "items": {"type": "string"}, "description": "IDs of documents to delete", "example": ["doc_123", "doc_456"]}
+                },
+                "required": ["tenant_id", "source_ids"]
+              }
+            }
+          }
+        },
+        "responses": {"200": {"description": "Memory deleted successfully (POST)"}}
+      }
+    },
+    "/upload/verify_processing": {
+      "post": {
+        "description": "Checks if a document has been successfully processed.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file_id": {"type": "string", "description": "ID of the uploaded file", "example": "file_123"}
+                },
+                "required": ["file_id"]
+              }
+            }
+          }
+        },
+        "responses": {"200": {"description": "Processing status returned successfully"}}
       }
     }
   },

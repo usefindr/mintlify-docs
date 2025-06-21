@@ -8,16 +8,19 @@ Checks if a document has been successfully processed.
 ## Sample Request
 
 ```bash
-curl -X POST https://api.usecortex.ai/upload/verify_processing \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "file_id": "file_123"
+curl --location 'https://api.usecortex.ai/upload/verify_processing' \
+  --header 'Authorization: Bearer {API_KEY}' \
+  --header 'accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "file_id": "{FILE_ID}"
   }'
 ```
 
 ### 🔐 Headers
 - `Authorization`: Bearer token
+- `accept`: application/json
+- `Content-Type`: application/json
 
 ### 🧾 Parameters
 - `file_id` (string, required): ID of the uploaded file

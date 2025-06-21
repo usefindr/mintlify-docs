@@ -8,38 +8,28 @@ Ask a question based on uploaded documents or sessions.
 ## Sample Request
 
 ```bash
-curl -X POST https://api.usecortex.ai/search/qna \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "question": "What are the key features of our product?",
-    "session_id": "session_123",
-    "tenant_id": "tenant_456",
-    "stream": false,
-    "search_mode": ["creative"],
-    "top_n": 5,
-    "ai_generation": true,
-    "highlight_chunks": true,
-    "multi_step_reasoning": true
-  }'
+curl --location 'https://api.usecortex.ai/search/qna?question={QUESTION}&session_id={SESSION_ID}&tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}&stream={STREAM}&context_list={CONTEXT_LIST}&search_modes={SEARCH_MODES}&top_n={TOP_N}&ai_generation={AI_GENERATION}&highlight_chunks={HIGHLIGHT_CHUNKS}&search_alpha={SEARCH_ALPHA}&recency_bias={RECENCY_BIAS}&multi_step_reasoning={MULTI_STEP_REASONING}&user_name={USER_NAME}&user_instructions={USER_INSTRUCTIONS}' \
+  --header 'Authorization: Bearer {API_KEY}' \
+  --header 'accept: application/json'
 ```
 
 ### 🔐 Headers
 - `Authorization`: Bearer token
+- `accept`: application/json
 
 ### 🧾 Parameters
-- `question` (string, required): The user query  
-- `user_name` (string, optional): User name
-- `user_instructions` (string, optional): Accept custom, specific instructions from the user
-- `session_id` (string, required): Chat session ID  
-- `tenant_id` (string, required): Tenant identifier  
-- `sub_tenant_id` (string, optional): Sub-tenant identifier  
-- `stream` (boolean, optional): Enable streaming  
-- `context_list` (list of strings, optional): List of document IDs  
-- `search_mode` (list of strings, optional): e.g., 'creative', 'web'  
-- `top_n` (number, optional): Number of results to return  
-- `ai_generation` (boolean, optional): Enable AI answer generation  
-- `highlight_chunks` (boolean, optional): Return source chunks  
-- `search_alpha` (float, optional): Weight for semantic match  
-- `recency_bias` (float, optional): Recency preference
-- `multi_step_reasoning` (boolean, optional): Enable multi-step reasoning for complex questions
+- `question` (string, required): The user query (query parameter)
+- `user_name` (string, optional): User name (query parameter)
+- `user_instructions` (string, optional): Accept custom, specific instructions from the user (query parameter)
+- `session_id` (string, required): Chat session ID (query parameter)
+- `tenant_id` (string, required): Tenant identifier (query parameter)
+- `sub_tenant_id` (string, optional): Sub-tenant identifier (query parameter)
+- `stream` (boolean, optional): Enable streaming (query parameter)
+- `context_list` (list of strings, optional): List of document IDs (query parameter)
+- `search_modes` (list of strings, optional): e.g., 'creative', 'web' (query parameter)
+- `top_n` (number, optional): Number of results to return (query parameter)
+- `ai_generation` (boolean, optional): Enable AI answer generation (query parameter)
+- `highlight_chunks` (boolean, optional): Return source chunks (query parameter)
+- `search_alpha` (float, optional): Weight for semantic match (query parameter)
+- `recency_bias` (float, optional): Recency preference (query parameter)
+- `multi_step_reasoning` (boolean, optional): Enable multi-step reasoning for complex questions (query parameter)

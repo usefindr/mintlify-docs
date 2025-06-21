@@ -8,19 +8,23 @@ Fetches specific sources/documents by their IDs.
 ## Sample Request
 
 ```bash
-curl -X POST https://api.usecortex.ai/list/sources_by_id \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "tenant_id": "tenant_456",
-    "source_ids": ["doc_123", "doc_456", "doc_789"]
+curl --location 'https://api.usecortex.ai/list/sources_by_id' \
+  --header 'Authorization: Bearer {API_KEY}' \
+  --header 'accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "tenant_id": "{TENANT_ID}",
+    "sub_tenant_id": "{SUB_TENANT_ID}",
+    "source_ids": ["{SOURCE_ID1}", "{SOURCE_ID2}"]
   }'
 ```
 
 ### 🔐 Headers
 - `Authorization`: Bearer token
+- `accept`: application/json
+- `Content-Type`: application/json
 
 ### 🧾 Body Parameters
-- `tenant_id` (string, required): Tenant identifier  
-- `sub_tenant_id` (string, optional): Optional filter  
+- `tenant_id` (string, required): Tenant identifier
+- `sub_tenant_id` (string, optional): Optional filter
 - `source_ids` (list of strings, required): IDs of documents
