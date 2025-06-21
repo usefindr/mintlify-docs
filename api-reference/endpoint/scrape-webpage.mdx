@@ -8,19 +8,16 @@ Scrapes and processes content from a public webpage.
 ## Sample Request
 
 ```bash
-curl -X POST https://api.usecortex.ai/upload/scrape_webpage \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "web_url": "https://example.com/article",
-    "tenant_id": "tenant_456"
-  }'
+curl --location 'https://api.usecortex.ai/upload/scrape_webpage?web_url={WEB_URL}&tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}' \
+  --header 'Authorization: Bearer {API_KEY}' \
+  --header 'accept: application/json'
 ```
 
 ### 🔐 Headers
 - `Authorization`: Bearer token
+- `accept`: application/json
 
 ### 🧾 Parameters
-- `web_url` (string, required): The public URL to scrape  
-- `tenant_id` (string, required): Tenant identifier  
-- `sub_tenant_id` (string, optional): Sub-tenant identifier
+- `web_url` (string, required): The public URL to scrape (query parameter)
+- `tenant_id` (string, required): Tenant identifier (query parameter)
+- `sub_tenant_id` (string, optional): Sub-tenant identifier (query parameter)

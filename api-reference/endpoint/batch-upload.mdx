@@ -8,20 +8,21 @@ Uploads multiple documents in a single request for processing and indexing.
 ## Sample Request
 
 ```bash
-curl -X POST https://api.usecortex.ai/upload/batch_upload \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -F "files=@document1.pdf" \
-  -F "files=@document2.docx" \
-  -F "files=@document3.txt" \
-  -F "tenant_id=tenant_456" \
-  -F "custom_metadata=[{\"author\":\"John Doe\",\"department\":\"Sales\"},{\"author\":\"Jane Smith\",\"department\":\"Marketing\"},{\"author\":\"Bob Wilson\",\"department\":\"Engineering\"}]"
+curl --location 'https://api.usecortex.ai/upload/batch_upload?tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}' \
+--header 'accept: application/json' \
+--header 'Authorization: Bearer {API_KEY}' \
+--form 'files=@{FILE1}' \
+--form 'files=@{FILE2}' \
+--form 'files=@{FILE3}' \
+--form 'custom_metadata="{CUSTOM_METADATA}"'
 ```
 
 ### 🔐 Headers
 - `Authorization`: Bearer token
+- `accept`: application/json
 
 ### 🧾 Parameters
-- `tenant_id` (string, required): Tenant identifier  
-- `sub_tenant_id` (string, optional): Sub-tenant identifier  
-- `files` (List of UploadFile, required): Document files  
-- `custom_metadata` (stringified JSON list, optional): Metadata list
+- `tenant_id` (string, required): Tenant identifier (query parameter)
+- `sub_tenant_id` (string, optional): Sub-tenant identifier (query parameter)
+- `files` (List of UploadFile, required): Document files (form data)
+- `custom_metadata` (string, optional): Metadata string (form data)

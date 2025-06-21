@@ -14,27 +14,27 @@ curl --location 'https://api.usecortex.ai/upload/upload_app_sources?tenant_id={T
 --header 'Authorization: Bearer {API_KEY}' \
 --header 'Content-Type: application/json' \
 --data '[
-  {
+    {
     "collections": [""],
     "id": "{SOURCE_ID}",
     "title": "{SOURCE_TITLE}",
     "type": "{SOURCE_TYPE}",
     "description": "{SOURCE_DESCRIPTION}",
-    "note": "",
+        "note": "",
     "url": "{SOURCE_URL}",
     "timestamp": "{TIMESTAMP}",
-    "content": {
+        "content": {
       "text": "{CONTENT_TEXT}",
-      "html_base64": "",
-      "csv_base64": "",
-      "markdown": "",
-      "files": [],
-      "layout": []
-    },
-    "cortex_metadata": {},
-    "meta": {},
+            "html_base64": "",
+            "csv_base64": "",
+            "markdown": "",
+            "files": [],
+            "layout": []
+        },
+        "cortex_metadata": {},
+        "meta": {},
     "attachments": []
-  }
+    }
 ]'
 ```
 
