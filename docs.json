@@ -56,7 +56,8 @@
               "api-reference/endpoint/list-sources",
               "api-reference/endpoint/list-sources-by-id",
               "api-reference/endpoint/delete-memory",
-              "api-reference/endpoint/verify-processing"
+              "api-reference/endpoint/verify-processing",
+              "api-reference/endpoint/app-upload"
             ]
           }
         ]
