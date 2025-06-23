@@ -563,21 +563,30 @@
     "/upload/verify_processing": {
       "post": {
         "description": "Checks if a document has been successfully processed.",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "file_id": {"type": "string", "description": "ID of the uploaded file", "example": "file_123"}
+        "parameters": [
+          {"name": "file_id", "in": "query", "required": true, "description": "ID of the uploaded file", "schema": {"type": "string"}, "example": "file_123"}
+        ],
+        "responses": {
+          "200": {
+            "description": "Processing status returned successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "file_id": {"type": "string", "description": "ID of the uploaded file", "example": "123123123123"},
+                    "indexing_status": {"type": "string", "enum": ["success", "in_progress", "errored"], "description": "Indexing status of the file", "example": "success"}
+                  },
+                  "required": ["file_id", "indexing_status"]
                 },
-                "required": ["file_id"]
+                "example": {
+                  "file_id": "123123123123",
+                  "indexing_status": "success"
+                }
               }
             }
           }
-        },
-        "responses": {"200": {"description": "Processing status returned successfully"}}
+        }
       }
     }
   },
