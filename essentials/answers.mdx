@@ -90,6 +90,23 @@ You can toggle this mode using the `search_mode: ["creative"]` parameter in the 
 
 ---
 
+## Filter by Metadata
+
+You can restrict the context used for answering questions by providing a `metadata` parameter in the `/search/qna` API call. This allows you to filter sources by `source_title` or `source_type`.
+
+Example:
+
+```json
+{
+  "question": "Summarize the contract terms",
+  "metadata": {"source_title": "contract.pdf"}
+}
+```
+
+Only sources matching the provided metadata will be used for context.
+
+---
+
 ## Combine All Modes
 
 Cortex's strength is in combining these capabilities into one flexible response system:
