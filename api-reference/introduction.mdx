@@ -25,11 +25,11 @@ Send knowledge into Cortex. Upload documents, batch files, and scrape webpages.
 
 Ask questions. Retrieve personalized answers from memory and indexed sources.
 
-- `/search/qna`
+- `/search/qna` — supports an optional `metadata` parameter to filter sources by `source_title` or `source_type`.
 
 ### **Listing APIs**
 
-Browse what’s in your Cortex memory or knowledge store.
+Browse what's in your Cortex memory or knowledge store.
 
 - `/list/sources`
 - `/list/sources_by_id`
@@ -49,7 +49,7 @@ Check if a file or page was successfully processed.
 ## 💡 Best Practices
 
 - Use **sub-tenants** to support multi-user isolation in B2B use cases.
-- Leverage **metadata** for fine-grained filtering and agentic retrieval.
+- Leverage **metadata** (e.g., `source_title`, `source_type` in the QnA API) for fine-grained filtering and agentic retrieval.
 - Tune **search_alpha** and **recency_bias** to control relevance.
 - Enable **highlight_chunks** for chunk-level citations.
 

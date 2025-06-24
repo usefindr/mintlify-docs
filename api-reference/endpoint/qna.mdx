@@ -28,7 +28,8 @@ curl --location 'https://api.usecortex.ai/search/qna' \
     "multi_step_reasoning": {MULTI_STEP_REASONING},
     "user_name": "{USER_NAME}",
     "user_instructions": "{USER_INSTRUCTIONS}",
-    "auto_agent_routing": {AUTO_AGENT_ROUTING}
+    "auto_agent_routing": {AUTO_AGENT_ROUTING},
+    "metadata": {"source_title": "<optional title>", "source_type": "<optional type>"}
   }'
 ```
 
@@ -54,3 +55,4 @@ curl --location 'https://api.usecortex.ai/search/qna' \
 - `recency_bias` (float, optional): Recency preference
 - `multi_step_reasoning` (boolean, optional): Enable multi-step reasoning for complex questions
 - `auto_agent_routing` (boolean, optional, default: true): If true, enables routing for choosing the best suitable agent automatically; if false, the answer is generated from the default model
+- `metadata` (object, optional): Filter context to only sources matching the provided metadata. **Allowed keys:** `source_title`, `source_type`. For example, `{ "source_title": "contract.pdf", "source_type": "document" }` will restrict the context to sources with that title and/or type.

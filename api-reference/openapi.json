@@ -417,7 +417,16 @@
                   "search_alpha": {"type": "number", "format": "float", "description": "Weight for semantic match"},
                   "recency_bias": {"type": "number", "format": "float", "description": "Recency preference"},
                   "multi_step_reasoning": {"type": "boolean", "default": true, "description": "Enable multi-step reasoning for complex questions"},
-                  "auto_agent_routing": {"type": "boolean", "default": true, "description": "If true, enables routing for choosing the best suitable agent automatically; if false, the answer is generated from the default model."}
+                  "auto_agent_routing": {"type": "boolean", "default": true, "description": "If true, enables routing for choosing the best suitable agent automatically; if false, the answer is generated from the default model."},
+                  "metadata": {
+                    "type": "object",
+                    "description": "Filter context to only sources matching the provided metadata. Allowed keys: source_title, source_type.",
+                    "properties": {
+                      "source_title": {"type": "string", "description": "Restrict to sources with this title."},
+                      "source_type": {"type": "string", "description": "Restrict to sources of this type (e.g., document, webpage)."}
+                    },
+                    "additionalProperties": false
+                  }
                 },
                 "required": ["question", "session_id", "tenant_id"]
               }
