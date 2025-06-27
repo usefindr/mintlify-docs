@@ -416,7 +416,7 @@
                   "highlight_chunks": {"type": "boolean", "description": "Return source chunks"},
                   "search_alpha": {"type": "number", "format": "float", "description": "Weight for semantic match"},
                   "recency_bias": {"type": "number", "format": "float", "description": "Recency preference"},
-                  "multi_step_reasoning": {"type": "boolean", "default": true, "description": "Enable multi-step reasoning for complex questions"},
+                  "multi_step_reasoning": {"type": "boolean", "default": true, "description": "If enabled, the system will automatically activate multi-step search for complex queries. If set to false, auto-enabling of multi-step search is disabled, and only single-step search will be used regardless of query complexity."},
                   "auto_agent_routing": {"type": "boolean", "default": true, "description": "If true, enables routing for choosing the best suitable agent automatically; if false, the answer is generated from the default model."},
                   "metadata": {
                     "type": "object",
