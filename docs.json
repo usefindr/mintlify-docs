@@ -34,6 +34,12 @@
               "essentials/self-improving",
               "essentials/web-search"
             ]
+          },
+          {
+            "group": "Use Cases",
+            "pages": [
+              "use-cases/glean-clone"
+            ]
           }
         ]
       },
