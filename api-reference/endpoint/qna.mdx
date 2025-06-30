@@ -53,7 +53,7 @@ curl --location 'https://api.usecortex.ai/search/qna' \
 - `highlight_chunks` (boolean, optional): Return source chunks
 - `search_alpha` (float, optional): Weight for semantic match
 - `recency_bias` (float, optional): Recency preference
-- `multi_step_reasoning` (boolean, optional): If enabled, the system will automatically activate multi-step search for complex queries. If set to false, auto-enabling of multi-step search is disabled, and only single-step search will be used regardless of query complexity.
+- `multi_step_reasoning` (boolean, optional, default: true): If enabled, the system will automatically activate multi-step search for complex queries. If set to false, auto-enabling of multi-step search is disabled, and only single-step search will be used regardless of query complexity.
 - `auto_agent_routing` (boolean, optional, default: true): If true, enables routing for choosing the best suitable agent automatically; if false, the answer is generated from the default model
 - `metadata` (object, optional): Filter context to only sources matching the provided metadata. **Allowed keys:** `source_title`, `source_type`. For example, `{ "source_title": "contract.pdf", "source_type": "document" }` will restrict the context to sources with that title and/or type. 
 
