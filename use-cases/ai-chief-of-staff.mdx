@@ -44,18 +44,12 @@ The same request from different users might yield different function sequences b
 
 ## Architecture Overview
 
-```
-┌───────────────┐   ask(task)   ┌─────────────────────┐   call(fn)   ┌──────────────────┐
-│  User / Agent │──────────────▶│  Action Orchestrator│─────────────▶│ Workspace Apps   │
-└───────────────┘               │  • Policy Engine    │              │ (Slack, Jira …)  │
-        ▲                       │  • Retry / Logging  │              └──────────────────┘
-        │                       │  • Auth Vault       │
-  feedback / events             │  • Function Cache   │
-        │                       └─────────┬───────────┘
-        │                                 │
-        │        function suggestions     │
-        └─────────────────────────────────┘
-                          Cortex
+```mermaid
+graph LR
+    A["User / Agent"] -->|"ask(task)"| B["Action Orchestrator<br/>• Policy Engine<br/>• Retry / Logging<br/>• Auth Vault<br/>• Function Cache"]
+    B -->|"call(fn)"| C["Workspace Apps<br/>(Slack, Jira …)"]
+    D["Cortex"] -->|"function suggestions"| B
+    B -->|"feedback / events / memories"| A
 ```
 
 * **Action Orchestrator**: Your runtime that receives function suggestions from Cortex and executes them.

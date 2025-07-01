@@ -20,25 +20,21 @@ A Glean-like application typically includes these core features:
 
 ## Architecture Overview
 
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Frontend UI   │    │   Backend API   │    │   Cortex APIs   │
-│                 │    │                 │    │                 │
-│ • Search UI     │◄──►│ • Data Sync     │◄──►│ • QnA Engine    │
-│ • Chat Interface│    │ • Auth/ACL      │    │ • Document Index│
-│ • Results View  │    │ • App Connectors│    │ • Memory Store  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                       │                       │
-         │                       │                       │
-         ▼                       ▼                       ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Data Sources  │    │  App Connectors │    │ Retrieval Layer │
-│                 │    │                 │    │                 │
-│ • Google apps   │    | • Compositio    │    │ • Cortex Memory │
-│ • Slack         │    │ • Vanilla APIs  │    │ • User Sessions │
-│ • Notion        │    │ • Webhooks      │    │ • Metadata Store│
-│ • Jira          │    │ • Scheduled Jobs│    │                 │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
+```mermaid
+graph TD
+    A["Frontend UI<br/>• Search UI<br/>• Chat Interface<br/>• Results View"] 
+    B["Backend API<br/>• Data Sync<br/>• Auth/ACL<br/>• App Connectors"]
+    C["Cortex APIs<br/>• QnA Engine<br/>• Document Index<br/>• Memory Store"]
+    
+    D["Data Sources<br/>• Google apps<br/>• Slack<br/>• Notion<br/>• Jira"]
+    E["App Connectors for Fetching Data<br/><br/>• Composio<br/>• Vanilla APIs<br/>• Webhooks<br/>• Scheduled Jobs"]
+    F["Retrieval Layer<br/>• Cortex Memory<br/>• User Sessions<br/>• Metadata Store"]
+    
+    A <--> B
+    B <--> C
+    A --> D
+    B <--> E
+    C --> F
 ```
 
 ## Step 1: Data Ingestion Strategy
