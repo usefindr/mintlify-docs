@@ -540,6 +540,56 @@
           }
         }
       }
+    },
+    "/fetch/fetch_content": {
+      "post": {
+        "description": "Fetches the download URL for a specific uploaded source/document.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file_id": {"type": "string", "description": "ID of the file to fetch the download URL for."},
+                  "tenant_id": {"type": "string", "description": "Tenant identifier."},
+                  "sub_tenant_id": {"type": "string", "description": "Sub-tenant identifier.", "default": ""}
+                },
+                "required": ["file_id", "tenant_id"]
+              },
+              "examples": {
+                "fetch_content": {
+                  "summary": "Fetch download URL for a file",
+                  "value": {
+                    "file_id": "file_123456",
+                    "tenant_id": "tenant_456",
+                    "sub_tenant_id": "subtenant_123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Download URL(s) fetched successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {"type": "string", "description": "Download URL for the file ID key."}
+                },
+                "example": {
+                  "CortexDocb7a1db714c9c473bbd8ff81ec17ba2811750936047": "https://cortex-local-sources-prod.s3.amazonaws.com/ToayuCogoBdxZVoZQ1ft8ZoRzCO2/FindrMasterCollectionMemoriesPreprod/123/local_source/CortexDocb7a1db714c9c473bbd8ff81ec17ba2811750936047?..."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "File not found or not accessible."
+          }
+        }
+      }
     }
   },
   "components": {
