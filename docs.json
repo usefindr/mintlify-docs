@@ -39,7 +39,8 @@
             "group": "Use Cases",
             "pages": [
               "use-cases/glean-clone",
-              "use-cases/ai-chief-of-staff"
+              "use-cases/ai-chief-of-staff",
+              "use-cases/ai-linkedin-recruiter"
             ]
           }
         ]
