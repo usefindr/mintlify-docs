@@ -58,3 +58,76 @@ curl --location 'https://api.usecortex.ai/search/qna' \
 - `metadata` (object, optional): Filter context to only sources matching the provided metadata. **Allowed keys:** `source_title`, `source_type`. For example, `{ "source_title": "contract.pdf", "source_type": "document" }` will restrict the context to sources with that title and/or type. 
 
 > **Important Note:** Cortex internally relies on the `metadata` field for source matching. You should use this field when you want to deterministically fetch specific documents based on their metadata.
+
+### 📤 Response
+Returns a JSON object containing the AI-generated answer and supporting source chunks with layout information for creating bounding boxes around cited sources.
+
+```json
+{
+  "answer": "Based on the uploaded documents, here is the answer to your question...",
+  "session_id": "session_123",
+  "sources": [
+    {
+      "id": "source_123",
+      "url": "https://example.com/document.pdf",
+      "title": "Document Title",
+      "timestamp": "2024-01-15T10:30:00Z",
+      "context": "This is the relevant text chunk from the document...",
+      "source": "document",
+      "layout": {
+        "page": 1,
+        "bbox": [100, 200, 300, 250],
+        "coordinates": {
+          "x": 100,
+          "y": 200,
+          "width": 200,
+          "height": 50
+        }
+      },
+      "hybrid_score": 0.85,
+      "cohere_score": 0.92,
+      "bm25_score": 0.78
+    }
+  ],
+  "highlighted_chunks": [
+    {
+      "chunk_content": "Highlighted text chunk...",
+      "source_type": "document",
+      "source_url": "https://example.com/document.pdf",
+      "source_title": "Document Title",
+      "vectorstore_type": "chroma",
+      "layout": {
+        "page": 1,
+        "bbox": [100, 200, 300, 250],
+        "coordinates": {
+          "x": 100,
+          "y": 200,
+          "width": 200,
+          "height": 50
+        }
+      },
+      "hybrid_score": 0.85,
+      "relevance_score": 0.89,
+      "bm25_score": 0.78
+    }
+  ]
+}
+```
+
+### 📍 Layout Field
+The `layout` field provides coordinates for creating bounding boxes around cited sources:
+
+- `page` (number): The page number where the content appears
+- `bbox` (array): Bounding box coordinates as [x1, y1, x2, y2]
+- `coordinates` (object): Alternative coordinate format with:
+  - `x` (number): Left position
+  - `y` (number): Top position  
+  - `width` (number): Width of the bounding box
+  - `height` (number): Height of the bounding box
+
+This layout information enables you to highlight or create visual indicators around the exact location of cited content within PDF documents.
+
+### 🚨 Error Responses
+- `400`: Missing required parameters (question, session_id, tenant_id)
+- `401`: Invalid or missing API key
+- `500`: Internal server error during processing
