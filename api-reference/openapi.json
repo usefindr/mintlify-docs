@@ -590,6 +590,163 @@
           }
         }
       }
+    },
+    "/list_user_memories": {
+      "get": {
+        "description": "Retrieves and lists all echo memories for a cortex user.",
+        "responses": {
+          "200": {
+            "description": "List of user memories returned successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "source_id": {"type": "string", "description": "Unique identifier for the memory"},
+                      "source_content": {"type": "string", "description": "Content of the echo memory"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/delete_user_memory": {
+      "delete": {
+        "description": "Deletes a specific echo memory for a cortex user.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "memory_id": {"type": "string", "description": "Echo memory ID to delete", "example": "memory_123"}
+                },
+                "required": ["memory_id"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Memory deletion result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean",
+                  "description": "Success (true) or failure (false) of the deletion operation"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/retrieve_user_memory": {
+      "get": {
+        "description": "Searches and retrieves relevant echo memories based on a query.",
+        "parameters": [
+          {"name": "query", "in": "query", "required": true, "description": "Search query to find relevant memories", "schema": {"type": "string"}, "example": "project meeting notes"},
+          {"name": "max_count", "in": "query", "required": false, "description": "Maximum number of memories to return", "schema": {"type": "integer"}, "example": 10}
+        ],
+        "responses": {
+          "200": {
+            "description": "Relevant memories returned successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "description": "Echo memory objects matching the search query"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/add_user_memory": {
+      "post": {
+        "description": "Manually adds a new echo memory for a cortex user.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "content": {"type": "string", "description": "The echo memory content to add", "example": "Remember to follow up on the Q1 budget proposal"},
+                  "metadata": {
+                    "type": "object",
+                    "description": "Additional metadata for the memory",
+                    "properties": {
+                      "title": {"type": "string", "description": "Title for the memory", "example": "Q1 Budget Follow-up"},
+                      "type": {"type": "string", "description": "Type classification for the memory", "example": "task"}
+                    }
+                  }
+                },
+                "required": ["content"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Memory insertion result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean",
+                  "description": "Success (true) or failure (false) of the memory insertion"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/generate_user_memory": {
+      "post": {
+        "description": "Automatically generates and saves echo memories based on a user query. The most sophisticated endpoint that combines query processing, memory generation, and storage.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {"type": "string", "description": "User query to generate memories from", "example": "I had a productive meeting with the sales team about Q2 targets"},
+                  "user_name": {"type": "string", "description": "Name of the user for personalization", "example": "John Doe"}
+                },
+                "required": ["query", "user_name"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Generated memories returned successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "description": "Generated echo memory objects that were created and stored"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
