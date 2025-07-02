@@ -1,0 +1,49 @@
+---
+title: 'Fetch Content'
+openapi: 'POST /fetch/fetch_content'
+---
+
+Fetches the download URL for a specific uploaded source/document.
+
+## Sample Request
+
+```bash
+curl --location 'https://api.usecortex.ai/fetch/fetch_content' \
+  --header 'Authorization: Bearer {API_KEY}' \
+  --header 'accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "file_id": "{FILE_ID}",
+    "tenant_id": "{TENANT_ID}",
+    "sub_tenant_id": "{SUB_TENANT_ID}"
+  }'
+```
+
+### 🔐 Headers
+- `Authorization`: Bearer token
+- `accept`: application/json
+- `Content-Type`: application/json
+
+### 🧾 Body Parameters
+- `file_id` (string, required): ID of the file to fetch the download URL for
+- `tenant_id` (string, required): Tenant identifier
+- `sub_tenant_id` (string, optional): Sub-tenant identifier
+
+### 📋 Functionality
+- Extracts user credentials and organization details from the API key
+- Validates the file access permissions for the specified tenant
+- Creates secure access tokens for file retrieval
+- Generates time-limited download URLs for the requested file
+- Returns downloadable URLs that can be used to access the file content
+
+### 📤 Response
+Returns a JSON object with file IDs as keys and their corresponding download URLs as values.
+
+```json
+{
+  "CortexDocb7a1db714c9c473bbd8ff81ec17ba2811750936047": "https://cortex-local-sources-prod.s3.amazonaws.com/ToayuCogoBdxZVoZQ1ft8ZoRzCO2/FindrMasterCollectionMemoriesPreprod/123/local_source/CortexDocb7a1db714c9c473bbd8ff81ec17ba2811750936047?..."
+}
+```
+
+### 🚨 Error Responses
+- `404`: File not found or not accessible with the provided credentials 
