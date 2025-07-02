@@ -15,7 +15,8 @@ curl --location 'https://api.usecortex.ai/fetch/fetch_content' \
   --data '{
     "file_id": "{FILE_ID}",
     "tenant_id": "{TENANT_ID}",
-    "sub_tenant_id": "{SUB_TENANT_ID}"
+    "sub_tenant_id": "{SUB_TENANT_ID}",
+    "return_content": true
   }'
 ```
 
@@ -28,12 +29,14 @@ curl --location 'https://api.usecortex.ai/fetch/fetch_content' \
 - `file_id` (string, required): ID of the file to fetch the download URL for
 - `tenant_id` (string, required): Tenant identifier
 - `sub_tenant_id` (string, optional): Sub-tenant identifier
+- `return_content` (boolean, optional, default=True): Flag to determine whether to return the actual file content.
 
 ### 📋 Functionality
 - Extracts user credentials and organization details from the API key
 - Validates the file access permissions for the specified tenant
 - Creates secure access tokens for file retrieval
-- Generates time-limited download URLs for the requested file
+- When `return_content` is `true`: Returns the actual file content directly
+- When `return_content` is `false`: Generates time-limited download URLs for the requested file
 - Returns downloadable URLs that can be used to access the file content
 
 ### 📤 Response
