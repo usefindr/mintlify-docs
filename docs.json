@@ -68,6 +68,16 @@
               "api-reference/endpoint/app-upload",
               "api-reference/endpoint/fetch-content"
             ]
+          },
+          {
+            "group": "User Memories",
+            "pages": [
+              "api-reference/endpoint/list-user-memories",
+              "api-reference/endpoint/delete-user-memory",
+              "api-reference/endpoint/retrieve-user-memory",
+              "api-reference/endpoint/add-user-memory",
+              "api-reference/endpoint/generate-user-memory"
+            ]
           }
         ]
       }
