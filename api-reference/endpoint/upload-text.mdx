@@ -1,0 +1,60 @@
+---
+title: 'Upload Text'
+openapi: 'POST /upload/upload_markdown'
+---
+
+Uploads text or markdown content for processing and indexing.
+
+## Sample Request
+
+```bash
+curl --location 'https://api.usecortex.ai/upload/upload_markdown?tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}' \
+  --header 'Authorization: Bearer {API_KEY}' \
+  --header 'accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "content": "This is sample markdown content that will be processed and indexed.",
+    "metadata": {
+      "title": "Sample Document",
+      "author": "John Doe",
+      "category": "documentation"
+    }
+  }'
+```
+
+### 🔐 Headers
+- `Authorization`: Bearer token
+- `accept`: application/json
+- `Content-Type`: application/json
+
+### 🧾 Parameters
+- `tenant_id` (string, required): Tenant identifier (query parameter)
+- `sub_tenant_id` (string, optional): Sub-tenant identifier (query parameter)
+
+### 🧾 Body Parameters
+- `content` (string, required): The text or markdown content to upload and process
+- `metadata` (object, optional): Custom metadata object to associate with the uploaded content
+
+### 📋 Functionality
+- Validates that content is provided and not empty
+- Generates a unique file ID for the uploaded content
+- Converts the text content to UTF-8 encoded bytes
+- Uploads the content as a .md file to S3 storage
+- Creates secure access tokens for processing
+- Triggers the ingestion pipeline for content processing and indexing
+- Returns the generated file ID for future reference
+
+### 📤 Response
+Returns a JSON object indicating upload success and the generated file ID.
+
+```json
+{
+  "success": true,
+  "file_id": "CortexDocb7a1db714c9c473bbd8ff81ec17ba2811750936047"
+}
+```
+
+### 🚨 Error Responses
+- `400`: Content field is required and cannot be empty
+- `500`: Upload to S3 failed or error while uploading markdown
+- `401`: Invalid or missing API key 

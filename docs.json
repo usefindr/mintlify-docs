@@ -59,6 +59,7 @@
             "pages": [
               "api-reference/endpoint/qna",
               "api-reference/endpoint/upload-document",
+              "api-reference/endpoint/upload-text",
               "api-reference/endpoint/batch-upload",
               "api-reference/endpoint/scrape-webpage",
               "api-reference/endpoint/list-sources",
