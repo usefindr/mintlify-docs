@@ -1,0 +1,39 @@
+---
+title: 'Generate User Memory'
+openapi: 'POST /generate_user_memory'
+---
+
+Automatically generates and saves echo memories based on a user query. This is the most sophisticated endpoint that combines query processing, memory generation, and storage.
+
+## Sample Request
+
+```bash
+curl --location 'https://api.usecortex.ai/generate_user_memory' \
+  --header 'Authorization: Bearer {API_KEY}' \
+  --header 'accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "query": "{USER_QUERY}",
+    "user_name": "{USER_NAME}"
+  }'
+```
+
+### 🔐 Headers
+- `Authorization`: Bearer token (Firebase token)
+- `accept`: application/json
+- `Content-Type`: application/json
+
+### 🧾 Body Parameters
+- `query` (string, required): User query to generate memories from
+- `user_name` (string, required): Name of the user for personalization
+
+### 📋 Functionality
+- Takes user query and user name from request
+- Rewrites the user query using OpenAI (without clarifications)
+- Generates multiple echo memories based on both original and rewritten queries
+- Automatically inserts all generated memories into the vector store
+- Returns the list of generated echo memories
+- Most sophisticated endpoint combining query processing, memory generation, and storage
+
+### 📤 Response
+Returns an array of generated echo memory objects that were created and stored. 

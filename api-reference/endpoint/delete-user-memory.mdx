@@ -1,0 +1,36 @@
+---
+title: 'Delete User Memory'
+openapi: 'DELETE /delete_user_memory'
+---
+
+Deletes a specific echo memory for a cortex user.
+
+## Sample Request
+
+```bash
+curl --location 'https://api.usecortex.ai/delete_user_memory' \
+  --header 'Authorization: Bearer {API_KEY}' \
+  --header 'accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "memory_id": "{MEMORY_ID}"
+  }'
+```
+
+### 🔐 Headers
+- `Authorization`: Bearer token (Firebase token)
+- `accept`: application/json
+- `Content-Type`: application/json
+
+### 🧾 Body Parameters
+- `memory_id` (string, required): Echo memory ID to delete
+
+### 📋 Functionality
+- Takes an echo memory ID from the request body
+- Extracts user credentials from Firebase token
+- Calls the delete function with the memory ID and user context
+- Returns confirmation of deletion success/failure
+- Logs errors and returns false on failure
+
+### 📤 Response
+Returns a boolean indicating success (true) or failure (false) of the deletion operation. 

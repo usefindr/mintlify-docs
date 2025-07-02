@@ -1,0 +1,29 @@
+---
+title: 'List User Memories'
+openapi: 'GET /list_user_memories'
+---
+
+Retrieves and lists all echo memories for a cortex user.
+
+## Sample Request
+
+```bash
+curl --location 'https://api.usecortex.ai/list_user_memories' \
+  --header 'Authorization: Bearer {API_KEY}' \
+  --header 'accept: application/json'
+```
+
+### 🔐 Headers
+- `Authorization`: Bearer token (Firebase token)
+- `accept`: application/json
+
+### 📋 Functionality
+- Extracts user details from Firebase token (email, user_id, tenant_id, sub_tenant_id)
+- Fetches all echo memories from the vector store using the combined tenant ID
+- Returns a simplified list containing source_id and source_content for each memory
+- Handles errors gracefully by returning an empty list
+
+### 📤 Response
+Returns an array of echo memory objects with:
+- `source_id` (string): Unique identifier for the memory
+- `source_content` (string): Content of the echo memory 
