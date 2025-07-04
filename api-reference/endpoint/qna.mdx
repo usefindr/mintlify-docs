@@ -91,11 +91,12 @@ Returns a JSON object containing the AI-generated answer and supporting source c
   ],
   "highlight_chunks": [
     {
-      "chunk_content": "Highlighted text chunk...",
-      "source_type": "document",
-      "source_url": "https://example.com/document.pdf",
-      "source_title": "Document Title",
-      "vectorstore_type": "chroma",
+      "source_id": "CortexDoc1234",
+      "subject": "Document Title",
+      "timestamp": "1750697263.2323804"
+      "context": "Highlighted text chunk...",
+      "source": "document",
+      "hybrid_score": 0.85,
       "layout": {
         "page": 1,
         "bbox": [100, 200, 300, 250],
@@ -106,9 +107,6 @@ Returns a JSON object containing the AI-generated answer and supporting source c
           "height": 50
         }
       },
-      "hybrid_score": 0.85,
-      "relevance_score": 0.89,
-      "bm25_score": 0.78
     }
   ]
 }
@@ -116,6 +114,8 @@ Returns a JSON object containing the AI-generated answer and supporting source c
 
 ### 📍 Layout Field
 The `layout` field provides coordinates for creating bounding boxes around cited sources:
+> **Note**: For PowerPoint (PPT) and Excel (XLSX) files, the `page` field will be returned as an empty string since these file formats don't use traditional page numbering.
+
 
 - `page` (number): The page number where the content appears
 - `bbox` (array): Bounding box coordinates as [x1, y1, x2, y2]
