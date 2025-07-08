@@ -76,6 +76,7 @@ Returns a JSON object containing the AI-generated answer and supporting source c
       "source": "document",
       "layout": {
         "page": 1,
+        "bbox": [100, 200, 300, 250],
         "coordinates": {
           "x": 100,
           "y": 200,
@@ -92,12 +93,13 @@ Returns a JSON object containing the AI-generated answer and supporting source c
     {
       "source_id": "CortexDoc1234",
       "subject": "Document Title",
-      "timestamp": "1750697263.2323804",
+      "timestamp": "1750697263.2323804"
       "context": "Highlighted text chunk...",
       "source": "document",
       "hybrid_score": 0.85,
       "layout": {
         "page": 1,
+        "bbox": [100, 200, 300, 250],
         "coordinates": {
           "x": 100,
           "y": 200,
@@ -116,6 +118,7 @@ The `layout` field provides coordinates for creating bounding boxes around cited
 
 
 - `page` (number): The page number where the content appears
+- `bbox` (array): Bounding box coordinates as [x1, y1, x2, y2]
 - `coordinates` (object): Alternative coordinate format with:
   - `x` (number): Left position
   - `y` (number): Top position  
