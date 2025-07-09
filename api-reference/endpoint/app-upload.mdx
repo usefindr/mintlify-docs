@@ -21,7 +21,7 @@ curl --location 'https://api.usecortex.ai/upload/upload_app_sources?tenant_id={T
     "collections": [""],
     "id": "{SOURCE_ID}",
     "title": "{SOURCE_TITLE}",
-    "type": "{SOURCE_TYPE}",
+    "type": "{APP_SOURCE_TYPE}",
     "description": "{SOURCE_DESCRIPTION}",
         "note": "",
     "url": "{SOURCE_URL}",
@@ -59,7 +59,7 @@ The request body is a JSON array of app source objects, where each object contai
 - `collections` (array of strings, optional): Collection tags for organization
 - `id` (string, required): Unique identifier for the source
 - `title` (string, required): Title of the source
-- `type` (string, required): Type of app source (e.g., "gmail", "bookmark", "document")
+- `type` (string, required): Type of app source (e.g., "gmail", "slack", "linear")
 - `description` (string, optional): Description of the source
 - `note` (string, optional): Additional notes
 - `url` (string, optional): Source URL
