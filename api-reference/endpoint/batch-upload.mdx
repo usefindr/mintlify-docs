@@ -16,7 +16,8 @@ curl --location 'https://api.usecortex.ai/upload/batch_upload?tenant_id={TENANT_
 --form 'files=@{FILE1}' \
 --form 'files=@{FILE2}' \
 --form 'files=@{FILE3}' \
---form 'custom_metadata="{CUSTOM_METADATA}"'
+--form 'tenant_metadata="{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}"' \
+--form 'document_metadata="{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\"}"'
 ```
 
 ### 🔐 Headers
@@ -27,4 +28,5 @@ curl --location 'https://api.usecortex.ai/upload/batch_upload?tenant_id={TENANT_
 - `tenant_id` (string, required): Tenant identifier (query parameter)
 - `sub_tenant_id` (string, optional): Sub-tenant identifier (query parameter)
 - `files` (List of UploadFile, required): Document files (form data)
-- `custom_metadata` (string, optional): Metadata string (form data)
+- `tenant_metadata` (string, optional): Metadata string (form data, for tenant-level filtering, e.g., department, compliance_tag)
+- `document_metadata` (string, optional): Metadata string (form data, for document-level filtering, e.g., title, author)
