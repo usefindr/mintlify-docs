@@ -245,7 +245,8 @@ class CortexDataIngestion {
     });
     
     if (Object.keys(metadata).length > 0) {
-      formData.append('custom_metadata', JSON.stringify(metadata));
+      formData.append('tenant_metadata', JSON.stringify(metadata.tenant_metadata));
+      formData.append('document_metadata', JSON.stringify(metadata.document_metadata));
     }
 
     const url = `${this.baseUrl}/upload/batch_upload?tenant_id=${this.tenantId}`;

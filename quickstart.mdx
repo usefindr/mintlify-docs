@@ -76,7 +76,8 @@ POST /search/qna
   "context_list": ["optional_specific_file_id"],
   "ai_generation": true,
   "highlight_chunks": true,
-  "metadata": {"source_title": "contract.pdf"}
+  "tenant_metadata": {"source_title": "contract.pdf"},
+  "document_metadata": {"source_title": "contract.pdf"}
 }
 ```
 
@@ -90,7 +91,8 @@ curl -X POST 'https://api.usecortex.ai/search/qna' \
     "question": "Summarize the contract terms",
     "session_id": "user-123-session",
     "tenant_id": "your_tenant_id",
-    "metadata": {"source_title": "contract.pdf"}
+    "tenant_metadata": {"source_title": "contract.pdf"},
+    "document_metadata": {"source_title": "contract.pdf"}
   }'
 ```
 
@@ -114,7 +116,7 @@ Render the answer in your UI and include clickable citations if desired. Citatio
 
 If available, use the `bounding_box` to enable clickable highlights or coordinate-based jumping in PDFs.
 
-You can use the `metadata` parameter to restrict the context to only sources matching a specific title or type. For example, `{ "source_title": "contract.pdf" }` will only use sources with that title for answering the question.
+You can use the `tenant_metadata` and `document_metadata` parameters to restrict the context to only sources matching a specific title or type. For example, `{ "source_title": "contract.pdf" }` will only use sources with that title for answering the question.
 
 ### **Step 6: Iterate (Optional)**
 

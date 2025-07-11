@@ -14,10 +14,13 @@ curl --location 'https://api.usecortex.ai/upload/upload_markdown?tenant_id={TENA
   --header 'Content-Type: application/json' \
   --data '{
     "content": "This is sample markdown content that will be processed and indexed.",
-    "metadata": {
-      "title": "Sample Document",
-      "author": "John Doe",
-      "category": "documentation"
+    "tenant_metadata": {
+      "department": "Finance",
+      "compliance_tag": "GDPR"
+    },
+    "document_metadata": {
+      "title": "Q1 Report.pdf",
+      "author": "Alice Smith"
     }
   }'
 ```
@@ -33,7 +36,8 @@ curl --location 'https://api.usecortex.ai/upload/upload_markdown?tenant_id={TENA
 
 ### 🧾 Body Parameters
 - `content` (string, required): The text or markdown content to upload and process
-- `metadata` (object, optional): Custom metadata object to associate with the uploaded content
+- `tenant_metadata` (object, optional): Custom metadata object to associate with the uploaded content for tenant-level filtering (e.g., department, compliance_tag)
+- `document_metadata` (object, optional): Custom metadata object to associate with the uploaded content for document-level filtering (e.g., title, author)
 
 ### 📋 Functionality
 - Validates that content is provided and not empty

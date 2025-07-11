@@ -99,10 +99,15 @@
                     "description": "Document file to upload (PDF, DOCX, TXT, etc.)",
                     "example": "document.pdf"
                   },
-                  "custom_metadata": {
-                    "type": "string",
-                    "description": "JSON string containing custom metadata for the document",
-                    "example": "{\"author\":\"John Doe\",\"department\":\"Sales\"}"
+                  "tenant_metadata": {
+                    "type": "object",
+                    "description": "JSON string containing tenant-level document metadata (e.g., department, compliance_tag)",
+                    "example": "{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}"
+                  },
+                  "document_metadata": {
+                    "type": "object",
+                    "description": "JSON string containing document-specific metadata (e.g., title, author)",
+                    "example": "{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\"}"
                   }
                 },
                 "required": [
@@ -112,10 +117,11 @@
               "examples": {
                 "document_upload": {
                   "summary": "Upload a PDF document",
-                  "description": "Example of uploading a PDF document with custom metadata",
+                  "description": "Example of uploading a PDF document with tenant metadata",
                   "value": {
                     "file": "document.pdf",
-                    "custom_metadata": "{\"author\":\"John Doe\",\"department\":\"Sales\",\"tags\":[\"contract\",\"Q1\"]}"
+                    "tenant_metadata": "{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}",
+                    "document_metadata": "{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\"}"
                   }
                 }
               }
@@ -186,9 +192,13 @@
                     },
                     "description": "Multiple document files to upload (PDF, DOCX, TXT, etc.)"
                   },
-                  "custom_metadata": {
+                  "tenant_metadata": {
                     "type": "string",
-                    "description": "JSON string containing custom metadata for the documents"
+                    "description": "JSON string containing tenant metadata for the documents"
+                  },
+                  "document_metadata": {
+                    "type": "string",
+                    "description": "JSON string containing document-specific metadata for the documents"
                   }
                 },
                 "required": [
@@ -198,10 +208,11 @@
               "examples": {
                 "batch_upload": {
                   "summary": "Upload multiple documents",
-                  "description": "Example of uploading multiple documents with custom metadata",
+                  "description": "Example of uploading multiple documents with tenant metadata",
                   "value": {
                     "files": ["document1.pdf", "document2.docx", "document3.txt"],
-                    "custom_metadata": "[{\"author\":\"John Doe\",\"department\":\"Sales\"},{\"author\":\"Jane Smith\",\"department\":\"Marketing\"}]"
+                    "tenant_metadata": "[{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"},{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}]",
+                    "document_metadata": "[{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\"},{\"title\":\"Q2 Report.pdf\",\"author\":\"Bob Jones\"}]"
                   }
                 }
               }
@@ -434,9 +445,6 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Question answered successfully"
-          }
         }
       }
     },
