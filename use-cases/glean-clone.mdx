@@ -1,5 +1,5 @@
 ---
-title: "Building Your Own Glean with Cortex (In Progress 🚧)"
+title: "Building Your Own Glean with Cortex (In Progress)"
 description: "Learn how to build a comprehensive workplace search and AI assistant platform using Cortex APIs. This guide covers data ingestion, search capabilities, and AI-powered Q&A across multiple data sources."
 ---
 
@@ -44,6 +44,7 @@ graph TD
 You'll need to connect to various data sources. Here are recommended approaches:
 
 #### Option A: Using Compositio
+
 [Compositio](https://compositio.com) provides pre-built connectors for popular apps:
 
 ```javascript
@@ -76,6 +77,7 @@ const compositioConfig = {
 ```
 
 #### Option B: Vanilla API Integration
+
 For custom integrations, use the native APIs:
 
 ```javascript
@@ -353,7 +355,8 @@ class GleanSearch {
 
 Implement advanced search capabilities:
 
-> **Advanced Features**: 
+> **Advanced Features**:
+>
 > - `multi_step_reasoning`: Automatically decomposes complex queries into steps
 > - `auto_agent_routing`: Routes queries to the best suitable AI agent
 > - `search_alpha`: Controls semantic vs keyword matching (0.0-1.0)
@@ -832,7 +835,8 @@ const MemoryEnhancedSearch = ({ userId }) => {
 - **Consistent Session IDs**: Use persistent session IDs for users to maintain conversation context
 - **User Names**: Provide consistent user names to enable Cortex's automatic memory management
 - **Performance**: Cache user profiles to avoid repeated API calls
-```
+
+````
 
 ## Step 3: Frontend Implementation
 
@@ -898,7 +902,7 @@ const GleanSearchInterface = () => {
     </div>
   );
 };
-```
+````
 
 ### 3.2 Results Display
 
@@ -1402,14 +1406,14 @@ class SearchAnalytics {
 
 ## Deployment Checklist
 
-- [ ] Set up authentication and authorization
-- [ ] Configure data connectors and sync schedules
-- [ ] Implement error handling and monitoring
-- [ ] Set up caching and rate limiting
-- [ ] Configure backup and disaster recovery
-- [ ] Test with production data volumes
-- [ ] Set up analytics and reporting
-- [ ] Document API usage and troubleshooting
+- Set up authentication and authorization
+- Configure data connectors and sync schedules
+- Implement error handling and monitoring
+- Set up caching and rate limiting
+- Configure backup and disaster recovery
+- Test with production data volumes
+- Set up analytics and reporting
+- Document API usage and troubleshooting
 
 ## Conclusion
 
@@ -1417,4 +1421,4 @@ Building a Glean-like application with Cortex APIs provides you with a powerful,
 
 The key to success is starting with a solid architecture, implementing proper data synchronization, and gradually adding advanced features like multi-step reasoning, conversation memory, and personalized responses. Cortex's APIs provide the AI capabilities you need, while your application handles the data ingestion, user interface, and business logic.
 
-Remember to monitor performance, gather user feedback, and continuously iterate on your implementation to create the best possible user experience. 
+Remember to monitor performance, gather user feedback, and continuously iterate on your implementation to create the best possible user experience.

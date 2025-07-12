@@ -1,5 +1,5 @@
 ---
-title: "Build an AI LinkedIn: People search in Natural Language with Cortex (In Progress 🚧)"
+title: "Build an AI LinkedIn: People search in Natural Language with Cortex (In Progress)"
 description: "Learn how to build an intelligent recruiting platform that understands natural language queries like 'find me someone who has 5+ years of experience in machine learning and has worked at Apple before' using Cortex's AI search capabilities."
 ---
 
@@ -10,6 +10,7 @@ Note: All code examples in this guide are for demonstration purposes. They show 
 ## The Problem with Traditional Hiring Platforms
 
 Traditional hiring platforms force recruiters to think like databases:
+
 - **Keyword matching**: "Machine Learning OR Apple OR 5 years"
 - **Boolean operators**: Complex filter combinations
 - **Manual screening**: Hours spent reviewing irrelevant profiles
@@ -18,7 +19,8 @@ Traditional hiring platforms force recruiters to think like databases:
 ## The AI-Powered Solution
 
 With Cortex, recruiters can search naturally:
-- **"Find me someone who has 5+ years of experience in machine learning and has worked at Apple before"**
+
+- **"Find me someone who has 5\+ years of experience in machine learning and has worked at Apple before"**
 - **"I need a senior frontend developer who has experience scaling React applications at a startup"**
 - **"Show me candidates who transitioned from consulting to product management at a tech company"**
 - **"Fetch the essays for the candidates that have gone to Harvard for their masters in computer science"**
@@ -159,6 +161,7 @@ const candidateProfile = {
 ### Critical Metadata Fields for Hiring Success
 
 #### Experience Metadata
+
 ```javascript
 const experienceMetadata = {
   // Quantitative experience
@@ -185,6 +188,7 @@ const experienceMetadata = {
 ```
 
 #### Skills and Technology Metadata
+
 ```javascript
 const skillsMetadata = {
   // Primary expertise areas
@@ -221,6 +225,7 @@ const skillsMetadata = {
 ```
 
 #### Education and Achievement Metadata
+
 ```javascript
 const educationMetadata = {
   // Formal education
@@ -572,6 +577,7 @@ class PersonalizedRecruitingSearch extends AIRecruitingSearch {
 Here's how AI memories make recruiting more effective:
 
 #### Initial Search (No Memory)
+
 ```
 Recruiter Query: "Find me a senior React developer with startup experience"
 
@@ -582,6 +588,7 @@ Basic Results:
 ```
 
 #### After 10 Searches (AI Memory Active)
+
 ```
 Recruiter Query: "Find me a senior React developer with startup experience"
 
@@ -606,6 +613,7 @@ AI Memory Insights:
 Cortex excels at understanding complex, multi-faceted queries:
 
 #### Multi-Criteria Searches
+
 ```javascript
 const complexQueries = [
   {
@@ -728,6 +736,7 @@ class AdvancedCandidateSearch extends PersonalizedRecruitingSearch {
 Traditional platforms rely on exact keyword matches. AI search understands concepts and relationships:
 
 #### Traditional Keyword Search Limitations
+
 ```
 Search: "Machine Learning Engineer Apple"
 Results: Only candidates with exact terms "Machine Learning" AND "Apple"
@@ -739,6 +748,7 @@ Missed:
 ```
 
 #### AI Semantic Search Power
+
 ```
 Search: "Find me someone who has 5+ years of experience in machine learning and has worked at Apple before"
 AI Understanding:
@@ -1088,8 +1098,8 @@ const searchStrategy = {
 
 1. **Use Natural Language**: Write queries as you would speak to a human recruiter
 2. **Include Context**: Add company stage, team size, and cultural requirements
-3. **Specify Experience**: Use ranges (3-5 years, 5+ years) rather than exact numbers
-4. **Combine Hard and Soft Skills**: Technical requirements + leadership/communication needs
+3. **Specify Experience**: Use ranges (3-5 years, 5\+ years) rather than exact numbers
+4. **Combine Hard and Soft Skills**: Technical requirements \+ leadership/communication needs
 5. **Add Industry Context**: Startup vs. enterprise, B2B vs. consumer, etc.
 
 ### Performance Optimization
@@ -1160,28 +1170,31 @@ const hiringMetrics = {
 ### Success Stories and ROI
 
 #### Before AI Search (Traditional Platform)
+
 - **Time per hire**: 6-8 weeks
 - **Recruiter efficiency**: 3 relevant candidates per day
 - **Search accuracy**: 35% of results relevant
 - **Offer acceptance**: 45%
 
 #### After AI Search (Cortex-Powered)
+
 - **Time per hire**: 3-4 weeks (-50%)
-- **Recruiter efficiency**: 12 relevant candidates per day (+300%)
-- **Search accuracy**: 85% of results relevant (+140%)
-- **Offer acceptance**: 78% (+73%)
+- **Recruiter efficiency**: 12 relevant candidates per day (\+300%)
+- **Search accuracy**: 85% of results relevant (\+140%)
+- **Offer acceptance**: 78% (\+73%)
 
 ## Conclusion
 
 Building an AI-powered hiring platform with Cortex transforms recruiting from a manual, keyword-based process into an intelligent, conversational experience. By leveraging natural language search, rich metadata, and AI memories, recruiters can:
 
 - **Find better candidates faster**: AI understands intent beyond keywords
-- **Improve matching accuracy**: Semantic search finds relevant candidates traditional systems miss  
+- **Improve matching accuracy**: Semantic search finds relevant candidates traditional systems miss
 - **Personalize the experience**: AI memories learn each recruiter's preferences and successful patterns
 - **Scale efficiently**: Handle complex queries that would require multiple traditional searches
 - **Make data-driven decisions**: Rich insights and scoring help prioritize candidates
 
 The key to success lies in:
+
 1. **Rich data ingestion**: Comprehensive candidate profiles with structured metadata
 2. **Natural language interface**: Let recruiters search as they think and speak
 3. **AI memory utilization**: Continuous learning from recruiter behavior and preferences
