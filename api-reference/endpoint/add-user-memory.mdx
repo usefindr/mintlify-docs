@@ -8,17 +8,10 @@ Lets you add new AI memories for your users.
 ## Sample Request
 
 ```bash
-curl --location 'https://api.usecortex.ai/add_user_memory' \
+curl --location 'https://api.usecortex.ai/user_memory/add_user_memory?tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}&user_memory={USER_MEMORY}' \
   --header 'Authorization: Bearer {API_KEY}' \
   --header 'accept: application/json' \
-  --header 'Content-Type: application/json' \
-  --data '{
-    "content": "{MEMORY_CONTENT}",
-    "metadata": {
-      "title": "{MEMORY_TITLE}",
-      "type": "{MEMORY_TYPE}"
-    }
-  }'
+  --header 'Content-Type: application/json'
 ```
 
 ### 🔐 Headers
@@ -26,18 +19,19 @@ curl --location 'https://api.usecortex.ai/add_user_memory' \
 - `accept`: application/json
 - `Content-Type`: application/json
 
-### 🧾 Body Parameters
-- `content` (string, required): The echo memory content to add
-- `metadata` (object, optional): Additional metadata for the memory
-  - `title` (string, optional): Title for the memory
-  - `type` (string, optional): Type classification for the memory
+### 🧾 Query Parameters
+- `tenant_id` (string, required): Tenant identifier
+- `sub_tenant_id` (string, required): Sub-tenant identifier
+- `user_memory` (string, required): User memory to be added to their vector store
 
 ### 📋 Functionality
-- Takes echo memory content from request body
+- Takes user memory content from request body
 - Extracts user context from Firebase token
-- Inserts the new echo memory into the vector store
+- Inserts the new user memory into the vector store
 - Returns confirmation of successful insertion
 - Handles errors and returns false on failure
 
 ### 📤 Response
-Returns a boolean indicating success (true) or failure (false) of the memory insertion. 
+Returns an object with:
+- `success` (boolean): Indicates if the request was successful
+- `user_memory_added` (boolean): True if the memory was added, false otherwise 

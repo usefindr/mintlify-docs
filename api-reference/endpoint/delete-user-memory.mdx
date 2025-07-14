@@ -8,13 +8,10 @@ Deletes a specific memory for a user.
 ## Sample Request
 
 ```bash
-curl --location 'https://api.usecortex.ai/delete_user_memory' \
+curl --location 'http://localhost:8080/user_memory/delete_user_memory?tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}&memory_id={MEMORY_ID}' \
   --header 'Authorization: Bearer {API_KEY}' \
   --header 'accept: application/json' \
-  --header 'Content-Type: application/json' \
-  --data '{
-    "memory_id": "{MEMORY_ID}"
-  }'
+  --header 'Content-Type: application/json'
 ```
 
 ### 🔐 Headers
@@ -22,15 +19,19 @@ curl --location 'https://api.usecortex.ai/delete_user_memory' \
 - `accept`: application/json
 - `Content-Type`: application/json
 
-### 🧾 Body Parameters
-- `memory_id` (string, required): Echo memory ID to delete
+### 🧾 Query Parameters
+- `tenant_id` (string, required): Tenant identifier
+- `sub_tenant_id` (string, required): Sub-tenant identifier
+- `memory_id` (string, required): user memory ID to delete
 
 ### 📋 Functionality
-- Takes an echo memory ID from the request body
+- Takes an user memory ID from the request body
 - Extracts user credentials from Firebase token
 - Calls the delete function with the memory ID and user context
 - Returns confirmation of deletion success/failure
 - Logs errors and returns false on failure
 
 ### 📤 Response
-Returns a boolean indicating success (true) or failure (false) of the deletion operation. 
+Returns an object with:
+- `success` (boolean): Indicates if the deletion was successful
+- `user_memory_deleted` (boolean): True if the memory was deleted, false otherwise 
