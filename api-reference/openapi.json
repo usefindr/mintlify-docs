@@ -599,21 +599,31 @@
         }
       }
     },
-    "/list_user_memories": {
+    "/user_memory/list_user_memories": {
       "get": {
-        "description": "Retrieves and lists all echo memories for a cortex user.",
+        "description": "Retrieves and lists all user memories for a cortex user.",
+        "parameters": [
+          { "name": "tenant_id", "in": "query", "required": true, "description": "Tenant identifier", "schema": { "type": "string" } },
+          { "name": "sub_tenant_id", "in": "query", "required": false, "description": "Sub-tenant identifier", "schema": { "type": "string" } }
+        ],
         "responses": {
           "200": {
             "description": "List of user memories returned successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "source_id": {"type": "string", "description": "Unique identifier for the memory"},
-                      "source_content": {"type": "string", "description": "Content of the echo memory"}
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "user_memories": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "source_id": { "type": "string", "description": "Unique identifier for the memory" },
+                          "source_content": { "type": "string", "description": "Content of the user memory" }
+                        }
+                      }
                     }
                   }
                 }
@@ -623,31 +633,25 @@
         }
       }
     },
-    "/delete_user_memory": {
+    "/user_memory/delete_user_memory": {
       "delete": {
-        "description": "Deletes a specific echo memory for a cortex user.",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "memory_id": {"type": "string", "description": "Echo memory ID to delete", "example": "memory_123"}
-                },
-                "required": ["memory_id"]
-              }
-            }
-          }
-        },
+        "description": "Deletes a specific user memory for a cortex user.",
+        "parameters": [
+          { "name": "tenant_id", "in": "query", "required": true, "description": "Tenant identifier", "schema": { "type": "string" } },
+          { "name": "sub_tenant_id", "in": "query", "required": true, "description": "Sub-tenant identifier", "schema": { "type": "string" } },
+          { "name": "memory_id", "in": "query", "required": true, "description": "user memory ID to delete", "schema": { "type": "string" } }
+        ],
         "responses": {
           "200": {
             "description": "Memory deletion result",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "boolean",
-                  "description": "Success (true) or failure (false) of the deletion operation"
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "user_memory_deleted": { "type": "boolean" }
+                  }
                 }
               }
             }
@@ -655,12 +659,12 @@
         }
       }
     },
-    "/retrieve_user_memory": {
+    "/user_memory/retrieve_user_memory": {
       "get": {
-        "description": "Searches and retrieves relevant echo memories based on a query.",
+        "description": "Searches and retrieves relevant user memories based on a query.",
         "parameters": [
-          {"name": "query", "in": "query", "required": true, "description": "Search query to find relevant memories", "schema": {"type": "string"}, "example": "project meeting notes"},
-          {"name": "max_count", "in": "query", "required": false, "description": "Maximum number of memories to return", "schema": {"type": "integer"}, "example": 10}
+          { "name": "query", "in": "query", "required": true, "description": "Search query to find relevant memories", "schema": { "type": "string" }, "example": "project meeting notes" },
+          { "name": "max_count", "in": "query", "required": false, "description": "Maximum number of memories to return", "schema": { "type": "integer" }, "example": 10 }
         ],
         "responses": {
           "200": {
@@ -668,10 +672,16 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "description": "Echo memory objects matching the search query"
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "user_memories": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "description": "user memory objects matching the search query"
+                      }
+                    }
                   }
                 }
               }
@@ -680,39 +690,25 @@
         }
       }
     },
-    "/add_user_memory": {
+    "/user_memory/add_user_memory": {
       "post": {
-        "description": "Manually adds a new echo memory for a cortex user.",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "content": {"type": "string", "description": "The echo memory content to add", "example": "Remember to follow up on the Q1 budget proposal"},
-                  "metadata": {
-                    "type": "object",
-                    "description": "Additional metadata for the memory",
-                    "properties": {
-                      "title": {"type": "string", "description": "Title for the memory", "example": "Q1 Budget Follow-up"},
-                      "type": {"type": "string", "description": "Type classification for the memory", "example": "task"}
-                    }
-                  }
-                },
-                "required": ["content"]
-              }
-            }
-          }
-        },
+        "description": "Manually adds a new user memory for a cortex user.",
+        "parameters": [
+          { "name": "tenant_id", "in": "query", "required": true, "description": "Tenant identifier", "schema": { "type": "string" } },
+          { "name": "sub_tenant_id", "in": "query", "required": true, "description": "Sub-tenant identifier", "schema": { "type": "string" } },
+          { "name": "user_memory", "in": "query", "required": true, "description": "User memory to be added to their vector store", "schema": { "type": "string" } }
+        ],
         "responses": {
           "200": {
             "description": "Memory insertion result",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "boolean",
-                  "description": "Success (true) or failure (false) of the memory insertion"
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "user_memory_added": { "type": "boolean" }
+                  }
                 }
               }
             }
@@ -720,34 +716,31 @@
         }
       }
     },
-    "/generate_user_memory": {
+    "/user_memory/generate_user_memory": {
       "post": {
-        "description": "Automatically generates and saves echo memories based on a user query. The most sophisticated endpoint that combines query processing, memory generation, and storage.",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "query": {"type": "string", "description": "User query to generate memories from", "example": "I had a productive meeting with the sales team about Q2 targets"},
-                  "user_name": {"type": "string", "description": "Name of the user for personalization", "example": "John Doe"}
-                },
-                "required": ["query", "user_name"]
-              }
-            }
-          }
-        },
+        "description": "Automatically generates and saves user memories based on a user query. The most sophisticated endpoint that combines query processing, memory generation, and storage.",
+        "parameters": [
+          { "name": "tenant_id", "in": "query", "required": true, "description": "Tenant identifier", "schema": { "type": "string" } },
+          { "name": "sub_tenant_id", "in": "query", "required": true, "description": "Sub-tenant identifier", "schema": { "type": "string" } },
+          { "name": "user_query", "in": "query", "required": true, "description": "User query to generate memories from", "schema": { "type": "string" } },
+          { "name": "user_name", "in": "query", "required": true, "description": "Name of the user for personalization", "schema": { "type": "string" } }
+        ],
         "responses": {
           "200": {
             "description": "Generated memories returned successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "description": "Generated echo memory objects that were created and stored"
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "generated_user_memories": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "description": "Generated user memory objects that were created and stored"
+                      }
+                    }
                   }
                 }
               }
