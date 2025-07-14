@@ -621,7 +621,7 @@
                         "type": "object",
                         "properties": {
                           "source_id": { "type": "string", "description": "Unique identifier for the memory" },
-                          "source_content": { "type": "string", "description": "Content of the echo memory" }
+                          "source_content": { "type": "string", "description": "Content of the user memory" }
                         }
                       }
                     }
@@ -635,11 +635,11 @@
     },
     "/user_memory/delete_user_memory": {
       "delete": {
-        "description": "Deletes a specific echo memory for a cortex user.",
+        "description": "Deletes a specific user memory for a cortex user.",
         "parameters": [
           { "name": "tenant_id", "in": "query", "required": true, "description": "Tenant identifier", "schema": { "type": "string" } },
           { "name": "sub_tenant_id", "in": "query", "required": true, "description": "Sub-tenant identifier", "schema": { "type": "string" } },
-          { "name": "memory_id", "in": "query", "required": true, "description": "Echo memory ID to delete", "schema": { "type": "string" } }
+          { "name": "memory_id", "in": "query", "required": true, "description": "user memory ID to delete", "schema": { "type": "string" } }
         ],
         "responses": {
           "200": {
@@ -661,7 +661,7 @@
     },
     "/user_memory/retrieve_user_memory": {
       "get": {
-        "description": "Searches and retrieves relevant echo memories based on a query.",
+        "description": "Searches and retrieves relevant user memories based on a query.",
         "parameters": [
           { "name": "query", "in": "query", "required": true, "description": "Search query to find relevant memories", "schema": { "type": "string" }, "example": "project meeting notes" },
           { "name": "max_count", "in": "query", "required": false, "description": "Maximum number of memories to return", "schema": { "type": "integer" }, "example": 10 }
@@ -679,7 +679,7 @@
                       "type": "array",
                       "items": {
                         "type": "object",
-                        "description": "Echo memory objects matching the search query"
+                        "description": "user memory objects matching the search query"
                       }
                     }
                   }
@@ -692,7 +692,7 @@
     },
     "/user_memory/add_user_memory": {
       "post": {
-        "description": "Manually adds a new echo memory for a cortex user.",
+        "description": "Manually adds a new user memory for a cortex user.",
         "parameters": [
           { "name": "tenant_id", "in": "query", "required": true, "description": "Tenant identifier", "schema": { "type": "string" } },
           { "name": "sub_tenant_id", "in": "query", "required": true, "description": "Sub-tenant identifier", "schema": { "type": "string" } },
@@ -718,7 +718,7 @@
     },
     "/user_memory/generate_user_memory": {
       "post": {
-        "description": "Automatically generates and saves echo memories based on a user query. The most sophisticated endpoint that combines query processing, memory generation, and storage.",
+        "description": "Automatically generates and saves user memories based on a user query. The most sophisticated endpoint that combines query processing, memory generation, and storage.",
         "parameters": [
           { "name": "tenant_id", "in": "query", "required": true, "description": "Tenant identifier", "schema": { "type": "string" } },
           { "name": "sub_tenant_id", "in": "query", "required": true, "description": "Sub-tenant identifier", "schema": { "type": "string" } },
@@ -738,7 +738,7 @@
                       "type": "array",
                       "items": {
                         "type": "object",
-                        "description": "Generated echo memory objects that were created and stored"
+                        "description": "Generated user memory objects that were created and stored"
                       }
                     }
                   }
