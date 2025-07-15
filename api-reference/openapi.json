@@ -23,6 +23,8 @@
       "post": {
         "description": "Scrapes and processes content from a public webpage.",
         "parameters": [
+          {"name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}"},
+          {"name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" }},
           {
             "name": "web_url",
             "in": "query",
@@ -65,6 +67,8 @@
       "post": {
         "description": "Uploads a document (e.g., PDF, DOCX) for processing and indexing.",
         "parameters": [
+          {"name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}"},
+          {"name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" }},
           {
             "name": "tenant_id",
             "in": "query",
@@ -157,6 +161,28 @@
         "description": "Uploads text or markdown content for processing and indexing.",
         "parameters": [
           {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Bearer token (Firebase token)",
+            "schema": { "type": "string" },
+            "example": "Bearer {API_KEY}"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "description": "Request content type",
+            "schema": { "type": "string", "default": "application/json" }
+          },
+          {
+            "name": "accept",
+            "in": "header",
+            "required": true,
+            "description": "Response content type",
+            "schema": { "type": "string", "default": "application/json" }
+          },
+          {
             "name": "tenant_id",
             "in": "query",
             "required": true,
@@ -236,6 +262,21 @@
       "post": {
         "description": "Uploads multiple documents in a single request for processing and indexing.",
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Bearer token (Firebase token)",
+            "schema": { "type": "string" },
+            "example": "Bearer {API_KEY}"
+          },
+          {
+            "name": "accept",
+            "in": "header",
+            "required": true,
+            "description": "Response content type",
+            "schema": { "type": "string", "default": "application/json" }
+          },
           {
             "name": "tenant_id",
             "in": "query",
@@ -330,6 +371,28 @@
       "post": {
         "description": "Works similar to the upload endpoint but is specifically designed to upload multiple app sources (e.g., Gmail, Slack, Notion) in a single request for processing and indexing.",
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Bearer token (Firebase token)",
+            "schema": { "type": "string" },
+            "example": "Bearer {API_KEY}"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "description": "Request content type",
+            "schema": { "type": "string", "default": "application/json" }
+          },
+          {
+            "name": "accept",
+            "in": "header",
+            "required": true,
+            "description": "Response content type",
+            "schema": { "type": "string", "default": "application/json" }
+          },
           {
             "name": "tenant_id",
             "in": "query",
@@ -486,6 +549,11 @@
     "/search/qna": {
       "post": {
         "description": "Ask a question based on uploaded documents or sessions.",
+        "parameters": [
+          {"name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}"},
+          {"name": "Content-Type", "in": "header", "required": true, "description": "Request content type", "schema": { "type": "string", "default": "application/json" }},
+          {"name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" }}
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -532,6 +600,8 @@
       "get": {
         "description": "Fetches all sources/documents for a given tenant.",
         "parameters": [
+          {"name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": {"type": "string"}, "example": "Bearer {API_KEY}"},
+          {"name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": {"type": "string", "default": "application/json"}},
           {"name": "tenant_id", "in": "query", "required": true, "description": "Tenant identifier", "schema": {"type": "string"}, "example": "tenant_456"},
           {"name": "sub_tenant_id", "in": "query", "required": true, "description": "Optional filter", "schema": {"type": "string"}, "example": "subtenant_123"}
         ],
@@ -562,6 +632,11 @@
     "/delete_memory": {
       "delete": {
         "description": "Deletes specific documents or memories associated with a user.",
+        "parameters": [
+          {"name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}"},
+          {"name": "Content-Type", "in": "header", "required": true, "description": "Request content type", "schema": { "type": "string", "default": "application/json" }},
+          {"name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" }}
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -581,6 +656,11 @@
       },
       "post": {
         "description": "Deletes specific documents or memories associated with a user (POST alternative).",
+        "parameters": [
+          {"name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}"},
+          {"name": "Content-Type", "in": "header", "required": true, "description": "Request content type", "schema": { "type": "string", "default": "application/json" }},
+          {"name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" }}
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -603,6 +683,8 @@
       "post": {
         "description": "Checks if a document has been successfully processed.",
         "parameters": [
+          {"name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": {"type": "string"}, "example": "Bearer {API_KEY}"},
+          {"name": "Content-Type", "in": "header", "required": true, "description": "Request content type", "schema": {"type": "string", "default": "application/json"}},
           {"name": "file_id", "in": "query", "required": true, "description": "ID of the uploaded file", "schema": {"type": "string"}, "example": "file_123"}
         ],
         "responses": {
@@ -631,6 +713,11 @@
     "/fetch/fetch_content": {
       "post": {
         "description": "Fetches the download URL for a specific uploaded source/document.",
+        "parameters": [
+          {"name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}"},
+          {"name": "Content-Type", "in": "header", "required": true, "description": "Request content type", "schema": { "type": "string", "default": "application/json" }},
+          {"name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" }}
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -682,6 +769,9 @@
       "get": {
         "description": "Retrieves and lists all user memories for a cortex user.",
         "parameters": [
+          { "name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}" },
+          { "name": "Content-Type", "in": "header", "required": true, "description": "Request content type", "schema": { "type": "string", "default": "application/json" } },
+          { "name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" } },
           { "name": "tenant_id", "in": "query", "required": true, "description": "Tenant identifier", "schema": { "type": "string" } },
           { "name": "sub_tenant_id", "in": "query", "required": false, "description": "Sub-tenant identifier", "schema": { "type": "string" } }
         ],
@@ -715,7 +805,13 @@
     "/user_memory/delete_user_memory": {
       "delete": {
         "description": "Deletes a specific user memory for a cortex user.",
+        "security": [
+          { "bearerAuth": [] }
+        ],
         "parameters": [
+          { "name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}" },
+          { "name": "Content-Type", "in": "header", "required": true, "description": "Request content type", "schema": { "type": "string", "default": "application/json" } },
+          { "name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" } },
           { "name": "tenant_id", "in": "query", "required": true, "description": "Tenant identifier", "schema": { "type": "string" } },
           { "name": "sub_tenant_id", "in": "query", "required": true, "description": "Sub-tenant identifier", "schema": { "type": "string" } },
           { "name": "memory_id", "in": "query", "required": true, "description": "user memory ID to delete", "schema": { "type": "string" } }
@@ -742,6 +838,9 @@
       "get": {
         "description": "Searches and retrieves relevant user memories based on a query.",
         "parameters": [
+          { "name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}" },
+          { "name": "Content-Type", "in": "header", "required": true, "description": "Request content type", "schema": { "type": "string", "default": "application/json" } },
+          { "name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" } },
           { "name": "tenant_id", "in": "query", "required": true, "description": "Tenant identifier", "schema": { "type": "string" } },
           { "name": "sub_tenant_id", "in": "query", "required": true, "description": "Sub-tenant identifier", "schema": { "type": "string" } },
           { "name": "query", "in": "query", "required": true, "description": "Search query to find relevant memories", "schema": { "type": "string" }, "example": "project meeting notes" },
@@ -775,6 +874,9 @@
       "post": {
         "description": "Manually adds a new user memory for a cortex user.",
         "parameters": [
+          { "name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}" },
+          { "name": "Content-Type", "in": "header", "required": true, "description": "Request content type", "schema": { "type": "string", "default": "application/json" } },
+          { "name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" } },
           { "name": "tenant_id", "in": "query", "required": true, "description": "Tenant identifier", "schema": { "type": "string" } },
           { "name": "sub_tenant_id", "in": "query", "required": true, "description": "Sub-tenant identifier", "schema": { "type": "string" } },
           { "name": "user_memory", "in": "query", "required": true, "description": "User memory to be added to their vector store", "schema": { "type": "string" } }
@@ -801,6 +903,9 @@
       "post": {
         "description": "Automatically generates and saves user memories based on a user query. The most sophisticated endpoint that combines query processing, memory generation, and storage.",
         "parameters": [
+          { "name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}" },
+          { "name": "Content-Type", "in": "header", "required": true, "description": "Request content type", "schema": { "type": "string", "default": "application/json" } },
+          { "name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" } },
           { "name": "tenant_id", "in": "query", "required": true, "description": "Tenant identifier", "schema": { "type": "string" } },
           { "name": "sub_tenant_id", "in": "query", "required": true, "description": "Sub-tenant identifier", "schema": { "type": "string" } },
           { "name": "user_query", "in": "query", "required": true, "description": "User query to generate memories from", "schema": { "type": "string" } },

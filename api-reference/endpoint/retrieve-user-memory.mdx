@@ -5,6 +5,13 @@ openapi: 'GET /user_memory/retrieve_user_memory'
 
 Searches and retrieves relevant AI memories based on a query.
 
+### 📋 Functionality
+- Takes a query and max_count from request parameters
+- Performs semantic search through existing user memories using the query
+- Returns the most relevant memories up to the specified max_count
+- Uses plan-independent querying to find matching memories
+- Returns empty list on errors
+
 ## Sample Request
 
 ```bash
@@ -13,15 +20,3 @@ curl --location 'https://api.usecortex.ai/user_memory/retrieve_user_memory?tenan
   --header 'accept: application/json' \
   --header 'Content-Type: application/json'
 ```
-
-### 🔐 Headers
-- `Authorization`: Bearer token (Firebase token)
-- `accept`: application/json
-- `Content-Type`: application/json
-
-### 📋 Functionality
-- Takes a query and max_count from request parameters
-- Performs semantic search through existing user memories using the query
-- Returns the most relevant memories up to the specified max_count
-- Uses plan-independent querying to find matching memories
-- Returns empty list on errors

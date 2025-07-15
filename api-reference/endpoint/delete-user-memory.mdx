@@ -5,6 +5,13 @@ openapi: 'DELETE /user_memory/delete_user_memory'
 
 Deletes a specific memory for a user.
 
+### 📋 Functionality
+- Takes an user memory ID from the request body
+- Extracts user credentials from Firebase token
+- Calls the delete function with the memory ID and user context
+- Returns confirmation of deletion success/failure
+- Logs errors and returns false on failure
+
 ## Sample Request
 
 ```bash
@@ -18,10 +25,3 @@ curl --location 'https://api.usecortex.ai/user_memory/delete_user_memory?tenant_
 - `Authorization`: Bearer token (Firebase token)
 - `accept`: application/json
 - `Content-Type`: application/json
-
-### 📋 Functionality
-- Takes an user memory ID from the request body
-- Extracts user credentials from Firebase token
-- Calls the delete function with the memory ID and user context
-- Returns confirmation of deletion success/failure
-- Logs errors and returns false on failure

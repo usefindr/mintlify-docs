@@ -5,6 +5,14 @@ openapi: 'POST /fetch/fetch_content'
 
 Fetches the download URL for a specific uploaded source/document.
 
+### 📋 Functionality
+- Extracts user credentials and organization details from the API key
+- Validates the file access permissions for the specified tenant
+- Creates secure access tokens for file retrieval
+- When `return_content` is `true`: Returns the actual file content directly
+- When `return_content` is `false`: Generates time-limited download URLs for the requested file
+- Returns downloadable URLs that can be used to access the file content
+
 ## Sample Request
 
 ```bash
@@ -18,24 +26,4 @@ curl --location 'https://api.usecortex.ai/fetch/fetch_content' \
     "sub_tenant_id": "{SUB_TENANT_ID}",
     "return_content": true
   }'
-```
-
-### 🔐 Headers
-- `Authorization`: Bearer token
-- `accept`: application/json
-- `Content-Type`: application/json
-
-### 📋 Functionality
-- Extracts user credentials and organization details from the API key
-- Validates the file access permissions for the specified tenant
-- Creates secure access tokens for file retrieval
-- When `return_content` is `true`: Returns the actual file content directly
-- When `return_content` is `false`: Generates time-limited download URLs for the requested file
-- Returns downloadable URLs that can be used to access the file content
-
-
-```json
-{
-  "CortexDocb7a1db714c9c473bbd8ff81ec17ba2811750936047": "https://cortex-local-sources-prod.s3.amazonaws.com/ToayuCogoBdxZVoZQ1ft8ZoRzCO2/FindrMasterCollectionMemoriesPreprod/123/local_source/CortexDocb7a1db714c9c473bbd8ff81ec17ba2811750936047?..."
-}
 ```
