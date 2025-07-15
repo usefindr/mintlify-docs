@@ -4,7 +4,7 @@ info:
   description: Documentation for Cortex's core upload and retrieval endpoints
   license:
     name: MIT
-  version: 1.0.0
+  version: 1.0.1
 servers:
 - url: https://api.usecortex.ai
 security:
