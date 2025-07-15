@@ -61,7 +61,7 @@
         ],
         "responses": {
           "200": {"description": "Webpage scraped successfully"},
-          "400": { "description": "Incomplete/invalid parameters"},
+          "422": { "description": "Incomplete/invalid parameters"},
           "401": {"description": "Invalid or missing API key"},
           "5XX": {"description": "Internal server error"}
         }
@@ -78,7 +78,7 @@
           {
             "name": "tenant_id",
             "in": "query",
-            "required": true,
+            "required": false,
             "description": "Tenant identifier",
             "schema": {
               "type": "string"
@@ -160,7 +160,7 @@
               }
             }
           },
-          "400": { "description": "Incomplete/invalid parameters"},
+          "422": { "description": "Incomplete/invalid parameters"},
           "401": {"description": "Invalid or missing API key"},
           "5XX": {"description": "Internal server error"}
         }
@@ -178,7 +178,7 @@
           {
             "name": "tenant_id",
             "in": "query",
-            "required": true,
+            "required": false,
             "description": "Tenant identifier",
             "schema": { "type": "string" }
           },
@@ -245,7 +245,7 @@
               }
             }
           },
-          "400": { "description": "Content field is required and cannot be empty" },
+          "422": { "description": "Content field is required and cannot be empty" },
           "500": { "description": "Upload failed or error while uploading markdown" },
           "401": { "description": "Invalid or missing API key" }
         }
@@ -259,7 +259,14 @@
           {"name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}"},
           {"name": "Content-Type", "in": "header", "required": true, "description": "Request content type", "schema": { "type": "string", "default": "application/json" }},
           {"name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" }},
-        
+
+          {
+            "name": "tenant_id",
+            "in": "query",
+            "required": true,
+            "description": "Tenant identifier",
+            "schema": { "type": "string" }
+          },
           {
             "name": "sub_tenant_id",
             "in": "query",
@@ -338,8 +345,8 @@
               }
             }
           },
-          "400": { "description": "Incomplete/invalid parameters"},
           "401": {"description": "Invalid or missing API key"},
+          "422": { "description": "Incomplete/invalid parameters"},
           "5XX": {"description": "Internal server error"}
         }
       }
@@ -356,7 +363,7 @@
           {
             "name": "tenant_id",
             "in": "query",
-            "required": true,
+            "required": false,
             "description": "Tenant identifier",
             "schema": {
               "type": "string"
@@ -502,7 +509,7 @@
         },
         "responses": {
           "200": {"description": "App sources uploaded successfully"},
-          "400": { "description": "Incomplete/invalid parameters"},
+          "422": { "description": "Incomplete/invalid parameters"},
           "401": {"description": "Invalid or missing API key"},
           "5XX": {"description": "Internal server error"}
         }
@@ -574,7 +581,7 @@
         ],
         "responses": {
           "200": {"description": "List of sources returned successfully"},
-          "400": { "description": "Incomplete/invalid parameters"},
+          "422": { "description": "Incomplete/invalid parameters"},
           "401": {"description": "Invalid or missing API key"},
           "5XX": {"description": "Internal server error"}
         }
@@ -607,7 +614,7 @@
         },
         "responses": {
           "200": {"description": "Sources returned successfully"},
-          "400": { "description": "Incomplete/invalid parameters"},
+          "422": { "description": "Incomplete/invalid parameters"},
           "401": {"description": "Invalid or missing API key"},
           "5XX": {"description": "Internal server error"}
         }
@@ -640,7 +647,7 @@
         },
         "responses": {
           "200": {"description": "Memory deleted successfully"},
-          "400": { "description": "Incomplete/invalid parameters"},
+          "422": { "description": "Incomplete/invalid parameters"},
           "401": {"description": "Invalid or missing API key"},
           "5XX": {"description": "Internal server error"}
         }
@@ -671,7 +678,7 @@
         },
         "responses": {
           "200": {"description": "Memory deleted successfully (POST)"},
-          "400": { "description": "Incomplete/invalid parameters"},
+          "422": { "description": "Incomplete/invalid parameters"},
           "401": {"description": "Invalid or missing API key"},
           "5XX": {"description": "Internal server error"}
       }
@@ -708,7 +715,7 @@
               }
             }
           },
-          "400": { "description": "Incomplete/invalid parameters"},
+          "422": { "description": "Incomplete/invalid parameters"},
           "401": {"description": "Invalid or missing API key"},
           "5XX": {"description": "Internal server error"}
         }
@@ -764,7 +771,7 @@
             }
           },
           "404": {"description": "File not found or not accessible with the provided credentials."},
-          "400": { "description": "Incomplete/invalid parameters"},
+          "422": { "description": "Incomplete/invalid parameters"},
           "401": {"description": "Invalid or missing API key"},
           "5XX": {"description": "Internal server error"}
         }
@@ -808,7 +815,7 @@
             }
           },
           "401": {"description": "Invalid or missing API key"},
-          "400": { "description": "Incomplete/invalid parameters"},
+          "422": { "description": "Incomplete/invalid parameters"},
           "5XX": {"description": "Internal server error"}
         }
       }
@@ -846,7 +853,7 @@
             }
           },
           "401": {"description": "Invalid or missing API key"},
-          "400": { "description": "Incomplete/invalid parameters"},
+          "422": { "description": "Incomplete/invalid parameters"},
           "5XX": {"description": "Internal server error"}
         }
       }
@@ -888,7 +895,7 @@
             }
           },
           "401": {"description": "Invalid or missing API key"},
-          "400": { "description": "Incomplete/invalid parameters"},
+          "422": { "description": "Incomplete/invalid parameters"},
           "5XX": {"description": "Internal server error"}
         }
       }
@@ -922,7 +929,7 @@
               }
             }
           },
-          "400": { "description": "Incomplete/invalid parameters"},
+          "422": { "description": "Incomplete/invalid parameters"},
           "401": {"description": "Invalid or missing API key"},
           "5XX": {"description": "Internal server error"}
         }
@@ -965,7 +972,7 @@
             }
           },
           "401": {"description": "Invalid or missing API key"},
-          "400": { "description": "Incomplete/invalid parameters"},
+          "422": { "description": "Incomplete/invalid parameters"},
           "5XX": {"description": "Internal server error"}
         }
       }
