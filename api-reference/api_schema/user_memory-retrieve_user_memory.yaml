@@ -1,0 +1,75 @@
+# Endpoint: /user_memory/retrieve_user_memory
+# Method: GET
+
+"/user_memory/retrieve_user_memory":
+  get:
+    description: Searches and retrieves relevant user memories based on a query.
+    parameters:
+    - name: Authorization
+      in: header
+      required: true
+      description: Bearer token (Firebase token)
+      schema:
+        type: string
+      example: Bearer {API_KEY}
+    - name: Content-Type
+      in: header
+      required: true
+      description: Request content type
+      schema:
+        type: string
+        default: application/json
+    - name: accept
+      in: header
+      required: true
+      description: Response content type
+      schema:
+        type: string
+        default: application/json
+    - name: tenant_id
+      in: query
+      required: true
+      description: Tenant identifier
+      schema:
+        type: string
+    - name: sub_tenant_id
+      in: query
+      required: true
+      description: Sub-tenant identifier
+      schema:
+        type: string
+    - name: query
+      in: query
+      required: true
+      description: Search query to find relevant memories
+      schema:
+        type: string
+      example: project meeting notes
+    - name: max_count
+      in: query
+      required: false
+      description: Maximum number of memories to return
+      schema:
+        type: integer
+      example: 10
+    responses:
+      '200':
+        description: Relevant memories returned successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                success:
+                  type: boolean
+                user_memories:
+                  type: array
+                  items:
+                    type: object
+                    description: User memory objects matching the search query
+      '401':
+        description: Invalid or missing API key
+      '422':
+        description: Incomplete/invalid parameters
+      5XX:
+        description: Internal server error 

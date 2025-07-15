@@ -1,0 +1,59 @@
+# Endpoint: /list/sources_by_id
+# Method: POST
+
+"/list/sources_by_id":
+  post:
+    description: Fetches specific sources/documents by their IDs.
+    parameters:
+    - name: Authorization
+      in: header
+      required: true
+      description: Bearer token (Firebase token)
+      schema:
+        type: string
+      example: Bearer {API_KEY}
+    - name: Content-Type
+      in: header
+      required: true
+      description: Request content type
+      schema:
+        type: string
+        default: application/json
+    - name: accept
+      in: header
+      required: true
+      description: Response content type
+      schema:
+        type: string
+        default: application/json
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              tenant_id:
+                type: string
+                description: Tenant identifier
+                example: tenant_456
+              source_ids:
+                type: array
+                items:
+                  type: string
+                description: IDs of documents
+                example:
+                - doc_123
+                - doc_456
+            required:
+            - tenant_id
+            - source_ids
+    responses:
+      '200':
+        description: Sources returned successfully
+      '422':
+        description: Incomplete/invalid parameters
+      '401':
+        description: Invalid or missing API key
+      '5XX':
+        description: Internal server error 
