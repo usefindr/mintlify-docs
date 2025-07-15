@@ -64,10 +64,10 @@ def yaml_to_json_with_refs(main_file, output_file=None):
         print(f"Error: {e}")
         return None
 
-if __name__ == "__main__":
-    result = yaml_to_json_with_refs('api-reference/openapi.yaml', 'api-reference/old-openapi.json')
-    if result is not None:
-        print("Conversion successful! Preview:")
-        print(result[:500] + "..." if len(result) > 500 else result)
-    else:
-        print("No result to display due to previous errors.")
+
+result = yaml_to_json_with_refs('api-reference/openapi.yaml', 'api-reference/old-openapi.json')
+if result is not None:
+    print("Conversion successful! Preview:")
+    print(result[:500] + "..." if len(result) > 500 else result)
+else:
+    print("No result to display due to previous errors.")
