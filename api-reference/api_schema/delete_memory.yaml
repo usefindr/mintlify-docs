@@ -4,6 +4,7 @@
 "/delete_memory":
   delete:
     description: Deletes specific documents or memories associated with a user.
+    # --- Parameters (Headers) ---
     parameters:
     - name: Authorization
       in: header
@@ -26,6 +27,7 @@
       schema:
         type: string
         default: application/json
+    # --- Request Body ---
     requestBody:
       required: true
       content:
@@ -48,6 +50,7 @@
             required:
             - tenant_id
             - source_ids
+    # --- Responses ---
     responses:
       '200':
         description: Memory deleted successfully
@@ -59,6 +62,7 @@
         description: Internal server error
   post:
     description: Deletes specific documents or memories associated with a user (POST alternative).
+    # --- Parameters (Headers) ---
     parameters:
     - name: Authorization
       in: header
@@ -81,6 +85,7 @@
       schema:
         type: string
         default: application/json
+    # --- Request Body ---
     requestBody:
       required: true
       content:
@@ -103,6 +108,7 @@
             required:
             - tenant_id
             - source_ids
+    # --- Responses ---
     responses:
       '200':
         description: Memory deleted successfully (POST)

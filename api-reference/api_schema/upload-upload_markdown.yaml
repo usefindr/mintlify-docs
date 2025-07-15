@@ -4,6 +4,7 @@
 "/upload/upload_markdown":
   post:
     description: Uploads text or markdown content for processing and indexing.
+    # --- Parameters (Headers & Query) ---
     parameters:
     - name: Authorization
       in: header
@@ -38,6 +39,7 @@
       description: Sub-tenant identifier
       schema:
         type: string
+    # --- Request Body ---
     requestBody:
       required: true
       content:
@@ -68,6 +70,7 @@
                 document_metadata:
                   title: Q1 Report.pdf
                   author: Alice Smith
+    # --- Responses ---
     responses:
       '200':
         description: Upload success and generated file ID.

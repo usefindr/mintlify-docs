@@ -4,6 +4,7 @@
 "/upload/upload_document":
   post:
     description: Uploads a document (e.g., PDF, DOCX) for processing and indexing.
+    # --- Parameters (Headers & Query) ---
     parameters:
     - name: Authorization
       in: header
@@ -33,6 +34,7 @@
       schema:
         type: string
       example: your_sub_tenant_id
+    # --- Request Body ---
     requestBody:
       required: true
       content:
@@ -63,6 +65,7 @@
                 file: document.pdf
                 tenant_metadata: '{"department":"Finance","compliance_tag":"GDPR"}'
                 document_metadata: '{"title":"Q1 Report.pdf","author":"Alice Smith"}'
+    # --- Responses ---
     responses:
       '200':
         description: Document uploaded and indexed successfully

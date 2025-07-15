@@ -4,6 +4,7 @@
 "/search/qna":
   post:
     description: Ask a question based on uploaded documents or sessions.
+    # --- Parameters (Headers) ---
     parameters:
     - name: Authorization
       in: header
@@ -26,6 +27,7 @@
       schema:
         type: string
         default: application/json
+    # --- Request Body ---
     requestBody:
       required: true
       content:
@@ -104,4 +106,5 @@
             - question
             - session_id
             - tenant_id
+    # --- Responses ---
     responses: {} 

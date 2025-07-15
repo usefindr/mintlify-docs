@@ -4,6 +4,7 @@
 "/upload/upload_app_sources":
   post:
     description: Works similar to the upload endpoint but is specifically designed to upload multiple app sources (e.g., Gmail, Slack, Notion) in a single request for processing and indexing.
+    # --- Parameters (Headers & Query) ---
     parameters:
     - name: Authorization
       in: header
@@ -38,6 +39,7 @@
       description: Sub-tenant identifier
       schema:
         type: string
+    # --- Request Body ---
     requestBody:
       required: true
       content:
@@ -122,6 +124,7 @@
               - type
               - timestamp
               - content
+    # --- Responses ---
     responses:
       '200':
         description: App sources uploaded successfully

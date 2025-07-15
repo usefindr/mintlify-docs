@@ -4,6 +4,7 @@
 "/user_memory/retrieve_user_memory":
   get:
     description: Searches and retrieves relevant user memories based on a query.
+    # --- Parameters (Headers & Query) ---
     parameters:
     - name: Authorization
       in: header
@@ -52,6 +53,7 @@
       schema:
         type: integer
       example: 10
+    # --- Responses ---
     responses:
       '200':
         description: Relevant memories returned successfully
@@ -71,5 +73,5 @@
         description: Invalid or missing API key
       '422':
         description: Incomplete/invalid parameters
-      5XX:
+      '5XX':
         description: Internal server error 

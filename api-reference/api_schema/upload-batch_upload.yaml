@@ -4,6 +4,7 @@
 "/upload/batch_upload":
   post:
     description: Uploads multiple documents in a single request for processing and indexing.
+    # --- Parameters (Headers & Query) ---
     parameters:
     - name: Authorization
       in: header
@@ -39,6 +40,7 @@
       schema:
         type: string
       example: your_sub_tenant_id
+    # --- Request Body ---
     requestBody:
       required: true
       content:
@@ -71,6 +73,7 @@
                 - document3.txt
                 tenant_metadata: '[{"department":"Finance","compliance_tag":"GDPR"},{"department":"Finance","compliance_tag":"GDPR"}]'
                 document_metadata: '[{"title":"Q1 Report.pdf","author":"Alice Smith"},{"title":"Q2 Report.pdf","author":"Bob Jones"}]'
+    # --- Responses ---
     responses:
       '200':
         description: Batch upload successful

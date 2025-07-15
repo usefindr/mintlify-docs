@@ -1,990 +1,1835 @@
 {
-  "openapi": "3.1.0",
-  "info": {
-    "title": "Cortex API",
-    "description": "Documentation for Cortex's core upload and retrieval endpoints",
-    "license": {
-      "name": "MIT"
+    "openapi": "3.1.0",
+    "info": {
+      "title": "Cortex API",
+      "description": "Documentation for Cortex's core upload and retrieval endpoints",
+      "license": {
+        "name": "MIT"
+      },
+      "version": "1.0.0"
     },
-    "version": "1.0.0"
-  },
-  "servers": [
-    {
-      "url": "https://api.usecortex.ai"
-    }
-  ],
-  "security": [
-    {
-      "bearerAuth": []
-    }
-  ],
-  "paths": {
-    "/upload/scrape_webpage": {
-      "post": {
-        "description": "Scrapes and processes content from a public webpage.",
-        "parameters": [
-          
-          {"name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}"},
-          {"name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" }},
-          
-          {
-            "name": "web_url",
-            "in": "query",
-            "required": true,
-            "description": "The public URL to scrape",
-            "schema": {
-              "type": "string"
-            },
-            "example": "https://example.com/article"
-          },
-          {
-            "name": "tenant_id",
-            "in": "query",
-            "required": true,
-            "description": "Tenant identifier",
-            "schema": {
-              "type": "string"
-            },
-            "example": "tenant_456"
-          },
-          {
-            "name": "sub_tenant_id",
-            "in": "query",
-            "required": false,
-            "description": "Sub-tenant identifier",
-            "schema": {
-              "type": "string"
-            },
-            "example": "subtenant_123"
-          }
-
-        ],
-        "responses": {
-          "200": {"description": "Webpage scraped successfully"},
-          "422": { "description": "Incomplete/invalid parameters"},
-          "401": {"description": "Invalid or missing API key"},
-          "5XX": {"description": "Internal server error"}
-        }
+    "servers": [
+      {
+        "url": "https://api.usecortex.ai"
       }
-    },
-    "/upload/upload_document": {
-      "post": {
-        "description": "Uploads a document (e.g., PDF, DOCX) for processing and indexing.",
-        "parameters": [
-          
-          {"name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}"},
-          {"name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" }},
-          
-          {
-            "name": "tenant_id",
-            "in": "query",
-            "required": false,
-            "description": "Tenant identifier",
-            "schema": {
-              "type": "string"
-            },
-            "example": "your_tenant_id"
-          },
-          {
-            "name": "sub_tenant_id",
-            "in": "query",
-            "required": false,
-            "description": "Sub-tenant identifier",
-            "schema": {
-              "type": "string"
-            },
-            "example": "your_sub_tenant_id"
-          }
-        
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "multipart/form-data": {
+    ],
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "paths": {
+      "/upload/scrape_webpage": {
+        "post": {
+          "description": "Scrapes and processes content from a public webpage.",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "description": "Bearer token (Firebase token)",
               "schema": {
-                "type": "object",
-                "properties": {
-                  "file": {
-                    "type": "string",
-                    "format": "binary",
-                    "description": "Document file to upload (PDF, DOCX, TXT, etc.)",
-                    "example": "document.pdf"
-                  },
-                  "tenant_metadata": {
-                    "type": "object",
-                    "description": "JSON string containing tenant-level document metadata (e.g., department, compliance_tag)",
-                    "example": "{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}"
-                  },
-                  "document_metadata": {
-                    "type": "object",
-                    "description": "JSON string containing document-specific metadata (e.g., title, author)",
-                    "example": "{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\"}"
-                  }
-                },
-                "required": [
-                  "file"
-                ]
+                "type": "string"
               },
-              "examples": {
-                "document_upload": {
-                  "summary": "Upload a PDF document",
-                  "description": "Example of uploading a PDF document with tenant metadata",
-                  "value": {
-                    "file": "document.pdf",
-                    "tenant_metadata": "{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}",
-                    "document_metadata": "{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\"}"
-                  }
-                }
+              "example": "Bearer {API_KEY}"
+            },
+            {
+              "name": "accept",
+              "in": "header",
+              "required": true,
+              "description": "Response content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
               }
+            },
+            {
+              "name": "web_url",
+              "in": "query",
+              "required": true,
+              "description": "The public URL to scrape",
+              "schema": {
+                "type": "string"
+              },
+              "example": "https://example.com/article"
+            },
+            {
+              "name": "tenant_id",
+              "in": "query",
+              "required": true,
+              "description": "Tenant identifier",
+              "schema": {
+                "type": "string"
+              },
+              "example": "tenant_456"
+            },
+            {
+              "name": "sub_tenant_id",
+              "in": "query",
+              "required": false,
+              "description": "Sub-tenant identifier",
+              "schema": {
+                "type": "string"
+              },
+              "example": "subtenant_123"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Webpage scraped successfully"
+            },
+            "422": {
+              "description": "Incomplete/invalid parameters"
+            },
+            "401": {
+              "description": "Invalid or missing API key"
+            },
+            "5XX": {
+              "description": "Internal server error"
             }
           }
-        },
-        "responses": {
-          "200": {
-            "description": "Document uploaded and indexed successfully",
+        }
+      },
+      "/upload/upload_document": {
+        "post": {
+          "description": "Uploads a document (e.g., PDF, DOCX) for processing and indexing.",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "description": "Bearer token (Firebase token)",
+              "schema": {
+                "type": "string"
+              },
+              "example": "Bearer {API_KEY}"
+            },
+            {
+              "name": "accept",
+              "in": "header",
+              "required": true,
+              "description": "Response content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "tenant_id",
+              "in": "query",
+              "required": false,
+              "description": "Tenant identifier",
+              "schema": {
+                "type": "string"
+              },
+              "example": "your_tenant_id"
+            },
+            {
+              "name": "sub_tenant_id",
+              "in": "query",
+              "required": false,
+              "description": "Sub-tenant identifier",
+              "schema": {
+                "type": "string"
+              },
+              "example": "your_sub_tenant_id"
+            }
+          ],
+          "requestBody": {
+            "required": true,
             "content": {
-              "application/json": {
+              "multipart/form-data": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
+                    "file": {
                       "type": "string",
-                      "example": "Document uploaded successfully"
+                      "format": "binary",
+                      "description": "Document file to upload (PDF, DOCX, TXT, etc.)",
+                      "example": "document.pdf"
                     },
-                    "document_id": {
-                      "type": "string",
-                      "example": "doc_123456"
+                    "tenant_metadata": {
+                      "type": "object",
+                      "description": "JSON string containing tenant-level document metadata (e.g., department, compliance_tag)",
+                      "example": "{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}"
+                    },
+                    "document_metadata": {
+                      "type": "object",
+                      "description": "JSON string containing document-specific metadata (e.g., title, author)",
+                      "example": "{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\"}"
+                    }
+                  },
+                  "required": [
+                    "file"
+                  ]
+                },
+                "examples": {
+                  "document_upload": {
+                    "summary": "Upload a PDF document",
+                    "description": "Example of uploading a PDF document with tenant metadata",
+                    "value": {
+                      "file": "document.pdf",
+                      "tenant_metadata": "{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}",
+                      "document_metadata": "{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\"}"
                     }
                   }
                 }
               }
             }
           },
-          "422": { "description": "Incomplete/invalid parameters"},
-          "401": {"description": "Invalid or missing API key"},
-          "5XX": {"description": "Internal server error"}
-        }
-      }
-    },
-    "/upload/upload_markdown": {
-      "post": {
-        "description": "Uploads text or markdown content for processing and indexing.",
-        "parameters": [
-          
-          {"name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}"},
-          {"name": "Content-Type", "in": "header", "required": true, "description": "Request content type", "schema": { "type": "string", "default": "application/json" }},
-          {"name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" }},
-        
-          {
-            "name": "tenant_id",
-            "in": "query",
-            "required": false,
-            "description": "Tenant identifier",
-            "schema": { "type": "string" }
-          },
-          {
-            "name": "sub_tenant_id",
-            "in": "query",
-            "required": false,
-            "description": "Sub-tenant identifier",
-            "schema": { "type": "string" }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "content": {
-                    "type": "string",
-                    "description": "The text or markdown content to upload and process"
-                  },
-                  "tenant_metadata": {
+          "responses": {
+            "200": {
+              "description": "Document uploaded and indexed successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
                     "type": "object",
-                    "description": "Custom metadata object to associate with the uploaded content for tenant-level filtering (e.g., department, compliance_tag)"
-                  },
-                  "document_metadata": {
-                    "type": "object",
-                    "description": "Custom metadata object to associate with the uploaded content for document-level filtering (e.g., title, author)"
-                  }
-                },
-                "required": ["content"]
-              },
-              "examples": {
-                "upload_markdown": {
-                  "summary": "Upload markdown content",
-                  "description": "Example of uploading markdown content with tenant and document metadata",
-                  "value": {
-                    "content": "This is sample markdown content that will be processed and indexed.",
-                    "tenant_metadata": { "department": "Finance", "compliance_tag": "GDPR" },
-                    "document_metadata": { "title": "Q1 Report.pdf", "author": "Alice Smith" }
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Document uploaded successfully"
+                      },
+                      "document_id": {
+                        "type": "string",
+                        "example": "doc_123456"
+                      }
+                    }
                   }
                 }
               }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Upload success and generated file ID.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": { "type": "boolean" },
-                    "file_id": { "type": "string" }
-                  }
-                },
-                "example": {
-                  "success": true,
-                  "file_id": "CortexDocb7a1db714c9c473bbd8ff81ec17ba2811750936047"
-                }
-              }
-            }
-          },
-          "422": { "description": "Content field is required and cannot be empty" },
-          "500": { "description": "Upload failed or error while uploading markdown" },
-          "401": { "description": "Invalid or missing API key" }
-        }
-      }
-    },
-    "/upload/batch_upload": {
-      "post": {
-        "description": "Uploads multiple documents in a single request for processing and indexing.",
-        "parameters": [
-
-          {"name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}"},
-          {"name": "Content-Type", "in": "header", "required": true, "description": "Request content type", "schema": { "type": "string", "default": "application/json" }},
-          {"name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" }},
-
-          {
-            "name": "tenant_id",
-            "in": "query",
-            "required": true,
-            "description": "Tenant identifier",
-            "schema": { "type": "string" }
-          },
-          {
-            "name": "sub_tenant_id",
-            "in": "query",
-            "required": false,
-            "description": "Sub-tenant identifier",
-            "schema": {
-              "type": "string"
             },
-            "example": "your_sub_tenant_id"
-          }
-        
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "files": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "format": "binary"
-                    },
-                    "description": "Multiple document files to upload (PDF, DOCX, TXT, etc.)"
-                  },
-                  "tenant_metadata": {
-                    "type": "string",
-                    "description": "JSON string containing tenant metadata for the documents"
-                  },
-                  "document_metadata": {
-                    "type": "string",
-                    "description": "JSON string containing document-specific metadata for the documents"
-                  }
-                },
-                "required": [
-                  "files"
-                ]
-              },
-              "examples": {
-                "batch_upload": {
-                  "summary": "Upload multiple documents",
-                  "description": "Example of uploading multiple documents with tenant metadata",
-                  "value": {
-                    "files": ["document1.pdf", "document2.docx", "document3.txt"],
-                    "tenant_metadata": "[{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"},{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}]",
-                    "document_metadata": "[{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\"},{\"title\":\"Q2 Report.pdf\",\"author\":\"Bob Jones\"}]"
-                  }
-                }
-              }
+            "422": {
+              "description": "Incomplete/invalid parameters"
+            },
+            "401": {
+              "description": "Invalid or missing API key"
+            },
+            "5XX": {
+              "description": "Internal server error"
             }
           }
-        },
-        "responses": {
-          "200": {
-            "description": "Batch upload successful",
+        }
+      },
+      "/upload/upload_markdown": {
+        "post": {
+          "description": "Uploads text or markdown content for processing and indexing.",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "description": "Bearer token (Firebase token)",
+              "schema": {
+                "type": "string"
+              },
+              "example": "Bearer {API_KEY}"
+            },
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "required": true,
+              "description": "Request content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "accept",
+              "in": "header",
+              "required": true,
+              "description": "Response content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "tenant_id",
+              "in": "query",
+              "required": false,
+              "description": "Tenant identifier",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "sub_tenant_id",
+              "in": "query",
+              "required": false,
+              "description": "Sub-tenant identifier",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
+                    "content": {
                       "type": "string",
-                      "example": "Batch upload successful"
+                      "description": "The text or markdown content to upload and process"
                     },
-                    "document_ids": {
+                    "tenant_metadata": {
+                      "type": "object",
+                      "description": "Custom metadata object to associate with the uploaded content for tenant-level filtering (e.g., department, compliance_tag)"
+                    },
+                    "document_metadata": {
+                      "type": "object",
+                      "description": "Custom metadata object to associate with the uploaded content for document-level filtering (e.g., title, author)"
+                    }
+                  },
+                  "required": [
+                    "content"
+                  ]
+                },
+                "examples": {
+                  "upload_markdown": {
+                    "summary": "Upload markdown content",
+                    "description": "Example of uploading markdown content with tenant and document metadata",
+                    "value": {
+                      "content": "This is sample markdown content that will be processed and indexed.",
+                      "tenant_metadata": {
+                        "department": "Finance",
+                        "compliance_tag": "GDPR"
+                      },
+                      "document_metadata": {
+                        "title": "Q1 Report.pdf",
+                        "author": "Alice Smith"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Upload success and generated file ID.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "file_id": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "example": {
+                    "success": true,
+                    "file_id": "CortexDocb7a1db714c9c473bbd8ff81ec17ba2811750936047"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Content field is required and cannot be empty"
+            },
+            "500": {
+              "description": "Upload failed or error while uploading markdown"
+            },
+            "401": {
+              "description": "Invalid or missing API key"
+            }
+          }
+        }
+      },
+      "/upload/batch_upload": {
+        "post": {
+          "description": "Uploads multiple documents in a single request for processing and indexing.",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "description": "Bearer token (Firebase token)",
+              "schema": {
+                "type": "string"
+              },
+              "example": "Bearer {API_KEY}"
+            },
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "required": true,
+              "description": "Request content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "accept",
+              "in": "header",
+              "required": true,
+              "description": "Response content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "tenant_id",
+              "in": "query",
+              "required": true,
+              "description": "Tenant identifier",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "sub_tenant_id",
+              "in": "query",
+              "required": false,
+              "description": "Sub-tenant identifier",
+              "schema": {
+                "type": "string"
+              },
+              "example": "your_sub_tenant_id"
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "files": {
                       "type": "array",
                       "items": {
+                        "type": "string",
+                        "format": "binary"
+                      },
+                      "description": "Multiple document files to upload (PDF, DOCX, TXT, etc.)"
+                    },
+                    "tenant_metadata": {
+                      "type": "string",
+                      "description": "JSON string containing tenant metadata for the documents"
+                    },
+                    "document_metadata": {
+                      "type": "string",
+                      "description": "JSON string containing document-specific metadata for the documents"
+                    }
+                  },
+                  "required": [
+                    "files"
+                  ]
+                },
+                "examples": {
+                  "batch_upload": {
+                    "summary": "Upload multiple documents",
+                    "description": "Example of uploading multiple documents with tenant metadata",
+                    "value": {
+                      "files": [
+                        "document1.pdf",
+                        "document2.docx",
+                        "document3.txt"
+                      ],
+                      "tenant_metadata": "[{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"},{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}]",
+                      "document_metadata": "[{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\"},{\"title\":\"Q2 Report.pdf\",\"author\":\"Bob Jones\"}]"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Batch upload successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Batch upload successful"
+                      },
+                      "document_ids": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "example": [
+                          "doc_123",
+                          "doc_456",
+                          "doc_789"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Invalid or missing API key"
+            },
+            "422": {
+              "description": "Incomplete/invalid parameters"
+            },
+            "5XX": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+      "/upload/upload_app_sources": {
+        "post": {
+          "description": "Works similar to the upload endpoint but is specifically designed to upload multiple app sources (e.g., Gmail, Slack, Notion) in a single request for processing and indexing.",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "description": "Bearer token (Firebase token)",
+              "schema": {
+                "type": "string"
+              },
+              "example": "Bearer {API_KEY}"
+            },
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "required": true,
+              "description": "Request content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "accept",
+              "in": "header",
+              "required": true,
+              "description": "Response content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "tenant_id",
+              "in": "query",
+              "required": false,
+              "description": "Tenant identifier",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "sub_tenant_id",
+              "in": "query",
+              "required": false,
+              "description": "Sub-tenant identifier",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "collections": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "id": {
                         "type": "string"
                       },
-                      "example": ["doc_123", "doc_456", "doc_789"]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {"description": "Invalid or missing API key"},
-          "422": { "description": "Incomplete/invalid parameters"},
-          "5XX": {"description": "Internal server error"}
-        }
-      }
-    },
-    "/upload/upload_app_sources": {
-      "post": {
-        "description": "Works similar to the upload endpoint but is specifically designed to upload multiple app sources (e.g., Gmail, Slack, Notion) in a single request for processing and indexing.",
-        "parameters": [
-
-          {"name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}"},
-          {"name": "Content-Type", "in": "header", "required": true, "description": "Request content type", "schema": { "type": "string", "default": "application/json" }},
-          {"name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" }},
-          
-          {
-            "name": "tenant_id",
-            "in": "query",
-            "required": false,
-            "description": "Tenant identifier",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "sub_tenant_id",
-            "in": "query",
-            "required": false,
-            "description": "Sub-tenant identifier",
-            "schema": {
-              "type": "string"
-            }
-          }
-        
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "collections": {
-                      "type": "array",
-                      "items": {
+                      "title": {
                         "type": "string"
-                      }
-                    },
-                    "id": {
-                      "type": "string"
-                    },
-                    "title": {
-                      "type": "string"
-                    },
-                    "type": {
-                      "type": "string"
-                    },
-                    "description": {
-                      "type": "string"
-                    },
-                    "note": {
-                      "type": "string"
-                    },
-                    "url": {
-                      "type": "string"
-                    },
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "content": {
-                      "type": "object",
-                      "properties": {
-                        "text": {
-                          "type": "string"
-                        },
-                        "html_base64": {
-                          "type": "string"
-                        },
-                        "csv_base64": {
-                          "type": "string"
-                        },
-                        "markdown": {
-                          "type": "string"
-                        },
-                        "files": {
-                          "type": "array"
-                        },
-                        "layout": {
-                          "type": "array"
-                        }
-                      }
-                    },
-                    "cortex_metadata": {
-                      "type": "object"
-                    },
-                    "meta": {
-                      "type": "object"
-                    },
-                    "attachments": {
-                      "type": "array",
-                      "items": {
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "note": {
+                        "type": "string"
+                      },
+                      "url": {
+                        "type": "string"
+                      },
+                      "timestamp": {
+                        "type": "string"
+                      },
+                      "content": {
                         "type": "object",
                         "properties": {
-                          "id": {
+                          "text": {
                             "type": "string"
                           },
-                          "url": {
+                          "html_base64": {
                             "type": "string"
                           },
-                          "title": {
+                          "csv_base64": {
                             "type": "string"
                           },
-                          "content_type": {
+                          "markdown": {
                             "type": "string"
                           },
-                          "content_url": {
-                            "type": "string"
+                          "files": {
+                            "type": "array"
                           },
-                          "misc": {
-                            "type": "object"
-                          },
-                          "content": {
-                            "type": "object",
-                            "properties": {
-                              "text": {
-                                "type": "string"
-                              },
-                              "html_base64": {
-                                "type": "string"
-                              },
-                              "csv_base64": {
-                                "type": "string"
-                              },
-                              "markdown": {
-                                "type": "string"
-                              },
-                              "files": {
-                                "type": "array"
-                              },
-                              "layout": {
-                                "type": "array"
+                          "layout": {
+                            "type": "array"
+                          }
+                        }
+                      },
+                      "cortex_metadata": {
+                        "type": "object"
+                      },
+                      "meta": {
+                        "type": "object"
+                      },
+                      "attachments": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "url": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "content_type": {
+                              "type": "string"
+                            },
+                            "content_url": {
+                              "type": "string"
+                            },
+                            "misc": {
+                              "type": "object"
+                            },
+                            "content": {
+                              "type": "object",
+                              "properties": {
+                                "text": {
+                                  "type": "string"
+                                },
+                                "html_base64": {
+                                  "type": "string"
+                                },
+                                "csv_base64": {
+                                  "type": "string"
+                                },
+                                "markdown": {
+                                  "type": "string"
+                                },
+                                "files": {
+                                  "type": "array"
+                                },
+                                "layout": {
+                                  "type": "array"
+                                }
                               }
                             }
                           }
                         }
                       }
+                    },
+                    "required": [
+                      "id",
+                      "title",
+                      "type",
+                      "timestamp",
+                      "content"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "App sources uploaded successfully"
+            },
+            "422": {
+              "description": "Incomplete/invalid parameters"
+            },
+            "401": {
+              "description": "Invalid or missing API key"
+            },
+            "5XX": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+      "/search/qna": {
+        "post": {
+          "description": "Ask a question based on uploaded documents or sessions.",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "description": "Bearer token (Firebase token)",
+              "schema": {
+                "type": "string"
+              },
+              "example": "Bearer {API_KEY}"
+            },
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "required": true,
+              "description": "Request content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "accept",
+              "in": "header",
+              "required": true,
+              "description": "Response content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "question": {
+                      "type": "string",
+                      "description": "The user query"
+                    },
+                    "user_name": {
+                      "type": "string",
+                      "description": "User name"
+                    },
+                    "user_instructions": {
+                      "type": "string",
+                      "description": "Custom instructions"
+                    },
+                    "session_id": {
+                      "type": "string",
+                      "description": "Chat session ID"
+                    },
+                    "tenant_id": {
+                      "type": "string",
+                      "description": "Tenant identifier"
+                    },
+                    "sub_tenant_id": {
+                      "type": "string",
+                      "description": "Sub-tenant identifier"
+                    },
+                    "stream": {
+                      "type": "boolean",
+                      "description": "Enable streaming"
+                    },
+                    "context_list": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "List of document IDs"
+                    },
+                    "search_modes": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "e.g., 'creative', 'web'"
+                    },
+                    "top_n": {
+                      "type": "number",
+                      "description": "Number of results to return"
+                    },
+                    "ai_generation": {
+                      "type": "boolean",
+                      "description": "Enable AI answer generation"
+                    },
+                    "highlight_chunks": {
+                      "type": "boolean",
+                      "description": "Return source chunks"
+                    },
+                    "search_alpha": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "Weight for semantic match"
+                    },
+                    "recency_bias": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "Recency preference"
+                    },
+                    "multi_step_reasoning": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "If enabled, the system will automatically activate multi-step search for complex queries. If set to false, auto-enabling of multi-step search is disabled, and only single-step search will be used regardless of query complexity."
+                    },
+                    "auto_agent_routing": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "If true, enables routing for choosing the best suitable agent automatically; if false, the answer is generated from the default model."
+                    },
+                    "metadata": {
+                      "type": "object",
+                      "description": "Filter context to only sources matching the provided metadata. Allowed keys: source_title, source_type.",
+                      "properties": {
+                        "source_title": {
+                          "type": "string",
+                          "description": "Restrict to sources with this title."
+                        },
+                        "source_type": {
+                          "type": "string",
+                          "description": "Restrict to sources of this type (e.g., document, webpage)."
+                        }
+                      },
+                      "additionalProperties": false
                     }
                   },
                   "required": [
-                    "id",
-                    "title",
-                    "type",
-                    "timestamp",
-                    "content"
+                    "question",
+                    "session_id",
+                    "tenant_id"
                   ]
                 }
               }
             }
-          }
-        },
-        "responses": {
-          "200": {"description": "App sources uploaded successfully"},
-          "422": { "description": "Incomplete/invalid parameters"},
-          "401": {"description": "Invalid or missing API key"},
-          "5XX": {"description": "Internal server error"}
-        }
-      }
-    },
-    "/search/qna": {
-      "post": {
-        "description": "Ask a question based on uploaded documents or sessions.",
-        "parameters": [
-
-          {"name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}"},
-          {"name": "Content-Type", "in": "header", "required": true, "description": "Request content type", "schema": { "type": "string", "default": "application/json" }},
-          {"name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" }}
-        
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "question": {"type": "string", "description": "The user query"},
-                  "user_name": {"type": "string", "description": "User name"},
-                  "user_instructions": {"type": "string", "description": "Custom instructions"},
-                  "session_id": {"type": "string", "description": "Chat session ID"},
-                  "tenant_id": {"type": "string", "description": "Tenant identifier"},
-                  "sub_tenant_id": {"type": "string", "description": "Sub-tenant identifier"},
-                  "stream": {"type": "boolean", "description": "Enable streaming"},
-                  "context_list": {"type": "array", "items": {"type": "string"}, "description": "List of document IDs"},
-                  "search_modes": {"type": "array", "items": {"type": "string"}, "description": "e.g., 'creative', 'web'"},
-                  "top_n": {"type": "number", "description": "Number of results to return"},
-                  "ai_generation": {"type": "boolean", "description": "Enable AI answer generation"},
-                  "highlight_chunks": {"type": "boolean", "description": "Return source chunks"},
-                  "search_alpha": {"type": "number", "format": "float", "description": "Weight for semantic match"},
-                  "recency_bias": {"type": "number", "format": "float", "description": "Recency preference"},
-                  "multi_step_reasoning": {"type": "boolean", "default": true, "description": "If enabled, the system will automatically activate multi-step search for complex queries. If set to false, auto-enabling of multi-step search is disabled, and only single-step search will be used regardless of query complexity."},
-                  "auto_agent_routing": {"type": "boolean", "default": true, "description": "If true, enables routing for choosing the best suitable agent automatically; if false, the answer is generated from the default model."},
-                  "metadata": {
-                    "type": "object",
-                    "description": "Filter context to only sources matching the provided metadata. Allowed keys: source_title, source_type.",
-                    "properties": {
-                      "source_title": {"type": "string", "description": "Restrict to sources with this title."},
-                      "source_type": {"type": "string", "description": "Restrict to sources of this type (e.g., document, webpage)."}
-                    },
-                    "additionalProperties": false
-                  }
-                },
-                "required": ["question", "session_id", "tenant_id"]
-              }
-            }
-          }
-        },
-        "responses": {
-        }
-      }
-    },
-    "/list/sources": {
-      "get": {
-        "description": "Fetches all sources/documents for a given tenant.",
-        "parameters": [
-        
-          {"name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": {"type": "string"}, "example": "Bearer {API_KEY}"},
-          {"name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": {"type": "string", "default": "application/json"}},
-          
-          {"name": "tenant_id", "in": "query", "required": true, "description": "Tenant identifier", "schema": {"type": "string"}, "example": "tenant_456"},
-          {"name": "sub_tenant_id", "in": "query", "required": false, "description": "Sub-tenant identifier", "schema": {"type": "string"}, "example": "subtenant_123"}
-        
-        ],
-        "responses": {
-          "200": {"description": "List of sources returned successfully"},
-          "422": { "description": "Incomplete/invalid parameters"},
-          "401": {"description": "Invalid or missing API key"},
-          "5XX": {"description": "Internal server error"}
-        }
-      }
-    },
-    "/list/sources_by_id": {
-      "post": {
-        "description": "Fetches specific sources/documents by their IDs.",
-        "parameters": [
-
-          {"name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}"},
-          {"name": "Content-Type", "in": "header", "required": true, "description": "Request content type", "schema": { "type": "string", "default": "application/json" }},
-          {"name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" }}
-        
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "tenant_id": {"type": "string", "description": "Tenant identifier", "example": "tenant_456"},
-                  "source_ids": {"type": "array", "items": {"type": "string"}, "description": "IDs of documents", "example": ["doc_123", "doc_456"]}
-                },
-                "required": ["tenant_id", "source_ids"]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {"description": "Sources returned successfully"},
-          "422": { "description": "Incomplete/invalid parameters"},
-          "401": {"description": "Invalid or missing API key"},
-          "5XX": {"description": "Internal server error"}
-        }
-      }
-    },
-    "/delete_memory": {
-      "delete": {
-        "description": "Deletes specific documents or memories associated with a user.",
-        "parameters": [
-          
-          {"name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}"},
-          {"name": "Content-Type", "in": "header", "required": true, "description": "Request content type", "schema": { "type": "string", "default": "application/json" }},
-          {"name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" }}
-        
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "tenant_id": {"type": "string", "description": "Tenant identifier", "example": "tenant_456"},
-                  "source_ids": {"type": "array", "items": {"type": "string"}, "description": "IDs of documents to delete", "example": ["doc_123", "doc_456"]}
-                },
-                "required": ["tenant_id", "source_ids"]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {"description": "Memory deleted successfully"},
-          "422": { "description": "Incomplete/invalid parameters"},
-          "401": {"description": "Invalid or missing API key"},
-          "5XX": {"description": "Internal server error"}
+          },
+          "responses": {}
         }
       },
-      "post": {
-        "description": "Deletes specific documents or memories associated with a user (POST alternative).",
-        "parameters": [
-
-          {"name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}"},
-          {"name": "Content-Type", "in": "header", "required": true, "description": "Request content type", "schema": { "type": "string", "default": "application/json" }},
-          {"name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" }}
-        
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
+      "/list/sources": {
+        "get": {
+          "description": "Fetches all sources/documents for a given tenant.",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "description": "Bearer token (Firebase token)",
               "schema": {
-                "type": "object",
-                "properties": {
-                  "tenant_id": {"type": "string", "description": "Tenant identifier", "example": "tenant_456"},
-                  "source_ids": {"type": "array", "items": {"type": "string"}, "description": "IDs of documents to delete", "example": ["doc_123", "doc_456"]}
-                },
-                "required": ["tenant_id", "source_ids"]
+                "type": "string"
+              },
+              "example": "Bearer {API_KEY}"
+            },
+            {
+              "name": "accept",
+              "in": "header",
+              "required": true,
+              "description": "Response content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
               }
+            },
+            {
+              "name": "tenant_id",
+              "in": "query",
+              "required": true,
+              "description": "Tenant identifier",
+              "schema": {
+                "type": "string"
+              },
+              "example": "tenant_456"
+            },
+            {
+              "name": "sub_tenant_id",
+              "in": "query",
+              "required": false,
+              "description": "Sub-tenant identifier",
+              "schema": {
+                "type": "string"
+              },
+              "example": "subtenant_123"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "List of sources returned successfully"
+            },
+            "422": {
+              "description": "Incomplete/invalid parameters"
+            },
+            "401": {
+              "description": "Invalid or missing API key"
+            },
+            "5XX": {
+              "description": "Internal server error"
             }
           }
-        },
-        "responses": {
-          "200": {"description": "Memory deleted successfully (POST)"},
-          "422": { "description": "Incomplete/invalid parameters"},
-          "401": {"description": "Invalid or missing API key"},
-          "5XX": {"description": "Internal server error"}
-      }
-      }
-    },
-    "/upload/verify_processing": {
-      "post": {
-        "description": "Checks if a document has been successfully processed.",
-        "parameters": [
-        
-          {"name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": {"type": "string"}, "example": "Bearer {API_KEY}"},
-          {"name": "Content-Type", "in": "header", "required": true, "description": "Request content type", "schema": {"type": "string", "default": "application/json"}},
-          
-          {"name": "file_id", "in": "query", "required": true, "description": "ID of the uploaded file", "schema": {"type": "string"}, "example": "file_123"}
-        
-        ],
-        "responses": {
-          "200": {
-            "description": "Processing status returned successfully",
+        }
+      },
+      "/list/sources_by_id": {
+        "post": {
+          "description": "Fetches specific sources/documents by their IDs.",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "description": "Bearer token (Firebase token)",
+              "schema": {
+                "type": "string"
+              },
+              "example": "Bearer {API_KEY}"
+            },
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "required": true,
+              "description": "Request content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "accept",
+              "in": "header",
+              "required": true,
+              "description": "Response content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "file_id": {"type": "string", "description": "ID of the uploaded file", "example": "123123123123"},
-                    "indexing_status": {"type": "string", "enum": ["success", "in_progress", "errored"], "description": "Indexing status of the file", "example": "success"}
+                    "tenant_id": {
+                      "type": "string",
+                      "description": "Tenant identifier",
+                      "example": "tenant_456"
+                    },
+                    "source_ids": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "IDs of documents",
+                      "example": [
+                        "doc_123",
+                        "doc_456"
+                      ]
+                    }
                   },
-                  "required": ["file_id", "indexing_status"]
-                },
-                "example": {
-                  "file_id": "123123123123",
-                  "indexing_status": "success"
+                  "required": [
+                    "tenant_id",
+                    "source_ids"
+                  ]
                 }
               }
             }
           },
-          "422": { "description": "Incomplete/invalid parameters"},
-          "401": {"description": "Invalid or missing API key"},
-          "5XX": {"description": "Internal server error"}
+          "responses": {
+            "200": {
+              "description": "Sources returned successfully"
+            },
+            "422": {
+              "description": "Incomplete/invalid parameters"
+            },
+            "401": {
+              "description": "Invalid or missing API key"
+            },
+            "5XX": {
+              "description": "Internal server error"
+            }
+          }
         }
-      }
-    },
-    "/fetch/fetch_content": {
-      "post": {
-        "description": "Fetches the download URL for a specific uploaded source/document.",
-        "parameters": [
-          {"name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}"},
-          {"name": "Content-Type", "in": "header", "required": true, "description": "Request content type", "schema": { "type": "string", "default": "application/json" }},
-          {"name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" }}
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
+      },
+      "/delete_memory": {
+        "delete": {
+          "description": "Deletes specific documents or memories associated with a user.",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "description": "Bearer token (Firebase token)",
               "schema": {
-                "type": "object",
-                "properties": {
-                  "file_id": {"type": "string", "description": "ID of the file to fetch the download URL for."},
-                  "tenant_id": {"type": "string", "description": "Tenant identifier."},
-                  "sub_tenant_id": {"type": "string", "description": "Sub-tenant identifier.", "default": ""}
-                },
-                "required": ["file_id", "tenant_id"]
+                "type": "string"
               },
-              "examples": {
-                "fetch_content": {
-                  "summary": "Fetch download URL for a file",
-                  "value": {
-                    "file_id": "file_123456",
-                    "tenant_id": "tenant_456",
-                    "sub_tenant_id": "subtenant_123"
+              "example": "Bearer {API_KEY}"
+            },
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "required": true,
+              "description": "Request content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "accept",
+              "in": "header",
+              "required": true,
+              "description": "Response content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "tenant_id": {
+                      "type": "string",
+                      "description": "Tenant identifier",
+                      "example": "tenant_456"
+                    },
+                    "source_ids": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "IDs of documents to delete",
+                      "example": [
+                        "doc_123",
+                        "doc_456"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "tenant_id",
+                    "source_ids"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Memory deleted successfully"
+            },
+            "422": {
+              "description": "Incomplete/invalid parameters"
+            },
+            "401": {
+              "description": "Invalid or missing API key"
+            },
+            "5XX": {
+              "description": "Internal server error"
+            }
+          }
+        },
+        "post": {
+          "description": "Deletes specific documents or memories associated with a user (POST alternative).",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "description": "Bearer token (Firebase token)",
+              "schema": {
+                "type": "string"
+              },
+              "example": "Bearer {API_KEY}"
+            },
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "required": true,
+              "description": "Request content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "accept",
+              "in": "header",
+              "required": true,
+              "description": "Response content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "tenant_id": {
+                      "type": "string",
+                      "description": "Tenant identifier",
+                      "example": "tenant_456"
+                    },
+                    "source_ids": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "IDs of documents to delete",
+                      "example": [
+                        "doc_123",
+                        "doc_456"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "tenant_id",
+                    "source_ids"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Memory deleted successfully (POST)"
+            },
+            "422": {
+              "description": "Incomplete/invalid parameters"
+            },
+            "401": {
+              "description": "Invalid or missing API key"
+            },
+            "5XX": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+      "/upload/verify_processing": {
+        "post": {
+          "description": "Checks if a document has been successfully processed.",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "description": "Bearer token (Firebase token)",
+              "schema": {
+                "type": "string"
+              },
+              "example": "Bearer {API_KEY}"
+            },
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "required": true,
+              "description": "Request content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "file_id",
+              "in": "query",
+              "required": true,
+              "description": "ID of the uploaded file",
+              "schema": {
+                "type": "string"
+              },
+              "example": "file_123"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Processing status returned successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "file_id": {
+                        "type": "string",
+                        "description": "ID of the uploaded file",
+                        "example": "123123123123"
+                      },
+                      "indexing_status": {
+                        "type": "string",
+                        "enum": [
+                          "success",
+                          "in_progress",
+                          "errored"
+                        ],
+                        "description": "Indexing status of the file",
+                        "example": "success"
+                      }
+                    },
+                    "required": [
+                      "file_id",
+                      "indexing_status"
+                    ]
+                  },
+                  "example": {
+                    "file_id": "123123123123",
+                    "indexing_status": "success"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Incomplete/invalid parameters"
+            },
+            "401": {
+              "description": "Invalid or missing API key"
+            },
+            "5XX": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+      "/fetch/fetch_content": {
+        "post": {
+          "description": "Fetches the download URL for a specific uploaded source/document.",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "description": "Bearer token (Firebase token)",
+              "schema": {
+                "type": "string"
+              },
+              "example": "Bearer {API_KEY}"
+            },
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "required": true,
+              "description": "Request content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "accept",
+              "in": "header",
+              "required": true,
+              "description": "Response content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "file_id": {
+                      "type": "string",
+                      "description": "ID of the file to fetch the download URL for."
+                    },
+                    "tenant_id": {
+                      "type": "string",
+                      "description": "Tenant identifier."
+                    },
+                    "sub_tenant_id": {
+                      "type": "string",
+                      "description": "Sub-tenant identifier.",
+                      "default": ""
+                    }
+                  },
+                  "required": [
+                    "file_id",
+                    "tenant_id"
+                  ]
+                },
+                "examples": {
+                  "fetch_content": {
+                    "summary": "Fetch download URL for a file",
+                    "value": {
+                      "file_id": "file_123456",
+                      "tenant_id": "tenant_456",
+                      "sub_tenant_id": "subtenant_123"
+                    }
                   }
                 }
               }
             }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Returns a JSON object with file IDs as keys and their corresponding download URLs as values",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": {"type": "string", "description": "Download URL for the file ID key."}
-                },
-                "example": {
-                  "CortexDocb7a1db714c9c473bbd8ff81ec17ba2811750936047": "https://cortex-local-sources-prod.s3.amazonaws.com/ToayuCogoBdxZVoZQ1ft8ZoRzCO2/FindrMasterCollectionMemoriesPreprod/123/local_source/CortexDocb7a1db714c9c473bbd8ff81ec17ba2811750936047?..."
+          },
+          "responses": {
+            "200": {
+              "description": "Returns a JSON object with file IDs as keys and their corresponding download URLs as values",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string",
+                      "description": "Download URL for the file ID key."
+                    }
+                  },
+                  "example": {
+                    "CortexDocb7a1db714c9c473bbd8ff81ec17ba2811750936047": "https://cortex-local-sources-prod.s3.amazonaws.com/ToayuCogoBdxZVoZQ1ft8ZoRzCO2/FindrMasterCollectionMemoriesPreprod/123/local_source/CortexDocb7a1db714c9c473bbd8ff81ec17ba2811750936047?..."
+                  }
                 }
               }
+            },
+            "404": {
+              "description": "File not found or not accessible with the provided credentials."
+            },
+            "422": {
+              "description": "Incomplete/invalid parameters"
+            },
+            "401": {
+              "description": "Invalid or missing API key"
+            },
+            "5XX": {
+              "description": "Internal server error"
             }
-          },
-          "404": {"description": "File not found or not accessible with the provided credentials."},
-          "422": { "description": "Incomplete/invalid parameters"},
-          "401": {"description": "Invalid or missing API key"},
-          "5XX": {"description": "Internal server error"}
+          }
         }
-      }
-    },
-    "/user_memory/list_user_memories": {
-      "get": {
-        "description": "Retrieves and lists all user memories for a cortex user.",
-        "parameters": [
-
-          { "name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}" },
-          { "name": "Content-Type", "in": "header", "required": true, "description": "Request content type", "schema": { "type": "string", "default": "application/json" } },
-          { "name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" } },
-          
-          { "name": "tenant_id", "in": "query", "required": true, "description": "Tenant identifier", "schema": { "type": "string" } },
-          { "name": "sub_tenant_id", "in": "query", "required": false, "description": "Sub-tenant identifier", "schema": { "type": "string" } }
-        
-        ],
-        "responses": {
-          "200": {
-            "description": "List of user memories returned successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": { "type": "boolean" },
-                    "user_memories": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "source_id": { "type": "string", "description": "Unique identifier for the memory" },
-                          "source_content": { "type": "string", "description": "Content of the user memory" }
+      },
+      "/user_memory/list_user_memories": {
+        "get": {
+          "description": "Retrieves and lists all user memories for a cortex user.",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "description": "Bearer token (Firebase token)",
+              "schema": {
+                "type": "string"
+              },
+              "example": "Bearer {API_KEY}"
+            },
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "required": true,
+              "description": "Request content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "accept",
+              "in": "header",
+              "required": true,
+              "description": "Response content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "tenant_id",
+              "in": "query",
+              "required": true,
+              "description": "Tenant identifier",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "sub_tenant_id",
+              "in": "query",
+              "required": false,
+              "description": "Sub-tenant identifier",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "List of user memories returned successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "user_memories": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "source_id": {
+                              "type": "string",
+                              "description": "Unique identifier for the memory"
+                            },
+                            "source_content": {
+                              "type": "string",
+                              "description": "Content of the user memory"
+                            }
+                          }
                         }
                       }
                     }
                   }
                 }
               }
+            },
+            "401": {
+              "description": "Invalid or missing API key"
+            },
+            "422": {
+              "description": "Incomplete/invalid parameters"
+            },
+            "5XX": {
+              "description": "Internal server error"
             }
-          },
-          "401": {"description": "Invalid or missing API key"},
-          "422": { "description": "Incomplete/invalid parameters"},
-          "5XX": {"description": "Internal server error"}
+          }
         }
-      }
-    },
-    "/user_memory/delete_user_memory": {
-      "delete": {
-        "description": "Deletes a specific user memory for a cortex user.",
-        "security": [
-          { "bearerAuth": [] }
-        ],
-        "parameters": [
-          
-          { "name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}" },
-          { "name": "Content-Type", "in": "header", "required": true, "description": "Request content type", "schema": { "type": "string", "default": "application/json" } },
-          { "name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" } },
-          
-          { "name": "tenant_id", "in": "query", "required": true, "description": "Tenant identifier", "schema": { "type": "string" } },
-          { "name": "sub_tenant_id", "in": "query", "required": true, "description": "Sub-tenant identifier", "schema": { "type": "string" } },
-          { "name": "memory_id", "in": "query", "required": true, "description": "user memory ID to delete", "schema": { "type": "string" } }
-        
-        ],
-        "responses": {
-          "200": {
-            "description": "Memory deletion result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": { "type": "boolean" },
-                    "user_memory_deleted": { "type": "boolean" }
-                  }
-                }
+      },
+      "/user_memory/delete_user_memory": {
+        "delete": {
+          "description": "Deletes a specific user memory for a cortex user.",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "description": "Bearer token (Firebase token)",
+              "schema": {
+                "type": "string"
+              },
+              "example": "Bearer {API_KEY}"
+            },
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "required": true,
+              "description": "Request content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "accept",
+              "in": "header",
+              "required": true,
+              "description": "Response content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "tenant_id",
+              "in": "query",
+              "required": true,
+              "description": "Tenant identifier",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "sub_tenant_id",
+              "in": "query",
+              "required": true,
+              "description": "Sub-tenant identifier",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "memory_id",
+              "in": "query",
+              "required": true,
+              "description": "user memory ID to delete",
+              "schema": {
+                "type": "string"
               }
             }
-          },
-          "401": {"description": "Invalid or missing API key"},
-          "422": { "description": "Incomplete/invalid parameters"},
-          "5XX": {"description": "Internal server error"}
-        }
-      }
-    },
-    "/user_memory/retrieve_user_memory": {
-      "get": {
-        "description": "Searches and retrieves relevant user memories based on a query.",
-        "parameters": [
-        
-          { "name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}" },
-          { "name": "Content-Type", "in": "header", "required": true, "description": "Request content type", "schema": { "type": "string", "default": "application/json" } },
-          { "name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" } },
-          
-          { "name": "tenant_id", "in": "query", "required": true, "description": "Tenant identifier", "schema": { "type": "string" } },
-          { "name": "sub_tenant_id", "in": "query", "required": true, "description": "Sub-tenant identifier", "schema": { "type": "string" } },
-          { "name": "query", "in": "query", "required": true, "description": "Search query to find relevant memories", "schema": { "type": "string" }, "example": "project meeting notes" },
-          { "name": "max_count", "in": "query", "required": false, "description": "Maximum number of memories to return", "schema": { "type": "integer" }, "example": 10 }
-        
-        ],
-        "responses": {
-          "200": {
-            "description": "Relevant memories returned successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": { "type": "boolean" },
-                    "user_memories": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "description": "User memory objects matching the search query"
+          ],
+          "responses": {
+            "200": {
+              "description": "Memory deletion result",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "user_memory_deleted": {
+                        "type": "boolean"
                       }
                     }
                   }
                 }
               }
+            },
+            "401": {
+              "description": "Invalid or missing API key"
+            },
+            "422": {
+              "description": "Incomplete/invalid parameters"
+            },
+            "5XX": {
+              "description": "Internal server error"
             }
-          },
-          "401": {"description": "Invalid or missing API key"},
-          "422": { "description": "Incomplete/invalid parameters"},
-          "5XX": {"description": "Internal server error"}
+          }
         }
-      }
-    },
-    "/user_memory/add_user_memory": {
-      "post": {
-        "description": "Manually adds a new user memory for a cortex user.",
-        "parameters": [
-        
-          { "name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}" },
-          { "name": "Content-Type", "in": "header", "required": true, "description": "Request content type", "schema": { "type": "string", "default": "application/json" } },
-          { "name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" } },
-          
-          { "name": "tenant_id", "in": "query", "required": true, "description": "Tenant identifier", "schema": { "type": "string" } },
-          { "name": "sub_tenant_id", "in": "query", "required": true, "description": "Sub-tenant identifier", "schema": { "type": "string" } },
-          { "name": "user_memory", "in": "query", "required": true, "description": "User memory to be added to their vector store", "schema": { "type": "string" } }
-        
-        ],
-        "responses": {
-          "200": {
-            "description": "Memory insertion result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": { "type": "boolean" },
-                    "user_memory_added": { "type": "boolean" }
-                  }
-                }
+      },
+      "/user_memory/retrieve_user_memory": {
+        "get": {
+          "description": "Searches and retrieves relevant user memories based on a query.",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "description": "Bearer token (Firebase token)",
+              "schema": {
+                "type": "string"
+              },
+              "example": "Bearer {API_KEY}"
+            },
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "required": true,
+              "description": "Request content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
               }
+            },
+            {
+              "name": "accept",
+              "in": "header",
+              "required": true,
+              "description": "Response content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "tenant_id",
+              "in": "query",
+              "required": true,
+              "description": "Tenant identifier",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "sub_tenant_id",
+              "in": "query",
+              "required": true,
+              "description": "Sub-tenant identifier",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "query",
+              "in": "query",
+              "required": true,
+              "description": "Search query to find relevant memories",
+              "schema": {
+                "type": "string"
+              },
+              "example": "project meeting notes"
+            },
+            {
+              "name": "max_count",
+              "in": "query",
+              "required": false,
+              "description": "Maximum number of memories to return",
+              "schema": {
+                "type": "integer"
+              },
+              "example": 10
             }
-          },
-          "422": { "description": "Incomplete/invalid parameters"},
-          "401": {"description": "Invalid or missing API key"},
-          "5XX": {"description": "Internal server error"}
-        }
-      }
-    },
-    "/user_memory/generate_user_memory": {
-      "post": {
-        "description": "Automatically generates and saves user memories based on a user query. The most sophisticated endpoint that combines query processing, memory generation, and storage.",
-        "parameters": [
-          
-          { "name": "Authorization", "in": "header", "required": true, "description": "Bearer token (Firebase token)", "schema": { "type": "string" }, "example": "Bearer {API_KEY}" },
-          { "name": "Content-Type", "in": "header", "required": true, "description": "Request content type", "schema": { "type": "string", "default": "application/json" } },
-          { "name": "accept", "in": "header", "required": true, "description": "Response content type", "schema": { "type": "string", "default": "application/json" } },
-          
-          { "name": "tenant_id", "in": "query", "required": true, "description": "Tenant identifier", "schema": { "type": "string" } },
-          { "name": "sub_tenant_id", "in": "query", "required": true, "description": "Sub-tenant identifier", "schema": { "type": "string" } },
-          { "name": "user_query", "in": "query", "required": true, "description": "User query to generate memories from", "schema": { "type": "string" } },
-          { "name": "user_name", "in": "query", "required": true, "description": "Name of the user for personalization", "schema": { "type": "string" } }
-        
-        ],
-        "responses": {
-          "200": {
-            "description": "Generated memories returned successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": { "type": "boolean" },
-                    "generated_user_memories": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "description": "Generated user memory objects that were created and stored"
+          ],
+          "responses": {
+            "200": {
+              "description": "Relevant memories returned successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "user_memories": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "description": "User memory objects matching the search query"
+                        }
                       }
                     }
                   }
                 }
               }
+            },
+            "401": {
+              "description": "Invalid or missing API key"
+            },
+            "422": {
+              "description": "Incomplete/invalid parameters"
+            },
+            "5XX": {
+              "description": "Internal server error"
             }
-          },
-          "401": {"description": "Invalid or missing API key"},
-          "422": { "description": "Incomplete/invalid parameters"},
-          "5XX": {"description": "Internal server error"}
+          }
+        }
+      },
+      "/user_memory/add_user_memory": {
+        "post": {
+          "description": "Manually adds a new user memory for a cortex user.",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "description": "Bearer token (Firebase token)",
+              "schema": {
+                "type": "string"
+              },
+              "example": "Bearer {API_KEY}"
+            },
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "required": true,
+              "description": "Request content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "accept",
+              "in": "header",
+              "required": true,
+              "description": "Response content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "tenant_id",
+              "in": "query",
+              "required": true,
+              "description": "Tenant identifier",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "sub_tenant_id",
+              "in": "query",
+              "required": true,
+              "description": "Sub-tenant identifier",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "user_memory",
+              "in": "query",
+              "required": true,
+              "description": "User memory to be added to their vector store",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Memory insertion result",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "user_memory_added": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Incomplete/invalid parameters"
+            },
+            "401": {
+              "description": "Invalid or missing API key"
+            },
+            "5XX": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+      "/user_memory/generate_user_memory": {
+        "post": {
+          "description": "Automatically generates and saves user memories based on a user query. The most sophisticated endpoint that combines query processing, memory generation, and storage.",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "description": "Bearer token (Firebase token)",
+              "schema": {
+                "type": "string"
+              },
+              "example": "Bearer {API_KEY}"
+            },
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "required": true,
+              "description": "Request content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "accept",
+              "in": "header",
+              "required": true,
+              "description": "Response content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "tenant_id",
+              "in": "query",
+              "required": true,
+              "description": "Tenant identifier",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "sub_tenant_id",
+              "in": "query",
+              "required": true,
+              "description": "Sub-tenant identifier",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "user_query",
+              "in": "query",
+              "required": true,
+              "description": "User query to generate memories from",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "user_name",
+              "in": "query",
+              "required": true,
+              "description": "Name of the user for personalization",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Generated memories returned successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "generated_user_memories": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "description": "Generated user memory objects that were created and stored"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Invalid or missing API key"
+            },
+            "422": {
+              "description": "Incomplete/invalid parameters"
+            },
+            "5XX": {
+              "description": "Internal server error"
+            }
+          }
         }
       }
-    }
-  },
-  "components": {
-    "schemas": {},
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
+    },
+    "components": {
+      "schemas": {},
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer"
+        }
       }
     }
   }
-}

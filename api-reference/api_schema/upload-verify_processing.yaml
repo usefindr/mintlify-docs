@@ -4,6 +4,7 @@
 "/upload/verify_processing":
   post:
     description: Checks if a document has been successfully processed.
+    # --- Parameters (Headers & Query) ---
     parameters:
     - name: Authorization
       in: header
@@ -26,6 +27,7 @@
       schema:
         type: string
       example: file_123
+    # --- Responses ---
     responses:
       '200':
         description: Processing status returned successfully

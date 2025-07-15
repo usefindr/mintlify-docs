@@ -6,6 +6,7 @@
     description: Deletes a specific user memory for a cortex user.
     security:
     - bearerAuth: []
+    # --- Parameters (Headers & Query) ---
     parameters:
     - name: Authorization
       in: header
@@ -46,6 +47,7 @@
       description: user memory ID to delete
       schema:
         type: string
+    # --- Responses ---
     responses:
       '200':
         description: Memory deletion result

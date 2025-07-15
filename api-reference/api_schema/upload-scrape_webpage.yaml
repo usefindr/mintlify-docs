@@ -4,8 +4,8 @@
 "/upload/scrape_webpage":
   post:
     description: Scrapes and processes content from a public webpage.
+    # --- Parameters (Headers & Query) ---
     parameters:
-      # --- Request Headers ---
       - name: Authorization
         in: header
         required: true
@@ -20,7 +20,6 @@
         schema:
           type: string
           default: application/json
-      # --- Query Parameters ---
       - name: web_url
         in: query
         required: true
@@ -42,8 +41,8 @@
         schema:
           type: string
         example: subtenant_123
+    # --- Responses ---
     responses:
-      # --- Response Codes ---
       '200':
         description: Webpage scraped successfully
       '422':

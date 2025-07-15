@@ -4,6 +4,7 @@
 "/user_memory/add_user_memory":
   post:
     description: Manually adds a new user memory for a cortex user.
+    # --- Parameters (Headers & Query) ---
     parameters:
     - name: Authorization
       in: header
@@ -44,6 +45,7 @@
       description: User memory to be added to their vector store
       schema:
         type: string
+    # --- Responses ---
     responses:
       '200':
         description: Memory insertion result
@@ -60,5 +62,5 @@
         description: Incomplete/invalid parameters
       '401':
         description: Invalid or missing API key
-      5XX:
+      '5XX':
         description: Internal server error 

@@ -4,6 +4,7 @@
 "/user_memory/generate_user_memory":
   post:
     description: Automatically generates and saves user memories based on a user query. The most sophisticated endpoint that combines query processing, memory generation, and storage.
+    # --- Parameters (Headers & Query) ---
     parameters:
     - name: Authorization
       in: header
@@ -50,6 +51,7 @@
       description: Name of the user for personalization
       schema:
         type: string
+    # --- Responses ---
     responses:
       '200':
         description: Generated memories returned successfully

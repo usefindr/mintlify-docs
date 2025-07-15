@@ -4,6 +4,7 @@
 "/user_memory/list_user_memories":
   get:
     description: Retrieves and lists all user memories for a cortex user.
+    # --- Parameters (Headers & Query) ---
     parameters:
     - name: Authorization
       in: header
@@ -38,6 +39,7 @@
       description: Sub-tenant identifier
       schema:
         type: string
+    # --- Responses ---
     responses:
       '200':
         description: List of user memories returned successfully
