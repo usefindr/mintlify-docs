@@ -1322,7 +1322,7 @@
       },
       "/user_memory/list_user_memories": {
         "get": {
-          "description": "Retrieves and lists all user memories for a cortex user.",
+          "description": "Retrieves and lists all AI memories for your user.",
           "parameters": [
             {
               "name": "Authorization",

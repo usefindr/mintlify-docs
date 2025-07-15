@@ -21,7 +21,7 @@ paths:
   /upload/upload_app_sources:
     $ref: './api_schema/upload-upload_app_sources.yaml#/upload/upload_app_sources'
   /search/qna:
-    $ref: './api_schema/search-qna.yaml#/search/qna'
+    $ref: './api_schema/search-qna.yaml#search/qna'
   /list/sources:
     $ref: './api_schema/list-sources.yaml#/list/sources'
   /list/sources_by_id:
