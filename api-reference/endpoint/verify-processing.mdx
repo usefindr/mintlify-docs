@@ -5,19 +5,6 @@ openapi: 'POST /upload/verify_processing'
 
 Checks if a document has been successfully processed.
 
-**Response:**
-Returns a JSON object with:
-- `file_id` (string): The ID of the uploaded file
-- `indexing_status` (string): One of `success`, `in_progress`, or `errored`
-
-Example:
-```json
-{
-  "file_id": "123123123123",
-  "indexing_status": "success"
-}
-```
-
 ## Sample Request
 
 ```bash
@@ -30,5 +17,3 @@ curl --location 'https://api.usecortex.ai/upload/verify_processing?file_id={FILE
 - `Authorization`: Bearer token
 - `Content-Type`: application/json
 
-### 🧾 Parameters
-- `file_id` (string, required): ID of the uploaded file (query parameter)

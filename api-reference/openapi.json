@@ -152,6 +152,86 @@
         }
       }
     },
+    "/upload/upload_markdown": {
+      "post": {
+        "description": "Uploads text or markdown content for processing and indexing.",
+        "parameters": [
+          {
+            "name": "tenant_id",
+            "in": "query",
+            "required": true,
+            "description": "Tenant identifier",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "sub_tenant_id",
+            "in": "query",
+            "required": false,
+            "description": "Sub-tenant identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "content": {
+                    "type": "string",
+                    "description": "The text or markdown content to upload and process"
+                  },
+                  "tenant_metadata": {
+                    "type": "object",
+                    "description": "Custom metadata object to associate with the uploaded content for tenant-level filtering (e.g., department, compliance_tag)"
+                  },
+                  "document_metadata": {
+                    "type": "object",
+                    "description": "Custom metadata object to associate with the uploaded content for document-level filtering (e.g., title, author)"
+                  }
+                },
+                "required": ["content"]
+              },
+              "examples": {
+                "upload_markdown": {
+                  "summary": "Upload markdown content",
+                  "description": "Example of uploading markdown content with tenant and document metadata",
+                  "value": {
+                    "content": "This is sample markdown content that will be processed and indexed.",
+                    "tenant_metadata": { "department": "Finance", "compliance_tag": "GDPR" },
+                    "document_metadata": { "title": "Q1 Report.pdf", "author": "Alice Smith" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Upload success and generated file ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "file_id": { "type": "string" }
+                  }
+                },
+                "example": {
+                  "success": true,
+                  "file_id": "CortexDocb7a1db714c9c473bbd8ff81ec17ba2811750936047"
+                }
+              }
+            }
+          },
+          "400": { "description": "Content field is required and cannot be empty" },
+          "500": { "description": "Upload failed or error while uploading markdown" },
+          "401": { "description": "Invalid or missing API key" }
+        }
+      }
+    },
     "/upload/batch_upload": {
       "post": {
         "description": "Uploads multiple documents in a single request for processing and indexing.",
@@ -453,7 +533,7 @@
         "description": "Fetches all sources/documents for a given tenant.",
         "parameters": [
           {"name": "tenant_id", "in": "query", "required": true, "description": "Tenant identifier", "schema": {"type": "string"}, "example": "tenant_456"},
-          {"name": "sub_tenant_id", "in": "query", "required": false, "description": "Optional filter", "schema": {"type": "string"}, "example": "subtenant_123"}
+          {"name": "sub_tenant_id", "in": "query", "required": true, "description": "Optional filter", "schema": {"type": "string"}, "example": "subtenant_123"}
         ],
         "responses": {"200": {"description": "List of sources returned successfully"}}
       }
@@ -469,7 +549,6 @@
                 "type": "object",
                 "properties": {
                   "tenant_id": {"type": "string", "description": "Tenant identifier", "example": "tenant_456"},
-                  "sub_tenant_id": {"type": "string", "description": "Optional filter", "example": "subtenant_123"},
                   "source_ids": {"type": "array", "items": {"type": "string"}, "description": "IDs of documents", "example": ["doc_123", "doc_456"]}
                 },
                 "required": ["tenant_id", "source_ids"]
@@ -480,7 +559,7 @@
         "responses": {"200": {"description": "Sources returned successfully"}}
       }
     },
-    "/upload/delete_memory": {
+    "/delete_memory": {
       "delete": {
         "description": "Deletes specific documents or memories associated with a user.",
         "requestBody": {
@@ -580,7 +659,7 @@
         },
         "responses": {
           "200": {
-            "description": "Download URL(s) fetched successfully.",
+            "description": "Returns a JSON object with file IDs as keys and their corresponding download URLs as values",
             "content": {
               "application/json": {
                 "schema": {
@@ -594,7 +673,7 @@
             }
           },
           "404": {
-            "description": "File not found or not accessible."
+            "description": "File not found or not accessible with the provided credentials."
           }
         }
       }
@@ -663,6 +742,8 @@
       "get": {
         "description": "Searches and retrieves relevant user memories based on a query.",
         "parameters": [
+          { "name": "tenant_id", "in": "query", "required": true, "description": "Tenant identifier", "schema": { "type": "string" } },
+          { "name": "sub_tenant_id", "in": "query", "required": true, "description": "Sub-tenant identifier", "schema": { "type": "string" } },
           { "name": "query", "in": "query", "required": true, "description": "Search query to find relevant memories", "schema": { "type": "string" }, "example": "project meeting notes" },
           { "name": "max_count", "in": "query", "required": false, "description": "Maximum number of memories to return", "schema": { "type": "integer" }, "example": 10 }
         ],
@@ -679,7 +760,7 @@
                       "type": "array",
                       "items": {
                         "type": "object",
-                        "description": "user memory objects matching the search query"
+                        "description": "User memory objects matching the search query"
                       }
                     }
                   }

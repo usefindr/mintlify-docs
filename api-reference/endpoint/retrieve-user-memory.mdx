@@ -19,20 +19,9 @@ curl --location 'https://api.usecortex.ai/user_memory/retrieve_user_memory?tenan
 - `accept`: application/json
 - `Content-Type`: application/json
 
-### 🧾 Query Parameters
-- `tenant_id` (string, required): Tenant identifier
-- `sub_tenant_id` (string, required): Sub-tenant identifier
-- `query` (string, required): Search query to find relevant memories
-- `max_count` (integer, optional): Maximum number of memories to return
-
 ### 📋 Functionality
 - Takes a query and max_count from request parameters
 - Performs semantic search through existing user memories using the query
 - Returns the most relevant memories up to the specified max_count
 - Uses plan-independent querying to find matching memories
 - Returns empty list on errors
-
-### 📤 Response
-Returns an object with:
-- `success` (boolean): Indicates if the request was successful
-- `user_memories` (array): List of relevant user memory objects matching the search query 
