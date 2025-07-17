@@ -3,8 +3,6 @@ title: 'Add User Memory'
 openapi: 'POST /user_memory/add_user_memory'
 ---
 
-Lets you add new AI memories for your users.
-
 ## Sample Request
 
 ```bash
@@ -14,24 +12,9 @@ curl --location 'https://api.usecortex.ai/user_memory/add_user_memory?tenant_id=
   --header 'Content-Type: application/json'
 ```
 
-### 🔐 Headers
-- `Authorization`: Bearer token (Firebase token)
-- `accept`: application/json
-- `Content-Type`: application/json
-
-### 🧾 Query Parameters
-- `tenant_id` (string, required): Tenant identifier
-- `sub_tenant_id` (string, required): Sub-tenant identifier
-- `user_memory` (string, required): User memory to be added to their vector store
-
 ### 📋 Functionality
 - Takes user memory content from request body
 - Extracts user context from Firebase token
 - Inserts the new user memory into the vector store
 - Returns confirmation of successful insertion
 - Handles errors and returns false on failure
-
-### 📤 Response
-Returns an object with:
-- `success` (boolean): Indicates if the request was successful
-- `user_memory_added` (boolean): True if the memory was added, false otherwise 
