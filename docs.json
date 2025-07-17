@@ -40,7 +40,8 @@
             "pages": [
               "use-cases/glean-clone",
               "use-cases/ai-chief-of-staff",
-              "use-cases/ai-linkedin-recruiter"
+              "use-cases/ai-linkedin-recruiter",
+              "use-cases/ai-travel-planner"
             ]
           }
         ]
