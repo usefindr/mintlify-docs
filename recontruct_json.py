@@ -67,7 +67,7 @@ def yaml_to_json_with_refs(main_file, output_file=None):
         return None
 
 
-result = yaml_to_json_with_refs('api-reference/openapi.yaml', 'api-reference/old-openapi.json')
+result = yaml_to_json_with_refs('api-reference/openapi.yaml', 'api-reference/openapi.json')
 if result is not None:
     print("Conversion successful! Preview:")
     print(result[:500] + "..." if len(result) > 500 else result)
