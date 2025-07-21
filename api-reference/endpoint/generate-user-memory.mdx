@@ -2,8 +2,13 @@
 title: 'Generate User Memory'
 openapi: 'POST /user_memory/generate_user_memory'
 ---
-
-Automatically generates and saves user memories based on a user query. This is the most sophisticated endpoint that combines query processing and memory generation for your end users.
+### 📋 Functionality
+- Takes user query and user name from request
+- Rewrites the user query using OpenAI (without clarifications)
+- Generates multiple user memories based on both original and rewritten queries
+- Automatically inserts all generated memories into the vector store
+- Returns the list of generated user memories
+- Most sophisticated endpoint combining query processing, memory generation, and storage
 
 ## Sample Request
 
@@ -13,27 +18,3 @@ curl --location 'https://api.usecortex.ai/user_memory/generate_user_memory?tenan
   --header 'accept: application/json' \
   --header 'Content-Type: application/json'
 ```
-
-### 🔐 Headers
-- `Authorization`: Bearer token (Firebase token)
-- `accept`: application/json
-- `Content-Type`: application/json
-
-### 🧾 Query Parameters
-- `tenant_id` (string, required): Tenant identifier
-- `sub_tenant_id` (string, required): Sub-tenant identifier
-- `user_query` (string, required): User query to generate memories from
-- `user_name` (string, required): Name of the user for personalization of the memory
-
-### 📋 Functionality
-- Takes user query and user name from request
-- Rewrites the user query using OpenAI (without clarifications)
-- Generates multiple user memories based on both original and rewritten queries
-- Automatically inserts all generated memories into the vector store
-- Returns the list of generated user memories
-- Most sophisticated endpoint combining query processing, memory generation, and storage
-
-### 📤 Response
-Returns an object with:
-- `success` (boolean): Indicates if the request was successful
-- `generated_user_memories` (array): List of generated user memory objects that were created and stored 

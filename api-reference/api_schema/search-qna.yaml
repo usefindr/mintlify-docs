@@ -1,0 +1,110 @@
+# Endpoint: /search/qna
+# Method: POST
+
+"/search/qna":
+  post:
+    description: Ask a question based on uploaded documents or sessions.
+    # --- Parameters (Headers) ---
+    parameters:
+    - name: Authorization
+      in: header
+      required: true
+      description: Bearer token (Firebase token)
+      schema:
+        type: string
+      example: Bearer {API_KEY}
+    - name: Content-Type
+      in: header
+      required: true
+      description: Request content type
+      schema:
+        type: string
+        default: application/json
+    - name: accept
+      in: header
+      required: true
+      description: Response content type
+      schema:
+        type: string
+        default: application/json
+    # --- Request Body ---
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              question:
+                type: string
+                description: The user query
+              user_name:
+                type: string
+                description: User name
+              user_instructions:
+                type: string
+                description: Custom instructions
+              session_id:
+                type: string
+                description: Chat session ID
+              tenant_id:
+                type: string
+                description: Tenant identifier
+              sub_tenant_id:
+                type: string
+                description: Sub-tenant identifier
+              stream:
+                type: boolean
+                description: Enable streaming
+              context_list:
+                type: array
+                items:
+                  type: string
+                description: List of document IDs
+              search_modes:
+                type: array
+                items:
+                  type: string
+                description: e.g., 'creative', 'web'
+              top_n:
+                type: number
+                description: Number of results to return
+              ai_generation:
+                type: boolean
+                description: Enable AI answer generation
+              highlight_chunks:
+                type: boolean
+                description: Return source chunks
+              search_alpha:
+                type: number
+                format: float
+                description: Weight for semantic match
+              recency_bias:
+                type: number
+                format: float
+                description: Recency preference
+              multi_step_reasoning:
+                type: boolean
+                default: true
+                description: If enabled, the system will automatically activate multi-step search for complex queries. If set to false, auto-enabling of multi-step search is disabled, and only single-step search will be used regardless of query complexity.
+              auto_agent_routing:
+                type: boolean
+                default: true
+                description: If true, enables routing for choosing the best suitable agent automatically; if false, the answer is generated from the default model.
+              metadata:
+                type: object
+                description: 'Filter context to only sources matching the provided metadata. Allowed keys: source_title, source_type.'
+                properties:
+                  source_title:
+                    type: string
+                    description: Restrict to sources with this title.
+                  source_type:
+                    type: string
+                    description: Restrict to sources of this type (e.g., document, webpage).
+                additionalProperties: false
+            required:
+            - question
+            - session_id
+            - tenant_id
+    # --- Responses ---
+    responses: {} 

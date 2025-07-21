@@ -1,0 +1,88 @@
+# Endpoint: /upload/upload_document
+# Method: POST
+
+"/upload/upload_document":
+  post:
+    description: Uploads a document (e.g., PDF, DOCX) for processing and indexing.
+    # --- Parameters (Headers & Query) ---
+    parameters:
+    - name: Authorization
+      in: header
+      required: true
+      description: Bearer token (Firebase token)
+      schema:
+        type: string
+      example: Bearer {API_KEY}
+    - name: accept
+      in: header
+      required: true
+      description: Response content type
+      schema:
+        type: string
+        default: application/json
+    - name: tenant_id
+      in: query
+      required: false
+      description: Tenant identifier
+      schema:
+        type: string
+      example: your_tenant_id
+    - name: sub_tenant_id
+      in: query
+      required: false
+      description: Sub-tenant identifier
+      schema:
+        type: string
+      example: your_sub_tenant_id
+    # --- Request Body ---
+    requestBody:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              file:
+                type: string
+                format: binary
+                description: Document file to upload (PDF, DOCX, TXT, etc.)
+                example: document.pdf
+              tenant_metadata:
+                type: object
+                description: JSON string containing tenant-level document metadata (e.g., department, compliance_tag)
+                example: '{"department":"Finance","compliance_tag":"GDPR"}'
+              document_metadata:
+                type: object
+                description: JSON string containing document-specific metadata (e.g., title, author)
+                example: '{"title":"Q1 Report.pdf","author":"Alice Smith"}'
+            required:
+            - file
+          examples:
+            document_upload:
+              summary: Upload a PDF document
+              description: Example of uploading a PDF document with tenant metadata
+              value:
+                file: document.pdf
+                tenant_metadata: '{"department":"Finance","compliance_tag":"GDPR"}'
+                document_metadata: '{"title":"Q1 Report.pdf","author":"Alice Smith"}'
+    # --- Responses ---
+    responses:
+      '200':
+        description: Document uploaded and indexed successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: Document uploaded successfully
+                document_id:
+                  type: string
+                  example: doc_123456
+      '422':
+        description: Incomplete/invalid parameters
+      '401':
+        description: Invalid or missing API key
+      '5XX':
+        description: Internal server error 

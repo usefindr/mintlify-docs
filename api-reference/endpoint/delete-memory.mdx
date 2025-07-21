@@ -3,7 +3,6 @@ title: 'Delete Source'
 openapi: 'DELETE /delete_memory'
 ---
 
-Deletes specific knowledge associated with a user.
 
 ## Sample Request
 
@@ -17,12 +16,3 @@ curl --location 'https://api.usecortex.ai/upload/delete_memory' \
     "source_ids": ["{SOURCE_ID1}", "{SOURCE_ID2}"]
   }'
 ```
-
-### 🔐 Headers
-- `Authorization`: Bearer token
-- `accept`: application/json
-- `Content-Type`: application/json
-
-### 🧾 Parameters
-- `tenant_id` (string, required): Tenant identifier
-- `source_ids` (list of strings, required): IDs of documents to delete

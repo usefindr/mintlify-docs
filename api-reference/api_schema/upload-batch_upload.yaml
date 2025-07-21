@@ -1,0 +1,101 @@
+# Endpoint: /upload/batch_upload
+# Method: POST
+
+"/upload/batch_upload":
+  post:
+    description: Uploads multiple documents in a single request for processing and indexing.
+    # --- Parameters (Headers & Query) ---
+    parameters:
+    - name: Authorization
+      in: header
+      required: true
+      description: Bearer token (Firebase token)
+      schema:
+        type: string
+      example: Bearer {API_KEY}
+    - name: Content-Type
+      in: header
+      required: true
+      description: Request content type
+      schema:
+        type: string
+        default: application/json
+    - name: accept
+      in: header
+      required: true
+      description: Response content type
+      schema:
+        type: string
+        default: application/json
+    - name: tenant_id
+      in: query
+      required: true
+      description: Tenant identifier
+      schema:
+        type: string
+    - name: sub_tenant_id
+      in: query
+      required: false
+      description: Sub-tenant identifier
+      schema:
+        type: string
+      example: your_sub_tenant_id
+    # --- Request Body ---
+    requestBody:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              files:
+                type: array
+                items:
+                  type: string
+                  format: binary
+                description: Multiple document files to upload (PDF, DOCX, TXT, etc.)
+              tenant_metadata:
+                type: string
+                description: JSON string containing tenant metadata for the documents
+              document_metadata:
+                type: string
+                description: JSON string containing document-specific metadata for the documents
+            required:
+            - files
+          examples:
+            batch_upload:
+              summary: Upload multiple documents
+              description: Example of uploading multiple documents with tenant metadata
+              value:
+                files:
+                - document1.pdf
+                - document2.docx
+                - document3.txt
+                tenant_metadata: '[{"department":"Finance","compliance_tag":"GDPR"},{"department":"Finance","compliance_tag":"GDPR"}]'
+                document_metadata: '[{"title":"Q1 Report.pdf","author":"Alice Smith"},{"title":"Q2 Report.pdf","author":"Bob Jones"}]'
+    # --- Responses ---
+    responses:
+      '200':
+        description: Batch upload successful
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: Batch upload successful
+                document_ids:
+                  type: array
+                  items:
+                    type: string
+                  example:
+                  - doc_123
+                  - doc_456
+                  - doc_789
+      '401':
+        description: Invalid or missing API key
+      '422':
+        description: Incomplete/invalid parameters
+      '5XX':
+        description: Internal server error 

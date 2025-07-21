@@ -2,9 +2,6 @@
 title: 'Upload Document'
 openapi: 'POST /upload/upload_document'
 ---
-
-Uploads a document (e.g., PDF, DOCX) for processing and indexing.
-
 ## Sample Request
 
 ```bash
@@ -16,13 +13,3 @@ curl --location 'https://api.usecortex.ai/upload/upload_document?tenant_id={TENA
 --form 'document_metadata="{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\"}"'
 ```
 
-### 🔐 Headers
-- `Authorization`: Bearer token
-- `accept`: application/json
-
-### 🧾 Parameters
-- `tenant_id` (string, required): Tenant identifier (query parameter)
-- `sub_tenant_id` (string, optional): Sub-tenant identifier (query parameter)
-- `file` (UploadFile, required): Document file (form data)
-- `tenant_metadata` (string, optional): Metadata string (form data, for tenant-level filtering, e.g., department, compliance_tag)
-- `document_metadata` (string, optional): Metadata string (form data, for document-level filtering, e.g., title, author)

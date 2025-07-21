@@ -3,7 +3,11 @@ title: 'List User Memories'
 openapi: 'GET /user_memory/list_user_memories'
 ---
 
-Retrieves and lists all AI memories for your user.
+### 📋 Functionality
+- Extracts user details from Firebase token (email, user_id, tenant_id, sub_tenant_id)
+- Fetches all user memories from the vector store using the combined tenant ID
+- Returns a simplified list containing source_id and source_content for each memory
+- Handles errors by returning false in the success field
 
 ## Sample Request
 
@@ -13,25 +17,3 @@ curl --location 'https://api.usecortex.ai/user_memory/list_user_memories?tenant_
   --header 'accept: application/json' \
   --header 'Content-Type: application/json'
 ```
-
-### 🔐 Headers
-- `Authorization`: Bearer token (Firebase token)
-- `accept`: application/json
-- `Content-Type`: application/json
-
-### 🧾 Query Parameters
-- `tenant_id` (string, required): Tenant identifier
-- `sub_tenant_id` (string, required): Optional filter
-
-### 📋 Functionality
-- Extracts user details from Firebase token (email, user_id, tenant_id, sub_tenant_id)
-- Fetches all user memories from the vector store using the combined tenant ID
-- Returns a simplified list containing source_id and source_content for each memory
-- Handles errors gracefully by returning an empty list
-
-### 📤 Response
-Returns an object with:
-- `success` (boolean): Indicates if the request was successful
-- `user_memories` (array): List of user memory objects, each with:
-  - `source_id` (string): Unique identifier for the memory
-  - `source_content` (string): Content of the user memory

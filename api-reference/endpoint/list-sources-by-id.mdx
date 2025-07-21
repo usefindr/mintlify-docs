@@ -3,8 +3,6 @@ title: 'List Sources By ID'
 openapi: 'POST /list/sources_by_id'
 ---
 
-Fetches specific sources/documents by their IDs.
-
 ## Sample Request
 
 ```bash
@@ -14,17 +12,6 @@ curl --location 'https://api.usecortex.ai/list/sources_by_id' \
   --header 'Content-Type: application/json' \
   --data '{
     "tenant_id": "{TENANT_ID}",
-    "sub_tenant_id": "{SUB_TENANT_ID}",
     "source_ids": ["{SOURCE_ID1}", "{SOURCE_ID2}"]
   }'
 ```
-
-### 🔐 Headers
-- `Authorization`: Bearer token
-- `accept`: application/json
-- `Content-Type`: application/json
-
-### 🧾 Body Parameters
-- `tenant_id` (string, required): Tenant identifier
-- `sub_tenant_id` (string, optional): Optional filter
-- `source_ids` (list of strings, required): IDs of documents

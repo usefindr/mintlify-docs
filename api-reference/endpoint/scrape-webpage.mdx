@@ -3,8 +3,6 @@ title: 'Scrape Webpage'
 openapi: 'POST /upload/scrape_webpage'
 ---
 
-Scrapes and processes content from a public webpage.
-
 ## Sample Request
 
 ```bash
@@ -12,12 +10,3 @@ curl --location 'https://api.usecortex.ai/upload/scrape_webpage?web_url={WEB_URL
   --header 'Authorization: Bearer {API_KEY}' \
   --header 'accept: application/json'
 ```
-
-### 🔐 Headers
-- `Authorization`: Bearer token
-- `accept`: application/json
-
-### 🧾 Parameters
-- `web_url` (string, required): The public URL to scrape (query parameter)
-- `tenant_id` (string, required): Tenant identifier (query parameter)
-- `sub_tenant_id` (string, optional): Sub-tenant identifier (query parameter)
