@@ -76,7 +76,35 @@
           ],
           "responses": {
             "200": {
-              "description": "Webpage scraped successfully"
+              "description": "Webpage scraped successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean",
+                        "example": true
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Scrape webpage job uploaded to S3 and SQS."
+                      },
+                      "file_id": {
+                        "type": "string",
+                        "example": "ScrapeJobcfe5d09bf58047b8922908dc8ea967371753161944",
+                        "description": "ID of the uploaded webpage job"
+                      }
+                    },
+                    "required": ["success", "message", "file_id"]
+                  },
+                  "example": {
+                    "success": true,
+                    "message": "Scrape webpage job uploaded to S3 and SQS.",
+                    "file_id": "ScrapeJobcfe5d09bf58047b8922908dc8ea967371753161944"
+                  }
+                }
+              }
             },
             "422": {
               "description": "Incomplete/invalid parameters"
@@ -1366,7 +1394,7 @@
             {
               "name": "sub_tenant_id",
               "in": "query",
-              "required": false,
+              "required": true,
               "description": "Sub-tenant identifier",
               "schema": {
                 "type": "string"
