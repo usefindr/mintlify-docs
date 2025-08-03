@@ -15,30 +15,28 @@ curl --location 'https://api.usecortex.ai/search/qna' \
     "session_id": "{SESSION_ID}",
     "tenant_id": "{TENANT_ID}",
     "sub_tenant_id": "{SUB_TENANT_ID}",
-    "stream": {STREAM},
-    "context_list": {CONTEXT_LIST},
-    "search_modes": {SEARCH_MODES},
-    "top_n": {TOP_N},
-    "ai_generation": {AI_GENERATION},
-    "highlight_chunks": {HIGHLIGHT_CHUNKS},
-    "search_alpha": {SEARCH_ALPHA},
-    "recency_bias": {RECENCY_BIAS},
-    "multi_step_reasoning": {MULTI_STEP_REASONING},
+    "stream": "{STREAM}",
+    "context_list": "{CONTEXT_LIST}",
+    "search_modes": "{SEARCH_MODES}",
+    "top_n": "{TOP_N}",
+    "ai_generation": "{AI_GENERATION}",
+    "highlight_chunks": "{HIGHLIGHT_CHUNKS}",
+    "search_alpha": "{SEARCH_ALPHA}",
+    "recency_bias": "{RECENCY_BIAS}",
+    "multi_step_reasoning": "{MULTI_STEP_REASONING}",
     "user_name": "{USER_NAME}",
     "user_instructions": "{USER_INSTRUCTIONS}",
-    "auto_agent_routing": {AUTO_AGENT_ROUTING},
+    "auto_agent_routing": "{AUTO_AGENT_ROUTING}",
     "metadata": {"source_title": "<optional title>", "source_type": "<optional type>"}
   }'
 ```
-
-> **Important Note:** Cortex internally relies on the `metadata` field for source matching. You should use this field when you want to deterministically fetch specific documents based on their metadata.
 
 ### 📤 Response
 Returns a JSON object containing the AI-generated answer and supporting source chunks with layout information for creating bounding boxes around cited sources.
 
 ```json
 {
-  "answer": "Based on the uploaded documents, here is the answer to your question...",
+  "answer": "Based on the uploaded knowledge, here is the answer to your question...",
   "session_id": "session_123",
   "sources": [
     {
@@ -116,4 +114,6 @@ The layout field provides coordinates for creating bounding boxes around cited s
   - `width` (number): Width of the bounding box
   - `height` (number): Height of the bounding box
 
-This layout information enables you to highlight or create visual indicators around the exact location of cited content within PDF documents.
+This layout information enables you to highlight or create visual indicators around the exact location of cited content within documents.
+
+> **Important Note:** Cortex internally uses Cortex Metadata Agent which is an expert at performing metadata-specific search. Using the `metadata` field as a filter should only be reserved when you want to deterministically fetch results from specific documents based on their metadata.

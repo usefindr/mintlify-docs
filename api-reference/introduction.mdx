@@ -13,49 +13,41 @@ Welcome to the Cortex SDK API Reference. This section documents every available 
 Authorization: Bearer <your_api_key>
 ```
 
-### **Upload APIs**
+### **Data Ingestion**
 
-Send knowledge into Cortex. Upload documents, batch files, and scrape webpages.
+Upload and import content into Cortex from various sources.
 
-- `/upload/upload_document`
-- `/upload/batch_upload`
-- `/upload/scrape_webpage`
+- `/upload/upload_document` — Upload single documents
+- `/upload/upload_markdown` — Upload text/markdown content
+- `/upload/upload_app_sources` — Import from workplace apps (Gmail, Slack, etc.)
+- `/upload/scrape_webpage` — Scrape and index web content
+- `/upload/verify_processing` — Check upload processing status
+- `/upload/batch_upload` — Upload multiple files at once
 
-### **Search API**
+### **Search & Query**
 
-Ask questions. Retrieve personalized answers from memory and indexed sources.
+Retrieve answers and information from your knowledge base.
 
-- `/search/qna` — supports an optional `metadata` parameter to filter sources by `source_title` or `source_type`.
-
-### **Listing APIs**
-
-Browse what's in your Cortex memory or knowledge store.
-
-- `/list/sources`
-- `/list/sources_by_id`
-- `/fetch/fetch_content`
+- `/search/qna` — Main search endpoint with AI-powered responses. Supports optional `metadata` parameter to filter sources by `source_title` or `source_type`.
 
 ### **Knowledge Management**
 
-Manage knowledge entries, delete outdated or unwanted context.
+Browse, fetch, and manage your knowledge base.
 
-- `/delete_memory`
+- `/list/sources` — Browse all indexed sources
+- `/list/sources_by_id` — Get specific sources by ID
+- `/fetch/fetch_content` — Retrieve file content and download URLs
+- `/delete_memory` — Remove sources from knowledge base
 
-### **Processing Verification**
+### **User Memory**
 
-Check if a file or page was successfully processed.
+Personalize, retrieve, and manage user-specific AI memories for advanced agentic workflows.
 
-- `/upload/verify_processing`
-
-### **User Memory APIs**
-
-Personalize, retrieve, and manage user-specific AI memories for advanced agentic workflows:
-
-- `/user_memory/list_user_memories`
-- `/user_memory/retrieve_user_memory`
-- `/user_memory/add_user_memory`
-- `/user_memory/generate_user_memory`
-- `/user_memory/delete_user_memory`
+- `/user_memory/list_user_memories` — Browse user memories
+- `/user_memory/retrieve_user_memory` — Get specific user memories
+- `/user_memory/add_user_memory` — Manually add user-specific memories
+- `/user_memory/generate_user_memory` — AI-generated personalized memories
+- `/user_memory/delete_user_memory` — Remove user memories
 
 ## 💡 Best Practices
 
