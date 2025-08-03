@@ -56,7 +56,7 @@
             ]
           },
           {
-            "group": "Data Ingestion",
+            "group": "Knowledge Ingestion",
             "pages": [
               "api-reference/endpoint/upload-document",
               "api-reference/endpoint/upload-text",
