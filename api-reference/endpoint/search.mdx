@@ -1,0 +1,55 @@
+---
+title: 'Search'
+openapi: 'POST /search/retrieve'
+---
+
+## Sample Request
+
+```bash
+curl --location 'https://api.usecortex.ai/search/retrieve' \
+  --header 'Authorization: Bearer {API_KEY}' \
+  --header 'accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "query": "{SEARCH_QUERY}",
+    "tenant_id": "{TENANT_ID}",
+    "sub_tenant_id": "{SUB_TENANT_ID}",
+    "max_chunks": {MAX_CHUNKS},
+    "alpha": {ALPHA},
+    "recency_bias": {RECENCY_BIAS}
+  }'
+```
+
+### Response
+Returns a JSON object containing relevant content chunks from your indexed sources based on the search query.
+
+```json
+{
+  "results": [
+    {
+      "content": "This is a relevant text chunk from your indexed content...",
+      "source_id": "CortexDoc123456789",
+      "score": 0.95,
+      "metadata": {
+        "source_title": "Document Title",
+        "source_type": "document",
+        "timestamp": "2024-01-15T10:30:00Z",
+        "url": "https://example.com/document.pdf"
+      }
+    },
+    {
+      "content": "Another relevant chunk of content...",
+      "source_id": "CortexDoc987654321",
+      "score": 0.87,
+      "metadata": {
+        "source_title": "Another Document",
+        "source_type": "webpage",
+        "timestamp": "2024-01-14T15:45:00Z",
+        "url": "https://example.com/webpage"
+      }
+    }
+  ]
+}
+```
+
+> **Note:** This endpoint returns search results without AI-generated answers. For conversational Q&A with AI-generated responses, use the `/search/qna` endpoint instead.

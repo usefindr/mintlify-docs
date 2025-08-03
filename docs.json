@@ -69,7 +69,8 @@
           {
             "group": "Query & Retrieval",
             "pages": [
-              "api-reference/endpoint/qna"
+              "api-reference/endpoint/qna",
+              "api-reference/endpoint/search"
             ]
           },
           {

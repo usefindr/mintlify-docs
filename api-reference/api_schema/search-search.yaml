@@ -1,0 +1,93 @@
+# Endpoint: /search/retrieve
+# Method: POST
+
+"/search/retrieve":
+  post:
+    description: Intelligent search using either traditional keyword methods or neural (embeddings-based) search for your knowledge base.
+    # --- Parameters (Headers) ---
+    parameters:
+    - name: Authorization
+      in: header
+      required: true
+      description: Bearer token (your API key)
+      schema:
+        type: string
+      example: Bearer {API_KEY}
+    - name: Content-Type
+      in: header
+      required: true
+      description: Request content type
+      schema:
+        type: string
+        default: application/json
+    - name: accept
+      in: header
+      required: true
+      description: Response content type
+      schema:
+        type: string
+        default: application/json
+    # --- Request Body ---
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              query:
+                type: string
+                description: Search query string to find relevant content from indexed sources.
+              tenant_id:
+                type: string
+                description: Tenant identifier for multi-tenancy to restrict search scope.
+              sub_tenant_id:
+                type: string
+                description: Sub-tenant identifier, defaults to tenant_id if not provided.
+              max_chunks:
+                type: integer
+                description: Maximum number of content chunks to return from the search.
+              alpha:
+                type: number
+                format: float
+                default: 0.8
+                description: Search algorithm parameter for result ranking. Controls the balance between semantic and keyword search (0.0 = keyword only, 1.0 = semantic only).
+              recency_bias:
+                type: number
+                format: float
+                default: 0.5
+                description: Bias towards more recent content. A value of 0 means no preference, a value of 1 means recent sources are strongly preferred.
+            required:
+            - query
+    # --- Responses ---
+    responses:
+      200:
+        description: Successful search results
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                results:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      content:
+                        type: string
+                        description: The relevant content chunk
+                      source_id:
+                        type: string
+                        description: Identifier of the source document
+                      score:
+                        type: number
+                        description: Relevance score of the result
+                      metadata:
+                        type: object
+                        description: Additional metadata about the source
+      400:
+        description: Bad request - invalid parameters
+      401:
+        description: Unauthorized - invalid API key
+      500:
+        description: Internal server error
