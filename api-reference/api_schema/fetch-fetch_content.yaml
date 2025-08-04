@@ -67,7 +67,7 @@
                 type: string
                 description: Download URL for the file ID key.
             example:
-              CortexDocb7a1db714c9c473bbd8ff81ec17ba2811750936047: https://cortex-local-sources-prod.s3.amazonaws.com/ToayuCogoBdxZVoZQ1ft8ZoRzCO2/FindrMasterCollectionMemoriesPreprod/123/local_source/CortexDocb7a1db714c9c473bbd8ff81ec17ba2811750936047?... 
+              CortexDocb7a1db714c9: https://cortex-local-sources-prod.s3.amazonaws.com/ToayuCogoBdxZVoZQ1ft8ZoRzCO2/FindrMasterCollectionMemoriesPreprod/123/local_source/CortexDocb7a1db714c9?... 
       '404':
         description: File not found or not accessible with the provided credentials.
       '422':

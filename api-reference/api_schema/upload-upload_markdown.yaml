@@ -85,7 +85,7 @@
                   type: string
             example:
               success: true
-              file_id: CortexDocb7a1db714c9c473bbd8ff81ec17ba2811750936047
+              file_id: CortexDocb7a1db714c9
       '422':
         description: Content field is required and cannot be empty
       '500':
