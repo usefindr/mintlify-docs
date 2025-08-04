@@ -238,7 +238,7 @@
           }
         }
       },
-      "/upload/upload_markdown": {
+      "/upload/upload_text": {
         "post": {
           "description": "Uploads text or markdown content for processing and indexing.",
           "parameters": [
@@ -316,7 +316,7 @@
                   ]
                 },
                 "examples": {
-                  "upload_markdown": {
+                  "upload_text": {
                     "summary": "Upload markdown content",
                     "description": "Example of uploading markdown content with tenant and document metadata",
                     "value": {
