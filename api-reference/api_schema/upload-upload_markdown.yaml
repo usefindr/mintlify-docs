@@ -60,7 +60,7 @@
             - content
           examples:
             upload_text:
-              summary: Upload markdown content
+              summary: Upload textual content
               description: Example of uploading markdown content with tenant and document metadata
               value:
                 content: This is sample markdown content that will be processed and indexed.

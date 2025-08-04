@@ -93,6 +93,17 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "Changelog",
+        "groups": [
+          {
+            "group": "Release History",
+            "pages": [
+              "changelog"
+            ]
+          }
+        ]
       }
     ],
     "global": {
