@@ -3,14 +3,12 @@ title: 'Upload Text'
 openapi: 'POST /upload/upload_markdown'
 ---
 
-### 📋 Functionality
-- Validates that content is provided and not empty
-- Generates a unique file ID for the uploaded content
-- Converts the text content to UTF-8 encoded bytes
-- Uploads the content as a .md file to S3 storage
+### Functionality
+- Validates that content is provided
+- Generates a unique ID for the uploaded content
 - Creates secure access tokens for processing
 - Triggers the ingestion pipeline for content processing and indexing
-- Returns the generated file ID for future reference
+- Returns the generated ID for future reference
 
 
 ## Sample Request

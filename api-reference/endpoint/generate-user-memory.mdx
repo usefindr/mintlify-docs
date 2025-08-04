@@ -2,12 +2,10 @@
 title: 'Generate User Memory'
 openapi: 'POST /user_memory/generate_user_memory'
 ---
-### 📋 Functionality
+### Functionality
 - Takes user query and user name from request
-- Rewrites the user query using OpenAI (without clarifications)
-- Generates multiple user memories based on both original and rewritten queries
-- Automatically inserts all generated memories into the vector store
-- Returns the list of generated user memories
+- Generates multiple user memories
+- Automatically stores and builds a network of user memories (just like a second brain)
 - Most sophisticated endpoint combining query processing, memory generation, and storage
 
 ## Sample Request

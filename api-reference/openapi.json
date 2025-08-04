@@ -982,7 +982,7 @@
       },
       "/list/sources": {
         "get": {
-          "description": "Fetches all sources/documents for a given tenant.",
+          "description": "Fetches all documents for a given tenant.",
           "parameters": [
             {
               "name": "Authorization",
@@ -1043,7 +1043,7 @@
       },
       "/list/sources_by_id": {
         "post": {
-          "description": "Fetches specific sources/documents by their IDs.",
+          "description": "Fetches specific documents by their IDs.",
           "parameters": [
             {
               "name": "Authorization",
@@ -1126,7 +1126,7 @@
       },
       "/delete_memory": {
         "delete": {
-          "description": "Deletes specific documents or memories associated with a user.",
+          "description": "Deletes specific documents associated with a tenant or sub-tenant.",
           "parameters": [
             {
               "name": "Authorization",
@@ -1373,7 +1373,7 @@
       },
       "/fetch/fetch_content": {
         "post": {
-          "description": "Fetches the download URL for a specific uploaded source/document.",
+          "description": "Fetches the download URL for a specific uploaded document.",
           "parameters": [
             {
               "name": "Authorization",
@@ -1783,7 +1783,7 @@
       },
       "/user_memory/add_user_memory": {
         "post": {
-          "description": "Manually adds a new user memory for a cortex user.",
+          "description": "Manually add a new user memory for a user.",
           "parameters": [
             {
               "name": "Authorization",
@@ -1876,7 +1876,7 @@
       },
       "/user_memory/generate_user_memory": {
         "post": {
-          "description": "Automatically generates and saves user memories based on a user query. The most sophisticated endpoint that combines query processing, memory generation, and storage.",
+          "description": "Automatically generates and saves user memories based on a user query. This endpoint combines query processing, memory generation, and storage.",
           "parameters": [
             {
               "name": "Authorization",
