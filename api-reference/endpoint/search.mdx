@@ -21,35 +21,41 @@ curl --location 'https://api.usecortex.ai/search/retrieve' \
 ```
 
 ### Response
-Returns a JSON object containing relevant content chunks from your indexed sources based on the search query.
+Returns an array of relevant content chunks from your indexed sources based on the search query.
 
 ```json
-{
-  "results": [
-    {
-      "content": "This is a relevant text chunk from your indexed content...",
-      "source_id": "CortexDoc123456789",
-      "score": 0.95,
-      "metadata": {
-        "source_title": "Document Title",
-        "source_type": "document",
-        "timestamp": "2024-01-15T10:30:00Z",
-        "url": "https://example.com/document.pdf"
-      }
-    },
-    {
-      "content": "Another relevant chunk of content...",
-      "source_id": "CortexDoc987654321",
-      "score": 0.87,
-      "metadata": {
-        "source_title": "Another Document",
-        "source_type": "webpage",
-        "timestamp": "2024-01-14T15:45:00Z",
-        "url": "https://example.com/webpage"
-      }
-    }
-  ]
-}
+[
+  {
+    "chunk_uuid": "CortexDoc37e854b429784b148d4fc910812bdc581753761779_20_v1",
+    "source_id": "CortexDoc37e854b429784b148d4fc910812bdc581753761779",
+    "source_title": "IEEE Transactions LaTeX Templates.pdf",
+    "chunk_content": "JOURNAL OF LATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2015 12 Fig. 10: Comparison of models with 4bit precision on Medical QA dataset...",
+    "source_url": "ToayuCogoBdxZVoZQ1ft8ZoRzCO2/Hello/Hello/local_source/CortexDoc37e854b429784b148d4fc910812bdc581753761779",
+    "source_upload_time": "1753761802.079415",
+    "source_collection": [],
+    "source_type": "file",
+    "layout": "{\"coordinates\": {\"x\": 48.96399688720703, \"y\": 26.49277114868164, \"width\": 514.0717697143555, \"height\": 721.1119651794434}, \"page\": 12}",
+    "version": "v1",
+    "source_last_updated_time": "",
+    "relevancy_score": 0.8363813161849976,
+    "rerank_score": null
+  },
+  {
+    "chunk_uuid": "CortexDoc04d73ba38fd54325800a74ec17aed9041753761993_4_v1",
+    "source_id": "CortexDoc04d73ba38fd54325800a74ec17aed9041753761993",
+    "source_title": "IEEE Transactions LaTeX Templates.pdf",
+    "chunk_content": "III. METHODOLOGY Our proposed framework integrates federated learning (FL) with blockchain technology to fine-tune Large Language Mod-",
+    "source_url": "ToayuCogoBdxZVoZQ1ft8ZoRzCO2/Hello/Hello/local_source/CortexDoc04d73ba38fd54325800a74ec17aed9041753761993",
+    "source_upload_time": "1753762013.1677928",
+    "source_collection": [],
+    "source_type": "file",
+    "layout": "{\"coordinates\": {\"x\": 311.9779968261719, \"y\": 712.3123168945312, \"width\": 251.05746459960938, \"height\": 35.72357177734375}, \"page\": 2}",
+    "version": "v1",
+    "source_last_updated_time": "",
+    "relevancy_score": 0.800000011920929,
+    "rerank_score": null
+  }
+]
 ```
 
 > **Note:** This endpoint returns search results without AI-generated answers. For conversational Q&A with AI-generated responses, use the `/search/qna` endpoint instead.
