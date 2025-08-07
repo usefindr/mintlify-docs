@@ -24,14 +24,14 @@
           {
             "group": "Essentials",
             "pages": [
+              "essentials/retrievals",
+              "essentials/multi-step",
               "essentials/answers",
+              "essentials/metadata",
+              "essentials/self-improving",
               "essentials/ai-memories",
               "essentials/customisation",
-              "essentials/metadata",
-              "essentials/multi-step",
               "essentials/multi-tenant",
-              "essentials/retrievals",
-              "essentials/self-improving",
               "essentials/web-search"
             ]
           },
