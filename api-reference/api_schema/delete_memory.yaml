@@ -1,7 +1,7 @@
-# Endpoint: /delete_memory
+# Endpoint: /delete_source
 # Methods: DELETE, POST
 
-"/delete_memory":
+"/delete_source":
   delete:
     description: Deletes specific documents or memories associated with a user.
     # --- Parameters (Headers) ---

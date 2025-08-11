@@ -26,8 +26,8 @@ paths:
     $ref: './api_schema/list-sources.yaml#/list/sources'
   /list/sources_by_id:
     $ref: './api_schema/list-sources_by_id.yaml#/list/sources_by_id'
-  /delete_memory:
-    $ref: './api_schema/delete_memory.yaml#/delete_memory'
+  /delete_source:
+    $ref: './api_schema/delete_memory.yaml#/delete_source'
   /upload/verify_processing:
     $ref: './api_schema/upload-verify_processing.yaml#/upload/verify_processing'
   /fetch/fetch_content:

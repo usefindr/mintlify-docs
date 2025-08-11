@@ -1174,7 +1174,7 @@
           }
         }
       },
-      "/delete_memory": {
+      "/delete_source": {
         "delete": {
           "description": "Deletes specific documents associated with a tenant or sub-tenant.",
           "parameters": [
