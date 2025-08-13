@@ -1,0 +1,25 @@
+---
+title: 'Update Text'
+openapi: 'PATCH /upload/update_text'
+---
+
+## Sample Request
+
+```bash
+curl --location --request PATCH 'https://api.usecortex.ai/upload/update_text?tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}&source_id={SOURCE_ID}' \
+  --header 'Authorization: Bearer {API_KEY}' \
+  --header 'accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "content": "This is updated markdown content.",
+    "tenant_metadata": {
+      "department": "Finance",
+      "compliance_tag": "GDPR"
+    },
+    "document_metadata": {
+      "title": "Q1 Report.pdf",
+      "author": "Alice Smith"
+    }
+  }'
+```
+

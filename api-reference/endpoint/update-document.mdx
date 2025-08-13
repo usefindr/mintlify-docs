@@ -1,0 +1,16 @@
+---
+title: 'Update Document'
+openapi: 'PATCH /upload/update_document'
+---
+
+## Sample Request
+
+```bash
+curl --location --request PATCH 'https://api.usecortex.ai/upload/update_document?tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}&source_id={SOURCE_ID}' \
+--header 'accept: application/json' \
+--header 'Authorization: Bearer {API_KEY}' \
+--form 'file=@"{FILE}"' \
+--form 'tenant_metadata="{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}"' \
+--form 'document_metadata="{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\"}"'
+```
+
