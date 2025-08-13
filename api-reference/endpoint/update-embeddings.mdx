@@ -1,0 +1,19 @@
+---
+title: 'Update Embeddings'
+openapi: 'PATCH /upload/update_embeddings'
+---
+
+## Sample Request
+
+```bash
+curl --location --request PATCH 'https://api.usecortex.ai/upload/update_embeddings?tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}' \
+  --header 'Authorization: Bearer {API_KEY}' \
+  --header 'accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "embeddings": {
+      "CortexEmbeddings123_0": [0.1, 0.2, 0.3, 0.4, 0.5],
+      "CortexEmbeddings123_1": [0.6, 0.7, 0.8, 0.9, 1.0]
+    }
+  }'
+```

@@ -1,0 +1,73 @@
+# Endpoint: /embeddings/delete
+# Method: DELETE
+
+"/embeddings/delete":
+  delete:
+    description: Delete specific embedding chunks from indexed sources.
+    parameters:
+    - name: Authorization
+      in: header
+      required: true
+      description: Bearer token (your API key)
+      schema:
+        type: string
+      example: Bearer {API_KEY}
+    - name: Content-Type
+      in: header
+      required: true
+      description: Request content type
+      schema:
+        type: string
+        default: application/json
+    - name: accept
+      in: header
+      required: true
+      description: Response content type
+      schema:
+        type: string
+        default: application/json
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              chunk_ids:
+                type: array
+                items:
+                  type: string
+                description: List of chunk IDs to delete
+                example: ["CortexEmbeddings123_0", "CortexEmbeddings123_1"]
+              tenant_id:
+                type: string
+                description: Tenant identifier for multi-tenancy
+                example: tenant_456
+              sub_tenant_id:
+                type: string
+                description: Sub-tenant identifier, defaults to tenant_id
+                example: subtenant_123
+            required:
+            - chunk_ids
+            - tenant_id
+    responses:
+      '200':
+        description: Embedding chunks deleted successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                success:
+                  type: boolean
+                message:
+                  type: string
+              example:
+                success: true
+                message: "Embedding chunks deleted successfully"
+      '400':
+        description: Invalid request (empty chunk_ids or invalid format)
+      '401':
+        description: Invalid or missing API key
+      '5XX':
+        description: Internal server error

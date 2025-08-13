@@ -1,0 +1,19 @@
+---
+title: 'Search Embeddings'
+openapi: 'POST /embeddings/search'
+---
+
+## Sample Request
+
+```bash
+curl --location 'https://api.usecortex.ai/embeddings/search' \
+  --header 'Authorization: Bearer {API_KEY}' \
+  --header 'accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "embeddings": [0.1, 0.2, 0.3, 0.4, 0.5],
+    "tenant_id": "{TENANT_ID}",
+    "sub_tenant_id": "{SUB_TENANT_ID}",
+    "max_chunks": 10
+  }'
+```

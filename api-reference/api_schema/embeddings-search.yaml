@@ -1,0 +1,88 @@
+# Endpoint: /embeddings/search
+# Method: POST
+
+"/embeddings/search":
+  post:
+    description: Search for similar embedding chunks using vector similarity.
+    parameters:
+    - name: Authorization
+      in: header
+      required: true
+      description: Bearer token (your API key)
+      schema:
+        type: string
+      example: Bearer {API_KEY}
+    - name: Content-Type
+      in: header
+      required: true
+      description: Request content type
+      schema:
+        type: string
+        default: application/json
+    - name: accept
+      in: header
+      required: true
+      description: Response content type
+      schema:
+        type: string
+        default: application/json
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              embeddings:
+                type: array
+                items:
+                  type: number
+                  format: float
+                description: Single embedding vector for similarity search
+                example: [0.1, 0.2, 0.3, 0.4, 0.5]
+              tenant_id:
+                type: string
+                description: Tenant identifier for multi-tenancy
+                example: tenant_456
+              sub_tenant_id:
+                type: string
+                description: Sub-tenant identifier, defaults to tenant_id
+                example: subtenant_123
+              max_chunks:
+                type: integer
+                description: Maximum number of chunk IDs to return
+                default: 10
+                minimum: 1
+                maximum: 200
+                example: 10
+            required:
+            - embeddings
+            - tenant_id
+    responses:
+      '200':
+        description: Similar embedding chunks found
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                chunk_ids:
+                  type: array
+                  items:
+                    type: string
+                  description: List of similar chunk IDs
+                similarity_scores:
+                  type: array
+                  items:
+                    type: number
+                    format: float
+                  description: Similarity scores for each chunk
+              example:
+                chunk_ids: ["CortexEmbeddings123_0", "CortexEmbeddings456_1"]
+                similarity_scores: [0.95, 0.87]
+      '400':
+        description: Invalid request (empty embeddings or invalid dimensions)
+      '401':
+        description: Invalid or missing API key
+      '5XX':
+        description: Internal server error

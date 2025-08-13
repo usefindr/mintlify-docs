@@ -2528,6 +2528,481 @@
             }
           }
         }
+      },
+      "/embeddings/delete": {
+        "delete": {
+          "description": "Delete specific embedding chunks from indexed sources.",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "description": "Bearer token (your API key)",
+              "schema": {
+                "type": "string"
+              },
+              "example": "Bearer {API_KEY}"
+            },
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "required": true,
+              "description": "Request content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "accept",
+              "in": "header",
+              "required": true,
+              "description": "Response content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "chunk_ids": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "List of chunk IDs to delete",
+                      "example": ["CortexEmbeddings123_0", "CortexEmbeddings123_1"]
+                    },
+                    "tenant_id": {
+                      "type": "string",
+                      "description": "Tenant identifier for multi-tenancy",
+                      "example": "tenant_456"
+                    },
+                    "sub_tenant_id": {
+                      "type": "string",
+                      "description": "Sub-tenant identifier, defaults to tenant_id",
+                      "example": "subtenant_123"
+                    }
+                  },
+                  "required": ["chunk_ids", "tenant_id"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Embedding chunks deleted successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "example": {
+                    "success": true,
+                    "message": "Embedding chunks deleted successfully"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid request (empty chunk_ids or invalid format)"
+            },
+            "401": {
+              "description": "Invalid or missing API key"
+            },
+            "5XX": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+      "/embeddings/search": {
+        "post": {
+          "description": "Search for similar embedding chunks using vector similarity.",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "description": "Bearer token (your API key)",
+              "schema": {
+                "type": "string"
+              },
+              "example": "Bearer {API_KEY}"
+            },
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "required": true,
+              "description": "Request content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "accept",
+              "in": "header",
+              "required": true,
+              "description": "Response content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "embeddings": {
+                      "type": "array",
+                      "items": {
+                        "type": "number",
+                        "format": "float"
+                      },
+                      "description": "Single embedding vector for similarity search",
+                      "example": [0.1, 0.2, 0.3, 0.4, 0.5]
+                    },
+                    "tenant_id": {
+                      "type": "string",
+                      "description": "Tenant identifier for multi-tenancy",
+                      "example": "tenant_456"
+                    },
+                    "sub_tenant_id": {
+                      "type": "string",
+                      "description": "Sub-tenant identifier, defaults to tenant_id",
+                      "example": "subtenant_123"
+                    },
+                    "max_chunks": {
+                      "type": "integer",
+                      "description": "Maximum number of chunk IDs to return",
+                      "default": 10,
+                      "minimum": 1,
+                      "maximum": 200,
+                      "example": 10
+                    }
+                  },
+                  "required": ["embeddings", "tenant_id"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Similar embedding chunks found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "chunk_ids": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "List of similar chunk IDs"
+                      },
+                      "similarity_scores": {
+                        "type": "array",
+                        "items": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "description": "Similarity scores for each chunk"
+                      }
+                    }
+                  },
+                  "example": {
+                    "chunk_ids": ["CortexEmbeddings123_0", "CortexEmbeddings456_1"],
+                    "similarity_scores": [0.95, 0.87]
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid request (empty embeddings or invalid dimensions)"
+            },
+            "401": {
+              "description": "Invalid or missing API key"
+            },
+            "5XX": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+      "/upload/upload_embeddings": {
+        "post": {
+          "description": "Uploads embeddings as a 2D array for processing and indexing.",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "description": "Bearer token (your API key)",
+              "schema": {
+                "type": "string"
+              },
+              "example": "Bearer {API_KEY}"
+            },
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "required": true,
+              "description": "Request content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "accept",
+              "in": "header",
+              "required": true,
+              "description": "Response content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "tenant_id",
+              "in": "query",
+              "required": false,
+              "description": "Tenant identifier",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "sub_tenant_id",
+              "in": "query",
+              "required": false,
+              "description": "Sub-tenant identifier",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "embeddings": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "number",
+                          "format": "float"
+                        }
+                      },
+                      "description": "2D array of embedding vectors (max 2000 rows x 3024 columns)",
+                      "example": [[0.1, 0.2, 0.3, 0.4, 0.5], [0.6, 0.7, 0.8, 0.9, 1.0]]
+                    }
+                  },
+                  "required": ["embeddings"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Embeddings uploaded successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "message": {
+                        "type": "string"
+                      },
+                      "chunk_ids": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Generated chunk IDs for the uploaded embeddings"
+                      },
+                      "batch_id": {
+                        "type": "string",
+                        "description": "Batch identifier for the uploaded embeddings"
+                      }
+                    }
+                  },
+                  "example": {
+                    "success": true,
+                    "message": "Embeddings upload message pushed to SQS.",
+                    "chunk_ids": ["CortexEmbeddings123_0", "CortexEmbeddings123_1"],
+                    "batch_id": "CortexEmbeddings123"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid embeddings format or dimensions exceed limits"
+            },
+            "401": {
+              "description": "Invalid or missing API key"
+            },
+            "5XX": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+      "/upload/update_embeddings": {
+        "patch": {
+          "description": "Updates existing embeddings using chunk IDs and new embedding vectors.",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "description": "Bearer token (your API key)",
+              "schema": {
+                "type": "string"
+              },
+              "example": "Bearer {API_KEY}"
+            },
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "required": true,
+              "description": "Request content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "accept",
+              "in": "header",
+              "required": true,
+              "description": "Response content type",
+              "schema": {
+                "type": "string",
+                "default": "application/json"
+              }
+            },
+            {
+              "name": "tenant_id",
+              "in": "query",
+              "required": false,
+              "description": "Tenant identifier",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "sub_tenant_id",
+              "in": "query",
+              "required": false,
+              "description": "Sub-tenant identifier",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "embeddings": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "number",
+                          "format": "float"
+                        }
+                      },
+                      "description": "Dictionary with chunk IDs as keys and embedding arrays as values",
+                      "example": {
+                        "CortexEmbeddings123_0": [0.1, 0.2, 0.3, 0.4, 0.5],
+                        "CortexEmbeddings123_1": [0.6, 0.7, 0.8, 0.9, 1.0]
+                      }
+                    }
+                  },
+                  "required": ["embeddings"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Embeddings updated successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "message": {
+                        "type": "string"
+                      },
+                      "chunk_ids": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Updated chunk IDs"
+                      },
+                      "batch_id": {
+                        "type": "string",
+                        "description": "Batch identifier for the updated embeddings"
+                      }
+                    }
+                  },
+                  "example": {
+                    "success": true,
+                    "message": "Embeddings update message pushed to SQS.",
+                    "chunk_ids": ["CortexEmbeddings123_0", "CortexEmbeddings123_1"],
+                    "batch_id": "CortexEmbeddings123"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid embeddings format, chunk IDs from different batches, or dimensions exceed limits"
+            },
+            "401": {
+              "description": "Invalid or missing API key"
+            },
+            "5XX": {
+              "description": "Internal server error"
+            }
+          }
+        }
       }
     },
     "components": {

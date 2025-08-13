@@ -1,0 +1,91 @@
+# Endpoint: /upload/update_embeddings
+# Method: PATCH
+
+"/upload/update_embeddings":
+  patch:
+    description: Updates existing embeddings using chunk IDs and new embedding vectors.
+    parameters:
+    - name: Authorization
+      in: header
+      required: true
+      description: Bearer token (your API key)
+      schema:
+        type: string
+      example: Bearer {API_KEY}
+    - name: Content-Type
+      in: header
+      required: true
+      description: Request content type
+      schema:
+        type: string
+        default: application/json
+    - name: accept
+      in: header
+      required: true
+      description: Response content type
+      schema:
+        type: string
+        default: application/json
+    - name: tenant_id
+      in: query
+      required: false
+      description: Tenant identifier
+      schema:
+        type: string
+    - name: sub_tenant_id
+      in: query
+      required: false
+      description: Sub-tenant identifier
+      schema:
+        type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              embeddings:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    type: number
+                    format: float
+                description: Dictionary with chunk IDs as keys and embedding arrays as values
+                example:
+                  "CortexEmbeddings123_0": [0.1, 0.2, 0.3, 0.4, 0.5]
+                  "CortexEmbeddings123_1": [0.6, 0.7, 0.8, 0.9, 1.0]
+            required:
+            - embeddings
+    responses:
+      '200':
+        description: Embeddings updated successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                success:
+                  type: boolean
+                message:
+                  type: string
+                chunk_ids:
+                  type: array
+                  items:
+                    type: string
+                  description: Updated chunk IDs
+                batch_id:
+                  type: string
+                  description: Batch identifier for the updated embeddings
+              example:
+                success: true
+                message: "Embeddings update message pushed to SQS."
+                chunk_ids: ["CortexEmbeddings123_0", "CortexEmbeddings123_1"]
+                batch_id: "CortexEmbeddings123"
+      '400':
+        description: Invalid embeddings format, chunk IDs from different batches, or dimensions exceed limits
+      '401':
+        description: Invalid or missing API key
+      '5XX':
+        description: Internal server error

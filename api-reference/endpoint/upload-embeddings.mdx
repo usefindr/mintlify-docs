@@ -1,0 +1,20 @@
+---
+title: 'Upload Embeddings'
+openapi: 'POST /upload/upload_embeddings'
+---
+
+## Sample Request
+
+```bash
+curl --location 'https://api.usecortex.ai/upload/upload_embeddings?tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}' \
+  --header 'Authorization: Bearer {API_KEY}' \
+  --header 'accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "embeddings": [
+      [0.1, 0.2, 0.3, 0.4, 0.5],
+      [0.6, 0.7, 0.8, 0.9, 1.0],
+      [0.2, 0.4, 0.6, 0.8, 1.0]
+    ]
+  }'
+```
