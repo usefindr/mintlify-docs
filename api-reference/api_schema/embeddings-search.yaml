@@ -70,18 +70,43 @@
                   type: array
                   items:
                     type: string
-                  description: List of similar chunk IDs
+                  description: List of similar chunk IDs ordered by similarity score (highest first)
+                  example: ["CortexEmbeddings123_0", "CortexEmbeddings456_1"]
                 similarity_scores:
                   type: array
                   items:
                     type: number
                     format: float
-                  description: Similarity scores for each chunk
+                    minimum: 0.0
+                    maximum: 1.0
+                  description: Similarity scores corresponding to each chunk ID (0.0 to 1.0, higher is more similar)
+                  example: [0.95, 0.87]
+                total_results:
+                  type: integer
+                  description: Total number of results found
+                  example: 2
+              required:
+                - chunk_ids
+                - similarity_scores
               example:
                 chunk_ids: ["CortexEmbeddings123_0", "CortexEmbeddings456_1"]
                 similarity_scores: [0.95, 0.87]
+                total_results: 2
       '400':
-        description: Invalid request (empty embeddings or invalid dimensions)
+        description: |
+          Invalid request. Possible errors:
+          - embeddings vector cannot be empty
+          - All embedding values must be numeric
+          - max_chunks must be greater than 0
+          - max_chunks cannot exceed 200
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: string
+                  example: "max_chunks cannot exceed 200"
       '401':
         description: Invalid or missing API key
       '5XX':

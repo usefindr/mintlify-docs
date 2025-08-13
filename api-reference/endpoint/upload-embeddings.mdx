@@ -3,6 +3,16 @@ title: 'Upload Embeddings'
 openapi: 'POST /upload/upload_embeddings'
 ---
 
+### Limitations & Requirements
+- **Maximum dimensions**: 2000 rows × 3024 columns; i.e, 2000 chunks with the dimensions, not more than 3024
+- **Format**: 2D array of numeric values (int or float)
+- **Consistency**: All embedding vectors must have the same dimension
+- **Content**: Embeddings array cannot be empty
+- **Processing**: Generates unique chunk IDs in format `{batch_id}_{index} for each row`. 
+  - Consider them as references of that particular embeddings vector. You will get back these `chunk_ids`, when you query something.
+  - In the example on your right, the reference to `[0.1, 0.2, 0.3, 0.4, 0.5]` is `CortexEmbeddings123_0`
+  - You can use these chunk IDs to link the original text which is being embedded
+
 ## Sample Request
 
 ```bash

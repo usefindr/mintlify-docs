@@ -2604,16 +2604,36 @@
                     "type": "object",
                     "properties": {
                       "success": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Indicates if the deletion was successful",
+                        "example": true
                       },
                       "message": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Status message about the deletion operation",
+                        "example": "Embedding chunks deleted successfully"
+                      },
+                      "deleted_count": {
+                        "type": "integer",
+                        "description": "Number of chunks successfully deleted",
+                        "example": 2
+                      },
+                      "chunk_ids": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "List of chunk IDs that were deleted",
+                        "example": ["CortexEmbeddings123_0", "CortexEmbeddings123_1"]
                       }
-                    }
+                    },
+                    "required": ["success", "message"]
                   },
                   "example": {
                     "success": true,
-                    "message": "Embedding chunks deleted successfully"
+                    "message": "Embedding chunks deleted successfully",
+                    "deleted_count": 2,
+                    "chunk_ids": ["CortexEmbeddings123_0", "CortexEmbeddings123_1"]
                   }
                 }
               }
@@ -2718,21 +2738,32 @@
                         "items": {
                           "type": "string"
                         },
-                        "description": "List of similar chunk IDs"
+                        "description": "List of similar chunk IDs ordered by similarity score (highest first)",
+                        "example": ["CortexEmbeddings123_0", "CortexEmbeddings456_1"]
                       },
                       "similarity_scores": {
                         "type": "array",
                         "items": {
                           "type": "number",
-                          "format": "float"
+                          "format": "float",
+                          "minimum": 0.0,
+                          "maximum": 1.0
                         },
-                        "description": "Similarity scores for each chunk"
+                        "description": "Similarity scores corresponding to each chunk ID (0.0 to 1.0, higher is more similar)",
+                        "example": [0.95, 0.87]
+                      },
+                      "total_results": {
+                        "type": "integer",
+                        "description": "Total number of results found",
+                        "example": 2
                       }
-                    }
+                    },
+                    "required": ["chunk_ids", "similarity_scores"]
                   },
                   "example": {
                     "chunk_ids": ["CortexEmbeddings123_0", "CortexEmbeddings456_1"],
-                    "similarity_scores": [0.95, 0.87]
+                    "similarity_scores": [0.95, 0.87],
+                    "total_results": 2
                   }
                 }
               }
@@ -2836,23 +2867,30 @@
                     "type": "object",
                     "properties": {
                       "success": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Indicates if the upload was successful",
+                        "example": true
                       },
                       "message": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Status message about the upload operation",
+                        "example": "Embeddings upload message pushed to SQS."
                       },
                       "chunk_ids": {
                         "type": "array",
                         "items": {
                           "type": "string"
                         },
-                        "description": "Generated chunk IDs for the uploaded embeddings"
+                        "description": "Generated chunk IDs for the uploaded embeddings in format batch_id_index",
+                        "example": ["CortexEmbeddings123_0", "CortexEmbeddings123_1", "CortexEmbeddings123_2"]
                       },
                       "batch_id": {
                         "type": "string",
-                        "description": "Batch identifier for the uploaded embeddings"
+                        "description": "Unique batch identifier for grouping these embeddings",
+                        "example": "CortexEmbeddings123"
                       }
-                    }
+                    },
+                    "required": ["success", "message", "chunk_ids", "batch_id"]
                   },
                   "example": {
                     "success": true,
@@ -2965,29 +3003,42 @@
                     "type": "object",
                     "properties": {
                       "success": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Indicates if the update was successful",
+                        "example": true
                       },
                       "message": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Status message about the update operation",
+                        "example": "Embeddings update message pushed to SQS."
                       },
                       "chunk_ids": {
                         "type": "array",
                         "items": {
                           "type": "string"
                         },
-                        "description": "Updated chunk IDs"
+                        "description": "List of chunk IDs that were updated",
+                        "example": ["CortexEmbeddings123_0", "CortexEmbeddings123_1"]
                       },
                       "batch_id": {
                         "type": "string",
-                        "description": "Batch identifier for the updated embeddings"
+                        "description": "Batch identifier extracted from chunk IDs",
+                        "example": "CortexEmbeddings123"
+                      },
+                      "updated_count": {
+                        "type": "integer",
+                        "description": "Number of embeddings that were updated",
+                        "example": 2
                       }
-                    }
+                    },
+                    "required": ["success", "message", "chunk_ids", "batch_id"]
                   },
                   "example": {
                     "success": true,
                     "message": "Embeddings update message pushed to SQS.",
                     "chunk_ids": ["CortexEmbeddings123_0", "CortexEmbeddings123_1"],
-                    "batch_id": "CortexEmbeddings123"
+                    "batch_id": "CortexEmbeddings123",
+                    "updated_count": 2
                   }
                 }
               }

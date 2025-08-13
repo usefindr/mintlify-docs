@@ -60,13 +60,43 @@
               properties:
                 success:
                   type: boolean
+                  description: Indicates if the deletion was successful
+                  example: true
                 message:
                   type: string
+                  description: Status message about the deletion operation
+                  example: "Embedding chunks deleted successfully"
+                deleted_count:
+                  type: integer
+                  description: Number of chunks successfully deleted
+                  example: 2
+                chunk_ids:
+                  type: array
+                  items:
+                    type: string
+                  description: List of chunk IDs that were deleted
+                  example: ["CortexEmbeddings123_0", "CortexEmbeddings123_1"]
+              required:
+                - success
+                - message
               example:
                 success: true
                 message: "Embedding chunks deleted successfully"
+                deleted_count: 2
+                chunk_ids: ["CortexEmbeddings123_0", "CortexEmbeddings123_1"]
       '400':
-        description: Invalid request (empty chunk_ids or invalid format)
+        description: |
+          Invalid request. Possible errors:
+          - chunk_ids list cannot be empty
+          - All chunk_ids must be non-empty strings
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: string
+                  example: "chunk_ids list cannot be empty"
       '401':
         description: Invalid or missing API key
       '5XX':
