@@ -17,6 +17,27 @@ curl --location 'https://api.usecortex.ai/embeddings/search' \
     "embeddings": [0.1, 0.2, 0.3, 0.4, 0.5],
     "tenant_id": "{TENANT_ID}",
     "sub_tenant_id": "{SUB_TENANT_ID}",
-    "max_chunks": 10
+    "max_chunks": 5
   }'
+```
+
+## Sample Response
+
+```json
+{
+  "chunk_ids": [
+    "CortexEmbeddings123_0",    
+    "CortexEmbeddings456_0",
+    "CortexEmbeddings456_1",
+    "CortexEmbeddings123_2",   
+    "CortexEmbeddings123_8"
+  ],
+  "scores": [
+    0.95,
+    0.89,
+    0.87,
+    0.82,
+    0.78
+  ]
+}
 ```

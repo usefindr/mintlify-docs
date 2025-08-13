@@ -2577,7 +2577,7 @@
                         "type": "string"
                       },
                       "description": "List of chunk IDs to delete",
-                      "example": ["CortexEmbeddings123_0", "CortexEmbeddings123_1"]
+                      "example": ["CortexEmbeddings123_1"]
                     },
                     "tenant_id": {
                       "type": "string",
@@ -2603,37 +2603,25 @@
                   "schema": {
                     "type": "object",
                     "properties": {
-                      "success": {
-                        "type": "boolean",
-                        "description": "Indicates if the deletion was successful",
-                        "example": true
+                      "status": {
+                        "type": "object",
+                        "description": "Status of deletion for each chunk ID (chunk_id -> success boolean)",
+                        "additionalProperties": {
+                          "type": "boolean"
+                        },
+                        "example": {"CortexEmbeddings123_1": true}
                       },
-                      "message": {
-                        "type": "string",
-                        "description": "Status message about the deletion operation",
-                        "example": "Embedding chunks deleted successfully"
-                      },
-                      "deleted_count": {
+                      "total_deleted": {
                         "type": "integer",
                         "description": "Number of chunks successfully deleted",
-                        "example": 2
-                      },
-                      "chunk_ids": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        },
-                        "description": "List of chunk IDs that were deleted",
-                        "example": ["CortexEmbeddings123_0", "CortexEmbeddings123_1"]
+                        "example": 1
                       }
                     },
-                    "required": ["success", "message"]
+                    "required": ["status", "total_deleted"]
                   },
                   "example": {
-                    "success": true,
-                    "message": "Embedding chunks deleted successfully",
-                    "deleted_count": 2,
-                    "chunk_ids": ["CortexEmbeddings123_0", "CortexEmbeddings123_1"]
+                    "status": {"CortexEmbeddings123_1": true},
+                    "total_deleted": 1
                   }
                 }
               }
@@ -2739,9 +2727,9 @@
                           "type": "string"
                         },
                         "description": "List of similar chunk IDs ordered by similarity score (highest first)",
-                        "example": ["CortexEmbeddings123_0", "CortexEmbeddings456_1"]
+                        "example": ["CortexEmbeddings123_0", "CortexEmbeddings456_0", "CortexEmbeddings456_1", "CortexEmbeddings123_2", "CortexEmbeddings123_8"]
                       },
-                      "similarity_scores": {
+                      "scores": {
                         "type": "array",
                         "items": {
                           "type": "number",
@@ -2750,20 +2738,14 @@
                           "maximum": 1.0
                         },
                         "description": "Similarity scores corresponding to each chunk ID (0.0 to 1.0, higher is more similar)",
-                        "example": [0.95, 0.87]
-                      },
-                      "total_results": {
-                        "type": "integer",
-                        "description": "Total number of results found",
-                        "example": 2
+                        "example": [0.95, 0.89, 0.87, 0.82, 0.78]
                       }
                     },
-                    "required": ["chunk_ids", "similarity_scores"]
+                    "required": ["chunk_ids", "scores"]
                   },
                   "example": {
-                    "chunk_ids": ["CortexEmbeddings123_0", "CortexEmbeddings456_1"],
-                    "similarity_scores": [0.95, 0.87],
-                    "total_results": 2
+                    "chunk_ids": ["CortexEmbeddings123_0", "CortexEmbeddings456_0", "CortexEmbeddings456_1", "CortexEmbeddings123_2", "CortexEmbeddings123_8"],
+                    "scores": [0.95, 0.89, 0.87, 0.82, 0.78]
                   }
                 }
               }
