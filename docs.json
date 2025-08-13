@@ -59,11 +59,15 @@
             "group": "Knowledge Ingestion",
             "pages": [
               "api-reference/endpoint/upload-document",
+              "api-reference/endpoint/update-document",
               "api-reference/endpoint/upload-text",
+              "api-reference/endpoint/update-text",
               "api-reference/endpoint/app-upload",
               "api-reference/endpoint/scrape-webpage",
+              "api-reference/endpoint/update-webpage",
               "api-reference/endpoint/verify-processing",
-              "api-reference/endpoint/batch-upload"
+              "api-reference/endpoint/batch-upload",
+              "api-reference/endpoint/batch-update"
             ]
           },
           {
