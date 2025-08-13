@@ -12,6 +12,7 @@ openapi: 'POST /upload/upload_embeddings'
   - Consider them as references of that particular embeddings vector. You will get back these `chunk_ids`, when you query something.
   - In the example on your right, the reference to `[0.1, 0.2, 0.3, 0.4, 0.5]` is `CortexEmbeddings123_0`
   - You can use these chunk IDs to link the original text which is being embedded
+- **Dimensional consistency per tenant**: All embedding vectors within a tenant must have identical dimensions. Different dimensional vectors require separate tenants
 
 ## Sample Request
 
