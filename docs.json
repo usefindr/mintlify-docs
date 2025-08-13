@@ -87,6 +87,15 @@
             ]
           },
           {
+            "group": "Embeddings",
+            "pages": [
+              "api-reference/endpoint/upload-embeddings",
+              "api-reference/endpoint/update-embeddings",
+              "api-reference/endpoint/search-embeddings",
+              "api-reference/endpoint/delete-embeddings"
+            ]
+          },
+          {
             "group": "User Memories",
             "pages": [
               "api-reference/endpoint/list-user-memories",

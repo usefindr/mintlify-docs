@@ -1,0 +1,18 @@
+---
+title: 'Delete Embeddings'
+openapi: 'DELETE /embeddings/delete'
+---
+
+## Sample Request
+
+```bash
+curl --location --request DELETE 'https://api.usecortex.ai/embeddings/delete' \
+  --header 'Authorization: Bearer {API_KEY}' \
+  --header 'accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "chunk_ids": ["CortexEmbeddings123_0", "CortexEmbeddings123_1"],
+    "tenant_id": "{TENANT_ID}",
+    "sub_tenant_id": "{SUB_TENANT_ID}"
+  }'
+```
