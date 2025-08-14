@@ -1,0 +1,48 @@
+---
+title: 'Create Tenant'
+openapi: 'POST /user/create_tenant'
+---
+
+Create a new tenant. If you pass `tenant_id` as a query parameter, that ID will be used. If not provided, the service generates a new `tenant_id` and returns it.
+
+### Query Parameters
+- **tenant_id**: Optional string — If provided, will be used as the tenant identifier; otherwise a new one is generated.
+
+## Sample Request
+
+```bash
+curl --location 'https://api.usecortex.ai/user/create_tenant?tenant_id={TENANT_ID}' \
+  --header 'Authorization: Bearer {API_KEY}' \
+  --header 'accept: application/json'
+```
+
+To auto-generate a tenant ID, omit the `tenant_id` parameter:
+
+```bash
+curl --location 'https://api.usecortex.ai/user/create_tenant' \
+  --header 'Authorization: Bearer {API_KEY}' \
+  --header 'accept: application/json'
+```
+
+## Sample Response
+
+```json
+{
+  "status": "success",
+  "message": "Tenant '99155#$@e2' created successfully.",
+  "tenant_id": "B1SlKQ2j2l1aWYLa"
+}
+```
+
+### Functionality
+- Accepts an optional `tenant_id` via query
+- Generates a new `tenant_id` if none is provided
+- Creates and persists the tenant
+- Returns the final `tenant_id` and a confirmation message
+
+### Error Responses
+- **401 Unauthorized**: Invalid or missing API key
+- **409 Conflict**: Tenant already exists (when a provided `tenant_id` is already in use)
+- **5XX Server Error**: Internal server error
+
+
