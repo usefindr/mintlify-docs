@@ -92,6 +92,7 @@
               "api-reference/endpoint/upload-embeddings",
               "api-reference/endpoint/update-embeddings",
               "api-reference/endpoint/search-embeddings",
+              "api-reference/endpoint/get-embeddings-by-chunk-ids",
               "api-reference/endpoint/delete-embeddings"
             ]
           },

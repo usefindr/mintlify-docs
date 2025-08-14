@@ -2891,7 +2891,102 @@
             },
             "5XX": {
               "description": "Internal server error"
+          }
+        }
+      }
+    },
+      "/embeddings/by-chunk-ids": {
+      "post": {
+          "description": "Retrieve embeddings for specific chunk IDs.",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "description": "Bearer token (your API key)",
+              "schema": { "type": "string" },
+              "example": "Bearer {API_KEY}"
+            },
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "required": true,
+              "description": "Request content type",
+              "schema": { "type": "string", "default": "application/json" }
+            },
+            {
+              "name": "accept",
+              "in": "header",
+              "required": true,
+              "description": "Response content type",
+              "schema": { "type": "string", "default": "application/json" }
             }
+          ],
+        "requestBody": {
+            "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                  "type": "object",
+                  "properties": {
+                    "chunk_ids": {
+                      "type": "array",
+                      "items": { "type": "string" },
+                      "description": "List of chunk IDs to retrieve embeddings for",
+                      "example": ["CortexEmbeddings123_0", "CortexEmbeddings123_1"]
+                    },
+                    "tenant_id": {
+                      "type": "string",
+                      "description": "Tenant identifier for multi-tenancy",
+                      "example": "tenant_456"
+                    },
+                    "sub_tenant_id": {
+                      "type": "string",
+                      "description": "Sub-tenant identifier, defaults to tenant_id",
+                      "example": "subtenant_123"
+                    }
+                  },
+                  "required": ["chunk_ids", "tenant_id"]
+                }
+              }
+            }
+        },
+        "responses": {
+          "200": {
+              "description": "Embeddings retrieved successfully",
+            "content": {
+              "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "embeddings": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "array",
+                          "items": { "type": "number", "format": "float" }
+                        },
+                        "description": "Mapping of chunk_id to its embedding vector",
+                        "example": {"CortexEmbeddings123_0": [0.12, 0.34, 0.56, 0.78], "CortexEmbeddings123_1": [0.11, 0.33, 0.55, 0.77]}
+                      },
+                      "not_found_chunk_ids": {
+                        "type": "array",
+                        "items": { "type": "string" },
+                        "description": "List of chunk IDs that were not found",
+                        "example": []
+                      }
+                    },
+                    "required": ["embeddings"]
+                  },
+                  "example": {
+                    "embeddings": {"CortexEmbeddings123_0": [0.12, 0.34, 0.56, 0.78], "CortexEmbeddings123_1": [0.11, 0.33, 0.55, 0.77]},
+                    "not_found_chunk_ids": []
+                  }
+                }
+              }
+            },
+            "400": { "description": "Invalid request (empty chunk_ids or invalid format)" },
+            "401": { "description": "Invalid or missing API key" },
+            "5XX": { "description": "Internal server error" }
           }
         }
       },
