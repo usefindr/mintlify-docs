@@ -105,6 +105,12 @@
               "api-reference/endpoint/generate-user-memory",
               "api-reference/endpoint/delete-user-memory"
             ]
+          },
+          {
+            "group": "Tenant Management",
+            "pages": [
+              "api-reference/endpoint/tenant-stats"
+            ]
           }
         ]
       },

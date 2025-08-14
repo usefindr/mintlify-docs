@@ -1,0 +1,48 @@
+---
+title: 'Get Tenant Stats'
+openapi: 'GET /tenant/stats'
+---
+
+Retrieve statistics for a specific tenant. This endpoint provides insights into the tenant's data including object count, vector dimensions, and tenant information.
+
+### Query Parameters
+- **tenant_id**: Required string - The tenant identifier
+- **sub_tenant_id**: Optional string - Sub-tenant identifier, if not provided defaults to empty string
+
+### Response Details
+- **object_count**: Number of objects/embeddings stored for the tenant
+- **vector_dimension**: Dimension size of the embedding vectors for this tenant
+- **tenant_name**: The name/identifier of the tenant
+
+## Sample Request
+
+```bash
+curl --location 'https://api.usecortex.ai/tenant/stats?tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}' \
+  --header 'Authorization: Bearer {API_KEY}' \
+  --header 'accept: application/json'
+```
+
+## Sample Response
+
+```json
+{
+  "object_count": 9,
+  "vector_dimension": 6,
+  "tenant_name": "Unlsbghv245109_zwv"
+}
+```
+
+## Use Cases
+
+This endpoint is useful for:
+- **Monitoring**: Track the number of embeddings stored for a tenant
+- **Validation**: Verify vector dimensions before uploading new embeddings
+- **Analytics**: Generate usage reports and statistics
+- **Capacity Planning**: Understand storage requirements and usage patterns
+
+## Error Responses
+
+- **400 Bad Request**: Missing or invalid tenant_id parameter
+- **401 Unauthorized**: Invalid or missing API key
+- **404 Not Found**: Tenant not found or no data available
+- **500 Internal Server Error**: Server processing error
