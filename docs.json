@@ -92,6 +92,7 @@
               "api-reference/endpoint/upload-embeddings",
               "api-reference/endpoint/update-embeddings",
               "api-reference/endpoint/search-embeddings",
+              "api-reference/endpoint/get-embeddings-by-chunk-ids",
               "api-reference/endpoint/delete-embeddings"
             ]
           },
@@ -103,6 +104,12 @@
               "api-reference/endpoint/add-user-memory",
               "api-reference/endpoint/generate-user-memory",
               "api-reference/endpoint/delete-user-memory"
+            ]
+          },
+          {
+            "group": "Tenant Management",
+            "pages": [
+              "api-reference/endpoint/tenant-stats"
             ]
           }
         ]
