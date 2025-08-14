@@ -3132,9 +3132,11 @@
           }
         }
       },
-      "/tenant/stats": {
-        "get": {
-          "description": "Retrieve statistics for a specific tenant including object count, vector dimensions, and tenant information.",
+      
+    },
+      "/user/create_tenant": {
+        "post": {
+          "description": "Creates a tenant. If tenant_id is provided it will be used; otherwise a new tenant_id is generated.",
           "parameters": [
             {
               "name": "Authorization",
@@ -3154,62 +3156,36 @@
             {
               "name": "tenant_id",
               "in": "query",
-              "required": true,
-              "description": "The tenant identifier",
-              "schema": { "type": "string" },
-              "example": "tenant_456"
-            },
-            {
-              "name": "sub_tenant_id",
-              "in": "query",
               "required": false,
-              "description": "Sub-tenant identifier, optional",
+              "description": "Optional tenant identifier. If omitted, a new tenant_id will be generated.",
               "schema": { "type": "string" },
-              "example": "subtenant_123"
+              "example": "my_tenant_id"
             }
           ],
           "responses": {
-            "200": {
-              "description": "Tenant statistics retrieved successfully",
+            "201": {
+              "description": "Tenant created successfully",
               "content": {
                 "application/json": {
                   "schema": {
                     "type": "object",
                     "properties": {
-                      "object_count": {
-                        "type": "integer",
-                        "description": "Number of objects/embeddings stored for the tenant",
-                        "example": 9
-                      },
-                      "vector_dimension": {
-                        "type": "integer",
-                        "description": "Dimension size of the embedding vectors for this tenant",
-                        "example": 6
-                      },
-                      "tenant_name": {
-                        "type": "string",
-                        "description": "The name/identifier of the tenant",
-                        "example": "Unlsbghv245109_zwv"
-                      }
+                      "status": { "type": "string", "example": "success" },
+                      "message": { "type": "string", "example": "Tenant '99155#$@e2' created successfully." },
+                      "tenant_id": { "type": "string", "description": "The created tenant identifier", "example": "B1SlKQ2j2l1aWYLa" }
                     },
-                    "required": ["object_count", "vector_dimension", "tenant_name"]
+                    "required": ["status", "message", "tenant_id"]
                   },
-                  "example": {
-                    "object_count": 9,
-                    "vector_dimension": 6,
-                    "tenant_name": "Unlsbghv245109_zwv"
-                  }
+                  "example": { "status": "success", "message": "Tenant '99155#$@e2' created successfully.", "tenant_id": "B1SlKQ2j2l1aWYLa" }
                 }
               }
             },
-            "400": { "description": "Missing or invalid tenant_id parameter" },
+            "409": { "description": "Tenant already exists" },
             "401": { "description": "Invalid or missing API key" },
-            "404": { "description": "Tenant not found or no data available" },
-            "500": { "description": "Internal server error" }
+            "5XX": { "description": "Internal server error" }
           }
         }
-      }
-    },
+      },
     "components": {
       "schemas": {},
       "securitySchemes": {

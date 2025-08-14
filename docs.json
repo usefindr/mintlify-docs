@@ -109,7 +109,7 @@
           {
             "group": "Tenant Management",
             "pages": [
-              "api-reference/endpoint/tenant-stats"
+              "api-reference/endpoint/create-tenant"
             ]
           }
         ]
