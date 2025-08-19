@@ -72,6 +72,16 @@
                 "type": "string"
               },
               "example": "subtenant_123"
+            },
+            {
+              "name": "file_id",
+              "in": "query",
+              "required": false,
+              "description": "Custom file identifier. If not provided, the system will generate an ID automatically.",
+              "schema": {
+                "type": "string"
+              },
+              "example": "custom_webpage_123"
             }
           ],
           "responses": {
@@ -2910,6 +2920,11 @@
                       },
                       "description": "2D array of embedding vectors (max 2000 rows x 3024 columns)",
                       "example": [[0.1, 0.2, 0.3, 0.4, 0.5], [0.6, 0.7, 0.8, 0.9, 1.0]]
+                    },
+                    "file_id": {
+                      "type": "string",
+                      "description": "Custom file identifier. If not provided, the system will generate an ID automatically.",
+                      "example": "custom_embeddings_123"
                     }
                   },
                   "required": ["embeddings"]
@@ -3208,8 +3223,7 @@
             }
           }
         }
-      }
-    },
+      },
       "/user/create_tenant": {
         "post": {
           "description": "Creates a tenant. If tenant_id is provided it will be used; otherwise a new tenant_id is generated.",
@@ -3261,7 +3275,8 @@
             "5XX": { "description": "Internal server error" }
           }
         }
-      },
+      }
+    },
     "components": {
       "schemas": {},
       "securitySchemes": {
