@@ -14,6 +14,8 @@ openapi: 'POST /upload/upload_embeddings'
   - You can use these chunk IDs to link the original text which is being embedded
 - **Dimensional consistency per tenant**: All embedding vectors within a tenant must have identical dimensions. Different dimensional vectors require separate tenants
 
+> **Note**: If `file_id` is not provided, the system will generate an ID automatically.
+
 ## Sample Request
 
 ```bash
@@ -26,6 +28,7 @@ curl --location 'https://api.usecortex.ai/upload/upload_embeddings?tenant_id={TE
       [0.1, 0.2, 0.3, 0.4, 0.5],
       [0.6, 0.7, 0.8, 0.9, 1.0],
       [0.2, 0.4, 0.6, 0.8, 1.0]
-    ]
+    ],
+    "file_id": "custom_embeddings_123"
   }'
 ```

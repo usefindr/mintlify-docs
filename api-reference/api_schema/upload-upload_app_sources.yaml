@@ -84,6 +84,7 @@
                       type: array
                 cortex_metadata:
                   type: object
+                  description: Custom metadata object that can include file_id. If file_id is not provided, the system will generate an ID automatically.
                 meta:
                   type: object
                 attachments:

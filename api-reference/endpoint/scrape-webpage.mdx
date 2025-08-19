@@ -3,10 +3,12 @@ title: 'Scrape Webpage'
 openapi: 'POST /upload/scrape_webpage'
 ---
 
+> **Note**: If `file_id` is not provided, the system will generate an ID automatically.
+
 ## Sample Request
 
 ```bash
-curl --location 'https://api.usecortex.ai/upload/scrape_webpage?web_url={WEB_URL}&tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}' \
+curl --location 'https://api.usecortex.ai/upload/scrape_webpage?web_url={WEB_URL}&tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}&file_id=custom_webpage_123' \
   --header 'Authorization: Bearer {API_KEY}' \
   --header 'accept: application/json'
 ```
