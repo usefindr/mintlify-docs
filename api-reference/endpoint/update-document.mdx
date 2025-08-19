@@ -3,6 +3,8 @@ title: 'Update Document'
 openapi: 'PATCH /upload/update_document'
 ---
 
+If the `source_id` does not exist, a new entry with that source ID will be created. This endpoint essentially performs an upsert (update or insert) operation.
+
 ## Sample Request
 
 ```bash
