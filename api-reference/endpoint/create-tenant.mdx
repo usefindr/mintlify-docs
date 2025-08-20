@@ -8,21 +8,28 @@ Create a new tenant. If you pass `tenant_id` as a query parameter, that ID will 
 ### Query Parameters
 - **tenant_id**: Optional string — If provided, will be used as the tenant identifier; otherwise a new one is generated.
 
+### Body Parameters
+- **tenant_metadata_schema**: Optional array of objects — Each object should specify a metadata key, type, and whether it is searchable/filterable. Used to define the schema for tenant-level metadata. Example:
+
+```json
+[
+  {"key": "demo", "type": "text", "searchable": true, "filterable": true},
+  {"key": "test", "type": "number", "searchable": true, "filterable": true}
+]
+```
+
 ## Sample Request
 
 ```bash
-curl --location 'https://api.usecortex.ai/user/create_tenant?tenant_id={TENANT_ID}' \
-  --header 'Authorization: Bearer {API_KEY}' \
-  --header 'accept: application/json'
+curl --location 'https://dev.usecortex.ai/user/create_tenant?tenant_id=Hbbyirq3573438_jkz3231' \
+  --header 'Authorization: Bearer a65e5691-a6f3-4668-9869-117084b93b28' \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{"metadata_schema":[{"key":"demo","type":"text","searchable":true,"filterable":true},{"key":"test","type":"number","searchable":true,"filterable":true}]}'
 ```
 
-To auto-generate a tenant ID, omit the `tenant_id` parameter:
-
-```bash
-curl --location 'https://api.usecortex.ai/user/create_tenant' \
-  --header 'Authorization: Bearer {API_KEY}' \
-  --header 'accept: application/json'
-```
+> **Note:**
+> - The `metadata_schema` field in the request body is now required and should be an array of objects, each specifying a metadata key, type, and whether it is searchable/filterable.
 
 ## Sample Response
 
