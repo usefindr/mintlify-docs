@@ -1498,10 +1498,18 @@
                       "description": "Maximum number of chunks to return from the search."
                     },
                     "alpha": {
-                      "type": "number",
-                      "format": "float",
-                      "default": 0.8,
-                      "description": "Search algorithm parameter for result ranking. Controls the balance between semantic and keyword search (0.0 = keyword only, 1.0 = semantic only)."
+                      "oneOf": [
+                        {
+                          "type": "number",
+                          "format": "float",
+                          "default": 0.8
+                        },
+                        {
+                          "type": "string",
+                          "enum": ["auto"]
+                        }
+                      ],
+                      "description": "Search algorithm parameter for result ranking. Controls the balance between semantic and keyword search (0.0 = keyword only, 1.0 = semantic only). Use 'auto' to let Cortex intelligently decide the optimal alpha value based on the query."
                     },
                     "recency_bias": {
                       "type": "number",

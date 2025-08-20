@@ -15,7 +15,7 @@ curl --location 'https://api.usecortex.ai/search/retrieve' \
     "tenant_id": "{TENANT_ID}",
     "sub_tenant_id": "{SUB_TENANT_ID}",
     "max_chunks": {MAX_CHUNKS},
-    "alpha": {ALPHA},
+    "alpha": "{ALPHA}",
     "recency_bias": {RECENCY_BIAS}
   }'
 ```
@@ -59,3 +59,10 @@ Returns an array of relevant content chunks from your indexed sources based on t
 ```
 
 > **Note:** This endpoint returns search results without AI-generated answers. For conversational Q&A with AI-generated responses, use the `/search/qna` endpoint instead.
+
+### Alpha Parameter
+The `alpha` parameter controls the balance between semantic and keyword search:
+- `0.0` = keyword search only
+- `1.0` = semantic search only  
+- `0.8` = default balanced approach
+- `"auto"` = Cortex intelligently decides the optimal alpha value based on the query
