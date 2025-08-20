@@ -41,10 +41,10 @@
         schema:
           type: string
         example: subtenant_123
-      - name: file_id
+      - name: source_id
         in: query
         required: false
-        description: Custom file identifier. If not provided, the system will generate an ID automatically.
+        description: Custom source identifier. If not provided, the system will generate an ID automatically.
         schema:
           type: string
         example: custom_webpage_123

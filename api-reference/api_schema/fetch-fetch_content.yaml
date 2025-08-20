@@ -35,9 +35,9 @@
           schema:
             type: object
             properties:
-              file_id:
+              source_id:
                 type: string
-                description: ID of the file to fetch the download URL for.
+                description: ID of the source to fetch the download URL for.
               tenant_id:
                 type: string
                 description: Tenant identifier.
@@ -46,30 +46,30 @@
                 description: Sub-tenant identifier.
                 default: ''
             required:
-            - file_id
+            - source_id
             - tenant_id
           examples:
             fetch_content:
-              summary: Fetch download URL for a file
+              summary: Fetch download URL for a source
               value:
-                file_id: file_123456
+                source_id: source_123456
                 tenant_id: tenant_456
                 sub_tenant_id: subtenant_123
     # --- Responses ---
     responses:
       '200':
-        description: Returns a JSON object with file IDs as keys and their corresponding download URLs as values
+        description: Returns a JSON object with source IDs as keys and their corresponding download URLs as values
         content:
           application/json:
             schema:
               type: object
               additionalProperties:
                 type: string
-                description: Download URL for the file ID key.
+                description: Download URL for the source ID key.
             example:
               CortexDocb7a1db714c9: https://cortex-local-sources-prod.s3.amazonaws.com/ToayuCogoBdxZVoZQ1ft8ZoRzCO2/FindrMasterCollectionMemoriesPreprod/123/local_source/CortexDocb7a1db714c9?... 
       '404':
-        description: File not found or not accessible with the provided credentials.
+        description: Source not found or not accessible with the provided credentials.
       '422':
         description: Incomplete/invalid parameters
       '401':

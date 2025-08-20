@@ -5,7 +5,7 @@ openapi: 'POST /upload/batch_upload'
 
 > **Recommended**: For optimal performance, limit each batch to a maximum of **20 sources** per request. Send multiple batch requests with an interval of **1 second** between each request.
 
-> **Note**: If `file_id` is not provided in the document metadata, the system will generate an ID automatically.
+> **Note**: If `source_id` is not provided in the document metadata, the system will generate an ID automatically.
 
 ## Sample Request
 
@@ -17,5 +17,5 @@ curl --location 'https://api.usecortex.ai/upload/batch_upload?tenant_id={TENANT_
 --form 'files=@{FILE2}' \
 --form 'files=@{FILE3}' \
 --form 'tenant_metadata="{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}"' \
---form 'document_metadata="{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_batch_123\"}"'
+--form 'document_metadata="{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"source_id\":\"custom_batch_123\"}"'
 ```
