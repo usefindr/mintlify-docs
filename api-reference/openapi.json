@@ -3252,6 +3252,38 @@
               "example": "my_tenant_id"
             }
           ],
+          "requestBody": {
+            "required": false,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "tenant_metadata_schema": {
+                      "type": "array",
+                      "description": "Schema for tenant-level metadata. Each object specifies a metadata key, type, and whether it is searchable/filterable.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "key": { "type": "string" },
+                          "type": { "type": "string", "enum": ["text", "number", "boolean", "date"] },
+                          "searchable": { "type": "boolean" },
+                          "filterable": { "type": "boolean" }
+                        },
+                        "required": ["key", "type", "searchable", "filterable"]
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "tenant_metadata_schema": [
+                    { "key": "demo", "type": "text", "searchable": true, "filterable": true },
+                    { "key": "test", "type": "number", "searchable": true, "filterable": true }
+                  ]
+                }
+              }
+            }
+          },
           "responses": {
             "201": {
               "description": "Tenant created successfully",
