@@ -74,12 +74,12 @@
                   type: boolean
                 message:
                   type: string
-                file_id:
+                source_id:
                   type: string
               example:
                 success: true
                 message: Markdown update message pushed to SQS.
-                file_id: CortexDoc123
+                source_id: CortexDoc123
       '400':
         description: Missing source_id or invalid payload
       '401':

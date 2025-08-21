@@ -74,8 +74,8 @@
                 - updated1.pdf
                 - updated2.docx
                 source_ids:
-                - CortexDoc123
-                - CortexDoc456
+                - source_id: CortexDoc123
+                - source_id: CortexDoc456
                 tenant_metadata: '[{"department":"Finance"},{"department":"Sales"}]'
                 document_metadata: '[{"title":"Q1 Report.pdf"},{"title":"Q2 Report.pdf"}]'
     responses:
@@ -93,7 +93,7 @@
                   items:
                     type: object
                     properties:
-                      file_id:
+                      source_id:
                         type: string
                       filename:
                         type: string
@@ -102,9 +102,9 @@
               example:
                 success: true
                 uploaded:
-                - file_id: CortexDoc123
+                - source_id: CortexDoc123
                   filename: updated1.pdf
-                - file_id: CortexDoc456
+                - source_id: CortexDoc456
                   filename: updated2.docx
                 message: Batch update messages pushed to SQS.
       '400':

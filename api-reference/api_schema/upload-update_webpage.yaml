@@ -56,12 +56,12 @@
                   type: boolean
                 message:
                   type: string
-                file_id:
+                source_id:
                   type: string
               example:
                 success: true
                 message: Scrape webpage job updated to S3 and SQS.
-                file_id: ScrapeJob123
+                source_id: ScrapeJob123
       '400':
         description: Missing source_id or invalid parameters
       '401':

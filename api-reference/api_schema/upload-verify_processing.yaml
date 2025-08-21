@@ -20,7 +20,7 @@
       schema:
         type: string
         default: application/json
-    - name: file_id
+    - name: source_id
       in: query
       required: true
       description: ID of the uploaded file
@@ -36,7 +36,7 @@
             schema:
               type: object
               properties:
-                file_id:
+                source_id:
                   type: string
                   description: ID of the uploaded file
                   example: '123123123123'
@@ -49,10 +49,10 @@
                   description: Indexing status of the file
                   example: success
               required:
-              - file_id
+              - source_id
               - indexing_status
             example:
-              file_id: '123123123123'
+              source_id: '123123123123'
               indexing_status: success
       '422':
         description: Incomplete/invalid parameters
