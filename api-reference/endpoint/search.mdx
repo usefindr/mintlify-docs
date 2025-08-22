@@ -1,5 +1,5 @@
 ---
-title: 'Search'
+title: 'Hybrid Search'
 openapi: 'POST /search/retrieve'
 ---
 
@@ -58,7 +58,7 @@ Returns an array of relevant content chunks from your indexed sources based on t
 ]
 ```
 
-> **Note:** This endpoint returns search results without AI-generated answers. For conversational Q&A with AI-generated responses, use the `/search/qna` endpoint instead.
+> **Note:** This endpoint returns hybrid search results without AI-generated answers. For conversational Q&A with AI-generated responses, use the `/search/qna` endpoint instead.
 
 ### Alpha Parameter
 The `alpha` parameter controls the balance between semantic and keyword search:

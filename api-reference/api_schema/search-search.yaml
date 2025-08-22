@@ -3,7 +3,7 @@
 
 "/search/retrieve":
   post:
-    description: Intelligent search using either traditional keyword methods or neural (embeddings-based) search for your knowledge base.
+    description: Hybrid search using either traditional keyword methods or neural (embeddings-based) search for your knowledge base.
     # --- Parameters (Headers) ---
     parameters:
     - name: Authorization
