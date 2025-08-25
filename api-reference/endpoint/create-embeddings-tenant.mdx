@@ -1,0 +1,36 @@
+---
+title: 'Create Embeddings Tenant'
+openapi: 'POST /embeddings/create_embeddings_tenant'
+---
+
+Create a tenant dedicated to directly storing and querying embeddings.
+
+> Use this endpoint only if you plan to upload embeddings directly (via `/upload/upload_embeddings`) and query them (via `/embeddings/*`). For standard document, text/markdown, or webpage ingestion, use `/user/create_tenant` instead.
+
+### Query Parameters
+- **tenant_id**: Required string — The tenant identifier.
+
+## Sample Request
+
+```bash
+curl --location 'https://api.usecortex.ai/embeddings/create_embeddings_tenant?tenant_id={TENANT_ID}' \
+  --header 'Authorization: Bearer {API_KEY}' \
+  --header 'accept: application/json'
+```
+
+## Sample Response
+
+```json
+{
+  "status": "success",
+  "message": "Tenant 'embeddings_test' created successfully.",
+  "tenant_id": "embeddings_test",
+}
+```
+
+### Error Responses
+- **401 Unauthorized**: Invalid or missing API key
+- **409 Conflict**: Tenant already exists
+- **5XX Server Error**: Internal server error
+
+
