@@ -59,9 +59,9 @@
               tenant_metadata:
                 type: string
                 description: JSON string array of tenant metadata objects, aligned by index with files
-              document_metadata:
-                type: string
-                description: JSON string array of document metadata objects, aligned by index with files
+              # document_metadata:
+              #   type: string
+              #   description: JSON string array of document metadata objects, aligned by index with files
             required:
             - files
             - source_ids
@@ -77,7 +77,7 @@
                 - CortexDoc123
                 - CortexDoc456
                 tenant_metadata: '[{"department":"Finance"},{"department":"Sales"}]'
-                document_metadata: '[{"title":"Q1 Report.pdf"},{"title":"Q2 Report.pdf"}]'
+                # document_metadata: '[{"title":"Q1 Report.pdf"},{"title":"Q2 Report.pdf"}]'
     responses:
       '200':
         description: Batch update accepted

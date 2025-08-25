@@ -51,10 +51,10 @@
                 type: object
                 description: JSON string containing tenant-level document metadata (e.g., department, compliance_tag)
                 example: '{"department":"Finance","compliance_tag":"GDPR"}'
-              document_metadata:
-                type: object
-                description: JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.
-                example: '{"title":"Q1 Report.pdf","author":"Alice Smith","file_id":"custom_file_123"}'
+              # document_metadata:
+              #   type: object
+              #   description: JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.
+              #   example: '{"title":"Q1 Report.pdf","author":"Alice Smith","file_id":"custom_file_123"}'
             required:
             - file
           examples:
@@ -64,7 +64,7 @@
               value:
                 file: document.pdf
                 tenant_metadata: '{"department":"Finance","compliance_tag":"GDPR"}'
-                document_metadata: '{"title":"Q1 Report.pdf","author":"Alice Smith","file_id":"custom_file_123"}'
+                # document_metadata: '{"title":"Q1 Report.pdf","author":"Alice Smith","file_id":"custom_file_123"}'
     # --- Responses ---
     responses:
       '200':

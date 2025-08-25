@@ -57,9 +57,9 @@
               tenant_metadata:
                 type: string
                 description: JSON string containing tenant metadata for the documents
-              document_metadata:
-                type: string
-                description: JSON string containing document-specific metadata for the documents (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.
+              # document_metadata:
+              #   type: string
+              #   description: JSON string containing document-specific metadata for the documents (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.
             required:
             - files
           examples:
@@ -72,7 +72,7 @@
                 - document2.docx
                 - document3.txt
                 tenant_metadata: '[{"department":"Finance","compliance_tag":"GDPR"},{"department":"Finance","compliance_tag":"GDPR"}]'
-                document_metadata: '[{"title":"Q1 Report.pdf","author":"Alice Smith","file_id":"custom_batch_123"},{"title":"Q2 Report.pdf","author":"Bob Jones","file_id":"custom_batch_456"}]'
+                # document_metadata: '[{"title":"Q1 Report.pdf","author":"Alice Smith","file_id":"custom_batch_123"},{"title":"Q2 Report.pdf","author":"Bob Jones","file_id":"custom_batch_456"}]'
     # --- Responses ---
     responses:
       '200':

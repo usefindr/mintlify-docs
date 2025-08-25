@@ -3,7 +3,7 @@ title: 'Upload Document'
 openapi: 'POST /upload/upload_document'
 ---
 
-> **Note**: If `file_id` is not provided in the document metadata, the system will generate an ID automatically.
+{/* > **Note**: If `file_id` is not provided in the document metadata, the system will generate an ID automatically. */}
 
 ## Sample Request
 
@@ -13,6 +13,6 @@ curl --location 'https://api.usecortex.ai/upload/upload_document?tenant_id={TENA
 --header 'Authorization: Bearer {API_KEY}' \
 --form 'file=@"{FILE}"' \
 --form 'tenant_metadata="{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}"' \
---form 'document_metadata="{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}"'
+{/* --form 'document_metadata="{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}"' */}
 ```
 
