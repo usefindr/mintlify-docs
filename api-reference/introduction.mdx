@@ -40,6 +40,31 @@ Browse, fetch, and manage your knowledge base.
 - `/fetch/fetch_content` — Retrieve file content and download URLs
 - `/delete_source` — Remove sources from knowledge base
 
+### **Update & Upsert**
+
+Update existing content and embeddings. If a `source_id` does not exist, these endpoints upsert (create or update).
+
+- `/upload/update_text` — Upsert markdown/text content by `source_id`
+- `/upload/update_document` — Upsert a file/document by `source_id`
+- `/upload/update_webpage` — Re-scrape and upsert a webpage by `source_id` and `web_url`
+- `/upload/update_embeddings` — Update existing embeddings by `chunk_id` within a batch/source
+
+### **Embeddings**
+
+Manage and query pre-computed embeddings.
+
+- `/upload/upload_embeddings` — Upload embeddings and get generated `chunk_ids`
+- `/embeddings/search` — Vector similarity search; returns nearest `chunk_ids` and scores
+- `/embeddings/by-chunk-ids` — Retrieve embedding vectors for specific `chunk_ids`
+- `/embeddings/delete` — Delete embeddings by `chunk_id`
+
+### **Tenant Management**
+
+Create and monitor tenants for multi-tenant setups.
+
+- `/user/create_tenant` — Create a tenant (optionally provide `tenant_id`, or auto-generate)
+- `/tenant/stats` — Get tenant stats (object count, vector dimension, identifiers)
+
 ### **User Memory**
 
 Personalize, retrieve, and manage user-specific AI memories for advanced agentic workflows.
