@@ -63,6 +63,7 @@ Manage and query pre-computed embeddings.
 Create and monitor tenants for multi-tenant setups.
 
 - `/user/create_tenant` — Create a tenant (optionally provide `tenant_id`, or auto-generate)
+- `/embeddings/create_embeddings_tenant` — Create an embeddings-only tenant (sets `sub_tenant_id = tenant_id`); use when directly uploading/searching embeddings
 - `/tenant/stats` — Get tenant stats (object count, vector dimension, identifiers)
 
 ### **User Memory**
