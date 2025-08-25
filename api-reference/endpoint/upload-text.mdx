@@ -10,7 +10,7 @@ openapi: 'POST /upload/upload_text'
 - Triggers the ingestion pipeline for content processing and indexing
 - Returns the generated ID for future reference
 
-> **Note**: If `file_id` is not provided in the document metadata, the system will generate an ID automatically.
+{/* > **Note**: If `file_id` is not provided in the document metadata, the system will generate an ID automatically. */}
 
 ## Sample Request
 
@@ -25,10 +25,10 @@ curl --location 'https://api.usecortex.ai/upload/upload_text?tenant_id={TENANT_I
       "department": "Finance",
       "compliance_tag": "GDPR"
     },
-    "document_metadata": {
+    {/* "document_metadata": {
       "title": "Q1 Report.pdf",
       "author": "Alice Smith",
       "file_id": "custom_text_123"
-    }
+    } */}
   }'
 ```

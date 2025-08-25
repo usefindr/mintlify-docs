@@ -51,9 +51,9 @@
               tenant_metadata:
                 type: object
                 description: JSON string with tenant-level metadata
-              document_metadata:
-                type: object
-                description: JSON string with document-level metadata
+              # document_metadata:
+              #   type: object
+              #   description: JSON string with document-level metadata
             required:
             - file
     responses:

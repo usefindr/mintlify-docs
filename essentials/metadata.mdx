@@ -5,7 +5,7 @@ description: "Add structured metadata to your documents for precise filtering an
 
 Metadata is the foundation of intelligent document retrieval and context-aware search in Cortex. By attaching structured information to your documents, you enable precise filtering, multi-tenant isolation, and sophisticated query capabilities that transform how users interact with your knowledge base.
 
-**Note:** For uploads, use the fields `tenant_metadata` and `document_metadata` (with the same schema as the original metadata field) to attach this information. These fields are not used in the QnA endpoint.
+{/* **Note:** For uploads, use the fields `tenant_metadata` and `document_metadata` (with the same schema as the original metadata field) to attach this information. These fields are not used in the QnA endpoint. */}
 
 ## Metadata Architecture Overview
 
@@ -14,7 +14,7 @@ Metadata is the foundation of intelligent document retrieval and context-aware s
 Metadata in Cortex operates on a two-tier architecture designed for enterprise-scale applications:
 
 1. **`tenant_metadata`**: Organization-level metadata that applies across all documents within a tenant
-2. **`document_metadata`**: Document-specific metadata that describes individual documents
+{/* 2. **`document_metadata`**: Document-specific metadata that describes individual documents */}
 
 This separation enables powerful multi-tenant scenarios while maintaining document-level granularity.
 
@@ -39,7 +39,7 @@ Cortex implements a flexible, schema-less metadata system that supports:
     "compliance_framework": "SOC2",
     "data_classification": "internal"
   },
-  "document_metadata": {
+  {/* "document_metadata": {
     "document_id": "DOC-2024-001",
     "title": "API Security Guidelines v2.1",
     "author": {
@@ -50,7 +50,7 @@ Cortex implements a flexible, schema-less metadata system that supports:
     "created_date": "2024-01-15T10:30:00Z",
     "document_type": "technical_specification",
     "version": "2.1.0"
-  }
+  } */}
 }
 ```
 
@@ -101,24 +101,24 @@ Cortex implements a flexible, schema-less metadata system that supports:
 #### Semantic Field Design
 ```json
 // ✅ Good - Clear semantic meaning
-{
-  "document_metadata": {
+{/* {
+  {/* "document_metadata": {
     "document_classification": "confidential",
     "approval_workflow_status": "pending_review",
     "last_review_date": "2024-01-15T10:30:00Z",
     "next_review_cycle": "quarterly"
-  }
-}
+  } */}
+} */}
 
 // ❌ Avoid - Ambiguous field names
-{
-  "document_metadata": {
+{/* {
+  {/* "document_metadata": {
     "type": "confidential",
     "status": "pending",
     "date": "2024-01-15T10:30:00Z",
     "cycle": "quarterly"
-  }
-}
+  } */}
+} */}
 ```
 
 ### 2. Data Structure Optimization
@@ -126,56 +126,56 @@ Cortex implements a flexible, schema-less metadata system that supports:
 #### Hierarchical Data Organization
 ```json
 {
-  "document_metadata": {
-    "ownership": {
-      "primary_owner": {
-        "name": "Dr. Sarah Chen",
-        "email": "sarah.chen@acme.com",
-        "department": "Security",
-        "role": "Security Architect"
+      {/* "document_metadata": {
+      "ownership": {
+        "primary_owner": {
+          "name": "Dr. Sarah Chen",
+          "email": "sarah.chen@acme.com",
+          "department": "Security",
+          "role": "Security Architect"
+        },
+        "stakeholders": [
+          {
+            "name": "Mike Johnson",
+            "email": "mike.johnson@acme.com",
+            "role": "Engineering Manager"
+          }
+        ]
       },
-      "stakeholders": [
-        {
-          "name": "Mike Johnson",
-          "email": "mike.johnson@acme.com",
-          "role": "Engineering Manager"
-        }
-      ]
-    },
-    "project_context": {
-      "project_id": "PROJ-SEC-2024-001",
-      "project_name": "API Security Enhancement",
-      "phase": "implementation",
-      "sprint": "S24.1"
-    }
-  }
+      "project_context": {
+        "project_id": "PROJ-SEC-2024-001",
+        "project_name": "API Security Enhancement",
+        "phase": "implementation",
+        "sprint": "S24.1"
+      }
+    } */}
 }
 ```
 
 #### Array Field Design
 ```json
 {
-  "document_metadata": {
-    "security_classifications": [
-      {
-        "level": "confidential",
-        "scope": "internal_only",
-        "expiry_date": "2025-01-15T23:59:59Z"
-      }
-    ],
-    "compliance_requirements": [
-      "GDPR_Article_32",
-      "SOC2_CC6_1",
-      "ISO27001_A_12_2"
-    ],
-    "technical_dependencies": [
-      {
-        "component": "authentication_service",
-        "version": "2.1.0",
-        "criticality": "high"
-      }
-    ]
-  }
+      {/* "document_metadata": {
+      "security_classifications": [
+        {
+          "level": "confidential",
+          "scope": "internal_only",
+          "expiry_date": "2025-01-15T23:59:59Z"
+        }
+      ],
+      "compliance_requirements": [
+        "GDPR_Article_32",
+        "SOC2_CC6_1",
+        "ISO27001_A_12_2"
+      ],
+      "technical_dependencies": [
+        {
+          "component": "authentication_service",
+          "version": "2.1.0",
+          "criticality": "high"
+        }
+      ]
+    } */}
 }
 ```
 
@@ -192,7 +192,7 @@ Cortex implements a flexible, schema-less metadata system that supports:
     "jurisdiction": "California",
     "regulatory_framework": "CCPA"
   },
-  "document_metadata": {
+  {/* "document_metadata": {
     "document_type": "service_agreement",
     "contract_party": "Acme Corporation",
     "effective_date": "2024-01-01T00:00:00Z",
@@ -205,7 +205,7 @@ Cortex implements a flexible, schema-less metadata system that supports:
       "assigned_to": "legal@firm.com",
       "due_date": "2024-02-15T17:00:00Z"
     }
-  }
+  } */}
 }
 ```
 
@@ -225,7 +225,7 @@ Cortex implements a flexible, schema-less metadata system that supports:
     "sprint": "S24.1",
     "release_version": "2.1.0"
   },
-  "document_metadata": {
+  {/* "document_metadata": {
     "document_type": "technical_specification",
     "component": "user_authentication",
     "priority": "high",
@@ -257,7 +257,7 @@ Cortex implements a flexible, schema-less metadata system that supports:
     "estimated_effort": 40,
     "actual_effort": 35,
     "status": "in_progress"
-  }
+  } */}
 }
 ```
 
@@ -277,7 +277,7 @@ Cortex implements a flexible, schema-less metadata system that supports:
     "data_retention_policy": "7_years",
     "privacy_framework": "GDPR"
   },
-  "document_metadata": {
+  {/* "document_metadata": {
     "document_type": "employee_contract",
     "employee_id": "EMP-2024-001",
     "position": "Senior Software Engineer",
@@ -293,7 +293,7 @@ Cortex implements a flexible, schema-less metadata system that supports:
     "probation_period": 90,
     "notice_period": 30,
     "status": "active"
-  }
+  } */}
 }
 ```
 
@@ -340,24 +340,24 @@ Cortex employs sophisticated indexing strategies to ensure optimal query perform
 #### Boolean Flag Optimization
 ```json
 // ✅ Good - Boolean flags for simple conditions
-{
-  "document_metadata": {
+{/* {
+  {/* "document_metadata": {
     "is_confidential": true,
     "requires_approval": false,
     "is_archived": false,
     "has_attachments": true
-  }
-}
+  } */}
+} */}
 
 // ❌ Avoid - String flags
-{
-  "document_metadata": {
+{/* {
+  {/* "document_metadata": {
     "confidentiality": "yes",
     "approval_required": "no",
     "archived": "no",
     "attachments": "yes"
-  }
-}
+  } */}
+} */}
 ```
 
 ### Large Dataset Considerations
@@ -414,10 +414,10 @@ With proper metadata structure, you can create sophisticated filtering scenarios
   "tenant_metadata": {
     "department": "Engineering"
   },
-  "document_metadata": {
+  {/* "document_metadata": {
     "priority": "high",
     "created_date": "2024-01-01" // Would be filtered by date range
-  }
+  } */}
 }
 ```
 
