@@ -1624,7 +1624,7 @@
           }
         }
       },
-      "/full-text-search": {
+      "/search/full-text-search": {
         "post": {
           "description": "Full text search endpoint for Cortex customers. Uses full text search with configurable operators for precise text matching.",
           "parameters": [
