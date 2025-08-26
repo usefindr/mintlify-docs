@@ -1593,7 +1593,7 @@
           }
         }
       },
-      "/full-text-search": {
+      "/search/full-text-search": {
         "post": {
           "description": "Full text search endpoint for Cortex customers. Uses full text search with configurable operators for precise text matching.",
           "parameters": [
@@ -3451,6 +3451,58 @@
                     "required": ["status", "message", "tenant_id"]
                   },
                   "example": { "status": "success", "message": "Tenant '99155#$@e2' created successfully.", "tenant_id": "B1SlKQ2j2l1aWYLa" }
+                }
+              }
+            },
+            "409": { "description": "Tenant already exists" },
+            "401": { "description": "Invalid or missing API key" },
+            "5XX": { "description": "Internal server error" }
+          }
+        }
+      },
+      "/embeddings/create_embeddings_tenant": {
+        "post": {
+          "description": "Creates an embeddings-only tenant. Use this for direct embeddings upload and search workflows.",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "description": "Bearer token (your API key)",
+              "schema": { "type": "string" },
+              "example": "Bearer {API_KEY}"
+            },
+            {
+              "name": "accept",
+              "in": "header",
+              "required": true,
+              "description": "Response content type",
+              "schema": { "type": "string", "default": "application/json" }
+            },
+            {
+              "name": "tenant_id",
+              "in": "query",
+              "required": true,
+              "description": "The tenant identifier.",
+              "schema": { "type": "string" },
+              "example": "embeddings_test"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Embeddings tenant created successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": { "type": "string", "example": "success" },
+                      "message": { "type": "string", "example": "Tenant 'embeddings_test' created successfully." },
+                      "tenant_id": { "type": "string", "description": "The created tenant identifier", "example": "embeddings_test" }
+                    },
+                    "required": ["status", "message", "tenant_id"]
+                  },
+                  "example": { "status": "success", "message": "Tenant 'embeddings_test' created successfully.", "tenant_id": "embeddings_test" }
                 }
               }
             },

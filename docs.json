@@ -91,6 +91,7 @@
           {
             "group": "Embeddings",
             "pages": [
+              "api-reference/endpoint/create-embeddings-tenant",
               "api-reference/endpoint/upload-embeddings",
               "api-reference/endpoint/update-embeddings",
               "api-reference/endpoint/search-embeddings",
