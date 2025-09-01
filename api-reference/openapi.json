@@ -1131,101 +1131,132 @@
                         "type": "array",
                         "items": {
                           "type": "string"
-                        }
+                        },
+                        "description": "Array of collection names that this source belongs to"
                       },
                       "id": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Unique identifier for the app source"
                       },
                       "title": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Title or name of the app source"
                       },
                       "type": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Type of the app source (e.g., gmail, slack, notion)"
                       },
                       "description": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Description of the app source content"
                       },
                       "note": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Additional notes or comments about the source"
                       },
                       "url": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "URL associated with the app source"
                       },
                       "timestamp": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Timestamp when the source was created or last modified"
                       },
                       "content": {
                         "type": "object",
+                        "description": "Content data of the app source in various formats",
                         "properties": {
                           "text": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Plain text content of the source"
                           },
                           "html_base64": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Base64 encoded HTML content"
                           },
                           "csv_base64": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Base64 encoded CSV data"
                           },
                           "markdown": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Markdown formatted content"
                           },
                           "files": {
-                            "type": "array"
+                            "type": "array",
+                            "description": "Array of associated files"
                           },
                           "layout": {
-                            "type": "array"
+                            "type": "array",
+                            "description": "Layout information for the content"
                           }
                         }
                       },
                       "cortex_metadata": {
-                        "type": "object"
+                        "type": "object",
+                        "description": "Custom metadata object that can include file_id. If file_id is not provided, the system will generate an ID automatically."
                       },
                       "meta": {
-                        "type": "object"
+                        "type": "object",
+                        "description": "Additional metadata associated with the source"
                       },
                       "attachments": {
                         "type": "array",
+                        "description": "Array of attachments associated with the app source",
                         "items": {
                           "type": "object",
                           "properties": {
                             "id": {
-                              "type": "string"
+                              "type": "string",
+                              "description": "Unique identifier for the attachment"
                             },
                             "url": {
-                              "type": "string"
+                              "type": "string",
+                              "description": "URL of the attachment"
                             },
                             "title": {
-                              "type": "string"
+                              "type": "string",
+                              "description": "Title or name of the attachment"
                             },
                             "content_type": {
-                              "type": "string"
+                              "type": "string",
+                              "description": "MIME type of the attachment content"
                             },
                             "content_url": {
-                              "type": "string"
+                              "type": "string",
+                              "description": "Direct URL to access the attachment content"
                             },
                             "misc": {
-                              "type": "object"
+                              "type": "object",
+                              "description": "Miscellaneous metadata for the attachment"
                             },
                             "content": {
                               "type": "object",
+                              "description": "Content data of the attachment in various formats",
                               "properties": {
                                 "text": {
-                                  "type": "string"
+                                  "type": "string",
+                                  "description": "Plain text content of the attachment"
                                 },
                                 "html_base64": {
-                                  "type": "string"
+                                  "type": "string",
+                                  "description": "Base64 encoded HTML content"
                                 },
                                 "csv_base64": {
-                                  "type": "string"
+                                  "type": "string",
+                                  "description": "Base64 encoded CSV data"
                                 },
                                 "markdown": {
-                                  "type": "string"
+                                  "type": "string",
+                                  "description": "Markdown formatted content"
                                 },
                                 "files": {
-                                  "type": "array"
+                                  "type": "array",
+                                  "description": "Array of associated files"
                                 },
                                 "layout": {
-                                  "type": "array"
+                                  "type": "array",
+                                  "description": "Layout information for the content"
                                 }
                               }
                             }
@@ -2543,10 +2574,12 @@
                     "type": "object",
                     "properties": {
                       "success": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Indicates whether the memory retrieval operation was successful"
                       },
                       "user_memories": {
                         "type": "array",
+                        "description": "Array of user memories matching the search query",
                         "items": {
                           "type": "object",
                           "description": "User memory objects matching the search query"
@@ -2640,10 +2673,12 @@
                     "type": "object",
                     "properties": {
                       "success": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Indicates whether the memory addition operation was successful"
                       },
                       "user_memory_added": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Confirms whether the user memory was successfully added to the vector store"
                       }
                     }
                   }
@@ -2742,10 +2777,12 @@
                     "type": "object",
                     "properties": {
                       "success": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Indicates whether the memory generation operation was successful"
                       },
                       "generated_user_memories": {
                         "type": "array",
+                        "description": "Array of user memories that were automatically generated and stored",
                         "items": {
                           "type": "string",
                           "description": "Generated user memory objects that were created and stored"
@@ -3417,10 +3454,10 @@
                       "items": {
                         "type": "object",
                         "properties": {
-                          "key": { "type": "string" },
-                          "type": { "type": "string", "enum": ["text", "number", "boolean", "date"] },
-                          "searchable": { "type": "boolean" },
-                          "filterable": { "type": "boolean" }
+                          "key": { "type": "string", "description": "The metadata key name" },
+                          "type": { "type": "string", "enum": ["text", "number", "boolean", "date"], "description": "Data type for the metadata field" },
+                          "searchable": { "type": "boolean", "description": "Whether this field can be searched" },
+                          "filterable": { "type": "boolean", "description": "Whether this field can be used for filtering" }
                         },
                         "required": ["key", "type", "searchable", "filterable"]
                       }
@@ -3444,8 +3481,8 @@
                   "schema": {
                     "type": "object",
                     "properties": {
-                      "status": { "type": "string", "example": "success" },
-                      "message": { "type": "string", "example": "Tenant '99155#$@e2' created successfully." },
+                      "status": { "type": "string", "description": "Status of the tenant creation operation", "example": "success" },
+                      "message": { "type": "string", "description": "Human-readable message about the operation", "example": "Tenant '99155#$@e2' created successfully." },
                       "tenant_id": { "type": "string", "description": "The created tenant identifier", "example": "B1SlKQ2j2l1aWYLa" }
                     },
                     "required": ["status", "message", "tenant_id"]
@@ -3496,8 +3533,8 @@
                   "schema": {
                     "type": "object",
                     "properties": {
-                      "status": { "type": "string", "example": "success" },
-                      "message": { "type": "string", "example": "Tenant 'embeddings_test' created successfully." },
+                      "status": { "type": "string", "description": "Status of the embeddings tenant creation operation", "example": "success" },
+                      "message": { "type": "string", "description": "Human-readable message about the operation", "example": "Tenant 'embeddings_test' created successfully." },
                       "tenant_id": { "type": "string", "description": "The created tenant identifier", "example": "embeddings_test" }
                     },
                     "required": ["status", "message", "tenant_id"]

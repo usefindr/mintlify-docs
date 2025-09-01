@@ -40,9 +40,11 @@ paths:
                 properties:
                   status:
                     type: string
+                    description: Status of the embeddings tenant creation operation
                     example: "success"
                   message:
                     type: string
+                    description: Human-readable message about the operation
                     example: "Tenant 'embeddings_test' created successfully."
                   tenant_id:
                     type: string

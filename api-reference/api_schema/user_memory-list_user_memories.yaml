@@ -50,10 +50,13 @@
               properties:
                 success:
                   type: boolean
+                  description: Indicates whether the memory retrieval operation was successful
                 user_memories:
                   type: array
+                  description: Array of user memories belonging to the user
                   items:
                     type: object
+                    description: User memory object containing metadata and content
                     properties:
                       source_id:
                         type: string
