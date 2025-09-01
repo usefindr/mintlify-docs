@@ -57,7 +57,7 @@
               "name": "tenant_id",
               "in": "query",
               "required": true,
-              "description": "Tenant identifier",
+              "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation",
               "schema": {
                 "type": "string"
               },
@@ -67,7 +67,7 @@
               "name": "sub_tenant_id",
               "in": "query",
               "required": false,
-              "description": "Sub-tenant identifier",
+              "description": "Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided",
               "schema": {
                 "type": "string"
               },
@@ -156,7 +156,7 @@
               "name": "tenant_id",
               "in": "query",
               "required": false,
-              "description": "Tenant identifier",
+              "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation",
               "schema": {
                 "type": "string"
               },
@@ -166,7 +166,7 @@
               "name": "sub_tenant_id",
               "in": "query",
               "required": false,
-              "description": "Sub-tenant identifier",
+              "description": "Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided",
               "schema": {
                 "type": "string"
               },
@@ -280,7 +280,7 @@
               "name": "tenant_id",
               "in": "query",
               "required": false,
-              "description": "Tenant identifier",
+              "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation",
               "schema": {
                 "type": "string"
               }
@@ -289,7 +289,7 @@
               "name": "sub_tenant_id",
               "in": "query",
               "required": false,
-              "description": "Sub-tenant identifier",
+              "description": "Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided",
               "schema": {
                 "type": "string"
               }
@@ -404,7 +404,7 @@
               "name": "tenant_id",
               "in": "query",
               "required": true,
-              "description": "Tenant identifier",
+              "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation",
               "schema": {
                 "type": "string"
               }
@@ -413,7 +413,7 @@
               "name": "sub_tenant_id",
               "in": "query",
               "required": false,
-              "description": "Sub-tenant identifier",
+              "description": "Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided",
               "schema": {
                 "type": "string"
               },
@@ -539,7 +539,7 @@
               "name": "tenant_id",
               "in": "query",
               "required": true,
-              "description": "Tenant identifier",
+              "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation",
               "schema": {
                 "type": "string"
               }
@@ -548,7 +548,7 @@
               "name": "sub_tenant_id",
               "in": "query",
               "required": false,
-              "description": "Sub-tenant identifier",
+              "description": "Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided",
               "schema": {
                 "type": "string"
               }
@@ -671,7 +671,7 @@
               "name": "tenant_id",
               "in": "query",
               "required": true,
-              "description": "The tenant identifier",
+              "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation",
               "schema": { "type": "string" },
               "example": "tenant_456"
             },
@@ -679,7 +679,7 @@
               "name": "sub_tenant_id",
               "in": "query",
               "required": false,
-              "description": "Sub-tenant identifier, optional",
+              "description": "Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided",
               "schema": { "type": "string" },
               "example": "subtenant_123"
             }
@@ -753,7 +753,7 @@
               "name": "tenant_id",
               "in": "query",
               "required": false,
-              "description": "Tenant identifier",
+              "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation",
               "schema": {
                 "type": "string"
               }
@@ -762,7 +762,7 @@
               "name": "sub_tenant_id",
               "in": "query",
               "required": false,
-              "description": "Sub-tenant identifier",
+              "description": "Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided",
               "schema": {
                 "type": "string"
               }
@@ -878,7 +878,7 @@
               "name": "tenant_id",
               "in": "query",
               "required": false,
-              "description": "Tenant identifier",
+              "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation",
               "schema": {
                 "type": "string"
               }
@@ -887,7 +887,7 @@
               "name": "sub_tenant_id",
               "in": "query",
               "required": false,
-              "description": "Sub-tenant identifier",
+              "description": "Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided",
               "schema": {
                 "type": "string"
               }
@@ -1002,7 +1002,7 @@
               "name": "tenant_id",
               "in": "query",
               "required": true,
-              "description": "Tenant identifier",
+              "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation",
               "schema": {
                 "type": "string"
               }
@@ -1011,7 +1011,7 @@
               "name": "sub_tenant_id",
               "in": "query",
               "required": false,
-              "description": "Sub-tenant identifier",
+              "description": "Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided",
               "schema": {
                 "type": "string"
               }
@@ -1103,7 +1103,7 @@
               "name": "tenant_id",
               "in": "query",
               "required": false,
-              "description": "Tenant identifier",
+              "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation",
               "schema": {
                 "type": "string"
               }
@@ -1112,7 +1112,7 @@
               "name": "sub_tenant_id",
               "in": "query",
               "required": false,
-              "description": "Sub-tenant identifier",
+              "description": "Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided",
               "schema": {
                 "type": "string"
               }
@@ -1796,7 +1796,7 @@
               "name": "tenant_id",
               "in": "query",
               "required": true,
-              "description": "Tenant identifier",
+              "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation",
               "schema": {
                 "type": "string"
               },
@@ -1806,7 +1806,7 @@
               "name": "sub_tenant_id",
               "in": "query",
               "required": false,
-              "description": "Sub-tenant identifier",
+              "description": "Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided",
               "schema": {
                 "type": "string"
               },
@@ -1873,7 +1873,7 @@
                   "properties": {
                     "tenant_id": {
                       "type": "string",
-                      "description": "Tenant identifier",
+                      "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation",
                       "example": "tenant_456"
                     },
                     "source_ids": {
@@ -1956,7 +1956,7 @@
                   "properties": {
                     "tenant_id": {
                       "type": "string",
-                      "description": "Tenant identifier",
+                      "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation",
                       "example": "tenant_456"
                     },
                     "source_ids": {
@@ -2037,7 +2037,7 @@
                   "properties": {
                     "tenant_id": {
                       "type": "string",
-                      "description": "Tenant identifier",
+                      "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation",
                       "example": "tenant_456"
                     },
                     "source_ids": {
@@ -2304,7 +2304,7 @@
               "name": "tenant_id",
               "in": "query",
               "required": true,
-              "description": "Tenant identifier",
+              "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation",
               "schema": {
                 "type": "string"
               }
@@ -2313,7 +2313,7 @@
               "name": "sub_tenant_id",
               "in": "query",
               "required": true,
-              "description": "Sub-tenant identifier",
+              "description": "Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided",
               "schema": {
                 "type": "string"
               }
@@ -2406,7 +2406,7 @@
               "name": "tenant_id",
               "in": "query",
               "required": true,
-              "description": "Tenant identifier",
+              "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation",
               "schema": {
                 "type": "string"
               }
@@ -2415,7 +2415,7 @@
               "name": "sub_tenant_id",
               "in": "query",
               "required": true,
-              "description": "Sub-tenant identifier",
+              "description": "Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided",
               "schema": {
                 "type": "string"
               }
@@ -2499,7 +2499,7 @@
               "name": "tenant_id",
               "in": "query",
               "required": true,
-              "description": "Tenant identifier",
+              "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation",
               "schema": {
                 "type": "string"
               }
@@ -2508,7 +2508,7 @@
               "name": "sub_tenant_id",
               "in": "query",
               "required": true,
-              "description": "Sub-tenant identifier",
+              "description": "Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided",
               "schema": {
                 "type": "string"
               }
@@ -2607,7 +2607,7 @@
               "name": "tenant_id",
               "in": "query",
               "required": true,
-              "description": "Tenant identifier",
+              "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation",
               "schema": {
                 "type": "string"
               }
@@ -2616,7 +2616,7 @@
               "name": "sub_tenant_id",
               "in": "query",
               "required": true,
-              "description": "Sub-tenant identifier",
+              "description": "Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided",
               "schema": {
                 "type": "string"
               }
@@ -2700,7 +2700,7 @@
               "name": "tenant_id",
               "in": "query",
               "required": true,
-              "description": "Tenant identifier",
+              "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation",
               "schema": {
                 "type": "string"
               }
@@ -2709,7 +2709,7 @@
               "name": "sub_tenant_id",
               "in": "query",
               "required": true,
-              "description": "Sub-tenant identifier",
+              "description": "Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided",
               "schema": {
                 "type": "string"
               }
@@ -2820,12 +2820,12 @@
                     },
                     "tenant_id": {
                       "type": "string",
-                      "description": "Tenant identifier for multi-tenancy",
+                      "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation",
                       "example": "tenant_456"
                     },
                     "sub_tenant_id": {
                       "type": "string",
-                      "description": "Sub-tenant identifier, defaults to tenant_id",
+                      "description": "Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided",
                       "example": "subtenant_123"
                     }
                   },
@@ -2930,12 +2930,12 @@
                     },
                     "tenant_id": {
                       "type": "string",
-                      "description": "Tenant identifier for multi-tenancy",
+                      "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation",
                       "example": "tenant_456"
                     },
                     "sub_tenant_id": {
                       "type": "string",
-                      "description": "Sub-tenant identifier, defaults to tenant_id",
+                      "description": "Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided",
                       "example": "subtenant_123"
                     },
                     "max_chunks": {
@@ -3039,7 +3039,7 @@
               "name": "tenant_id",
               "in": "query",
               "required": false,
-              "description": "Tenant identifier",
+              "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation",
               "schema": {
                 "type": "string"
               }
@@ -3048,7 +3048,7 @@
               "name": "sub_tenant_id",
               "in": "query",
               "required": false,
-              "description": "Sub-tenant identifier",
+              "description": "Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided",
               "schema": {
                 "type": "string"
               }
@@ -3181,12 +3181,12 @@
                     },
                     "tenant_id": {
                       "type": "string",
-                      "description": "Tenant identifier for multi-tenancy",
+                      "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation",
                       "example": "tenant_456"
                     },
                     "sub_tenant_id": {
                       "type": "string",
-                      "description": "Sub-tenant identifier, defaults to tenant_id",
+                      "description": "Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided",
                       "example": "subtenant_123"
                     }
                   },
@@ -3272,7 +3272,7 @@
               "name": "tenant_id",
               "in": "query",
               "required": false,
-              "description": "Tenant identifier",
+              "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation",
               "schema": {
                 "type": "string"
               }
@@ -3281,7 +3281,7 @@
               "name": "sub_tenant_id",
               "in": "query",
               "required": false,
-              "description": "Sub-tenant identifier",
+              "description": "Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided",
               "schema": {
                 "type": "string"
               }

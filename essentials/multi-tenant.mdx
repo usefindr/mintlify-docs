@@ -3,15 +3,136 @@ title: "Multi-Tenant Support"
 description: "Create completely isolated workspaces called tenants for secure, scalable B2B platforms that serve many organizations without cross-contamination of data."
 ---
 
-Cortex lets you create completely isolated workspaces called tenants. Each tenant can represent a client, team, or organization. Inside each tenant, you can also create sub-tenants or user groups. Documents, search results, and memory are isolated per tenant, ensuring clean data separation.
+Cortex provides a robust multi-tenant architecture with hierarchical tenant support, enabling you to build secure, scalable B2B platforms. Understanding the difference between `tenant_id` and `sub_tenant_id` is crucial for implementing proper data isolation and access control.
 
-## Multi-Tenant Support
+## Understanding Tenant Hierarchy
+
+### Tenant ID (`tenant_id`)
+The **tenant_id** represents the primary organizational unit - typically your main enterprise client or organization. This is the top-level identifier that provides the broadest scope of data isolation.
+
+### Sub-Tenant ID (`sub_tenant_id`)
+The **sub_tenant_id** represents a subdivision within a tenant - such as departments, teams, or individual customers within an enterprise. This enables hierarchical data organization and more granular access control.
+
+## Multi-Tenant Architecture
 
 **What it is:**  
-Cortex lets you create completely isolated workspaces called tenants. Each tenant can represent a client, team, or organization. Inside each tenant, you can also create sub-tenants or user groups. Documents, search results, and memory are isolated per tenant, ensuring clean data separation.
+Cortex's multi-tenant system creates completely isolated workspaces at both the tenant and sub-tenant levels. All documents, search results, embeddings, and AI memories are isolated per tenant/sub-tenant combination, ensuring zero cross-contamination of data.
 
-**Benefit:**  
-You can build a secure, scalable B2B platform that serves many organizations at once without cross-contamination of data. It also makes access control, permissions, and context management easier.
+**Key Benefits:**
+- **Complete Data Isolation**: Zero cross-contamination between tenants and sub-tenants
+- **Scalable B2B Architecture**: Serve unlimited organizations and their subdivisions
+- **Granular Access Control**: Control data access at organization and department levels
+- **Performance Optimization**: Tenant-scoped searches for faster results
+- **Compliance Ready**: Meet enterprise security and privacy requirements
 
-**Use Case & Scenario:**  
-You're building a knowledge assistant for 10 different consulting firms. Each firm has its own projects, files, and team members. With multi-tenancy, each firm can only access its own data and get search results personalized to its environment, even though the backend is shared.
+## Real-World Use Cases
+
+### 1. Enterprise SaaS Platform
+
+**Scenario**: You're building an AI knowledge assistant for multiple enterprise clients.
+
+```
+Tenant: "acme_corp" (Acme Corporation)
+├── Sub-tenant: "engineering" (Engineering Department)
+├── Sub-tenant: "sales" (Sales Department)
+├── Sub-tenant: "hr" (Human Resources)
+└── Sub-tenant: "finance" (Finance Department)
+
+Tenant: "tech_solutions" (Tech Solutions Inc.)
+├── Sub-tenant: "product_dev" (Product Development)
+├── Sub-tenant: "customer_success" (Customer Success)
+└── Sub-tenant: "operations" (Operations)
+```
+
+**Implementation**:
+- Each enterprise client gets their own `tenant_id`
+- Each department within the enterprise gets their own `sub_tenant_id`
+- Documents uploaded by Acme's Engineering team are only accessible to Acme Corporation (`tenant_id: "acme_corp"`) and specifically to the Engineering department (`sub_tenant_id: "engineering"`)
+
+### 2. Consulting Firm with Multiple Clients
+
+**Scenario**: A consulting firm serving multiple clients with project-based work.
+
+```
+Tenant: "consulting_firm" (Your Consulting Firm)
+├── Sub-tenant: "client_alpha" (Client Alpha Project)
+├── Sub-tenant: "client_beta" (Client Beta Project)
+├── Sub-tenant: "client_gamma" (Client Gamma Project)
+└── Sub-tenant: "internal" (Internal Operations)
+```
+
+**Implementation**:
+- Your consulting firm is the main `tenant_id`
+- Each client project gets its own `sub_tenant_id`
+- Client Alpha's documents are completely isolated from Client Beta's data
+- Internal firm knowledge can be kept separate from client work
+
+### 3. Educational Platform
+
+**Scenario**: An AI-powered learning platform serving multiple schools.
+
+```
+Tenant: "stanford_university" (Stanford University)
+├── Sub-tenant: "computer_science" (CS Department)
+├── Sub-tenant: "business_school" (Business School)
+└── Sub-tenant: "medical_school" (Medical School)
+
+Tenant: "mit" (MIT)
+├── Sub-tenant: "engineering" (Engineering Department)
+├── Sub-tenant: "sloan_school" (Sloan School of Management)
+└── Sub-tenant: "media_lab" (Media Lab)
+```
+
+**Implementation**:
+- Each university is a separate `tenant_id`
+- Each department/school is a `sub_tenant_id`
+- Research papers and course materials are isolated by institution and department
+
+### 4. Multi-Brand E-commerce
+
+**Scenario**: A company managing multiple brands with different customer bases.
+
+```
+Tenant: "fashion_group" (Fashion Group Corp)
+├── Sub-tenant: "luxury_brand" (Luxury Brand)
+├── Sub-tenant: "casual_brand" (Casual Brand)
+└── Sub-tenant: "sports_brand" (Sports Brand)
+```
+
+**Implementation**:
+- The parent company is the `tenant_id`
+- Each brand is a `sub_tenant_id`
+- Customer data, product catalogs, and support documents are brand-specific
+
+## API Implementation
+
+When making API calls, always include both identifiers:
+
+```json
+{
+  "tenant_id": "acme_corp",
+  "sub_tenant_id": "engineering",
+  "query": "What are our coding standards?",
+  // other parameters...
+}
+```
+
+### Default Behavior
+- If `sub_tenant_id` is not provided, it defaults to the `tenant_id` value
+- This means the search/operation applies to the entire tenant scope
+- For tenant-wide operations, you can omit `sub_tenant_id` or set it to match `tenant_id`
+
+## Security and Isolation
+
+### Data Isolation Guarantees
+- **Tenant Level**: No data can ever cross tenant boundaries
+- **Sub-Tenant Level**: Data is isolated within sub-tenants unless explicitly queried at tenant level
+- **Search Scope**: All searches are automatically scoped to the specified tenant/sub-tenant
+- **Memory Isolation**: AI memories are completely isolated per tenant/sub-tenant combination
+
+### Access Patterns
+- **Tenant-Wide Access**: Use same value for both `tenant_id` and `sub_tenant_id`
+- **Sub-Tenant Specific**: Use specific `sub_tenant_id` within a `tenant_id`
+- **Cross Sub-Tenant**: Not supported - maintains strict isolation
+
+This architecture ensures your platform can scale securely while maintaining the flexibility to organize data hierarchically within each client organization.

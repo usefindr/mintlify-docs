@@ -49,10 +49,10 @@
                 description: Chat session ID to track the conversation history and maintain session context. Always provide a new session ID for each new chat session.
               tenant_id:
                 type: string
-                description: Tenant identifier to restrict the search to a specific tenant.
+                description: Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation.
               sub_tenant_id:
                 type: string
-                description: Sub-tenant identifier to restrict the search to a specific sub-tenant.
+                description: Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided.
               stream:
                 type: boolean
                 description: Enable streaming to receive your answer in a stream.

@@ -32,13 +32,13 @@
     - name: tenant_id
       in: query
       required: true
-      description: Tenant identifier
+      description: Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation
       schema:
         type: string
     - name: sub_tenant_id
       in: query
       required: true
-      description: Sub-tenant identifier
+      description: Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided
       schema:
         type: string
     - name: memory_id

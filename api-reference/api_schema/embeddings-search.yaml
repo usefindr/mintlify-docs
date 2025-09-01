@@ -42,11 +42,11 @@
                 example: [0.1, 0.2, 0.3, 0.4, 0.5]
               tenant_id:
                 type: string
-                description: Tenant identifier for multi-tenancy
+                description: Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation
                 example: tenant_456
               sub_tenant_id:
                 type: string
-                description: Sub-tenant identifier, defaults to tenant_id
+                description: Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided
                 example: subtenant_123
               max_chunks:
                 type: integer
