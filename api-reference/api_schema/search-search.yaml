@@ -40,10 +40,10 @@
                 description: Search query string to find relevant content from indexed sources.
               tenant_id:
                 type: string
-                description: Tenant identifier for multi-tenancy to restrict search scope.
+                description: Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation.
               sub_tenant_id:
                 type: string
-                description: Sub-tenant identifier, defaults to tenant_id if not provided.
+                description: Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided.
               max_chunks:
                 type: integer
                 description: Maximum number of content chunks to return from the search.

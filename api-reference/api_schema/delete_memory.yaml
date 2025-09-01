@@ -37,7 +37,7 @@
             properties:
               tenant_id:
                 type: string
-                description: Tenant identifier
+                description: Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation
                 example: tenant_456
               source_ids:
                 type: array
@@ -95,7 +95,7 @@
             properties:
               tenant_id:
                 type: string
-                description: Tenant identifier
+                description: Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation
                 example: tenant_456
               source_ids:
                 type: array

@@ -40,10 +40,10 @@
                 description: ID of the file to fetch the download URL for.
               tenant_id:
                 type: string
-                description: Tenant identifier.
+                description: Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation.
               sub_tenant_id:
                 type: string
-                description: Sub-tenant identifier.
+                description: Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided.
                 default: ''
             required:
             - file_id

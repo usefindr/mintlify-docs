@@ -41,11 +41,11 @@
                 example: ["CortexEmbeddings123_1"]
               tenant_id:
                 type: string
-                description: Tenant identifier for multi-tenancy
+                description: Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation
                 example: tenant_456
               sub_tenant_id:
                 type: string
-                description: Sub-tenant identifier, defaults to tenant_id
+                description: Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided
                 example: subtenant_123
             required:
             - chunk_ids
