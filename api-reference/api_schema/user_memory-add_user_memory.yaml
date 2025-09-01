@@ -56,8 +56,10 @@
               properties:
                 success:
                   type: boolean
+                  description: Indicates whether the memory addition operation was successful
                 user_memory_added:
                   type: boolean
+                  description: Confirms whether the user memory was successfully added to the vector store
       '422':
         description: Incomplete/invalid parameters
       '401':
