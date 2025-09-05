@@ -53,16 +53,3 @@ Each document is processed independently with:
 > **Recommended**: For optimal performance, limit each batch to a maximum of **20 sources** per request. Send multiple batch requests with an interval of **1 second** between each request.
 
 > **File ID Management**: When you provide a `file_id` as a key in the `document_metadata` object, that specific ID will be used to identify your content. If no `file_id` is provided in the `document_metadata`, the system will automatically generate a unique identifier for you. This allows you to maintain consistent references to your content across your application while ensuring every piece of content has a unique identifier.
-
-## Sample Request
-
-```bash
-curl --location --request POST 'https://api.usecortex.ai/upload/batch_upload?tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}' \
---header 'accept: application/json' \
---header 'Authorization: Bearer {API_KEY}' \
---form 'files=@{FILE1}' \
---form 'files=@{FILE2}' \
---form 'files=@{FILE3}' \
---form 'tenant_metadata="{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}"' \
---form 'document_metadata="{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_batch_123\"}"'
-```

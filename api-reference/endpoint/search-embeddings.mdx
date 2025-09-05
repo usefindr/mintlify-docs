@@ -109,20 +109,6 @@ Use when searching for content related to a specific concept or topic.
 ```
 Use when building recommendation systems that need many similar items.
 
-## Sample Request
-
-```bash
-curl --location --request POST 'https://api.usecortex.ai/embeddings/search' \
-  --header 'Authorization: Bearer {API_KEY}' \
-  --header 'accept: application/json' \
-  --header 'Content-Type: application/json' \
-  --data '{
-    "embeddings": [0.1, 0.2, 0.3, 0.4, 0.5],
-    "tenant_id": "{TENANT_ID}",
-    "sub_tenant_id": "{SUB_TENANT_ID}",
-    "max_chunks": 5
-  }'
-```
 
 ## Sample Response
 

@@ -20,23 +20,6 @@ This endpoint leverages Cortex's hierarchical tenant system where:
 - **vector_dimension**: Dimension size of the embedding vectors for this tenant
 - **tenant_name**: The name/identifier of the tenant
 
-## Sample Request
-
-```bash
-curl --location 'https://api.usecortex.ai/tenant/stats?tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}' \
-  --header 'Authorization: Bearer {API_KEY}' \
-  --header 'accept: application/json'
-```
-
-## Sample Response
-
-```json
-{
-  "object_count": 9,
-  "vector_dimension": 6,
-  "tenant_name": "Unlsbghv245109_zwv"
-}
-```
 
 ## Use Cases
 

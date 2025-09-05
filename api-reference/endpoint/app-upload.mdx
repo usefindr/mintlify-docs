@@ -96,34 +96,3 @@ Each app source is processed using specialized pipelines:
 
 > **File ID Management**: When you provide a `file_id` as a key in the `document_metadata` object, that specific ID will be used to identify your content. If no `file_id` is provided in the `document_metadata`, the system will automatically generate a unique identifier for you. This allows you to maintain consistent references to your content across your application while ensuring every piece of content has a unique identifier.
 
-## Sample Request
-
-```bash
-curl --location --request POST 'https://api.usecortex.ai/upload/upload_app_sources?tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}' \
---header 'accept: application/json' \
---header 'Authorization: Bearer {API_KEY}' \
---header 'Content-Type: application/json' \
---data '[
-    {
-    "collections": [""],
-    "id": "{SOURCE_ID}",
-    "title": "{SOURCE_TITLE}",
-    "type": "{APP_SOURCE_TYPE}",
-    "description": "{SOURCE_DESCRIPTION}",
-        "note": "",
-    "url": "{SOURCE_URL}",
-    "timestamp": "{TIMESTAMP}",
-        "content": {
-      "text": "{CONTENT_TEXT}",
-            "html_base64": "",
-            "csv_base64": "",
-            "markdown": "",
-            "files": [],
-            "layout": []
-        },
-        "cortex_metadata": {},
-        "meta": {},
-    "attachments": []
-    }
-]'
-```

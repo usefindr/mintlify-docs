@@ -3,16 +3,3 @@ title: 'List Sources By ID'
 openapi: 'POST /list/sources_by_id'
 ---
 
-## Sample Request
-
-```bash
-curl --location --request POST 'https://api.usecortex.ai/list/sources_by_id' \
-  --header 'Authorization: Bearer {API_KEY}' \
-  --header 'accept: application/json' \
-  --header 'Content-Type: application/json' \
-  --data '{
-    "tenant_id": "{TENANT_ID}",
-    "sub_tenant_id": "{SUB_TENANT_ID},
-    "source_ids": ["{SOURCE_ID1}", "{SOURCE_ID2}"]
-  }'
-```

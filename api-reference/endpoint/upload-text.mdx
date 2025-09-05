@@ -87,23 +87,3 @@ Once processing is complete, your text content will be:
 **Important**: Don't attempt to search or retrieve your text content immediately after upload. Wait for processing to complete (typically 1-3 minutes) to ensure optimal results.
 </Warning>
 
-## Sample Request
-
-```bash
-curl --location --request POST 'https://api.usecortex.ai/upload/upload_text?tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}' \
-  --header 'Authorization: Bearer {API_KEY}' \
-  --header 'accept: application/json' \
-  --header 'Content-Type: application/json' \
-  --data '{
-    "content": "This is sample markdown content that will be processed and indexed.",
-    "tenant_metadata": {
-      "department": "Finance",
-      "compliance_tag": "GDPR"
-    },
-    "document_metadata": {
-      "title": "Q1 Report.pdf",
-      "author": "Alice Smith",
-      "file_id": "custom_text_123"
-    }
-  }'
-```

@@ -82,22 +82,6 @@ Controls the number of results returned:
 - Adjust **recency bias** based on content type
 - Experiment with **different alpha values** to find optimal results
 
-## Sample Request
-
-```bash
-curl --location --request POST 'https://api.usecortex.ai/search/retrieve' \
-  --header 'Authorization: Bearer {API_KEY}' \
-  --header 'accept: application/json' \
-  --header 'Content-Type: application/json' \
-  --data '{
-    "query": "{SEARCH_QUERY}",
-    "tenant_id": "{TENANT_ID}",
-    "sub_tenant_id": "{SUB_TENANT_ID}",
-    "max_chunks": {MAX_CHUNKS},
-    "alpha": "{ALPHA}",
-    "recency_bias": {RECENCY_BIAS}
-  }'
-```
 
 ### Response
 Returns an array of relevant content chunks from your indexed sources based on the search query.

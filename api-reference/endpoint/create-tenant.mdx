@@ -43,21 +43,6 @@ Each schema object should specify:
 ]
 ```
 
-## Sample Request
-
-```bash
-curl --location --request POST 'https://api.usecortex.ai/user/create_tenant?tenant_id=acme_corp_2024' \
-  --header 'Authorization: Bearer {API_KEY}' \
-  --header 'Accept: application/json' \
-  --header 'Content-Type: application/json' \
-  --data '{
-    "tenant_metadata_schema": [
-      {"key": "department", "type": "text", "searchable": true, "filterable": true},
-      {"key": "compliance_framework", "type": "text", "searchable": true, "filterable": true},
-      {"key": "data_classification", "type": "text", "searchable": false, "filterable": true}
-    ]
-  }'
-```
 
 > **Note:**
 > - The `tenant_metadata_schema` field in the request body is optional but recommended for enterprise setups. It defines immutable tenant-level metadata keys that will apply to all documents in this tenant.

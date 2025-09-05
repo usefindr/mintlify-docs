@@ -87,16 +87,6 @@ Once processing is complete, your document will be:
 **Important**: Don't attempt to search or retrieve your document immediately after upload. Wait for processing to complete (typically 1-5 minutes) to ensure optimal results.
 </Warning>
 
-## Sample Request
-
-```bash
-curl --location --request POST 'https://api.usecortex.ai/upload/upload_document?tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}' \
---header 'accept: application/json' \
---header 'Authorization: Bearer {API_KEY}' \
---form 'file=@"{FILE}"' \
---form 'tenant_metadata="{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}"' \
---form 'document_metadata="{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}"'
-```
 
 ## Best Practices
 

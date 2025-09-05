@@ -115,33 +115,6 @@ When enabled, the AI can:
 - **Adjust Search Alpha**: Experiment with different values for your content type
 - **Use Metadata Filtering**: Narrow results to specific document types when needed
 
-## Sample Request
-
-```bash
-curl --location --request POST 'https://api.usecortex.ai/search/qna' \
-  --header 'Authorization: Bearer {API_KEY}' \
-  --header 'accept: application/json' \
-  --header 'Content-Type: application/json' \
-  --data '{
-    "question": "{QUESTION}",
-    "session_id": "{SESSION_ID}",
-    "tenant_id": "{TENANT_ID}",
-    "sub_tenant_id": "{SUB_TENANT_ID}",
-    "stream": "{STREAM}",
-    "context_list": "{CONTEXT_LIST}",
-    "search_modes": "{SEARCH_MODES}",
-    "top_n": "{TOP_N}",
-    "ai_generation": "{AI_GENERATION}",
-    "highlight_chunks": "{HIGHLIGHT_CHUNKS}",
-    "search_alpha": "{SEARCH_ALPHA}",
-    "recency_bias": "{RECENCY_BIAS}",
-    "multi_step_reasoning": "{MULTI_STEP_REASONING}",
-    "user_name": "{USER_NAME}",
-    "user_instructions": "{USER_INSTRUCTIONS}",
-    "auto_agent_routing": "{AUTO_AGENT_ROUTING}",
-    "metadata": {"source_title": "<optional title>", "source_type": "<optional type>"}
-  }'
-```
 
 ### Response
 Returns a JSON object containing the AI-generated answer and supporting source chunks with layout information for creating bounding boxes around cited sources.
