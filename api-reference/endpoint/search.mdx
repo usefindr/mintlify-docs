@@ -3,6 +3,12 @@ title: 'Hybrid Search'
 openapi: 'POST /search/retrieve'
 ---
 
+Perform a hybrid search across your tenant's knowledge base using both semantic and keyword matching.
+
+<Note>
+**Default Sub-Tenant Behavior**: If you don't specify a `sub_tenant_id`, the search will be performed within the default sub-tenant created when your tenant was set up. This searches across organization-wide documents.
+</Note>
+
 ## Sample Request
 
 ```bash

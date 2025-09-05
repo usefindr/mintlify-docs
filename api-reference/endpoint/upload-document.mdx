@@ -3,7 +3,89 @@ title: 'Upload Document'
 openapi: 'POST /upload/upload_document'
 ---
 
-{/* > **Note**: If `file_id` is not provided in the document metadata, the system will generate an ID automatically. */}
+Upload a document to your tenant's knowledge base. The document will be processed, chunked, and indexed for search and retrieval.
+
+## Document Processing Pipeline
+
+When you upload a document, it goes through a comprehensive processing pipeline designed to make your content searchable and retrievable:
+
+### 1. **Immediate Upload & Queue**
+- Your document is immediately accepted and stored securely
+- It's added to our processing queue for background processing
+- You receive a confirmation response with a `document_id` for tracking
+
+### 2. **Processing Phase**
+Our system automatically handles:
+- **Content Extraction**: Extracting text from various formats (PDF, DOCX, TXT, etc.)
+- **Document Parsing**: Understanding document structure, headers, and formatting
+- **Text Cleaning**: Removing formatting artifacts and normalizing content
+
+### 3. **Intelligent Chunking**
+- Documents are split into semantically meaningful chunks
+- Chunk size is optimized for both context preservation and search accuracy
+- Overlapping boundaries ensure no information is lost between chunks
+- Metadata is preserved and associated with each chunk
+
+### 4. **Embedding Generation**
+- Each chunk is converted into high-dimensional vector embeddings
+- Embeddings capture semantic meaning and context
+- Vectors are optimized for similarity search and retrieval
+
+### 5. **Indexing & Database Updates**
+- Embeddings are stored in our vector database for fast similarity search
+- Full-text search indexes are created for keyword-based queries
+- Metadata is indexed for filtering and faceted search
+- Cross-references are established for related documents
+
+### 6. **Quality Assurance**
+- Automated quality checks ensure processing accuracy
+- Content validation verifies extracted text completeness
+- Embedding quality is assessed for optimal retrieval performance
+
+<Note>
+**Processing Time**: Most documents are fully processed and searchable within 1-5 minutes. Larger documents (100+ pages) may take up to 15 minutes. You can check processing status using the document ID returned in the response.
+</Note>
+
+<Note>
+**Default Sub-Tenant Behavior**: If you don't specify a `sub_tenant_id`, the document will be uploaded to the default sub-tenant created when your tenant was set up. This is perfect for organization-wide documents that should be accessible across all departments.
+</Note>
+
+> **File ID Management**: When you provide a `file_id` as a key in the `document_metadata` object, that specific ID will be used to identify your content. If no `file_id` is provided in the `document_metadata`, the system will automatically generate a unique identifier for you. This allows you to maintain consistent references to your content across your application while ensuring every piece of content has a unique identifier.
+
+## Processing Status & Monitoring
+
+After uploading, you can monitor your document's processing status:
+
+### **Immediate Response**
+Upon successful upload, you'll receive:
+```json
+{
+  "message": "Document uploaded successfully",
+  "document_id": "doc_123456"
+}
+```
+
+### **Processing States**
+Your document will progress through these states:
+- **`queued`**: Document is in the processing queue, waiting to be processed
+- **`in_progress`**: Document is actively being processed (includes content extraction, chunking, embedding generation, and indexing)
+- **`success`**: Document is fully processed and searchable
+- **`errored`**: Processing encountered an error (rare occurrence)
+
+<Info>
+**In-Progress Details**: While the status shows `in_progress`, the system is actually performing multiple steps: content extraction, document parsing, intelligent chunking, embedding generation, and database indexing. These happen sequentially but are all part of the single `in_progress` state.
+</Info>
+
+### **When Your Document is Ready**
+Once processing is complete, your document will be:
+- ✅ **Searchable** via semantic search and Q&A endpoints
+- ✅ **Retrievable** through our retrieval APIs
+- ✅ **Available** for AI-powered applications
+- ✅ **Indexed** for fast query performance
+
+<Warning>
+**Important**: Don't attempt to search or retrieve your document immediately after upload. Wait for processing to complete (typically 1-5 minutes) to ensure optimal results.
+</Warning>
 
 ## Sample Request
 
@@ -13,6 +95,40 @@ curl --location --request POST 'https://api.usecortex.ai/upload/upload_document?
 --header 'Authorization: Bearer {API_KEY}' \
 --form 'file=@"{FILE}"' \
 --form 'tenant_metadata="{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}"' \
-{/* --form 'document_metadata="{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}"' */}
+--form 'document_metadata="{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}"'
 ```
+
+## Best Practices
+
+### **Document Preparation**
+- **File Formats**: We support PDF, DOCX, TXT, MD, and other common formats
+- **File Size**: Documents up to 50MB are processed efficiently
+- **Content Quality**: Clear, well-structured documents produce better embeddings
+- **Metadata**: Include rich metadata for better filtering and organization
+
+### **Processing Optimization**
+- **Batch Uploads**: For multiple documents, consider using our batch upload endpoint
+- **Metadata Consistency**: Use consistent metadata schemas across your organization
+- **File Naming**: Descriptive filenames help with document identification
+
+### **Troubleshooting**
+
+**Document Not Appearing in Search?**
+- Wait 5-10 minutes for processing to complete
+- Check if the document status is `errored` (rare occurrence)
+- Verify your search query and filters
+
+**Slow Processing?**
+- Large documents (100+ pages) take longer to process
+- Complex formatting may require additional processing time
+- High system load may temporarily slow processing
+
+**Processing Failures?**
+- If status shows `errored`, ensure your document isn't corrupted or password-protected
+- Check that the file format is supported
+- Verify your API key has sufficient permissions
+
+<Info>
+**Need Help?** If a document fails to process or you're experiencing issues, contact our support team with the `document_id` for assistance.
+</Info>
 

@@ -3,8 +3,89 @@ title: 'Upload Text'
 openapi: 'POST /upload/upload_text'
 ---
 
+Upload text content directly to your tenant's knowledge base. The text will be processed, chunked, and indexed for search and retrieval.
 
-{/* > **Note**: If `file_id` is not provided in the document metadata, the system will generate an ID automatically. */}
+## Text Processing Pipeline
+
+When you upload text content, it goes through a streamlined processing pipeline optimized for direct text input:
+
+### 1. **Immediate Upload & Queue**
+- Your text content is immediately accepted and stored securely
+- It's added to our processing queue for background processing
+- You receive a confirmation response with a `document_id` for tracking
+
+### 2. **Text Processing Phase**
+Our system automatically handles:
+- **Content Validation**: Ensuring text content is properly formatted and accessible
+- **Format Detection**: Identifying markdown, plain text, or structured content
+- **Text Normalization**: Cleaning and standardizing text formatting
+
+### 3. **Intelligent Chunking**
+- Text is split into semantically meaningful chunks
+- Chunk size is optimized for both context preservation and search accuracy
+- Overlapping boundaries ensure no information is lost between chunks
+- Metadata is preserved and associated with each chunk
+
+### 4. **Embedding Generation**
+- Each chunk is converted into high-dimensional vector embeddings
+- Embeddings capture semantic meaning and context
+- Vectors are optimized for similarity search and retrieval
+
+### 5. **Indexing & Database Updates**
+- Embeddings are stored in our vector database for fast similarity search
+- Full-text search indexes are created for keyword-based queries
+- Metadata is indexed for filtering and faceted search
+- Cross-references are established for related content
+
+### 6. **Quality Assurance**
+- Automated quality checks ensure processing accuracy
+- Content validation verifies text completeness
+- Embedding quality is assessed for optimal retrieval performance
+
+<Note>
+**Processing Time**: Text content is typically processed and searchable within 1-3 minutes. Large text blocks (10,000+ words) may take up to 5 minutes. You can check processing status using the document ID returned in the response.
+</Note>
+
+<Note>
+**Default Sub-Tenant Behavior**: If you don't specify a `sub_tenant_id`, the text content will be uploaded to the default sub-tenant created when your tenant was set up. This is perfect for organization-wide content that should be accessible across all departments.
+</Note>
+
+> **File ID Management**: When you provide a `file_id` as a key in the `document_metadata` object, that specific ID will be used to identify your content. If no `file_id` is provided in the `document_metadata`, the system will automatically generate a unique identifier for you. This allows you to maintain consistent references to your content across your application while ensuring every piece of content has a unique identifier.
+
+## Processing Status & Monitoring
+
+After uploading, you can monitor your text content's processing status:
+
+### **Immediate Response**
+Upon successful upload, you'll receive:
+```json
+{
+  "message": "Text content uploaded successfully",
+  "document_id": "doc_123456"
+}
+```
+
+### **Processing States**
+Your text content will progress through these states:
+- **`queued`**: Text content is in the processing queue, waiting to be processed
+- **`in_progress`**: Text content is actively being processed (includes validation, chunking, embedding generation, and indexing)
+- **`success`**: Text content is fully processed and searchable
+- **`errored`**: Processing encountered an error (rare occurrence)
+
+<Info>
+**In-Progress Details**: While the status shows `in_progress`, the system is actually performing multiple steps: content validation, format detection, intelligent chunking, embedding generation, and database indexing. These happen sequentially but are all part of the single `in_progress` state.
+</Info>
+
+### **When Your Text is Ready**
+Once processing is complete, your text content will be:
+- ✅ **Searchable** via semantic search and Q&A endpoints
+- ✅ **Retrievable** through our retrieval APIs
+- ✅ **Available** for AI-powered applications
+- ✅ **Indexed** for fast query performance
+
+<Warning>
+**Important**: Don't attempt to search or retrieve your text content immediately after upload. Wait for processing to complete (typically 1-3 minutes) to ensure optimal results.
+</Warning>
 
 ## Sample Request
 
@@ -19,10 +100,10 @@ curl --location --request POST 'https://api.usecortex.ai/upload/upload_text?tena
       "department": "Finance",
       "compliance_tag": "GDPR"
     },
-    {/* "document_metadata": {
+    "document_metadata": {
       "title": "Q1 Report.pdf",
       "author": "Alice Smith",
       "file_id": "custom_text_123"
-    } */}
+    }
   }'
 ```

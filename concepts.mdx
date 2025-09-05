@@ -7,11 +7,26 @@ The Cortex SDK is designed to give you the most flexible developer experience fo
 
 ### Tenants
 
-Tenants represent isolated knowledge stores for your application. Cortex supports both **B2C** and **B2B** use cases out of the box.
+Think of a **tenant** as a completely separate workspace or organization in your Cortex application. It's like having different "companies" or "projects" that can't see each other's data.
 
-- In **B2C**, each end user operates with their own private memory store inside a single tenant which represents your project.
-- In **B2B**, organizations are modeled as separate tenants, each with their own scoped environment where users, knowledge, memory, and policies are fully encapsulated.\
-  Multi-tenancy ensures data isolation, access control, and efficient retrieval across contexts.
+**Simple Analogy**: Imagine you're building a knowledge management system for multiple companies. Each company gets their own "tenant" - like separate office buildings where employees can't access each other's files.
+
+Cortex supports both **B2C** and **B2B** use cases:
+
+- **B2C (Business-to-Consumer)**: Each individual user gets their own private workspace within your single tenant. Perfect for personal AI assistants or individual productivity apps.
+- **B2B (Business-to-Business)**: Each organization gets their own tenant with complete data isolation. Perfect for enterprise software serving multiple companies.
+
+### Sub-Tenants
+
+A **sub-tenant** is like a department or team within an organization. It provides an additional layer of organization within a tenant.
+
+**Simple Analogy**: If a tenant is like a company, then sub-tenants are like departments (Engineering, Sales, HR) within that company. Each department has its own space, but they're all part of the same company.
+
+**Key Benefits**:
+- **Complete Data Isolation**: No tenant can ever see another tenant's data
+- **Organized Workspaces**: Sub-tenants help organize data within large organizations
+- **Flexible Access Control**: Control who can access what data at both tenant and sub-tenant levels
+- **Scalable Architecture**: Serve unlimited organizations and their subdivisions
 
 ### Knowledge
 

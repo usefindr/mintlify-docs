@@ -7,11 +7,22 @@ Cortex provides a robust multi-tenant architecture with hierarchical tenant supp
 
 ## Understanding Tenant Hierarchy
 
-### Tenant ID (`tenant_id`)
-The **tenant_id** represents the primary organizational unit - typically your main enterprise client or organization. This is the top-level identifier that provides the broadest scope of data isolation.
+### Tenant ID (`tenant_id`) - Your Organization
+The **tenant_id** is like your company's main identifier. It represents the primary organizational unit - typically your main enterprise client or organization. This is the top-level identifier that provides the broadest scope of data isolation.
 
-### Sub-Tenant ID (`sub_tenant_id`)
+**Think of it as**: The company name or organization ID that completely separates your data from all other organizations using Cortex.
+
+### Sub-Tenant ID (`sub_tenant_id`) - Your Department/Team
 The **sub_tenant_id** represents a subdivision within a tenant - such as departments, teams, or individual customers within an enterprise. This enables hierarchical data organization and more granular access control.
+
+**Think of it as**: The department or team name within your company (like "Engineering", "Sales", or "HR").
+
+### Default Sub-Tenant Behavior
+**Important**: When you create a tenant, Cortex automatically creates a **DEFAULT sub-tenant** that acts as a global space for that tenant. 
+
+- If you don't specify a `sub_tenant_id` when using any API, your data will be stored in this default sub-tenant
+- This means if you upload documents with just a `tenant_id` and leave `sub_tenant_id` empty, they'll go to the default sub-tenant
+- The default sub-tenant is perfect for organization-wide data that should be accessible across all departments
 
 ## Multi-Tenant Architecture
 
@@ -118,9 +129,10 @@ When making API calls, always include both identifiers:
 ```
 
 ### Default Behavior
-- If `sub_tenant_id` is not provided, it defaults to the `tenant_id` value
-- This means the search/operation applies to the entire tenant scope
-- For tenant-wide operations, you can omit `sub_tenant_id` or set it to match `tenant_id`
+- If `sub_tenant_id` is not provided, it automatically uses the **DEFAULT sub-tenant** created when the tenant was set up
+- This means the search/operation applies to the default sub-tenant scope (organization-wide data)
+- For tenant-wide operations, you can omit `sub_tenant_id` and your data will be stored in the default sub-tenant
+- The default sub-tenant acts as a global space where organization-wide documents and data are stored
 
 ## Security and Isolation
 

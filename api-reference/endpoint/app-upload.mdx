@@ -7,7 +7,94 @@ description: "Specifically built to handle knowledge from workplace apps. Parsin
 Works similar to the upload endpoint but is specifically designed to upload multiple app sources (e.g., Gmail, Slack, Notion) in a single request for processing and indexing.
 Each app upload is handled using specialized pipelines inside Cortex and can include various content types with rich metadata.
 
+## Supported Apps
+
+The following apps are currently supported for app source uploads:
+
+**File Storage & Cloud Services:**
+- `drive` - Google Drive
+- `dropbox` - Dropbox Business
+- `dropboxpersonal` - Dropbox Personal
+- `onedrive` - Microsoft OneDrive
+- `sharepoint` - Microsoft SharePoint
+
+**CRM & Sales:**
+- `intercom` - Intercom
+- `salesforce` - Salesforce
+- `hubspot` - HubSpot
+
+**Communication & Collaboration:**
+- `msteams` - Microsoft Teams
+- `gmail` - Gmail
+- `slack` - Slack
+- `outlook` - Microsoft Outlook
+
+**Project Management:**
+- `jira` - Atlassian Jira
+- `confluence` - Atlassian Confluence
+- `shortcut` - Shortcut
+- `linear` - Linear
+- `asana` - Asana
+
+**Productivity & Organization:**
+- `notion` - Notion
+- `googlecalendar` - Google Calendar
+
+## App Source Processing Pipeline
+
+When you upload app sources, each source goes through specialized processing pipelines tailored to the specific app type:
+
+### 1. **Immediate Upload & App Detection**
+- All app sources are immediately accepted and stored securely
+- App type is automatically detected (Gmail, Slack, Notion, etc.)
+- Each source is routed to its specialized processing pipeline
+- You receive a confirmation response with individual `document_id`s for tracking
+
+### 2. **App-Specific Processing Phase**
+Each app source is processed using specialized pipelines:
+- **Gmail**: Email parsing, thread reconstruction, attachment handling
+- **Slack**: Message threading, channel context, user mentions
+- **Notion**: Page hierarchy, block structure, database relationships
+- **Documents**: Format-specific parsing (PDF, DOCX, etc.)
+- **Custom Apps**: Configurable parsing based on app metadata
+
+### 3. **Content Extraction & Normalization**
+- **Multi-format Support**: Text, HTML, CSV, Markdown, and file attachments
+- **Context Preservation**: Maintaining app-specific context and relationships
+- **Metadata Enrichment**: Extracting app-specific metadata and timestamps
+- **Content Cleaning**: Normalizing content while preserving structure
+
+### 4. **Intelligent Chunking**
+- App-aware chunking strategies preserve context and relationships
+- Thread-based chunking for Gmail and Slack conversations
+- Hierarchical chunking for Notion pages and databases
+- Metadata is preserved and associated with each chunk
+
+### 5. **Embedding Generation**
+- Each chunk is converted into high-dimensional vector embeddings
+- Embeddings capture semantic meaning and app-specific context
+- Vectors are optimized for similarity search and retrieval
+- Cross-app relationship embeddings for related content
+
+### 6. **Indexing & Database Updates**
+- Embeddings are stored in our vector database for fast similarity search
+- Full-text search indexes are created for keyword-based queries
+- App-specific metadata is indexed for filtering and faceted search
+- Cross-references are established between related app sources
+
+### 7. **Quality Assurance**
+- App-specific quality checks ensure processing accuracy
+- Content validation verifies extracted text completeness
+- Relationship validation ensures proper context preservation
+- Embedding quality is assessed for optimal retrieval performance
+
+<Note>
+**Processing Time**: App sources are processed in parallel using specialized pipelines. Most sources are fully processed and searchable within 2-5 minutes. Complex sources with multiple attachments may take up to 10 minutes. You can check processing status using the individual document IDs returned in the response.
+</Note>
+
 > **Recommended**: For optimal performance, limit each batch to a maximum of **20 app sources** per request. Send multiple batch requests with an interval of **1 second** between each request.
+
+> **File ID Management**: When you provide a `file_id` as a key in the `document_metadata` object, that specific ID will be used to identify your content. If no `file_id` is provided in the `document_metadata`, the system will automatically generate a unique identifier for you. This allows you to maintain consistent references to your content across your application while ensuring every piece of content has a unique identifier.
 
 ## Sample Request
 

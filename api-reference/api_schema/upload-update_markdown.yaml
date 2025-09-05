@@ -57,9 +57,9 @@
               tenant_metadata:
                 type: object
                 description: Custom tenant-level metadata
-              # document_metadata:
-              #   type: object
-              #   description: Custom document-level metadata
+              document_metadata:
+                type: object
+                description: Custom document-level metadata
             required:
             - content
     responses:

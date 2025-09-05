@@ -3,6 +3,12 @@ title: 'QnA'
 openapi: 'POST /search/qna'
 ---
 
+Ask questions and get AI-generated answers based on your tenant's knowledge base. This endpoint combines search and AI generation to provide conversational responses with citations.
+
+<Note>
+**Default Sub-Tenant Behavior**: If you don't specify a `sub_tenant_id`, the QnA will search within the default sub-tenant created when your tenant was set up. This searches across organization-wide documents and knowledge.
+</Note>
+
 ## Sample Request
 
 ```bash

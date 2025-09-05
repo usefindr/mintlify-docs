@@ -5,31 +5,62 @@ openapi: 'POST /user/create_tenant'
 
 Create a new tenant. If you pass `tenant_id` as a query parameter, that ID will be used. If not provided, the service generates a new `tenant_id` and returns it.
 
+<Note>
+**Important**: When a tenant is created, Cortex automatically creates a **DEFAULT sub-tenant** that acts as a global space for that tenant. Any documents ingested or API calls made with the `tenant_id` but without specifying a `sub_tenant_id` will automatically reference this default sub-tenant.
+</Note>
+
 ### Query Parameters
 - **tenant_id**: Optional string — If provided, will be used as the tenant identifier; otherwise a new one is generated.
 
 ### Body Parameters
-- **tenant_metadata_schema**: Optional array of objects — Each object should specify a metadata key, type, and whether it is searchable/filterable. Used to define the schema for tenant-level metadata. Example:
+- **tenant_metadata_schema**: Optional array of objects — Defines the **immutable** tenant-level metadata schema for your organization. Once set, these keys cannot be changed and will apply to all documents in this tenant.
 
+<Warning>
+**Important**: Tenant metadata keys are **immutable** once set during tenant creation. Choose your keys carefully as they cannot be modified later. Document metadata remains fully flexible and can be set per document during upload.
+</Warning>
+
+Each schema object should specify:
+- **key**: The metadata field name (immutable once set)
+- **type**: Data type (`text`, `number`, `boolean`, `date`)
+- **searchable**: Whether this field can be used in search queries
+- **filterable**: Whether this field can be used for filtering
+
+**Example for Enterprise Setup:**
 ```json
 [
-  {"key": "demo", "type": "text", "searchable": true, "filterable": true},
-  {"key": "test", "type": "number", "searchable": true, "filterable": true}
+  {"key": "department", "type": "text", "searchable": true, "filterable": true},
+  {"key": "compliance_framework", "type": "text", "searchable": true, "filterable": true},
+  {"key": "data_classification", "type": "text", "searchable": false, "filterable": true},
+  {"key": "business_unit", "type": "text", "searchable": true, "filterable": true}
+]
+```
+
+**Example for Simple Setup:**
+```json
+[
+  {"key": "organization", "type": "text", "searchable": true, "filterable": true},
+  {"key": "environment", "type": "text", "searchable": true, "filterable": true}
 ]
 ```
 
 ## Sample Request
 
 ```bash
-curl --location --request POST 'https://dev.usecortex.ai/user/create_tenant?tenant_id=Hbbyirq3573438_jkz3231' \
-  --header 'Authorization: Bearer a65e5691-a6f3-4668-9869-117084b93b28' \
+curl --location --request POST 'https://api.usecortex.ai/user/create_tenant?tenant_id=acme_corp_2024' \
+  --header 'Authorization: Bearer {API_KEY}' \
   --header 'Accept: application/json' \
   --header 'Content-Type: application/json' \
-  --data '{"metadata_schema":[{"key":"demo","type":"text","searchable":true,"filterable":true},{"key":"test","type":"number","searchable":true,"filterable":true}]}'
+  --data '{
+    "tenant_metadata_schema": [
+      {"key": "department", "type": "text", "searchable": true, "filterable": true},
+      {"key": "compliance_framework", "type": "text", "searchable": true, "filterable": true},
+      {"key": "data_classification", "type": "text", "searchable": false, "filterable": true}
+    ]
+  }'
 ```
 
 > **Note:**
-> - The `metadata_schema` field in the request body is now required and should be an array of objects, each specifying a metadata key, type, and whether it is searchable/filterable.
+> - The `tenant_metadata_schema` field in the request body is optional but recommended for enterprise setups. It defines immutable tenant-level metadata keys that will apply to all documents in this tenant.
 
 ## Sample Response
 
@@ -53,5 +84,3 @@ curl --location --request POST 'https://dev.usecortex.ai/user/create_tenant?tena
 - **401 Unauthorized**: Invalid or missing API key
 - **409 Conflict**: Tenant already exists (when a provided `tenant_id` is already in use)
 - **5XX Server Error**: Internal server error
-
-

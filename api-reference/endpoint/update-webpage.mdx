@@ -9,6 +9,18 @@ If the `source_id` does not exist, a new entry with that source ID will be creat
 ```bash
 curl --location --request PATCH 'https://api.usecortex.ai/upload/update_webpage?tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}&source_id={SOURCE_ID}&web_url={WEB_URL}' \
   --header 'Authorization: Bearer {API_KEY}' \
-  --header 'accept: application/json'
+  --header 'accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "tenant_metadata": {
+      "department": "Marketing",
+      "content_type": "blog_post"
+    },
+    "document_metadata": {
+      "title": "Updated Product Launch Blog",
+      "author": "Marketing Team",
+      "source_url": "https://example.com/blog"
+    }
+  }'
 ```
 

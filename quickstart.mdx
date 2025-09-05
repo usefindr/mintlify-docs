@@ -77,7 +77,7 @@ POST /search/qna
   "ai_generation": true,
   "highlight_chunks": true,
   "tenant_metadata": {"source_title": "contract.pdf"}
-  {/* "document_metadata": {"source_title": "contract.pdf"} */}
+  "document_metadata": {"source_title": "contract.pdf"}
 }
 ```
 
@@ -92,7 +92,7 @@ curl -X POST 'https://api.usecortex.ai/search/qna' \
     "session_id": "user-123-session",
     "tenant_id": "your_tenant_id",
     "tenant_metadata": {"source_title": "contract.pdf"}
-    {/* "document_metadata": {"source_title": "contract.pdf"} */}
+    "document_metadata": {"source_title": "contract.pdf"}
   }'
 ```
 
@@ -116,7 +116,12 @@ Render the answer in your UI and include clickable citations if desired. Citatio
 
 If available, use the `bounding_box` to enable clickable highlights or coordinate-based jumping in PDFs.
 
-{/* You can use the `tenant_metadata` and `document_metadata` parameters to restrict the context to only sources matching a specific title or type. For example, `{ "source_title": "contract.pdf" }` will only use sources with that title for answering the question. */}
+You can use the `tenant_metadata` and `document_metadata` parameters to restrict the context to only sources matching specific criteria:
+
+- **`tenant_metadata`**: Filter by organizational attributes (department, compliance framework) that apply to all documents in your tenant
+- **`document_metadata`**: Filter by document-specific attributes (title, author, document type) that vary per document
+
+For example, `{ "source_title": "contract.pdf" }` will only use sources with that title for answering the question. You can combine both metadata types for precise filtering: `{ "department": "Legal", "document_type": "contract" }` to find all legal contracts.
 
 ### **Step 6: Iterate (Optional)**
 

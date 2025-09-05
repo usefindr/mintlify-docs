@@ -3,9 +3,56 @@ title: 'Batch Upload'
 openapi: 'POST /upload/batch_upload'
 ---
 
+Upload multiple documents simultaneously to your tenant's knowledge base. All documents will be processed, chunked, and indexed for search and retrieval.
+
+## Batch Processing Pipeline
+
+When you upload multiple documents, each document goes through our comprehensive processing pipeline in parallel:
+
+### 1. **Immediate Upload & Queue**
+- All documents are immediately accepted and stored securely
+- Each document is added to our processing queue for background processing
+- You receive a confirmation response with individual `document_id`s for tracking each file
+
+### 2. **Parallel Processing Phase**
+Each document is processed independently with:
+- **Content Extraction**: Extracting text from various formats (PDF, DOCX, TXT, etc.)
+- **Document Parsing**: Understanding document structure, headers, and formatting
+- **Text Cleaning**: Removing formatting artifacts and normalizing content
+
+### 3. **Intelligent Chunking**
+- Each document is split into semantically meaningful chunks
+- Chunk size is optimized for both context preservation and search accuracy
+- Overlapping boundaries ensure no information is lost between chunks
+- Metadata is preserved and associated with each chunk
+
+### 4. **Embedding Generation**
+- Each chunk is converted into high-dimensional vector embeddings
+- Embeddings capture semantic meaning and context
+- Vectors are optimized for similarity search and retrieval
+
+### 5. **Indexing & Database Updates**
+- Embeddings are stored in our vector database for fast similarity search
+- Full-text search indexes are created for keyword-based queries
+- Metadata is indexed for filtering and faceted search
+- Cross-references are established between related documents
+
+### 6. **Quality Assurance**
+- Automated quality checks ensure processing accuracy for each document
+- Content validation verifies extracted text completeness
+- Embedding quality is assessed for optimal retrieval performance
+
+<Note>
+**Processing Time**: Batch uploads are processed in parallel. Most documents are fully processed and searchable within 2-5 minutes. Larger documents (100+ pages) may take up to 15 minutes. You can check processing status using the individual document IDs returned in the response.
+</Note>
+
+<Note>
+**Default Sub-Tenant Behavior**: If you don't specify a `sub_tenant_id`, all documents will be uploaded to the default sub-tenant created when your tenant was set up. This is perfect for organization-wide document batches that should be accessible across all departments.
+</Note>
+
 > **Recommended**: For optimal performance, limit each batch to a maximum of **20 sources** per request. Send multiple batch requests with an interval of **1 second** between each request.
 
-{/* > **Note**: If `file_id` is not provided in the document metadata, the system will generate an ID automatically. */}
+> **File ID Management**: When you provide a `file_id` as a key in the `document_metadata` object, that specific ID will be used to identify your content. If no `file_id` is provided in the `document_metadata`, the system will automatically generate a unique identifier for you. This allows you to maintain consistent references to your content across your application while ensuring every piece of content has a unique identifier.
 
 ## Sample Request
 
@@ -17,5 +64,5 @@ curl --location --request POST 'https://api.usecortex.ai/upload/batch_upload?ten
 --form 'files=@{FILE2}' \
 --form 'files=@{FILE3}' \
 --form 'tenant_metadata="{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}"' \
-{/* --form 'document_metadata="{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_batch_123\"}"' */}
+--form 'document_metadata="{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_batch_123\"}"'
 ```
