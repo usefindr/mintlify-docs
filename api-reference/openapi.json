@@ -3999,35 +3999,42 @@
           "id": {
             "type": "string",
             "title": "Id",
+            "description": "Unique identifier for the attachment.",
             "default": ""
           },
           "url": {
             "type": "string",
             "title": "Url",
+            "description": "Public or internal URL referencing the attachment resource.",
             "default": ""
           },
           "title": {
             "type": "string",
             "title": "Title",
+            "description": "Human-readable title or filename of the attachment.",
             "default": ""
           },
           "content_type": {
             "type": "string",
             "title": "Content Type",
+            "description": "MIME type of the attachment (e.g., application/pdf).",
             "default": ""
           },
           "content_url": {
             "type": "string",
             "title": "Content Url",
+            "description": "Direct URL for content retrieval when different from the reference URL.",
             "default": ""
           },
           "misc": {
             "additionalProperties": true,
             "type": "object",
-            "title": "Misc"
+            "title": "Misc",
+            "description": "Additional attachment attributes defined by the tenant (free-form)."
           },
           "content": {
-            "$ref": "#/components/schemas/ContentModel"
+            "$ref": "#/components/schemas/ContentModel",
+            "description": "Structured content payload for the attachment when available."
           }
         },
         "type": "object",
@@ -4103,7 +4110,7 @@
               }
             ],
             "title": "Tenant Metadata",
-            "description": "Optional JSON string containing tenant-level metadata as key-value pairs"
+            "description": "JSON string containing tenant-level document metadata (e.g., department, compliance_tag)\n\nExample: \u003E \"{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}\"\n\n"
           },
           "document_metadata": {
             "anyOf": [
@@ -4115,7 +4122,7 @@
               }
             ],
             "title": "Document Metadata",
-            "description": "Optional JSON string containing document-specific metadata as key-value pairs"
+            "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: \u003E \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n"
           }
         },
         "type": "object",
@@ -4145,7 +4152,7 @@
               }
             ],
             "title": "Tenant Metadata",
-            "description": "Optional JSON string containing tenant-level metadata as key-value pairs"
+            "description": "JSON string containing tenant-level document metadata (e.g., department, compliance_tag)\n\nExample: \u003E \"{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}\"\n\n"
           },
           "document_metadata": {
             "anyOf": [
@@ -4157,7 +4164,7 @@
               }
             ],
             "title": "Document Metadata",
-            "description": "Optional JSON string containing document-specific metadata as key-value pairs"
+            "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: \u003E \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n"
           }
         },
         "type": "object",
@@ -4205,7 +4212,7 @@
               }
             ],
             "title": "Tenant Metadata",
-            "description": "Optional JSON string containing tenant-level metadata as key-value pairs"
+            "description": "JSON string containing tenant-level document metadata (e.g., department, compliance_tag)\n\nExample: \u003E \"{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}\"\n\n"
           },
           "document_metadata": {
             "anyOf": [
@@ -4217,7 +4224,7 @@
               }
             ],
             "title": "Document Metadata",
-            "description": "Optional JSON string containing document-specific metadata as key-value pairs"
+            "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: \u003E \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n"
           }
         },
         "type": "object",
@@ -4244,7 +4251,7 @@
               }
             ],
             "title": "Tenant Metadata",
-            "description": "Optional JSON string containing tenant-level metadata as key-value pairs"
+            "description": "JSON string containing tenant-level document metadata (e.g., department, compliance_tag)\n\nExample: \u003E \"{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}\"\n\n"
           },
           "document_metadata": {
             "anyOf": [
@@ -4256,7 +4263,7 @@
               }
             ],
             "title": "Document Metadata",
-            "description": "Optional JSON string containing document-specific metadata as key-value pairs"
+            "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: \u003E \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n"
           }
         },
         "type": "object",
@@ -4270,21 +4277,25 @@
           "text": {
             "type": "string",
             "title": "Text",
+            "description": "Plain text content extracted or provided for indexing.",
             "default": ""
           },
           "html_base64": {
             "type": "string",
             "title": "Html Base64",
+            "description": "Base64-encoded HTML content preserving structure and formatting.",
             "default": ""
           },
           "csv_base64": {
             "type": "string",
             "title": "Csv Base64",
+            "description": "Base64-encoded CSV data for tabular content ingestion.",
             "default": ""
           },
           "markdown": {
             "type": "string",
             "title": "Markdown",
+            "description": "Raw Markdown content to be indexed as rich text.",
             "default": ""
           },
           "files": {
@@ -4293,7 +4304,8 @@
               "type": "object"
             },
             "type": "array",
-            "title": "Files"
+            "title": "Files",
+            "description": "List of file descriptors associated with the source (e.g., filenames, sizes)."
           },
           "layout": {
             "items": {
@@ -4301,7 +4313,8 @@
               "type": "object"
             },
             "type": "array",
-            "title": "Layout"
+            "title": "Layout",
+            "description": "Optional layout metadata such as sections or blocks to guide chunking."
           }
         },
         "type": "object",
@@ -4876,7 +4889,7 @@
               }
             ],
             "title": "Tenant Metadata",
-            "description": "Optional JSON string containing tenant-level metadata as key-value pairs"
+            "description": "JSON string containing tenant-level document metadata (e.g., department, compliance_tag)\n\nExample: \u003E \"{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}\"\n\n"
           },
           "document_metadata": {
             "anyOf": [
@@ -4889,7 +4902,7 @@
               }
             ],
             "title": "Document Metadata",
-            "description": "Optional JSON string containing document-specific metadata as key-value pairs"
+            "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: \u003E \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n"
           }
         },
         "type": "object",
@@ -5487,72 +5500,86 @@
               "type": "string"
             },
             "type": "array",
-            "title": "Collections"
+            "title": "Collections",
+            "description": "Deprecated. Will soon be removed"
           },
           "id": {
             "type": "string",
             "title": "Id",
+            "description": "Stable, unique identifier for the source. If omitted, one may be generated upstream.",
             "default": ""
           },
           "title": {
             "type": "string",
             "title": "Title",
+            "description": "Short human-readable title for the source.",
             "default": ""
           },
           "type": {
             "type": "string",
             "title": "Type",
+            "description": "High-level category of the source (e.g., document, email, ticket).",
             "default": ""
           },
           "description": {
             "type": "string",
             "title": "Description",
+            "description": "Optional long-form description providing additional context.",
             "default": ""
           },
           "note": {
             "type": "string",
             "title": "Note",
+            "description": "Free-form notes for internal use or ingestion hints.",
             "default": ""
           },
           "url": {
             "type": "string",
             "title": "Url",
+            "description": "Canonical URL or reference link associated with the source.",
             "default": ""
           },
           "timestamp": {
             "type": "string",
             "title": "Timestamp",
+            "description": "Creation or last-updated timestamp of the source in ISO-8601 format.",
             "default": ""
           },
           "content": {
-            "$ref": "#/components/schemas/ContentModel"
+            "$ref": "#/components/schemas/ContentModel",
+            "description": "Primary content payload used for indexing and retrieval."
           },
           "cortex_metadata": {
             "additionalProperties": true,
             "type": "object",
-            "title": "Cortex Metadata"
+            "title": "Cortex Metadata",
+            "description": "[Deprecated] Use tenant_metadata. Retained for backward compatibility; semantics are the same as tenant_metadata."
           },
           "tenant_metadata": {
             "additionalProperties": true,
             "type": "object",
-            "title": "Tenant Metadata"
+            "title": "Tenant Metadata",
+            "description": "JSON string containing tenant-level document metadata (e.g., department, compliance_tag)\n\nExample: \u003E \"{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}\"\n\n"
           },
           "document_metadata": {
             "additionalProperties": true,
             "type": "object",
-            "title": "Document Metadata"
+            "title": "Document Metadata",
+            "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: \u003E \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n"
           },
           "meta": {
             "additionalProperties": true,
             "type": "object",
-            "title": "Meta"
+            "title": "Meta",
+            "description": "System-provided attributes (e.g., app_name, local file size) not intended for search filtering."
           },
           "attachments": {
             "items": {
               "$ref": "#/components/schemas/AttachmentModel"
             },
             "type": "array",
-            "title": "Attachments"
+            "title": "Attachments",
+            "description": "Attachments related to the source such as images, PDFs, or supplemental files."
           }
         },
         "type": "object",
