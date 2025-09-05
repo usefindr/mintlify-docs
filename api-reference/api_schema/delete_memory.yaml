@@ -39,6 +39,10 @@
                 type: string
                 description: Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation
                 example: tenant_456
+              sub_tenant_id:
+                type: string
+                description: Sub-tenant identifier
+                example: subtenant_123
               source_ids:
                 type: array
                 items:
