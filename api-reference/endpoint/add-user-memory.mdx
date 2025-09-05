@@ -6,7 +6,7 @@ openapi: 'POST /user_memory/add_user_memory'
 ## Sample Request
 
 ```bash
-curl --location 'https://api.usecortex.ai/user_memory/add_user_memory?tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}&user_memory={USER_MEMORY}' \
+curl --location --request POST 'https://api.usecortex.ai/user_memory/add_user_memory?tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}&user_memory={USER_MEMORY}' \
   --header 'Authorization: Bearer {API_KEY}' \
   --header 'accept: application/json' \
   --header 'Content-Type: application/json'

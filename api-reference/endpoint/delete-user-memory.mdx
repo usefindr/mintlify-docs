@@ -11,7 +11,7 @@ openapi: 'DELETE /user_memory/delete_user_memory'
 ## Sample Request
 
 ```bash
-curl --location 'https://api.usecortex.ai/user_memory/delete_user_memory?tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}&memory_id={MEMORY_ID}' \
+curl --location --request DELETE 'https://api.usecortex.ai/user_memory/delete_user_memory?tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}&memory_id={MEMORY_ID}' \
   --header 'Authorization: Bearer {API_KEY}' \
   --header 'accept: application/json' \
   --header 'Content-Type: application/json'

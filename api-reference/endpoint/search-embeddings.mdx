@@ -9,7 +9,7 @@ openapi: 'POST /embeddings/search'
 ## Sample Request
 
 ```bash
-curl --location 'https://api.usecortex.ai/embeddings/search' \
+curl --location --request POST 'https://api.usecortex.ai/embeddings/search' \
   --header 'Authorization: Bearer {API_KEY}' \
   --header 'accept: application/json' \
   --header 'Content-Type: application/json' \

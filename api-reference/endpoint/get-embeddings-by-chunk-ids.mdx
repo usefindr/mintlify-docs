@@ -17,7 +17,7 @@ Retrieve embeddings for specific chunk IDs. This endpoint allows you to fetch th
 ## Sample Request
 
 ```bash
-curl --location 'https://api.usecortex.ai/embeddings/by-chunk-ids' \
+curl --location --request POST 'https://api.usecortex.ai/embeddings/by-chunk-ids' \
   --header 'Authorization: Bearer {API_KEY}' \
   --header 'accept: application/json' \
   --header 'Content-Type: application/json' \

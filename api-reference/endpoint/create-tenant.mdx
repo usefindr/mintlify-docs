@@ -21,7 +21,7 @@ Create a new tenant. If you pass `tenant_id` as a query parameter, that ID will 
 ## Sample Request
 
 ```bash
-curl --location 'https://dev.usecortex.ai/user/create_tenant?tenant_id=Hbbyirq3573438_jkz3231' \
+curl --location --request POST 'https://dev.usecortex.ai/user/create_tenant?tenant_id=Hbbyirq3573438_jkz3231' \
   --header 'Authorization: Bearer a65e5691-a6f3-4668-9869-117084b93b28' \
   --header 'Accept: application/json' \
   --header 'Content-Type: application/json' \
