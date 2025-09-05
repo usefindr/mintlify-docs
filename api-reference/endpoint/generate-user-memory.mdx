@@ -8,11 +8,3 @@ openapi: 'POST /user_memory/generate_user_memory'
 - Automatically stores and builds a network of user memories (just like a second brain)
 - Most sophisticated endpoint combining query processing, memory generation, and storage
 
-## Sample Request
-
-```bash
-curl --location --request POST 'https://api.usecortex.ai/user_memory/generate_user_memory?tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}&user_query={USER_QUERY}&user_name={USER_NAME}' \
-  --header 'Authorization: Bearer {API_KEY}' \
-  --header 'accept: application/json' \
-  --header 'Content-Type: application/json'
-```

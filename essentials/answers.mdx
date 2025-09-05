@@ -93,12 +93,12 @@ This keeps responses **auditable, explainable, and trustworthy** — especially 
 
 ## Filter by Metadata
 
-{/* You can restrict the context used for answering questions by providing `tenant_metadata` and `document_metadata` parameters in upload API calls. This allows you to filter sources by `source_title` or `source_type`.
+You can restrict the context used for answering questions by providing `tenant_metadata` and `document_metadata` parameters in upload API calls. This allows you to filter sources by `source_title` or `source_type`.
 
 ```json
 "tenant_metadata": {"source_title": "contract.pdf"},
-{/* "document_metadata": {"source_title": "contract.pdf"} */}
-``` */}
+"document_metadata": {"source_title": "contract.pdf"}
+```
 
 Only sources matching the provided metadata will be used for context.
 

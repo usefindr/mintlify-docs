@@ -53,9 +53,9 @@
               tenant_metadata:
                 type: object
                 description: Custom metadata object to associate with the uploaded content for tenant-level filtering (e.g., department, compliance_tag)
-              # document_metadata:
-              #   type: object
-              #   description: Custom metadata object to associate with the uploaded content for document-level filtering (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.
+              document_metadata:
+                type: object
+                description: Custom metadata object to associate with the uploaded content for document-level filtering (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.
             required:
             - content
           examples:
@@ -67,10 +67,10 @@
                 tenant_metadata:
                   department: Finance
                   compliance_tag: GDPR
-                # document_metadata:
-                #   title: Q1 Report.pdf
-                #   author: Alice Smith
-                #   file_id: custom_text_123
+                document_metadata:
+                  title: Q1 Report.pdf
+                  author: Alice Smith
+                  file_id: custom_text_123
     # --- Responses ---
     responses:
       '200':

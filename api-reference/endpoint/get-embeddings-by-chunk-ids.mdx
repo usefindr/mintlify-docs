@@ -14,24 +14,6 @@ Retrieve embeddings for specific chunk IDs. This endpoint allows you to fetch th
 - **embeddings**: Dictionary mapping chunk IDs to their embedding vectors
 - **not_found_chunk_ids**: Array of chunk IDs that were not found in the system
 
-## Sample Request
-
-```bash
-curl --location --request POST 'https://api.usecortex.ai/embeddings/by-chunk-ids' \
-  --header 'Authorization: Bearer {API_KEY}' \
-  --header 'accept: application/json' \
-  --header 'Content-Type: application/json' \
-  --data '{
-    "chunk_ids": [
-      "CortexEmbeddings123_0",
-      "CortexEmbeddings123_1", 
-      "CortexEmbeddings456_0",
-      "CortexEmbeddings789_2"
-    ],
-    "tenant_id": "{TENANT_ID}",
-    "sub_tenant_id": "{SUB_TENANT_ID}"
-  }'
-```
 
 ## Sample Response
 

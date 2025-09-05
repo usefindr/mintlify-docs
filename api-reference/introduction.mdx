@@ -14,7 +14,33 @@ Authorization: Bearer <your_api_key>
 ```
 
 ### Multi-Tenant Architecture
-All endpoints support Cortex's hierarchical multi-tenant system using `tenant_id` (primary organization) and `sub_tenant_id` (departments/teams). This enables secure data isolation for enterprise applications. [Learn more about multi-tenancy](/essentials/multi-tenant).
+All endpoints support Cortex's hierarchical multi-tenant system using `tenant_id` (primary organization) and `sub_tenant_id` (departments/teams). This enables secure data isolation for enterprise applications.
+
+<Note>
+**Default Sub-Tenant Behavior**: When you create a tenant, Cortex automatically creates a **DEFAULT sub-tenant** that acts as a global space. If you don't specify a `sub_tenant_id` in your API calls, your data will be stored in this default sub-tenant. This is perfect for organization-wide data that should be accessible across all departments.
+</Note>
+
+[Learn more about multi-tenancy](/essentials/multi-tenant) | [Learn more about metadata](/essentials/metadata)
+
+### Metadata Architecture
+
+Cortex provides a powerful two-tier metadata system for precise document organization and filtering:
+
+#### **Tenant Metadata** (`tenant_metadata`)
+- **Purpose**: Organization-level metadata that applies consistently across all documents within a tenant
+- **Immutability**: Keys are **immutable** and can only be set when creating a tenant via `tenant_metadata_schema`
+- **Best For**: Fixed organizational attributes like department, compliance framework, data classification, or business unit
+- **Example**: `{"department": "Engineering", "compliance_framework": "SOC2", "data_classification": "internal"}`
+
+#### **Document Metadata** (`document_metadata`)
+- **Purpose**: Document-specific metadata that varies from document to document
+- **Flexibility**: **Fully mutable** and flexible - can be different for each document
+- **Best For**: Variable document attributes like title, author, creation date, document type, or custom tags
+- **Example**: `{"title": "API Security Guidelines", "author": "Dr. Sarah Chen", "document_type": "technical_specification"}`
+
+<Note>
+**Metadata Filtering**: Use both metadata types in your search queries to filter sources by specific criteria. For example, find all engineering documents authored by specific team members or filter by document type and compliance status.
+</Note>
 
 ### **Data Ingestion**
 
@@ -66,9 +92,13 @@ Manage and query pre-computed embeddings.
 
 Create and monitor tenants for multi-tenant setups.
 
-- `/user/create_tenant` — Create a tenant (optionally provide `tenant_id`, or auto-generate)
+- `/user/create_tenant` — Create a tenant with optional `tenant_metadata_schema` to define immutable tenant-level metadata fields
 - `/embeddings/create_embeddings_tenant` — Create an embeddings-only tenant (sets `sub_tenant_id = tenant_id`); use when directly uploading/searching embeddings
 - `/tenant/stats` — Get tenant stats (object count, vector dimension, identifiers)
+
+<Note>
+**Tenant Metadata Schema**: When creating a tenant, you can define a `tenant_metadata_schema` that specifies which metadata keys are allowed at the tenant level. These keys become immutable and can only be set during tenant creation. Document metadata remains fully flexible and can be set per document during upload.
+</Note>
 
 ### **User Memory**
 
@@ -83,7 +113,9 @@ Personalize, retrieve, and manage user-specific AI memories for advanced agentic
 ## 💡 Best Practices
 
 - Use **sub-tenants** to support multi-user isolation in B2B use cases.
-- Leverage **metadata** (e.g., `source_title`, `source_type` in the QnA API) for fine-grained filtering and agentic retrieval.
+- **Design your metadata strategy**: Use `tenant_metadata` for fixed organizational attributes (department, compliance) and `document_metadata` for variable document attributes (title, author, type).
+- **Plan tenant metadata carefully**: Remember that tenant metadata keys are immutable once set during tenant creation.
+- Leverage **metadata filtering** in search queries for precise document retrieval and agentic workflows.
 - Tune **search_alpha** and **recency_bias** to control relevance.
 - Enable **highlight_chunks** for chunk-level citations.
 

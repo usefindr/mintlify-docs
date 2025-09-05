@@ -6,12 +6,3 @@ openapi: 'GET /user_memory/list_user_memories'
 ### Functionality
 - Fetches all user memories from the vector store using the combined tenant ID
 - Returns a simplified list containing source_id and source_content for each memory
-
-## Sample Request
-
-```bash
-curl --location 'https://api.usecortex.ai/user_memory/list_user_memories?tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}' \
-  --header 'Authorization: Bearer {API_KEY}' \
-  --header 'accept: application/json' \
-  --header 'Content-Type: application/json'
-```
