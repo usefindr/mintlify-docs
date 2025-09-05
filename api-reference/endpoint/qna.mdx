@@ -9,6 +9,112 @@ Ask questions and get AI-generated answers based on your tenant's knowledge base
 **Default Sub-Tenant Behavior**: If you don't specify a `sub_tenant_id`, the QnA will search within the default sub-tenant created when your tenant was set up. This searches across organization-wide documents and knowledge.
 </Note>
 
+## QnA Capabilities
+
+The QnA endpoint provides intelligent question-answering with several powerful features:
+
+### AI-Generated Responses
+- **Natural Language Processing**: Understands complex questions and context
+- **Citation-Based Answers**: Every answer includes source references with exact locations
+- **Conversational Context**: Maintains conversation history through session management
+- **Multi-Step Reasoning**: Can break down complex questions into logical steps
+
+### Advanced Search Integration
+- **Hybrid Search**: Combines semantic and keyword search for optimal results
+- **Context-Aware Retrieval**: Finds relevant information based on question context
+- **Source Highlighting**: Identifies and highlights the most relevant content chunks
+
+### Customization Options
+- **User Instructions**: Provide custom instructions to guide AI behavior
+- **Metadata Filtering**: Filter results by source type, title, or other metadata
+- **Streaming Support**: Get real-time responses for better user experience
+- **Auto-Agent Routing**: Automatically route queries to specialized agents
+
+## Key Parameters
+
+### Core Parameters
+
+#### Question & Session Management
+- **`question`**: The question you want answered (required)
+- **`session_id`**: Unique identifier for maintaining conversation context
+- **`user_name`**: Optional user identifier for personalized responses
+
+#### Search Configuration
+- **`search_alpha`**: Balance between semantic and keyword search (0.0-1.0)
+- **`top_n`**: Number of relevant chunks to retrieve for context
+- **`recency_bias`**: Prioritize recent content (0.0-1.0)
+
+#### AI Generation Control
+- **`ai_generation`**: Enable/disable AI response generation
+- **`multi_step_reasoning`**: Enable complex reasoning for difficult questions
+- **`user_instructions`**: Custom instructions to guide AI behavior
+- **`auto_agent_routing`**: Automatically route to specialized agents
+
+#### Response Formatting
+- **`stream`**: Enable streaming responses for real-time output
+- **`highlight_chunks`**: Include highlighted relevant chunks in response
+- **`context_list`**: Provide additional context for the AI
+
+### Advanced Features
+
+#### Metadata Filtering
+Use the `metadata` object to filter results:
+```json
+{
+  "metadata": {
+    "source_title": "Specific Document Title",
+    "source_type": "file",
+    "custom_field": "value"
+  }
+}
+```
+
+#### Session Management
+- **Persistent Context**: Maintain conversation history across multiple questions
+- **Context Accumulation**: Build understanding over multiple interactions
+- **User Personalization**: Adapt responses based on user preferences
+
+#### Multi-Step Reasoning
+When enabled, the AI can:
+- Break down complex questions into smaller parts
+- Analyze multiple sources of information
+- Synthesize information from different documents
+- Provide step-by-step explanations
+
+## Use Cases
+
+### Customer Support
+- **FAQ Automation**: Answer common customer questions automatically
+- **Product Information**: Provide detailed product specifications and features
+- **Troubleshooting**: Guide users through problem-solving steps
+
+### Knowledge Management
+- **Document Q&A**: Ask questions about uploaded documents and manuals
+- **Research Assistance**: Find and synthesize information from multiple sources
+- **Training Support**: Answer questions about company policies and procedures
+
+### Content Discovery
+- **Information Retrieval**: Find specific information within large document collections
+- **Contextual Search**: Get answers that understand the broader context
+- **Citation Tracking**: See exactly where information comes from
+
+## Best Practices
+
+### Question Formulation
+- **Be Specific**: Ask clear, specific questions for better results
+- **Provide Context**: Include relevant background information when needed
+- **Use Natural Language**: Ask questions as you would to a human expert
+
+### Session Management
+- **Maintain Context**: Use consistent session IDs for related questions
+- **Build Understanding**: Ask follow-up questions to deepen the conversation
+- **Reset When Needed**: Start new sessions for unrelated topics
+
+### Response Optimization
+- **Enable Highlighting**: Use `highlight_chunks` to see source relevance
+- **Adjust Search Alpha**: Experiment with different values for your content type
+- **Use Metadata Filtering**: Narrow results to specific document types when needed
+
 ## Sample Request
 
 ```bash

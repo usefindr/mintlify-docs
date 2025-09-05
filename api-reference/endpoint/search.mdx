@@ -9,6 +9,79 @@ Perform a hybrid search across your tenant's knowledge base using both semantic 
 **Default Sub-Tenant Behavior**: If you don't specify a `sub_tenant_id`, the search will be performed within the default sub-tenant created when your tenant was set up. This searches across organization-wide documents.
 </Note>
 
+## Search Modes
+
+The Hybrid Search endpoint combines multiple search strategies to provide the most relevant results:
+
+### Semantic Search
+- **Purpose**: Finds content based on meaning and context, not just exact keywords
+- **Best for**: Conceptual queries, finding related content, understanding intent
+- **Example**: Searching for "machine learning" will also find content about "AI", "neural networks", "deep learning"
+
+### Keyword Search  
+- **Purpose**: Finds content containing specific terms or phrases
+- **Best for**: Exact term matching, technical specifications, proper nouns
+- **Example**: Searching for "TensorFlow 2.0" will find documents mentioning this specific version
+
+### Hybrid Approach
+- **Purpose**: Combines semantic understanding with keyword precision
+- **Best for**: Most use cases where you want both relevance and accuracy
+- **Example**: "Python data analysis libraries" finds both semantic matches (pandas, numpy) and exact keyword matches
+
+## Search Parameters
+
+### Alpha Parameter
+Controls the balance between semantic and keyword search:
+
+- **`0.0`** - Pure keyword search only
+  - Best for: Exact term matching, technical specifications
+  - Use when: You need precise keyword matches
+  
+- **`1.0`** - Pure semantic search only  
+  - Best for: Conceptual queries, finding related content
+  - Use when: You want to discover related concepts
+  
+- **`0.8`** - Default balanced approach (recommended)
+  - Best for: Most general use cases
+  - Provides optimal balance of precision and recall
+  
+- **`"auto"`** - Intelligent auto-selection
+  - Cortex analyzes your query and chooses the optimal alpha
+  - Best for: When you're unsure which approach to use
+
+### Recency Bias
+Controls how much recent content is prioritized:
+
+- **`0.0`** - No recency bias (default)
+- **`0.1-0.5`** - Light to moderate recency preference
+- **`0.6-1.0`** - Strong recency preference
+- **Best for**: News, documentation updates, time-sensitive information
+
+### Max Chunks
+Controls the number of results returned:
+- **Range**: 1-1001 chunks
+- **Default**: System limit
+- **Recommendation**: Start with 10-20 for most use cases
+
+## Search Optimization Tips
+
+### For Better Precision
+- Use **lower alpha values** (0.2-0.4) for exact term matching
+- Include **specific terminology** in your queries
+- Set **higher max_chunks** to get more comprehensive results
+
+### For Better Recall
+- Use **higher alpha values** (0.6-0.8) for broader semantic matching
+- Try **synonyms and related terms** in your queries
+- Use **conceptual language** rather than specific terms
+- Enable **recency bias** for time-sensitive content
+
+### For Complex Queries
+- Use **"auto" alpha** to let Cortex optimize automatically
+- Combine **specific terms with conceptual language**
+- Adjust **recency bias** based on content type
+- Experiment with **different alpha values** to find optimal results
+
 ## Sample Request
 
 ```bash

@@ -3,6 +3,34 @@ title: 'Full Text Search'
 openapi: 'POST /search/full-text-search'
 ---
 
+## Search Options
+
+The Full Text Search endpoint provides various operators and search capabilities to help you find exactly what you're looking for in your indexed content.
+
+### Boolean Operators
+
+#### AND Operator
+- **Usage**: `"operator": "and"`
+- **Behavior**: All search terms must be present in the document for it to match
+- **Best for**: Precise searches where you need all keywords to be present
+- **Example**: Searching for "machine learning algorithms" with AND will only return documents containing both "machine" AND "learning" AND "algorithms"
+
+#### OR Operator  
+- **Usage**: `"operator": "or"`
+- **Behavior**: At least one search term must be present in the document for it to match
+- **Best for**: Broad searches to find documents containing any of the specified terms
+- **Example**: Searching for "python javascript react" with OR will return documents containing any of these programming languages
+
+### Search Optimization Tips
+
+#### For Better Precision
+- Use the **AND operator** when you need all terms to be present
+- Use **specific terminology** rather than generic terms
+
+#### For Broader Results
+- Use the **OR operator** to find documents with any of the search terms
+- Try **synonyms and related terms** to expand your search
+
 ## Sample Request
 
 ```bash
