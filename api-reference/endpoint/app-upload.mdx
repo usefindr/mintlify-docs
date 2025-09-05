@@ -12,7 +12,7 @@ Each app upload is handled using specialized pipelines inside Cortex and can inc
 ## Sample Request
 
 ```bash
-curl --location 'https://api.usecortex.ai/upload/upload_app_sources?tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}' \
+curl --location --request POST 'https://api.usecortex.ai/upload/upload_app_sources?tenant_id={TENANT_ID}&sub_tenant_id={SUB_TENANT_ID}' \
 --header 'accept: application/json' \
 --header 'Authorization: Bearer {API_KEY}' \
 --header 'Content-Type: application/json' \
