@@ -5171,7 +5171,7 @@
               }
             ],
             "title": "Layout",
-            "description": "Layout information for the source document"
+            "description": "Layout of the chunk in original document. You will always get the start offset of the chunk. In most cases, if possible, you will get the page number as well."
           },
           "source_url": {
             "type": "string",
