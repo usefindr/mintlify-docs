@@ -74,9 +74,9 @@
           {
             "group": "Query & Retrieval",
             "pages": [
-              "api-reference/endpoint/qna",
               "api-reference/endpoint/search",
-              "api-reference/endpoint/full-text-search"
+              "api-reference/endpoint/full-text-search",
+              "api-reference/endpoint/qna"
             ]
           },
           {
@@ -85,7 +85,7 @@
               "api-reference/endpoint/list-sources",
               "api-reference/endpoint/list-sources-by-id",
               "api-reference/endpoint/fetch-content",
-              "api-reference/endpoint/delete-memory"
+              "api-reference/endpoint/delete-source"
             ]
           },
           {
