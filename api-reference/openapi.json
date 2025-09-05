@@ -2544,15 +2544,6 @@
             "description": "Optional custom file ID for the scraped content. If not provided, a unique ID will be generated"
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/Body_scrape_webpage_upload_scrape_webpage_post"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -2702,15 +2693,6 @@
             "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id"
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/Body_update_scrape_job_upload_update_webpage_patch"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -4134,18 +4116,6 @@
             ],
             "title": "Document Metadata",
             "description": "Optional JSON string containing document-specific metadata as key-value pairs"
-          },
-          "relations": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Relations",
-            "description": "Optional JSON string containing relations as key-value pairs"
           }
         },
         "type": "object",
@@ -4188,18 +4158,6 @@
             ],
             "title": "Document Metadata",
             "description": "Optional JSON string containing document-specific metadata as key-value pairs"
-          },
-          "relations": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Relations",
-            "description": "Optional JSON string containing relations as key-value pairs"
           }
         },
         "type": "object",
@@ -4228,24 +4186,6 @@
         },
         "type": "object",
         "title": "Body_create_tenant_user_create_tenant_post"
-      },
-      "Body_scrape_webpage_upload_scrape_webpage_post": {
-        "properties": {
-          "relations": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Relations",
-            "description": "Optional JSON string containing relations as key-value pairs"
-          }
-        },
-        "type": "object",
-        "title": "Body_scrape_webpage_upload_scrape_webpage_post"
       },
       "Body_update_file_upload_update_document_patch": {
         "properties": {
@@ -4278,18 +4218,6 @@
             ],
             "title": "Document Metadata",
             "description": "Optional JSON string containing document-specific metadata as key-value pairs"
-          },
-          "relations": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Relations",
-            "description": "Optional JSON string containing relations as key-value pairs"
           }
         },
         "type": "object",
@@ -4297,24 +4225,6 @@
           "file"
         ],
         "title": "Body_update_file_upload_update_document_patch"
-      },
-      "Body_update_scrape_job_upload_update_webpage_patch": {
-        "properties": {
-          "relations": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Relations",
-            "description": "Optional JSON string containing relations as key-value pairs"
-          }
-        },
-        "type": "object",
-        "title": "Body_update_scrape_job_upload_update_webpage_patch"
       },
       "Body_upload_files_upload_upload_document_post": {
         "properties": {
@@ -4347,18 +4257,6 @@
             ],
             "title": "Document Metadata",
             "description": "Optional JSON string containing document-specific metadata as key-value pairs"
-          },
-          "relations": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Relations",
-            "description": "Optional JSON string containing relations as key-value pairs"
           }
         },
         "type": "object",
@@ -4716,27 +4614,6 @@
         "type": "object",
         "title": "ErrorResponse"
       },
-      "ExtendedContext": {
-        "properties": {
-          "relations": {
-            "anyOf": [
-              {
-                "items": {
-                  "$ref": "#/components/schemas/RelatedChunk"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Relations",
-            "default": []
-          }
-        },
-        "type": "object",
-        "title": "ExtendedContext"
-      },
       "FetchContentData": {
         "properties": {
           "file_id": {
@@ -5013,17 +4890,6 @@
             ],
             "title": "Document Metadata",
             "description": "Optional JSON string containing document-specific metadata as key-value pairs"
-          },
-          "relations": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/Relations"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Optional JSON string containing relations as key-value pairs"
           }
         },
         "type": "object",
@@ -5254,68 +5120,6 @@
         ],
         "title": "QnARequest"
       },
-      "RelatedChunk": {
-        "properties": {
-          "source_id": {
-            "type": "string",
-            "title": "Source Id"
-          },
-          "chunk_uuid": {
-            "type": "string",
-            "title": "Chunk Uuid"
-          },
-          "chunk_content": {
-            "type": "string",
-            "title": "Chunk Content"
-          },
-          "source_title": {
-            "type": "string",
-            "title": "Source Title",
-            "default": ""
-          }
-        },
-        "type": "object",
-        "required": [
-          "source_id",
-          "chunk_uuid",
-          "chunk_content"
-        ],
-        "title": "RelatedChunk"
-      },
-      "Relations": {
-        "properties": {
-          "cortex_source_ids": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Cortex Source Ids",
-            "description": "List of cortex source IDs to directly relate with"
-          },
-          "auto_discovery": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Auto Discovery",
-            "description": "Key value pairs to allow cortex to automatically discover relations"
-          }
-        },
-        "type": "object",
-        "title": "Relations"
-      },
       "SearchChunk": {
         "properties": {
           "chunk_uuid": {
@@ -5413,18 +5217,6 @@
             ],
             "title": "Tenant Metadata",
             "description": "Custom metadata associated with your tenant"
-          },
-          "extra_context": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ExtendedContext"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "default": {},
-            "exclude_from_schema": true
           }
         },
         "type": "object",
@@ -5500,19 +5292,6 @@
             "title": "Recency Bias",
             "description": "Preference for newer content (0.0 = no bias, 1.0 = strong recency preference)",
             "default": 0.5
-          },
-          "num_related_chunks": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Num Related Chunks",
-            "description": "Number of related content chunks to include",
-            "default": 0
           }
         },
         "type": "object",
