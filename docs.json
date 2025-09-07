@@ -57,6 +57,13 @@
             ]
           },
           {
+            "group": "Tenant Management",
+            "pages": [
+              "api-reference/endpoint/create-tenant",
+              "api-reference/endpoint/tenant-stats"
+            ]
+          },
+          {
             "group": "Knowledge Ingestion",
             "pages": [
               "api-reference/endpoint/upload-document",
@@ -107,13 +114,6 @@
               "api-reference/endpoint/add-user-memory",
               "api-reference/endpoint/generate-user-memory",
               "api-reference/endpoint/delete-user-memory"
-            ]
-          },
-          {
-            "group": "Tenant Management",
-            "pages": [
-              "api-reference/endpoint/create-tenant",
-              "api-reference/endpoint/tenant-stats"
             ]
           }
         ]
