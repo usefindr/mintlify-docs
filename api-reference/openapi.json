@@ -2859,7 +2859,7 @@
         "tags": [
           "upload"
         ],
-        "summary": "Delete Memory",
+        "summary": "Delete Source",
         "description": "Remove documents and content from your knowledge base.\n\nThis endpoint permanently deletes the specified sources from your knowledge base. Once deleted, the content will no longer be available for search or retrieval.\n\nUse this carefully as the action cannot be undone. The system will confirm successful deletion of each source ID you specify.",
         "operationId": "delete_source_upload_delete_source_delete",
         "requestBody": {
@@ -2875,7 +2875,7 @@
         },
         "responses": {
           "200": {
-            "description": "User memories retrieved successfully",
+            "description": "Document deleted successfully",
             "content": {
               "application/json": {
                 "schema": {
