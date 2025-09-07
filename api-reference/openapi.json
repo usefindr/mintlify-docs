@@ -33,7 +33,7 @@
         },
         "responses": {
           "200": {
-            "description": "Document deleted successfully",
+            "description": "QnA response generated successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -45,7 +45,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Document deleted successfully"
+                      "default": "QnA response generated successfully"
                     }
                   }
                 }
@@ -523,7 +523,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Document deleted successfully",
+            "description": "User memories retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -535,7 +535,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Document deleted successfully"
+                      "default": "User memories retrieved successfully"
                     }
                   }
                 }
@@ -693,7 +693,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Document deleted successfully",
+            "description": "User memory retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -705,7 +705,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Document deleted successfully"
+                      "default": "User memory retrieved successfully"
                     }
                   }
                 }
@@ -782,7 +782,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Document deleted successfully",
+            "description": "User memory generated successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -794,7 +794,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Document deleted successfully"
+                      "default": "User memory generated successfully"
                     }
                   }
                 }
@@ -862,7 +862,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Document deleted successfully",
+            "description": "User memory added successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -874,7 +874,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Document deleted successfully"
+                      "default": "User memory added successfully"
                     }
                   }
                 }
