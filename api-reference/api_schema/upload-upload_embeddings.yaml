@@ -94,11 +94,6 @@
                   type: string
                   description: Unique batch identifier for grouping these embeddings
                   example: "CortexEmbeddings123"
-              required:
-                - success
-                - message
-                - chunk_ids
-                - batch_id
               example:
                 success: true
                 message: "Embeddings upload message pushed to SQS."

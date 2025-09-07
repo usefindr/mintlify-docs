@@ -57,7 +57,7 @@
     # --- Responses ---
     responses:
       '200':
-        description: Memory deleted successfully
+        description: Document deleted successfully
       '422':
         description: Incomplete/invalid parameters
       '401':
@@ -115,7 +115,7 @@
     # --- Responses ---
     responses:
       '200':
-        description: Memory deleted successfully (POST)
+        description: Document deleted successfully (POST)
       '422':
         description: Incomplete/invalid parameters
       '401':

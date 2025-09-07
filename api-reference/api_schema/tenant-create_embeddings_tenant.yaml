@@ -50,10 +50,6 @@ paths:
                     type: string
                     description: The created tenant identifier
                     example: "embeddings_test"
-                required:
-                  - status
-                  - message
-                  - tenant_id
               example:
                 status: "success"
                 message: "Tenant 'embeddings_test' created successfully."

@@ -50,7 +50,7 @@
     # --- Responses ---
     responses:
       '200':
-        description: Memory deletion result
+        description: Memory deleted successfully
         content:
           application/json:
             schema:
