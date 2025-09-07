@@ -2875,7 +2875,7 @@
         },
         "responses": {
           "200": {
-            "description": "Document deleted successfully",
+            "description": "User memories retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
