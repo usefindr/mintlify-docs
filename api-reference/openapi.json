@@ -33,10 +33,22 @@
         },
         "responses": {
           "200": {
-            "description": "Successful Response",
+            "description": "Document deleted successfully",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "default": true
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Document deleted successfully"
+                    }
+                  }
+                }
               }
             }
           },
@@ -511,10 +523,22 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful Response",
+            "description": "Document deleted successfully",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "default": true
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Document deleted successfully"
+                    }
+                  }
+                }
               }
             }
           },
@@ -579,10 +603,22 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful Response",
+            "description": "Memory deleted successfully",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "default": true
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Memory deleted successfully"
+                    }
+                  }
+                }
               }
             }
           },
@@ -657,10 +693,22 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful Response",
+            "description": "Document deleted successfully",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "default": true
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Document deleted successfully"
+                    }
+                  }
+                }
               }
             }
           },
@@ -734,10 +782,22 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful Response",
+            "description": "Document deleted successfully",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "default": true
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Document deleted successfully"
+                    }
+                  }
+                }
               }
             }
           },
@@ -802,10 +862,22 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful Response",
+            "description": "Document deleted successfully",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "default": true
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Document deleted successfully"
+                    }
+                  }
+                }
               }
             }
           },
@@ -2782,57 +2854,6 @@
         ]
       }
     },
-    "/upload/delete_memory": {
-      "delete": {
-        "tags": [
-          "upload"
-        ],
-        "summary": "Delete Memory",
-        "description": "Remove documents and content from your knowledge base.\n\nThis endpoint permanently deletes the specified sources from your knowledge base. Once deleted, the content will no longer be available for search or retrieval.\n\nUse this carefully as the action cannot be undone. The system will confirm successful deletion of each source ID you specify.",
-        "operationId": "delete_memory_upload_delete_memory_delete",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DeleteMemoryRequest",
-                "description": "Request body containing the source IDs to delete and tenant information"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "x-fern-sdk-group-name": "upload",
-        "x-fern-sdk-method-name": "delete_memory",
-        "x-fern-sdk-audience": [
-          "public"
-        ]
-      }
-    },
     "/upload/delete_source": {
       "delete": {
         "tags": [
@@ -2840,7 +2861,7 @@
         ],
         "summary": "Delete Memory",
         "description": "Remove documents and content from your knowledge base.\n\nThis endpoint permanently deletes the specified sources from your knowledge base. Once deleted, the content will no longer be available for search or retrieval.\n\nUse this carefully as the action cannot be undone. The system will confirm successful deletion of each source ID you specify.",
-        "operationId": "delete_memory_upload_delete_source_delete",
+        "operationId": "delete_source_upload_delete_source_delete",
         "requestBody": {
           "content": {
             "application/json": {
@@ -2854,10 +2875,22 @@
         },
         "responses": {
           "200": {
-            "description": "Successful Response",
+            "description": "Document deleted successfully",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "default": true
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Document deleted successfully"
+                    }
+                  }
+                }
               }
             }
           },
@@ -3989,9 +4022,6 @@
           }
         },
         "type": "object",
-        "required": [
-          "uploaded"
-        ],
         "title": "AppSourcesUploadData"
       },
       "AttachmentModel": {
@@ -4069,9 +4099,6 @@
           }
         },
         "type": "object",
-        "required": [
-          "uploaded"
-        ],
         "title": "BatchUploadData"
       },
       "Body_batch_update_upload_batch_update_patch": {
@@ -4324,7 +4351,8 @@
         "properties": {
           "tenant_id": {
             "type": "string",
-            "title": "Tenant Id"
+            "title": "Tenant Id",
+            "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation"
           },
           "source_ids": {
             "items": {
@@ -4336,6 +4364,7 @@
           "sub_tenant_id": {
             "type": "string",
             "title": "Sub Tenant Id",
+            "description": "Sub-tenant identifier",
             "default": ""
           }
         },
@@ -4399,10 +4428,6 @@
           }
         },
         "type": "object",
-        "required": [
-          "total_deleted",
-          "status"
-        ],
         "title": "EmbeddingsDeleteData"
       },
       "EmbeddingsDeleteRequest": {
@@ -4465,10 +4490,6 @@
           }
         },
         "type": "object",
-        "required": [
-          "embeddings",
-          "not_found_chunk_ids"
-        ],
         "title": "EmbeddingsGetData"
       },
       "EmbeddingsSearchData": {
@@ -4499,10 +4520,6 @@
           }
         },
         "type": "object",
-        "required": [
-          "chunk_ids",
-          "scores"
-        ],
         "title": "EmbeddingsSearchData"
       },
       "EmbeddingsSearchRequest": {
@@ -4660,10 +4677,6 @@
           }
         },
         "type": "object",
-        "required": [
-          "file_id",
-          "url"
-        ],
         "title": "FetchContentData"
       },
       "FetchContentRequest": {
@@ -4866,9 +4879,6 @@
           }
         },
         "type": "object",
-        "required": [
-          "sources"
-        ],
         "title": "ListSourcesResponse"
       },
       "MarkdownUploadRequest": {
@@ -4933,10 +4943,6 @@
           }
         },
         "type": "object",
-        "required": [
-          "file_id",
-          "indexing_status"
-        ],
         "title": "ProcessingStatus"
       },
       "QnARequest": {

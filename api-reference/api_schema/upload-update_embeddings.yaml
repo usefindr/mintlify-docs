@@ -96,11 +96,6 @@
                   type: integer
                   description: Number of embeddings that were updated
                   example: 2
-              required:
-                - success
-                - message
-                - chunk_ids
-                - batch_id
               example:
                 success: true
                 message: "Embeddings update message pushed to SQS."

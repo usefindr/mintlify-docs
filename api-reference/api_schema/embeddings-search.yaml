@@ -81,9 +81,6 @@
                     maximum: 1.0
                   description: Similarity scores corresponding to each chunk ID (0.0 to 1.0, higher is more similar)
                   example: [0.95, 0.89, 0.87, 0.82, 0.78]
-              required:
-                - chunk_ids
-                - scores
               example:
                 chunk_ids: ["CortexEmbeddings123_0", "CortexEmbeddings456_0", "CortexEmbeddings456_1", "CortexEmbeddings123_2", "CortexEmbeddings123_8"]
                 scores: [0.95, 0.89, 0.87, 0.82, 0.78]

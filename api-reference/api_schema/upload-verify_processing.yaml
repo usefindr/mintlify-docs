@@ -48,9 +48,6 @@
                   - errored
                   description: Indexing status of the file
                   example: success
-              required:
-              - file_id
-              - indexing_status
             example:
               file_id: '123123123123'
               indexing_status: success

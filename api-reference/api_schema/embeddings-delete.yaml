@@ -68,9 +68,6 @@
                   type: integer
                   description: Number of chunks successfully deleted
                   example: 1
-              required:
-                - status
-                - total_deleted
               example:
                 status: {"CortexEmbeddings123_1": true}
                 total_deleted: 1

@@ -107,4 +107,43 @@
             - session_id
             - tenant_id
     # --- Responses ---
-    responses: {} 
+    responses:
+      '200':
+        description: QnA response returned successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                answer:
+                  type: string
+                  description: The generated answer to the user's question
+                  example: "Based on your recent interactions, I think..."
+                sources:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      source_id:
+                        type: string
+                        description: Unique identifier for the source document
+                      chunk_uuid:
+                        type: string
+                        description: Unique identifier for the content chunk
+                      content:
+                        type: string
+                        description: Relevant content from the source
+                      metadata:
+                        type: object
+                        description: Additional metadata about the source
+                  description: List of sources used to generate the answer
+                session_id:
+                  type: string
+                  description: Chat session ID for maintaining conversation context
+                  example: "session_12345"
+      '422':
+        description: Incomplete/invalid parameters
+      '401':
+        description: Invalid or missing API key
+      '5XX':
+        description: Internal server error 
