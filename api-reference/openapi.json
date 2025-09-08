@@ -3985,6 +3985,125 @@
           "public"
         ]
       }
+    },
+    "/tenant/sub_tenant_ids": {
+      "get": {
+        "tags": [
+          "tenant"
+        ],
+        "summary": "List Sub-Tenant IDs",
+        "description": "Retrieve all sub-tenant IDs contained within a specific tenant. Fetches the sub-tenant IDs directly from the underlying data store.",
+        "operationId": "get_sub_tenant_ids_tenant_sub_tenant_ids_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "tenant_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The primary tenant ID to fetch sub-tenant IDs for",
+              "title": "Tenant Id"
+            },
+            "description": "The primary tenant ID to fetch sub-tenant IDs for"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sub-tenant IDs retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "tenant_id": {
+                      "type": "string",
+                      "description": "The tenant ID that was queried",
+                      "example": "acme_corp"
+                    },
+                    "sub_tenant_ids": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "Array of all sub-tenant IDs within the tenant",
+                      "example": [
+                        "default",
+                        "engineering",
+                        "sales",
+                        "marketing",
+                        "hr",
+                        "user_12345",
+                        "user_67890",
+                        "project_alpha"
+                      ]
+                    },
+                    "count": {
+                      "type": "integer",
+                      "description": "Total number of sub-tenants found",
+                      "example": 8
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Success message with additional context",
+                      "example": "Successfully retrieved sub-tenant IDs for tenant acme_corp"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Tenant not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-fern-sdk-group-name": "tenant",
+        "x-fern-sdk-method-name": "sub_tenant_ids",
+        "x-fern-sdk-audience": [
+          "public"
+        ]
+      }
     }
   },
   "components": {
@@ -5593,7 +5712,7 @@
       },
       "SubTenantIdsData": {
         "properties": {
-          "collection_name": {
+          "tenant_id": {
             "type": "string",
             "title": "Collection Name",
             "description": "Name of the tenant containing the sub-tenants"
@@ -5626,7 +5745,7 @@
         },
         "type": "object",
         "required": [
-          "collection_name",
+          "tenant_id",
           "sub_tenant_ids",
           "count"
         ],
