@@ -67,14 +67,13 @@ When you upload documents with `file_id`s that already exist in your tenant:
 **Important**: When overwriting existing documents, all previous chunks, embeddings, and search indexes associated with those `file_id`s will be permanently removed and replaced. This action cannot be undone.
 </Warning>
 
-**Example Error Response for Duplicate File IDs in Batch:**
+**Example Success Response for Duplicate File IDs in Batch:**
 ```json
 {
-  "error": "Duplicate file IDs detected",
-  "message": "Some file_ids in the batch already exist and will be overwritten",
-  "duplicate_file_ids": ["doc_123456", "doc_789012"],
-  "status": "overwrite_warning",
-  "successful_uploads": ["doc_345678", "doc_901234"]
+  "message": "Batch upload successful. Documents with existing file_ids have been overwritten.",
+  "document_ids": ["doc_123456", "doc_789012", "doc_345678", "doc_901234"],
+  "overwritten_file_ids": ["doc_123456", "doc_789012"],
+  "status": "success"
 }
 ```
 

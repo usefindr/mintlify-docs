@@ -74,13 +74,12 @@ When you upload embeddings with a `file_id` that already exists in your tenant:
 **Important**: When overwriting existing embeddings, all previous vector data, chunk IDs, and search indexes associated with that `file_id` will be permanently removed and replaced. This action cannot be undone.
 </Warning>
 
-**Example Error Response for Duplicate File ID:**
+**Example Success Response for Duplicate File ID:**
 ```json
 {
-  "error": "File ID already exists",
-  "message": "Embeddings with file_id 'emb_123456' already exist. The existing embeddings will be overwritten with the new vectors.",
+  "message": "Embeddings uploaded successfully. Existing embeddings with file_id 'emb_123456' have been overwritten.",
   "file_id": "emb_123456",
-  "status": "overwrite_warning"
+  "status": "success"
 }
 ```
 

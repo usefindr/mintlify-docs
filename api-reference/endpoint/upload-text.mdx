@@ -65,13 +65,12 @@ When you upload text content with a `file_id` that already exists in your tenant
 **Important**: When overwriting existing text content, all previous chunks, embeddings, and search indexes associated with that `file_id` will be permanently removed and replaced. This action cannot be undone.
 </Warning>
 
-**Example Error Response for Duplicate File ID:**
+**Example Success Response for Duplicate File ID:**
 ```json
 {
-  "error": "File ID already exists",
-  "message": "Text content with file_id 'text_123456' already exists. The existing content will be overwritten with the new content.",
+  "message": "Text content uploaded successfully. Existing content with file_id 'text_123456' has been overwritten.",
   "file_id": "text_123456",
-  "status": "overwrite_warning"
+  "status": "success"
 }
 ```
 

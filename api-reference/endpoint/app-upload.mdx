@@ -109,14 +109,13 @@ When you upload app sources with `file_id`s that already exist in your tenant:
 **Important**: When overwriting existing app sources, all previous chunks, embeddings, and search indexes associated with those `file_id`s will be permanently removed and replaced. This action cannot be undone.
 </Warning>
 
-**Example Error Response for Duplicate File IDs in App Upload:**
+**Example Success Response for Duplicate File IDs in App Upload:**
 ```json
 {
-  "error": "Duplicate file IDs detected",
-  "message": "Some file_ids in the app upload already exist and will be overwritten",
-  "duplicate_file_ids": ["gmail_123456", "slack_789012"],
-  "status": "overwrite_warning",
-  "successful_uploads": ["notion_345678", "drive_901234"]
+  "message": "App sources uploaded successfully. Sources with existing file_ids have been overwritten.",
+  "document_ids": ["gmail_123456", "slack_789012", "notion_345678", "drive_901234"],
+  "overwritten_file_ids": ["gmail_123456", "slack_789012"],
+  "status": "success"
 }
 ```
 

@@ -65,13 +65,12 @@ When you upload a document with a `file_id` that already exists in your tenant:
 **Important**: When overwriting an existing document, all previous chunks, embeddings, and search indexes associated with that `file_id` will be permanently removed and replaced. This action cannot be undone.
 </Warning>
 
-**Example Error Response for Duplicate File ID:**
+**Example Success Response for Duplicate File ID:**
 ```json
 {
-  "error": "File ID already exists",
-  "message": "A document with file_id 'doc_123456' already exists. The existing document will be overwritten with the new content.",
+  "message": "Document uploaded successfully. Existing document with file_id 'doc_123456' has been overwritten.",
   "file_id": "doc_123456",
-  "status": "overwrite_warning"
+  "status": "success"
 }
 ```
 
