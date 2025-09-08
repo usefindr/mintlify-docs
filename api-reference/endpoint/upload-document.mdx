@@ -6,6 +6,8 @@ openapi: 'POST /upload/upload_document'
 Upload a document to your tenant's knowledge base. The document will be processed, chunked, and indexed for search and retrieval.
 
 
+
+## Supported file formats
 <Info>
 **Complete Reference**: For a comprehensive list of all supported file formats with detailed information, see our [Supported File Formats](/essentials/file-formats) documentation.
 </Info>
@@ -125,85 +127,6 @@ Once processing is complete, your document will be:
 - **File Size**: Documents up to 50MB are processed efficiently
 - **Content Quality**: Clear, well-structured documents produce better embeddings
 - **Metadata**: Include rich metadata for better filtering and organization
-
-## Supported File Formats
-
-Cortex supports a comprehensive range of file formats for document processing. Files are automatically parsed and their content extracted for indexing and search.
-
-<Info>
-**Complete Reference**: For a comprehensive list of all supported file formats with detailed information, see our [Supported File Formats](/essentials/file-formats) documentation.
-</Info>
-
-### **Markup and Documentation**
-- **Markdown** (all variants: CommonMark, GitHub-Flavored, MultiMarkdown, Markdown Extra, Djot)
-- **HTML, XHTML**
-- **LaTeX**
-- **reStructuredText**
-- **Textile**
-- **Emacs Org-Mode**
-- **Emacs Muse**
-- **OPML**
-- **DocBook**
-- **AsciiDoc**
-- **MediaWiki, TWiki, DokuWiki, TikiWiki, Vimwiki, Muse Wiki**
-- **JATS, BITS**
-- **FictionBook2 (FB2)**
-- **GNU TexInfo**
-- **Haddock markup**
-- **TEI Simple**
-- **Typst**
-- **pod, man (roff), mdoc**
-- **Creole, Jira wiki markup**
-- **Markua, txt2tags**
-- **Plain text (TXT)**
-
-### **Word Processing and Presentations**
-- **PDF**
-- **ODT (OpenDocument Text)**
-- **RTF (Rich Text Format)**
-- **DOC**
-- **DOCX (Office Open XML)**
-- **DOCM, DOT, DOTM**
-- **Pages**
-- **CWK, LWP, MW, MCW, HWP, PBD, zabw**
-- **WPD, WPS**
-- **XML**
-- **Key**
-- **PPT, PPTX, PPTM, POT, POTM, POTX, SDD, SDA, SDP, SGL, STI, SXI, STW, SXW, SXG, UOP**
-
-### **Spreadsheets**
-- **XLSX**
-- **XLS**
-- **XLSM, XLSB, XLW, CSV, TSV, DIF, SYLK, SLK, PRN, NUMBERS, ET, ODS, FODS, UOS1, UOS2, DBF, WK1, WK2, WK3, WK4, WKS, 123, WQ1, WQ2, WB1, WB2, WB3, QPW, XLR, ETH**
-
-### **Images**
-- **JPEG, JPG, PNG, GIF, BMP, SVG, TIFF, WEBP**
-
-### **Ebooks**
-- **EPUB**
-- **FictionBook2 (FB2)**
-
-### **Audio/Video**
-- **MP3, MP4, MPEG, MPGA, M4A, WAV, WEBM**
-
-### **Data/Bibliography/Serialization**
-- **BibTeX/BibLaTeX/CSL JSON/CSL YAML**
-- **RIS**
-- **EndNote XML**
-- **Jupyter notebook (ipynb)**
-- **JSON**
-- **XML**
-- **Haskell AST**
-
-### **Others (Special Formats)**
-- **InDesign ICML**
-- **XWiki, ZimWiki**
-- **Beamer, Slidy, Slideous, S5, DZSlides, reveal.js (presentation/slideshow formats)**
-- **ANSI-formatted text**
-
-<Warning>
-**Unsupported File Formats**: If you attempt to upload a file format that is not supported, you will receive an error response with status code `400` and the message: `"Unsupported file format: [filename]. Please check our supported file formats documentation."` Ensure your files are in one of the supported formats listed above before uploading.
-</Warning>
 
 ### **Processing Optimization**
 - **Batch Uploads**: For multiple documents, consider using our batch upload endpoint
