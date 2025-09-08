@@ -20,6 +20,10 @@ All endpoints support Cortex's hierarchical multi-tenant system using `tenant_id
 **Default Sub-Tenant Behavior**: When you create a tenant, Cortex automatically creates a **DEFAULT sub-tenant** that acts as a global space. If you don't specify a `sub_tenant_id` in your API calls, your data will be stored in this default sub-tenant. This is perfect for organization-wide data that should be accessible across all departments.
 </Note>
 
+<Info>
+**Creating Additional Sub-Tenants**: Sub-tenants are created automatically when you first use a new `sub_tenant_id` that doesn't exist yet. No separate API call is required. For B2C applications, use user IDs as sub-tenant IDs (e.g., `sub_tenant_id: "user_12345"`). For B2B applications, use descriptive department names (e.g., `sub_tenant_id: "engineering"`).
+</Info>
+
 [Learn more about multi-tenancy](/essentials/multi-tenant) | [Learn more about metadata](/essentials/metadata)
 
 ### Metadata Architecture

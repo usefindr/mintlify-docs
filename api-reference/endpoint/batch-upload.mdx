@@ -16,7 +16,7 @@ When you upload multiple documents, each document goes through our comprehensive
 
 ### 2. **Parallel Processing Phase**
 Each document is processed independently with:
-- **Content Extraction**: Extracting text from various formats (PDF, DOCX, TXT, etc.)
+- **Content Extraction**: Extracting text from various supported formats (see Supported File Formats section below)
 - **Document Parsing**: Understanding document structure, headers, and formatting
 - **Text Cleaning**: Removing formatting artifacts and normalizing content
 
@@ -53,3 +53,141 @@ Each document is processed independently with:
 > **Recommended**: For optimal performance, limit each batch to a maximum of **20 sources** per request. Send multiple batch requests with an interval of **1 second** between each request.
 
 > **File ID Management**: When you provide a `file_id` as a key in the `document_metadata` object, that specific ID will be used to identify your content. If no `file_id` is provided in the `document_metadata`, the system will automatically generate a unique identifier for you. This allows you to maintain consistent references to your content across your application while ensuring every piece of content has a unique identifier.
+
+### **Duplicate File ID Behavior**
+
+When you upload documents with `file_id`s that already exist in your tenant:
+
+- **Overwrite Behavior**: Each existing document with a matching `file_id` will be **completely replaced** with the new document
+- **Processing**: Each new document will go through the full processing pipeline independently
+- **Search Results**: Previous search results and embeddings from old documents will be replaced with the new documents' content
+- **Idempotency**: Uploading the same documents with the same `file_id`s multiple times is safe and will result in the same final state
+
+<Warning>
+**Important**: When overwriting existing documents, all previous chunks, embeddings, and search indexes associated with those `file_id`s will be permanently removed and replaced. This action cannot be undone.
+</Warning>
+
+**Example Error Response for Duplicate File IDs in Batch:**
+```json
+{
+  "error": "Duplicate file IDs detected",
+  "message": "Some file_ids in the batch already exist and will be overwritten",
+  "duplicate_file_ids": ["doc_123456", "doc_789012"],
+  "status": "overwrite_warning",
+  "successful_uploads": ["doc_345678", "doc_901234"]
+}
+```
+
+## Supported File Formats
+
+Cortex supports a comprehensive range of file formats for document processing. Files are automatically parsed and their content extracted for indexing and search.
+
+<Info>
+**Complete Reference**: For a comprehensive list of all supported file formats with detailed information, see our [Supported File Formats](/essentials/file-formats) documentation.
+</Info>
+
+### **Markup and Documentation**
+- **Markdown** (all variants: CommonMark, GitHub-Flavored, MultiMarkdown, Markdown Extra, Djot)
+- **HTML, XHTML**
+- **LaTeX**
+- **reStructuredText**
+- **Textile**
+- **Emacs Org-Mode**
+- **Emacs Muse**
+- **OPML**
+- **DocBook**
+- **AsciiDoc**
+- **MediaWiki, TWiki, DokuWiki, TikiWiki, Vimwiki, Muse Wiki**
+- **JATS, BITS**
+- **FictionBook2 (FB2)**
+- **GNU TexInfo**
+- **Haddock markup**
+- **TEI Simple**
+- **Typst**
+- **pod, man (roff), mdoc**
+- **Creole, Jira wiki markup**
+- **Markua, txt2tags**
+- **Plain text (TXT)**
+
+### **Word Processing and Presentations**
+- **PDF**
+- **ODT (OpenDocument Text)**
+- **RTF (Rich Text Format)**
+- **DOC**
+- **DOCX (Office Open XML)**
+- **DOCM, DOT, DOTM**
+- **Pages**
+- **CWK, LWP, MW, MCW, HWP, PBD, zabw**
+- **WPD, WPS**
+- **XML**
+- **Key**
+- **PPT, PPTX, PPTM, POT, POTM, POTX, SDD, SDA, SDP, SGL, STI, SXI, STW, SXW, SXG, UOP**
+
+### **Spreadsheets**
+- **XLSX**
+- **XLS**
+- **XLSM, XLSB, XLW, CSV, TSV, DIF, SYLK, SLK, PRN, NUMBERS, ET, ODS, FODS, UOS1, UOS2, DBF, WK1, WK2, WK3, WK4, WKS, 123, WQ1, WQ2, WB1, WB2, WB3, QPW, XLR, ETH**
+
+### **Images**
+- **JPEG, JPG, PNG, GIF, BMP, SVG, TIFF, WEBP**
+
+### **Ebooks**
+- **EPUB**
+- **FictionBook2 (FB2)**
+
+### **Audio/Video**
+- **MP3, MP4, MPEG, MPGA, M4A, WAV, WEBM**
+
+### **Data/Bibliography/Serialization**
+- **BibTeX/BibLaTeX/CSL JSON/CSL YAML**
+- **RIS**
+- **EndNote XML**
+- **Jupyter notebook (ipynb)**
+- **JSON**
+- **XML**
+- **Haskell AST**
+
+### **Others (Special Formats)**
+- **InDesign ICML**
+- **XWiki, ZimWiki**
+- **Beamer, Slidy, Slideous, S5, DZSlides, reveal.js (presentation/slideshow formats)**
+- **ANSI-formatted text**
+
+<Warning>
+**Unsupported File Formats**: If you attempt to upload a file format that is not supported, you will receive an error response with status code `400` and the message: `"Unsupported file format: [filename]. Please check our supported file formats documentation."` Ensure your files are in one of the supported formats listed above before uploading.
+</Warning>
+
+## Best Practices
+
+### **Document Preparation**
+- **File Size**: Documents up to 50MB are processed efficiently
+- **Content Quality**: Clear, well-structured documents produce better embeddings
+- **Metadata**: Include rich metadata for better filtering and organization
+
+### **Processing Optimization**
+- **Batch Size**: Limit each batch to a maximum of **20 sources** per request
+- **Request Intervals**: Send multiple batch requests with an interval of **1 second** between each request
+- **Metadata Consistency**: Use consistent metadata schemas across your organization
+- **File Naming**: Descriptive filenames help with document identification
+
+### **Troubleshooting**
+
+**Documents Not Appearing in Search?**
+- Wait 5-10 minutes for processing to complete
+- Check if any document status is `errored` (rare occurrence)
+- Verify your search query and filters
+
+**Slow Processing?**
+- Large documents (100+ pages) take longer to process
+- Complex formatting may require additional processing time
+- High system load may temporarily slow processing
+
+**Processing Failures?**
+- If status shows `errored`, ensure your documents aren't corrupted or password-protected
+- Check that the file format is supported (see Supported File Formats section above)
+- Verify your API key has sufficient permissions
+- For unsupported formats, you'll receive a `400` error with the message: `"Unsupported file format: [filename]. Please check our supported file formats documentation."`
+
+<Info>
+**Need Help?** If documents fail to process or you're experiencing issues, contact our support team with the `file_id`s for assistance.
+</Info>

@@ -24,6 +24,95 @@ The **sub_tenant_id** represents a subdivision within a tenant - such as departm
 - This means if you upload documents with just a `tenant_id` and leave `sub_tenant_id` empty, they'll go to the default sub-tenant
 - The default sub-tenant is perfect for organization-wide data that should be accessible across all departments
 
+## Creating Additional Sub-Tenants
+
+**No Explicit API Required**: Cortex doesn't require a separate API call to create sub-tenants. Sub-tenants are created automatically when you first use a new `sub_tenant_id` that doesn't exist yet.
+
+### How Sub-Tenant Creation Works
+
+1. **Automatic Creation**: When you upload a document, text, or any content with a `sub_tenant_id` that doesn't exist, Cortex automatically creates that sub-tenant
+2. **First Upload Triggers Creation**: The first API call with a new `sub_tenant_id` will create the sub-tenant and then process your content
+3. **Immediate Availability**: Once created, the sub-tenant is immediately available for all subsequent operations
+
+**Example - Creating a New Sub-Tenant:**
+```json
+POST /upload/upload_document?tenant_id=acme_corp&sub_tenant_id=engineering_team_alpha
+{
+  "file": "engineering_standards.pdf",
+  "document_metadata": {
+    "title": "Engineering Standards",
+    "department": "Engineering"
+  }
+}
+```
+
+If `engineering_team_alpha` doesn't exist as a sub-tenant under `acme_corp`, Cortex will:
+1. ✅ Create the new sub-tenant `engineering_team_alpha`
+2. ✅ Upload and process the document
+3. ✅ Make the sub-tenant available for future operations
+
+### Sub-Tenant ID Best Practices
+
+#### **Recommended Naming Conventions**
+
+**For User-Based Sub-Tenants (B2C):**
+```javascript
+// Use user IDs as sub-tenant IDs for individual user workspaces
+sub_tenant_id: "user_12345"
+sub_tenant_id: "user_67890"
+sub_tenant_id: "user_abc123"
+```
+
+**For Department/Team-Based Sub-Tenants (B2B):**
+```javascript
+// Use descriptive department names
+sub_tenant_id: "engineering"
+sub_tenant_id: "sales"
+sub_tenant_id: "hr"
+sub_tenant_id: "marketing"
+```
+
+**For Project-Based Sub-Tenants:**
+```javascript
+// Use project identifiers
+sub_tenant_id: "project_alpha"
+sub_tenant_id: "project_beta"
+sub_tenant_id: "client_acme_corp"
+```
+
+**For Customer-Based Sub-Tenants (Multi-tenant SaaS):**
+```javascript
+// Use customer identifiers
+sub_tenant_id: "customer_12345"
+sub_tenant_id: "customer_acme_inc"
+sub_tenant_id: "customer_beta_corp"
+```
+
+#### **Best Practices for Sub-Tenant IDs**
+
+1. **Use Consistent Naming**: Establish a clear naming convention across your application
+2. **Include Prefixes**: Use prefixes like `user_`, `dept_`, `project_` to make the purpose clear
+3. **Avoid Special Characters**: Stick to alphanumeric characters and underscores
+4. **Keep It Descriptive**: Make sub-tenant IDs self-explanatory
+5. **Consider Hierarchies**: For complex organizations, consider hierarchical naming like `dept_engineering_team_alpha`
+
+**Good Examples:**
+```javascript
+sub_tenant_id: "user_12345"           // Individual user
+sub_tenant_id: "dept_engineering"     // Department
+sub_tenant_id: "project_alpha_v2"     // Project
+sub_tenant_id: "client_acme_corp"     // Client
+sub_tenant_id: "team_mobile_dev"      // Team
+```
+
+**Avoid These:**
+```javascript
+sub_tenant_id: "12345"                // Too generic
+sub_tenant_id: "user@company.com"     // Special characters
+sub_tenant_id: "very_long_descriptive_name_that_is_hard_to_read" // Too long
+sub_tenant_id: "temp"                 // Not descriptive
+```
+
 ## Multi-Tenant Architecture
 
 **What it is:**  

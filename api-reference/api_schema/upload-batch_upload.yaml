@@ -93,6 +93,32 @@
                   - doc_123
                   - doc_456
                   - doc_789
+      '409':
+        description: Duplicate file IDs detected - will be overwritten
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  example: "Duplicate file IDs detected"
+                message:
+                  type: string
+                  example: "Some file_ids in the batch already exist and will be overwritten"
+                duplicate_file_ids:
+                  type: array
+                  items:
+                    type: string
+                  example: ["doc_123456", "doc_789012"]
+                status:
+                  type: string
+                  example: "overwrite_warning"
+                successful_uploads:
+                  type: array
+                  items:
+                    type: string
+                  example: ["doc_345678", "doc_901234"]
       '401':
         description: Invalid or missing API key
       '422':
