@@ -33,22 +33,10 @@
         },
         "responses": {
           "200": {
-            "description": "QnA response generated successfully",
+            "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "default": true
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "QnA response generated successfully"
-                    }
-                  }
-                }
+                "schema": {}
               }
             }
           },
@@ -374,14 +362,14 @@
         ]
       }
     },
-    "/list/sub_tenant_ids": {
+    "/user_memory/list_user_memories": {
       "get": {
         "tags": [
-          "list"
+          "user_memory"
         ],
-        "summary": "Get Sub Tenant Ids",
-        "description": "Retrieve all sub-tenant IDs for a specific tenant.\n\nUse this endpoint to get a list of all sub-tenant identifiers associated with your main tenant. This helps you understand the organizational structure of your data and manage access controls effectively.\n\nThe response includes the collection name, list of sub-tenant IDs, and a count of total sub-tenants for easy reference.",
-        "operationId": "get_sub_tenant_ids_list_sub_tenant_ids_get",
+        "summary": "List User Memories",
+        "description": "Retrieve all stored user memories for your tenant.\n\nThis endpoint returns a comprehensive list of all user memories that have been stored, \nwhether they were added manually or generated through AI. User memories help personalize \nyour experience by storing context, preferences, and important information.\n\nYou can optionally specify a sub-tenant to filter memories within that specific scope.",
+        "operationId": "list_user_memories_user_memory_list_user_memories_get",
         "security": [
           {
             "HTTPBearer": []
@@ -398,6 +386,18 @@
               "title": "Tenant Id"
             },
             "description": "Unique identifier for the tenant/organization"
+          },
+          {
+            "name": "sub_tenant_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id",
+              "default": "",
+              "title": "Sub Tenant Id"
+            },
+            "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id"
           }
         ],
         "responses": {
@@ -406,7 +406,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SubTenantIdsData"
+                  "$ref": "#/components/schemas/ListUserMemoriesResponse"
                 }
               }
             }
@@ -482,77 +482,6 @@
             }
           }
         },
-        "x-fern-sdk-group-name": "sources",
-        "x-fern-sdk-method-name": "get_sub_tenant_ids",
-        "x-fern-sdk-audience": [
-          "public"
-        ]
-      }
-    },
-    "/user_memory/list_user_memories": {
-      "get": {
-        "tags": [
-          "user_memory"
-        ],
-        "summary": "List User Memories",
-        "operationId": "list_user_memories_user_memory_list_user_memories_get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "tenant_id",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Tenant Id"
-            }
-          },
-          {
-            "name": "sub_tenant_id",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Sub Tenant Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "User memories retrieved successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "default": true
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "User memories retrieved successfully"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
         "x-fern-sdk-group-name": "user_memory",
         "x-fern-sdk-method-name": "list_user_memories",
         "x-fern-sdk-audience": [
@@ -566,6 +495,7 @@
           "user_memory"
         ],
         "summary": "Delete User Memory",
+        "description": "Permanently remove a specific user memory from storage.\n\nThis endpoint allows you to delete a user memory by its unique identifier. \nOnce deleted, the memory cannot be recovered, so use this operation carefully.\n\nThe memory will be removed from your tenant's storage and will no longer \nappear in search results or memory listings.",
         "operationId": "delete_user_memory_user_memory_delete_user_memory_delete",
         "security": [
           {
@@ -579,8 +509,10 @@
             "required": true,
             "schema": {
               "type": "string",
+              "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id"
-            }
+            },
+            "description": "Unique identifier for the tenant/organization"
           },
           {
             "name": "memory_id",
@@ -588,46 +520,101 @@
             "required": true,
             "schema": {
               "type": "string",
+              "description": "Unique identifier of the memory to delete",
               "title": "Memory Id"
-            }
+            },
+            "description": "Unique identifier of the memory to delete"
           },
           {
             "name": "sub_tenant_id",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string",
+              "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id",
+              "default": "",
               "title": "Sub Tenant Id"
-            }
+            },
+            "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id"
           }
         ],
         "responses": {
           "200": {
-            "description": "Memory deleted successfully",
+            "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "default": true
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Memory deleted successfully"
-                    }
-                  }
+                  "$ref": "#/components/schemas/DeleteUserMemoryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - Resource does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
                 }
               }
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Unprocessable Entity - Validation failed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
                 }
               }
             }
@@ -646,6 +633,7 @@
           "user_memory"
         ],
         "summary": "Retrieve User Memory",
+        "description": "Find relevant user memories using semantic search.\n\nThis endpoint performs a semantic search across all your stored user memories \nto find the most relevant ones based on your query. The results are ranked by \nsimilarity score, with the most relevant memories returned first.\n\nUse this to recall past preferences, context, or information that might be \nrelevant to your current task or query.",
         "operationId": "retrieve_user_memory_user_memory_retrieve_user_memory_get",
         "security": [
           {
@@ -659,8 +647,10 @@
             "required": true,
             "schema": {
               "type": "string",
+              "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id"
-            }
+            },
+            "description": "Unique identifier for the tenant/organization"
           },
           {
             "name": "query",
@@ -668,17 +658,22 @@
             "required": true,
             "schema": {
               "type": "string",
+              "description": "Search query to find relevant user memories",
               "title": "Query"
-            }
+            },
+            "description": "Search query to find relevant user memories"
           },
           {
             "name": "sub_tenant_id",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string",
+              "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id",
+              "default": "",
               "title": "Sub Tenant Id"
-            }
+            },
+            "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id"
           },
           {
             "name": "max_count",
@@ -686,38 +681,92 @@
             "required": false,
             "schema": {
               "type": "integer",
+              "maximum": 50,
+              "minimum": 1,
+              "description": "Maximum number of memories to return (default: 5)",
               "default": 5,
               "title": "Max Count"
-            }
+            },
+            "description": "Maximum number of memories to return (default: 5)"
           }
         ],
         "responses": {
           "200": {
-            "description": "User memory retrieved successfully",
+            "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "default": true
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "User memory retrieved successfully"
-                    }
-                  }
+                  "$ref": "#/components/schemas/RetrieveUserMemoryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - Resource does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
                 }
               }
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Unprocessable Entity - Validation failed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
                 }
               }
             }
@@ -736,6 +785,7 @@
           "user_memory"
         ],
         "summary": "Generate User Memory",
+        "description": "Generate AI-powered user memories from your query and context.\n\nThis endpoint uses artificial intelligence to create personalized memories \nbased on your query and user context. The AI analyzes your input and generates \nrelevant, contextual memories that can help improve future interactions.\n\nGenerated memories are automatically stored and can be retrieved through \nthe standard memory search endpoints.",
         "operationId": "generate_user_memory_user_memory_generate_user_memory_post",
         "security": [
           {
@@ -749,8 +799,10 @@
             "required": true,
             "schema": {
               "type": "string",
+              "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id"
-            }
+            },
+            "description": "Unique identifier for the tenant/organization"
           },
           {
             "name": "user_query",
@@ -758,8 +810,10 @@
             "required": true,
             "schema": {
               "type": "string",
+              "description": "Your query or context for AI memory generation",
               "title": "User Query"
-            }
+            },
+            "description": "Your query or context for AI memory generation"
           },
           {
             "name": "user_name",
@@ -767,46 +821,101 @@
             "required": true,
             "schema": {
               "type": "string",
+              "description": "Your name to personalize the generated memories",
               "title": "User Name"
-            }
+            },
+            "description": "Your name to personalize the generated memories"
           },
           {
             "name": "sub_tenant_id",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string",
+              "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id",
+              "default": "",
               "title": "Sub Tenant Id"
-            }
+            },
+            "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id"
           }
         ],
         "responses": {
           "200": {
-            "description": "User memory generated successfully",
+            "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "default": true
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "User memory generated successfully"
-                    }
-                  }
+                  "$ref": "#/components/schemas/GenerateUserMemoryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - Resource does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
                 }
               }
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Unprocessable Entity - Validation failed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
                 }
               }
             }
@@ -825,6 +934,7 @@
           "user_memory"
         ],
         "summary": "Add User Memory",
+        "description": "Store a new user memory for future reference.\n\nThis endpoint allows you to manually add a memory that will be stored and \ncan be retrieved later through memory search. Use this to save important \npreferences, context, or information that you want the system to remember.\n\nThe stored memory will be indexed and available for semantic search, making \nit accessible when relevant to future queries or interactions.",
         "operationId": "add_user_memory_user_memory_add_user_memory_post",
         "security": [
           {
@@ -838,8 +948,10 @@
             "required": true,
             "schema": {
               "type": "string",
+              "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id"
-            }
+            },
+            "description": "Unique identifier for the tenant/organization"
           },
           {
             "name": "user_memory",
@@ -847,46 +959,101 @@
             "required": true,
             "schema": {
               "type": "string",
+              "description": "The memory content to store for future reference",
               "title": "User Memory"
-            }
+            },
+            "description": "The memory content to store for future reference"
           },
           {
             "name": "sub_tenant_id",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string",
+              "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id",
+              "default": "",
               "title": "Sub Tenant Id"
-            }
+            },
+            "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id"
           }
         ],
         "responses": {
           "200": {
-            "description": "User memory added successfully",
+            "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "default": true
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "User memory added successfully"
-                    }
-                  }
+                  "$ref": "#/components/schemas/AddUserMemoryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - Resource does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
                 }
               }
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Unprocessable Entity - Validation failed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
                 }
               }
             }
@@ -1033,7 +1200,8 @@
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id"
             },
-            "description": "Unique identifier for the tenant/organization"
+            "description": "Unique identifier for the tenant/organization",
+            "example": "tenant_abcdefg"
           },
           {
             "name": "sub_tenant_id",
@@ -1045,7 +1213,8 @@
               "default": "",
               "title": "Sub Tenant Id"
             },
-            "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id"
+            "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id",
+            "example": "sub_tenant_abcdef"
           }
         ],
         "requestBody": {
@@ -1307,7 +1476,8 @@
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id"
             },
-            "description": "Unique identifier for the tenant/organization"
+            "description": "Unique identifier for the tenant/organization",
+            "example": "1234"
           },
           {
             "name": "sub_tenant_id",
@@ -1319,7 +1489,8 @@
               "default": "",
               "title": "Sub Tenant Id"
             },
-            "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id"
+            "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id",
+            "example": "5678"
           }
         ],
         "requestBody": {
@@ -1455,7 +1626,8 @@
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id"
             },
-            "description": "Unique identifier for the tenant/organization"
+            "description": "Unique identifier for the tenant/organization",
+            "example": "1234"
           },
           {
             "name": "sub_tenant_id",
@@ -1467,7 +1639,8 @@
               "default": "",
               "title": "Sub Tenant Id"
             },
-            "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id"
+            "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id",
+            "example": "5678"
           }
         ],
         "requestBody": {
@@ -2854,14 +3027,14 @@
         ]
       }
     },
-    "/upload/delete_source": {
+    "/upload/delete_memory": {
       "delete": {
         "tags": [
           "upload"
         ],
-        "summary": "Delete Source",
+        "summary": "Delete Memory",
         "description": "Remove documents and content from your knowledge base.\n\nThis endpoint permanently deletes the specified sources from your knowledge base. Once deleted, the content will no longer be available for search or retrieval.\n\nUse this carefully as the action cannot be undone. The system will confirm successful deletion of each source ID you specify.",
-        "operationId": "delete_source_upload_delete_source_delete",
+        "operationId": "delete_memory_upload_delete_memory_delete",
         "requestBody": {
           "content": {
             "application/json": {
@@ -2875,31 +3048,194 @@
         },
         "responses": {
           "200": {
-            "description": "Document deleted successfully",
+            "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "default": true
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Document deleted successfully"
-                    }
-                  }
+                  "$ref": "#/components/schemas/DeleteSources"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - Resource does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
                 }
               }
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Unprocessable Entity - Validation failed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "x-fern-sdk-group-name": "upload",
+        "x-fern-sdk-method-name": "delete_memory",
+        "x-fern-sdk-audience": [
+          "public"
+        ]
+      }
+    },
+    "/upload/delete_source": {
+      "delete": {
+        "tags": [
+          "upload"
+        ],
+        "summary": "Delete Memory",
+        "description": "Remove documents and content from your knowledge base.\n\nThis endpoint permanently deletes the specified sources from your knowledge base. Once deleted, the content will no longer be available for search or retrieval.\n\nUse this carefully as the action cannot be undone. The system will confirm successful deletion of each source ID you specify.",
+        "operationId": "delete_memory_upload_delete_source_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteMemoryRequest",
+                "description": "Request body containing the source IDs to delete and tenant information"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteSources"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - Resource does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity - Validation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
                 }
               }
             }
@@ -3039,6 +3375,119 @@
         },
         "x-fern-sdk-group-name": "upload",
         "x-fern-sdk-method-name": "verify_processing",
+        "x-fern-sdk-audience": [
+          "public"
+        ]
+      }
+    },
+    "/document/delete": {
+      "delete": {
+        "tags": [
+          "document"
+        ],
+        "summary": "Delete Memory",
+        "description": "Remove documents and content from your knowledge base.\n\nThis endpoint permanently deletes the specified sources from your knowledge base. Once deleted, the content will no longer be available for search or retrieval.\n\nUse this carefully as the action cannot be undone. The system will confirm successful deletion of each source ID you specify.",
+        "operationId": "delete_memory_document_delete_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteMemoryRequest",
+                "description": "Request body containing the source IDs to delete and tenant information"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteSources"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - Resource does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity - Validation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "x-fern-sdk-group-name": "document",
+        "x-fern-sdk-method-name": "delete",
         "x-fern-sdk-audience": [
           "public"
         ]
@@ -3991,7 +4440,7 @@
         "tags": [
           "tenant"
         ],
-        "summary": "List Sub-Tenant IDs",
+        "summary": "Get Sub Tenant Ids",
         "description": "Retrieve all sub-tenant IDs contained within a specific tenant. Fetches the sub-tenant IDs directly from the underlying data store.",
         "operationId": "get_sub_tenant_ids_tenant_sub_tenant_ids_get",
         "security": [
@@ -4006,59 +4455,43 @@
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The primary tenant ID to fetch sub-tenant IDs for",
               "title": "Tenant Id"
-            },
-            "description": "The primary tenant ID to fetch sub-tenant IDs for"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Sub-tenant IDs retrieved successfully",
+            "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "tenant_id": {
-                      "type": "string",
-                      "description": "The tenant ID that was queried",
-                      "example": "acme_corp"
-                    },
-                    "sub_tenant_ids": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      },
-                      "description": "Array of all sub-tenant IDs within the tenant",
-                      "example": [
-                        "default",
-                        "engineering",
-                        "sales",
-                        "marketing",
-                        "hr",
-                        "user_12345",
-                        "user_67890",
-                        "project_alpha"
-                      ]
-                    },
-                    "count": {
-                      "type": "integer",
-                      "description": "Total number of sub-tenants found",
-                      "example": 8
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Success message with additional context",
-                      "example": "Successfully retrieved sub-tenant IDs for tenant acme_corp"
-                    }
-                  }
+                  "$ref": "#/components/schemas/SubTenantIdsData"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
                 }
               }
             }
           },
           "401": {
-            "description": "Invalid or missing API key",
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Access denied",
             "content": {
               "application/json": {
                 "schema": {
@@ -4068,7 +4501,7 @@
             }
           },
           "404": {
-            "description": "Tenant not found",
+            "description": "Not Found - Resource does not exist",
             "content": {
               "application/json": {
                 "schema": {
@@ -4078,7 +4511,7 @@
             }
           },
           "422": {
-            "description": "Invalid parameters",
+            "description": "Unprocessable Entity - Validation failed",
             "content": {
               "application/json": {
                 "schema": {
@@ -4088,7 +4521,17 @@
             }
           },
           "500": {
-            "description": "Internal server error",
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
             "content": {
               "application/json": {
                 "schema": {
@@ -4099,7 +4542,129 @@
           }
         },
         "x-fern-sdk-group-name": "tenant",
-        "x-fern-sdk-method-name": "sub_tenant_ids",
+        "x-fern-sdk-method-name": "get_sub_tenant_ids",
+        "x-fern-sdk-audience": [
+          "public"
+        ]
+      }
+    },
+    "/tenant/delete_sub_tenant": {
+      "delete": {
+        "tags": [
+          "tenant"
+        ],
+        "summary": "Delete Sub Tenant",
+        "description": "Delete a sub-tenant from a given tenant.\n\nThis endpoint deletes a specific sub-tenant from the specified tenant.\nIt validates that the sub-tenant is not the primary/default sub-tenant before deletion.",
+        "operationId": "delete_sub_tenant_tenant_delete_sub_tenant_delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "tenant_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Tenant Id"
+            }
+          },
+          {
+            "name": "sub_tenant_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Sub Tenant Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteSubTenantData"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - Resource does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity - Validation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-fern-sdk-group-name": "tenant",
+        "x-fern-sdk-method-name": "delete_sub_tenant",
         "x-fern-sdk-audience": [
           "public"
         ]
@@ -4120,6 +4685,42 @@
         ],
         "title": "ActualErrorResponse"
       },
+      "AddUserMemoryResponse": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "description": "Indicates whether the memory addition operation was successful",
+            "example": true
+          },
+          "user_memory_added": {
+            "type": "boolean",
+            "title": "User Memory Added",
+            "description": "Confirms whether the memory was successfully stored in the system",
+            "example": true
+          },
+          "user_memory_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "User Memory Id",
+            "description": "Unique identifier assigned to the newly created memory",
+            "example": "CortexUserMemory39243c65851949fbab283cce9085a5f61757340796"
+          }
+        },
+        "type": "object",
+        "required": [
+          "success",
+          "user_memory_added"
+        ],
+        "title": "AddUserMemoryResponse",
+        "description": "Response model for adding a new user memory."
+      },
       "AppSourcesUploadData": {
         "properties": {
           "uploaded": {
@@ -4127,20 +4728,25 @@
               "$ref": "#/components/schemas/FileUploadResult"
             },
             "type": "array",
-            "title": "Uploaded"
+            "title": "Uploaded",
+            "description": "List of successfully uploaded app source for indexing"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "description": "Status message indicating app sources upload scheduled"
           },
           "success": {
             "type": "boolean",
             "title": "Success",
             "default": true
-          },
-          "message": {
-            "type": "string",
-            "title": "Message",
-            "default": "App sources upload completed successfully"
           }
         },
         "type": "object",
+        "required": [
+          "uploaded",
+          "message"
+        ],
         "title": "AppSourcesUploadData"
       },
       "AttachmentModel": {
@@ -4204,20 +4810,25 @@
               "$ref": "#/components/schemas/FileUploadResult"
             },
             "type": "array",
-            "title": "Uploaded"
+            "title": "Uploaded",
+            "description": "List of successfully uploaded files for processing"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "description": "Status message indicating batch document parsing scheduled"
           },
           "success": {
             "type": "boolean",
             "title": "Success",
             "default": true
-          },
-          "message": {
-            "type": "string",
-            "title": "Message",
-            "default": "Batch upload completed successfully"
           }
         },
         "type": "object",
+        "required": [
+          "uploaded",
+          "message"
+        ],
         "title": "BatchUploadData"
       },
       "Body_batch_update_upload_batch_update_patch": {
@@ -4471,19 +5082,20 @@
           "tenant_id": {
             "type": "string",
             "title": "Tenant Id",
-            "description": "Primary organizational identifier (e.g., enterprise client, company) for multi-tenant data isolation"
+            "description": "Unique identifier for the tenant/organization"
           },
           "source_ids": {
             "items": {
               "type": "string"
             },
             "type": "array",
-            "title": "Source Ids"
+            "title": "Source Ids",
+            "description": "List of source IDs to delete"
           },
           "sub_tenant_id": {
             "type": "string",
             "title": "Sub Tenant Id",
-            "description": "Sub-tenant identifier",
+            "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id",
             "default": ""
           }
         },
@@ -4494,16 +5106,8 @@
         ],
         "title": "DeleteMemoryRequest"
       },
-      "EmbeddingsCreateCollectionData": {
+      "DeleteSources": {
         "properties": {
-          "tenant_id": {
-            "type": "string",
-            "title": "Tenant Id"
-          },
-          "sub_tenant_id": {
-            "type": "string",
-            "title": "Sub Tenant Id"
-          },
           "success": {
             "type": "boolean",
             "title": "Success",
@@ -4512,6 +5116,101 @@
           "message": {
             "type": "string",
             "title": "Message",
+            "default": "Sources deleted successfully"
+          }
+        },
+        "type": "object",
+        "title": "DeleteSources"
+      },
+      "DeleteSubTenantData": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Status",
+            "description": "The status of the deletion operation.",
+            "example": "deleted"
+          },
+          "tenant_id": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Tenant Id",
+            "description": "The tenant ID from which the sub-tenant was deleted.",
+            "example": "tenant_abcd"
+          },
+          "sub_tenant_id": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Sub Tenant Id",
+            "description": "The ID of the sub-tenant that was deleted.",
+            "example": "user_12345"
+          },
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "description": "Indicates whether the sub-tenant deletion was successful.",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "description": "Response message describing the operation result.",
+            "default": "Sub-tenant deleted successfully"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "tenant_id",
+          "sub_tenant_id"
+        ],
+        "title": "DeleteSubTenantData"
+      },
+      "DeleteUserMemoryResponse": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "description": "Indicates whether the memory deletion operation was successful",
+            "example": true
+          },
+          "user_memory_deleted": {
+            "type": "boolean",
+            "title": "User Memory Deleted",
+            "description": "Confirms whether the specific memory was successfully deleted",
+            "example": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "success",
+          "user_memory_deleted"
+        ],
+        "title": "DeleteUserMemoryResponse",
+        "description": "Response model for deleting a user memory."
+      },
+      "EmbeddingsCreateCollectionData": {
+        "properties": {
+          "tenant_id": {
+            "type": "string",
+            "title": "Tenant Id",
+            "description": "Identifier for the tenant/organization"
+          },
+          "sub_tenant_id": {
+            "type": "string",
+            "title": "Sub Tenant Id",
+            "description": "Identifier for the sub-tenant within the tenant"
+          },
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "description": "Indicates whether the embeddings tenant creation completed successfully",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "description": "Status message about the tenant creation operation",
             "default": "Embeddings collection created successfully"
           }
         },
@@ -4526,27 +5225,35 @@
         "properties": {
           "total_deleted": {
             "type": "integer",
-            "title": "Total Deleted"
+            "title": "Total Deleted",
+            "description": "Total number of embeddings that were successfully deleted"
           },
           "status": {
             "additionalProperties": {
               "type": "boolean"
             },
             "type": "object",
-            "title": "Status"
+            "title": "Status",
+            "description": "Dictionary mapping chunk IDs to their deletion status (true if deleted successfully). Example: {'chunk_1234': true}"
           },
           "success": {
             "type": "boolean",
             "title": "Success",
+            "description": "Indicates whether the embeddings deletion operation completed successfully",
             "default": true
           },
           "message": {
             "type": "string",
             "title": "Message",
+            "description": "Status message about the deletion operation",
             "default": "Embeddings deleted successfully"
           }
         },
         "type": "object",
+        "required": [
+          "total_deleted",
+          "status"
+        ],
         "title": "EmbeddingsDeleteData"
       },
       "EmbeddingsDeleteRequest": {
@@ -4588,27 +5295,35 @@
               "type": "array"
             },
             "type": "object",
-            "title": "Embeddings"
+            "title": "Embeddings",
+            "description": "Dictionary mapping chunk IDs to their embedding vectors (lists of float values)"
           },
           "not_found_chunk_ids": {
             "items": {
               "type": "string"
             },
             "type": "array",
-            "title": "Not Found Chunk Ids"
+            "title": "Not Found Chunk Ids",
+            "description": "List of chunk IDs that were not found in the embeddings collection"
           },
           "success": {
             "type": "boolean",
             "title": "Success",
+            "description": "Indicates whether the embeddings retrieval operation completed successfully",
             "default": true
           },
           "message": {
             "type": "string",
             "title": "Message",
+            "description": "Status message about the retrieval operation",
             "default": "Embeddings retrieved successfully"
           }
         },
         "type": "object",
+        "required": [
+          "embeddings",
+          "not_found_chunk_ids"
+        ],
         "title": "EmbeddingsGetData"
       },
       "EmbeddingsSearchData": {
@@ -4618,27 +5333,35 @@
               "type": "string"
             },
             "type": "array",
-            "title": "Chunk Ids"
+            "title": "Chunk Ids",
+            "description": "List of chunk IDs that match the search query"
           },
           "scores": {
             "items": {
               "type": "number"
             },
             "type": "array",
-            "title": "Scores"
+            "title": "Scores",
+            "description": "Similarity scores for each matching chunk (higher is more similar)"
           },
           "success": {
             "type": "boolean",
             "title": "Success",
+            "description": "Indicates whether the embeddings search operation completed successfully",
             "default": true
           },
           "message": {
             "type": "string",
             "title": "Message",
+            "description": "Status message about the search operation",
             "default": "Embeddings search completed successfully"
           }
         },
         "type": "object",
+        "required": [
+          "chunk_ids",
+          "scores"
+        ],
         "title": "EmbeddingsSearchData"
       },
       "EmbeddingsSearchRequest": {
@@ -4746,18 +5469,6 @@
               }
             ],
             "title": "Error Code"
-          },
-          "data": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Data"
           }
         },
         "type": "object",
@@ -4767,11 +5478,8 @@
         "properties": {
           "file_id": {
             "type": "string",
-            "title": "File Id"
-          },
-          "url": {
-            "type": "string",
-            "title": "Url"
+            "title": "File Id",
+            "description": "Unique identifier for the file being fetched"
           },
           "file_content": {
             "anyOf": [
@@ -4782,20 +5490,27 @@
                 "type": "null"
               }
             ],
-            "title": "File Content"
+            "title": "File Content",
+            "description": "Content of the fetched file",
+            "default": ""
           },
           "success": {
             "type": "boolean",
             "title": "Success",
+            "description": "Indicates whether the fetch operation completed successfully",
             "default": true
           },
           "message": {
             "type": "string",
             "title": "Message",
+            "description": "Status message about the fetch operation",
             "default": "Content fetched successfully"
           }
         },
         "type": "object",
+        "required": [
+          "file_id"
+        ],
         "title": "FetchContentData"
       },
       "FetchContentRequest": {
@@ -4854,7 +5569,8 @@
         "properties": {
           "file_id": {
             "type": "string",
-            "title": "File Id"
+            "title": "File Id",
+            "description": "Unique identifier for the file being processed"
           },
           "filename": {
             "anyOf": [
@@ -4865,7 +5581,8 @@
                 "type": "null"
               }
             ],
-            "title": "Filename"
+            "title": "Filename",
+            "description": "Name of the uploaded file, if provided"
           }
         },
         "type": "object",
@@ -4925,6 +5642,67 @@
         ],
         "title": "FullTextSearchRequest"
       },
+      "GenerateUserMemoryResponse": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "description": "Indicates whether the memory generation operation was successful",
+            "example": true
+          },
+          "generated_user_memories": {
+            "items": {
+              "$ref": "#/components/schemas/GeneratedUserMemory"
+            },
+            "type": "array",
+            "title": "Generated User Memories",
+            "description": "Array of AI-generated memories based on your query and user context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "success"
+        ],
+        "title": "GenerateUserMemoryResponse",
+        "description": "Response model for AI-generated user memories."
+      },
+      "GeneratedUserMemory": {
+        "properties": {
+          "memory_id": {
+            "type": "string",
+            "title": "Memory Id",
+            "description": "Unique identifier for the generated memory",
+            "example": "CortexUserMemory39243c65851949fbab283cce9085a5f61757340796"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content",
+            "description": "AI-generated memory content based on your query and context",
+            "example": "Based on user's workflow patterns, they prefer automated testing and CI/CD pipelines"
+          },
+          "timestamp": {
+            "type": "integer",
+            "title": "Timestamp",
+            "description": "Unix timestamp when the memory was generated",
+            "example": 1234567890
+          },
+          "source": {
+            "type": "string",
+            "title": "Source",
+            "description": "Source of the memory creation (always 'ai_generated' for this endpoint)",
+            "default": "ai_generated",
+            "example": "ai_generated"
+          }
+        },
+        "type": "object",
+        "required": [
+          "memory_id",
+          "content",
+          "timestamp"
+        ],
+        "title": "GeneratedUserMemory",
+        "description": "Represents an AI-generated user memory."
+      },
       "GetEmbeddingsBasedOnChunkIdsRequest": {
         "properties": {
           "chunk_ids": {
@@ -4953,19 +5731,6 @@
           "tenant_id"
         ],
         "title": "GetEmbeddingsBasedOnChunkIdsRequest"
-      },
-      "HTTPValidationError": {
-        "properties": {
-          "detail": {
-            "items": {
-              "$ref": "#/components/schemas/ValidationError"
-            },
-            "type": "array",
-            "title": "Detail"
-          }
-        },
-        "type": "object",
-        "title": "HTTPValidationError"
       },
       "ListSourcesResponse": {
         "properties": {
@@ -4998,7 +5763,34 @@
           }
         },
         "type": "object",
+        "required": [
+          "sources"
+        ],
         "title": "ListSourcesResponse"
+      },
+      "ListUserMemoriesResponse": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "description": "Indicates whether the memory listing operation was successful",
+            "example": true
+          },
+          "user_memories": {
+            "items": {
+              "$ref": "#/components/schemas/UserMemory"
+            },
+            "type": "array",
+            "title": "User Memories",
+            "description": "Array of all user memories associated with your tenant"
+          }
+        },
+        "type": "object",
+        "required": [
+          "success"
+        ],
+        "title": "ListUserMemoriesResponse",
+        "description": "Response model for listing all user memories."
       },
       "MarkdownUploadRequest": {
         "properties": {
@@ -5044,11 +5836,13 @@
         "properties": {
           "file_id": {
             "type": "string",
-            "title": "File Id"
+            "title": "File Id",
+            "description": "Identifier fo the file whose status is being retrieved"
           },
           "indexing_status": {
             "type": "string",
-            "title": "Indexing Status"
+            "title": "Indexing Status",
+            "description": "Current status of the file. Possible values are 'queued', 'processing', 'completed', 'failed'"
           },
           "success": {
             "type": "boolean",
@@ -5058,25 +5852,33 @@
           "message": {
             "type": "string",
             "title": "Message",
+            "description": "Detailed status message about the processing operation",
             "default": "Processing status retrieved successfully"
           }
         },
         "type": "object",
+        "required": [
+          "file_id",
+          "indexing_status"
+        ],
         "title": "ProcessingStatus"
       },
       "QnARequest": {
         "properties": {
           "question": {
             "type": "string",
-            "title": "Question"
+            "title": "Question",
+            "description": "The question to be answered"
           },
           "session_id": {
             "type": "string",
-            "title": "Session Id"
+            "title": "Session Id",
+            "description": "Unique identifier for the conversation session. Keep it same when the current question refers to a previous answer or question"
           },
           "tenant_id": {
             "type": "string",
-            "title": "Tenant Id"
+            "title": "Tenant Id",
+            "description": "Identifier for the tenant/organization"
           },
           "context_list": {
             "anyOf": [
@@ -5090,7 +5892,8 @@
                 "type": "null"
               }
             ],
-            "title": "Context List"
+            "title": "Context List",
+            "description": "List of context strings to provide additional information"
           },
           "search_modes": {
             "anyOf": [
@@ -5104,7 +5907,8 @@
                 "type": "null"
               }
             ],
-            "title": "Search Modes"
+            "title": "Search Modes",
+            "description": "List of search modes to use for finding relevant information"
           },
           "sub_tenant_id": {
             "anyOf": [
@@ -5116,6 +5920,7 @@
               }
             ],
             "title": "Sub Tenant Id",
+            "description": "Identifier for sub-tenant within the tenant",
             "default": ""
           },
           "highlight_chunks": {
@@ -5128,6 +5933,7 @@
               }
             ],
             "title": "Highlight Chunks",
+            "description": "Whether to return text chunks in the response along with final LLM generated answer",
             "default": false
           },
           "stream": {
@@ -5140,6 +5946,7 @@
               }
             ],
             "title": "Stream",
+            "description": "Whether to stream the response",
             "default": false
           },
           "search_alpha": {
@@ -5152,6 +5959,7 @@
               }
             ],
             "title": "Search Alpha",
+            "description": "Closer to 0.0 means a exact keyword search will be performed, closer to 1.0 means semantics of the search will be considered. In most cases, you wont have to toggle it yourself.",
             "default": 0.8
           },
           "recency_bias": {
@@ -5164,6 +5972,7 @@
               }
             ],
             "title": "Recency Bias",
+            "description": "Bias towards more recent information (0.0 to 1.0)",
             "default": 0.2
           },
           "ai_generation": {
@@ -5176,6 +5985,7 @@
               }
             ],
             "title": "Ai Generation",
+            "description": "Whether to use AI for generating responses",
             "default": true
           },
           "top_n": {
@@ -5187,7 +5997,8 @@
                 "type": "null"
               }
             ],
-            "title": "Top N"
+            "title": "Top N",
+            "description": "Number of top results to return"
           },
           "user_name": {
             "anyOf": [
@@ -5199,6 +6010,7 @@
               }
             ],
             "title": "User Name",
+            "description": "Name of the user making the request. This helps LLM to know the user's name if semantics around the username are involved in query. Its generally a good practice to include it possible.",
             "default": ""
           },
           "user_instructions": {
@@ -5211,6 +6023,7 @@
               }
             ],
             "title": "User Instructions",
+            "description": "Custom instructions for the AI response to add to our proprietary prompt. This can be used to provide additional context or instructions for the LLM to follow so that the answers are tailored towards your application style",
             "default": ""
           },
           "multi_step_reasoning": {
@@ -5223,6 +6036,7 @@
               }
             ],
             "title": "Multi Step Reasoning",
+            "description": "Enable advanced multi-step reasoning for complex queries. When enabled, the AI will automatically break down complex questions into multiple research steps to provide more comprehensive and accurate answers.",
             "default": true
           },
           "auto_agent_routing": {
@@ -5235,6 +6049,7 @@
               }
             ],
             "title": "Auto Agent Routing",
+            "description": "Enable intelligent agent routing to automatically select the most suitable AI agent for your specific query type. Different agents are optimized for various use cases like social media, code, conversations, general knowledge, etc.",
             "default": true
           },
           "metadata": {
@@ -5247,7 +6062,8 @@
                 "type": "null"
               }
             ],
-            "title": "Metadata"
+            "title": "Metadata",
+            "description": "Additional metadata for the request"
           }
         },
         "type": "object",
@@ -5258,46 +6074,116 @@
         ],
         "title": "QnARequest"
       },
+      "RetrieveUserMemoryResponse": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "description": "Indicates whether the memory retrieval operation was successful",
+            "example": true
+          },
+          "retrieved_user_memories": {
+            "items": {
+              "$ref": "#/components/schemas/RetrievedUserMemory"
+            },
+            "type": "array",
+            "title": "Retrieved User Memories",
+            "description": "Array of user memories ranked by relevance to your search query"
+          }
+        },
+        "type": "object",
+        "required": [
+          "success"
+        ],
+        "title": "RetrieveUserMemoryResponse",
+        "description": "Response model for retrieving user memories through semantic search."
+      },
+      "RetrievedUserMemory": {
+        "properties": {
+          "memory_id": {
+            "type": "string",
+            "title": "Memory Id",
+            "description": "Unique identifier for the retrieved memory",
+            "example": "CortexUserMemory39243c65851949fbab283cce9085a5f61757340796"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content",
+            "description": "The memory content text that matches your search query",
+            "example": "User prefers dark mode interface and uses keyboard shortcuts frequently"
+          },
+          "similarity_score": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0,
+            "title": "Similarity Score",
+            "description": "Relevance score indicating how well this memory matches your query (0.0 to 1.0)",
+            "example": 0.95
+          },
+          "timestamp": {
+            "type": "integer",
+            "title": "Timestamp",
+            "description": "Unix timestamp when the memory was originally created",
+            "example": 1234567890
+          }
+        },
+        "type": "object",
+        "required": [
+          "memory_id",
+          "content",
+          "similarity_score",
+          "timestamp"
+        ],
+        "title": "RetrievedUserMemory",
+        "description": "Represents a user memory retrieved through semantic search."
+      },
       "SearchChunk": {
         "properties": {
           "chunk_uuid": {
             "type": "string",
             "title": "Chunk Uuid",
-            "description": "Unique identifier for this content chunk"
+            "description": "Unique identifier for this content chunk",
+            "example": "a1b2c3d4-e5f6-7890-1234-567890abcdef"
           },
           "source_id": {
             "type": "string",
             "title": "Source Id",
-            "description": "Unique identifier for the source document"
+            "description": "Unique identifier for the source document",
+            "example": "doc_12345"
           },
           "chunk_content": {
             "type": "string",
             "title": "Chunk Content",
-            "description": "The actual text content of this chunk"
+            "description": "The actual text content of this chunk",
+            "example": "This is a chunk of text from the source document."
           },
           "source_type": {
             "type": "string",
             "title": "Source Type",
             "description": "Type of the source document (file, webpage, etc.)",
-            "default": ""
+            "default": "",
+            "example": "file"
           },
           "source_upload_time": {
             "type": "string",
             "title": "Source Upload Time",
             "description": "When the source document was originally uploaded",
-            "default": ""
+            "default": "",
+            "example": "2023-10-27T10:00:00Z"
           },
           "source_title": {
             "type": "string",
             "title": "Source Title",
             "description": "Title or name of the source document",
-            "default": ""
+            "default": "",
+            "example": "Project Phoenix Overview"
           },
           "source_last_updated_time": {
             "type": "string",
             "title": "Source Last Updated Time",
             "description": "When the source document was last modified",
-            "default": ""
+            "default": "",
+            "example": "2023-10-27T12:30:00Z"
           },
           "layout": {
             "anyOf": [
@@ -5309,26 +6195,8 @@
               }
             ],
             "title": "Layout",
-            "description": "Layout of the chunk in original document. You will always get the start offset of the chunk. In most cases, if possible, you will get the page number as well."
-          },
-          "source_url": {
-            "type": "string",
-            "title": "Source Url",
-            "description": "URL or path to the original source document",
-            "default": ""
-          },
-          "cortex_metadata": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Cortex Metadata",
-            "description": "Additional metadata specific to the Cortex platform"
+            "description": "Layout of the chunk in original document. You will generally receive a stringified dict with 2 keys, `offsets` and `page`(optional). Offsets will have `document_level_start_index` and `page_level_start_index`(optional)",
+            "example": "{\"offsets\": {\"document_level_start_index\": 1024, \"page_level_start_index\": 50}, \"page\": 2}"
           },
           "document_metadata": {
             "anyOf": [
@@ -5341,7 +6209,11 @@
               }
             ],
             "title": "Document Metadata",
-            "description": "Metadata extracted from the source document"
+            "description": "Metadata extracted from the source document",
+            "example": {
+              "author": "John Doe",
+              "category": "Internal"
+            }
           },
           "tenant_metadata": {
             "anyOf": [
@@ -5354,7 +6226,10 @@
               }
             ],
             "title": "Tenant Metadata",
-            "description": "Custom metadata associated with your tenant"
+            "description": "Custom metadata associated with your tenant",
+            "example": {
+              "department": "R&D"
+            }
           }
         },
         "type": "object",
@@ -5443,22 +6318,24 @@
         "properties": {
           "file_id": {
             "type": "string",
-            "title": "File Id"
+            "title": "File Id",
+            "description": "Unique identifier for the file being processed"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "description": "Status message indicating document parsing scheduled or update completed"
           },
           "success": {
             "type": "boolean",
             "title": "Success",
             "default": true
-          },
-          "message": {
-            "type": "string",
-            "title": "Message",
-            "default": "Upload completed successfully"
           }
         },
         "type": "object",
         "required": [
-          "file_id"
+          "file_id",
+          "message"
         ],
         "title": "SingleUploadData"
       },
@@ -5467,76 +6344,52 @@
           "id": {
             "type": "string",
             "title": "Id",
-            "description": "Unique identifier for the source document"
+            "description": "Unique identifier for the source document",
+            "example": "doc_67890"
           },
           "title": {
             "type": "string",
             "title": "Title",
-            "description": "Display title of the source document"
+            "description": "Display title of the source document",
+            "example": "Q3 Financial Report"
           },
           "type": {
             "type": "string",
             "title": "Type",
-            "description": "Type of content (document, file, text, etc.)"
+            "description": "Type of content (document, file, text, etc.)",
+            "example": "document"
           },
           "timestamp": {
             "type": "string",
             "title": "Timestamp",
-            "description": "When the source was originally created or uploaded"
-          },
-          "content": {
-            "$ref": "#/components/schemas/SourceContent"
-          },
-          "collections": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Collections"
+            "description": "When the source was originally created or uploaded",
+            "example": "2023-09-30T15:00:00Z"
           },
           "description": {
             "type": "string",
             "title": "Description",
             "description": "Brief summary or description of the source content",
-            "default": ""
-          },
-          "note": {
-            "type": "string",
-            "title": "Note",
-            "default": ""
-          },
-          "url": {
-            "type": "string",
-            "title": "Url",
-            "default": ""
-          },
-          "cortex_metadata": {
-            "additionalProperties": true,
-            "type": "object",
-            "title": "Cortex Metadata"
+            "default": "",
+            "example": "Financial report for the third quarter."
           },
           "document_metadata": {
             "additionalProperties": true,
             "type": "object",
             "title": "Document Metadata",
-            "description": "Additional metadata specific to the document"
+            "description": "Additional metadata specific to the document",
+            "example": {
+              "quarter": 3,
+              "year": 2023
+            }
           },
           "tenant_metadata": {
             "additionalProperties": true,
             "type": "object",
             "title": "Tenant Metadata",
-            "description": "Metadata related to the tenant and organizational context"
-          },
-          "meta": {
-            "additionalProperties": true,
-            "type": "object",
-            "title": "Meta",
-            "description": "Additional system metadata and processing information"
-          },
-          "attachments": {
-            "items": {},
-            "type": "array",
-            "title": "Attachments"
+            "description": "Metadata related to the tenant and organizational context",
+            "example": {
+              "confidentiality": "high"
+            }
           }
         },
         "type": "object",
@@ -5544,8 +6397,7 @@
           "id",
           "title",
           "type",
-          "timestamp",
-          "content"
+          "timestamp"
         ],
         "title": "Source"
       },
@@ -5570,64 +6422,8 @@
         ],
         "title": "SourceBodyParams"
       },
-      "SourceContent": {
-        "properties": {
-          "text": {
-            "type": "string",
-            "title": "Text",
-            "description": "Plain text content of the source",
-            "default": ""
-          },
-          "html_base64": {
-            "type": "string",
-            "title": "Html Base64",
-            "description": "HTML content encoded in base64 format",
-            "default": ""
-          },
-          "csv_base64": {
-            "type": "string",
-            "title": "Csv Base64",
-            "description": "CSV data encoded in base64 format",
-            "default": ""
-          },
-          "markdown": {
-            "type": "string",
-            "title": "Markdown",
-            "description": "Markdown formatted content",
-            "default": ""
-          },
-          "files": {
-            "items": {
-              "additionalProperties": true,
-              "type": "object"
-            },
-            "type": "array",
-            "title": "Files",
-            "description": "List of associated files and their metadata"
-          },
-          "layout": {
-            "items": {
-              "additionalProperties": true,
-              "type": "object"
-            },
-            "type": "array",
-            "title": "Layout",
-            "description": "Document layout and structural information"
-          }
-        },
-        "type": "object",
-        "title": "SourceContent"
-      },
       "SourceModel": {
         "properties": {
-          "collections": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Collections",
-            "description": "Deprecated. Will soon be removed"
-          },
           "id": {
             "type": "string",
             "title": "Id",
@@ -5674,12 +6470,6 @@
             "$ref": "#/components/schemas/ContentModel",
             "description": "Primary content payload used for indexing and retrieval."
           },
-          "cortex_metadata": {
-            "additionalProperties": true,
-            "type": "object",
-            "title": "Cortex Metadata",
-            "description": "[Deprecated] Use tenant_metadata. Retained for backward compatibility; semantics are the same as tenant_metadata."
-          },
           "tenant_metadata": {
             "additionalProperties": true,
             "type": "object",
@@ -5714,8 +6504,10 @@
         "properties": {
           "tenant_id": {
             "type": "string",
-            "title": "Collection Name",
-            "description": "Name of the tenant containing the sub-tenants"
+            "minLength": 1,
+            "title": "Tenant Id",
+            "description": "The tenant ID that was queried",
+            "example": "tenant_abcd"
           },
           "sub_tenant_ids": {
             "items": {
@@ -5723,12 +6515,24 @@
             },
             "type": "array",
             "title": "Sub Tenant Ids",
-            "description": "List of all sub-tenant identifiers found"
+            "description": "Array of all sub-tenant IDs within the tenant",
+            "example": [
+              "default",
+              "engineering",
+              "sales",
+              "marketing",
+              "hr",
+              "user_12345",
+              "user_67890",
+              "project_alpha"
+            ]
           },
           "count": {
             "type": "integer",
+            "minimum": 0,
             "title": "Count",
-            "description": "Total number of sub-tenants available"
+            "description": "Total number of sub-tenants found",
+            "example": 8
           },
           "success": {
             "type": "boolean",
@@ -5755,13 +6559,17 @@
         "properties": {
           "status": {
             "type": "string",
+            "minLength": 1,
             "title": "Status",
-            "description": "Current status of the tenant creation process"
+            "description": "Current status of the tenant creation process",
+            "example": "created"
           },
           "tenant_id": {
             "type": "string",
+            "minLength": 1,
             "title": "Tenant Id",
-            "description": "Unique identifier assigned to the new tenant"
+            "description": "Unique identifier assigned to the new tenant",
+            "example": "tenant_abcd"
           },
           "success": {
             "type": "boolean",
@@ -5787,13 +6595,17 @@
         "properties": {
           "object_count": {
             "type": "integer",
+            "minimum": 0,
             "title": "Object Count",
-            "description": "Total number of objects stored for this tenant"
+            "description": "Total number of objects stored for this tenant",
+            "example": 1500
           },
           "tenant_name": {
             "type": "string",
+            "minLength": 1,
             "title": "Tenant Name",
-            "description": "Name identifier for the tenant"
+            "description": "Name identifier for the tenant",
+            "example": "tenant_abcd"
           },
           "vector_dimension": {
             "anyOf": [
@@ -5805,7 +6617,8 @@
               }
             ],
             "title": "Vector Dimension",
-            "description": "Dimensions of the vector embeddings used for this tenant"
+            "description": "Dimensions of the vector embeddings used for this tenant. Null when the tenant is empty.",
+            "example": 768
           },
           "success": {
             "type": "boolean",
@@ -5827,38 +6640,42 @@
         ],
         "title": "TenantStats"
       },
-      "ValidationError": {
+      "UserMemory": {
         "properties": {
-          "loc": {
-            "items": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            },
-            "type": "array",
-            "title": "Location"
-          },
-          "msg": {
+          "memory_id": {
             "type": "string",
-            "title": "Message"
+            "title": "Memory Id",
+            "description": "Unique identifier for the user memory",
+            "example": "CortexUserMemory39243c65851949fbab283cce9085a5f61757340796"
           },
-          "type": {
+          "content": {
             "type": "string",
-            "title": "Error Type"
+            "title": "Content",
+            "description": "The actual memory content text that was stored",
+            "example": "User prefers dark mode interface and uses keyboard shortcuts frequently"
+          },
+          "timestamp": {
+            "type": "integer",
+            "title": "Timestamp",
+            "description": "Unix timestamp when the memory was created",
+            "example": 1234567890
+          },
+          "source": {
+            "type": "string",
+            "title": "Source",
+            "description": "Source of the memory creation (user_generated or ai_generated)",
+            "example": "user_generated"
           }
         },
         "type": "object",
         "required": [
-          "loc",
-          "msg",
-          "type"
+          "memory_id",
+          "content",
+          "timestamp",
+          "source"
         ],
-        "title": "ValidationError"
+        "title": "UserMemory",
+        "description": "Represents a user memory stored in the system."
       }
     },
     "securitySchemes": {
