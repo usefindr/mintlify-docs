@@ -52,6 +52,28 @@ Our system automatically handles:
 
 > **File ID Management**: When you provide a `file_id` as a key in the `document_metadata` object, that specific ID will be used to identify your content. If no `file_id` is provided in the `document_metadata`, the system will automatically generate a unique identifier for you. This allows you to maintain consistent references to your content across your application while ensuring every piece of content has a unique identifier.
 
+### **Duplicate File ID Behavior**
+
+When you upload text content with a `file_id` that already exists in your tenant:
+
+- **Overwrite Behavior**: The existing text content with the same `file_id` will be **completely replaced** with the new content
+- **Processing**: The new text content will go through the full processing pipeline (validation, chunking, embedding generation, indexing)
+- **Search Results**: Previous search results and embeddings from the old content will be replaced with the new content
+- **Idempotency**: Uploading the same text content with the same `file_id` multiple times is safe and will result in the same final state
+
+<Warning>
+**Important**: When overwriting existing text content, all previous chunks, embeddings, and search indexes associated with that `file_id` will be permanently removed and replaced. This action cannot be undone.
+</Warning>
+
+**Example Success Response for Duplicate File ID:**
+```json
+{
+  "message": "Text content uploaded successfully. Existing content with file_id 'text_123456' has been overwritten.",
+  "file_id": "text_123456",
+  "status": "success"
+}
+```
+
 ## Processing Status & Monitoring
 
 After uploading, you can monitor your text content's processing status:

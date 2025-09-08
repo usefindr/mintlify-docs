@@ -84,7 +84,7 @@
               properties:
                 message:
                   type: string
-                  example: Batch upload successful
+                  example: Batch upload successful. Documents with existing file_ids have been overwritten.
                 document_ids:
                   type: array
                   items:
@@ -93,6 +93,13 @@
                   - doc_123
                   - doc_456
                   - doc_789
+                overwritten_file_ids:
+                  type: array
+                  items:
+                    type: string
+                  example:
+                  - doc_123
+                  - doc_456
       '401':
         description: Invalid or missing API key
       '422':
