@@ -119,3 +119,203 @@ When you upload app sources with `file_id`s that already exist in your tenant:
 }
 ```
 
+## Attachments Field Structure
+
+The `attachments` field allows you to include additional files, documents, or content alongside your main app source. Each attachment supports multiple content formats and can contain nested structures for complex documents.
+
+### Attachment Object Structure
+
+```json
+{
+  "attachments": [
+    {
+      "id": "unique_attachment_id",
+      "url": "https://example.com/document.pdf",
+      "title": "Document Title",
+      "content_type": "application/pdf",
+      "content_url": "https://api.example.com/content/123",
+      "misc": {
+        "custom_field": "value"
+      },
+      "content": {
+        "text": "Plain text content",
+        "html_base64": "base64_encoded_html",
+        "csv_base64": "base64_encoded_csv",
+        "markdown": "# Markdown content",
+        "files": [{"name": "file.pdf", "data": "base64_data"}],
+        "layout": [{"type": "section", "content": "..."}]
+      }
+    }
+  ]
+}
+```
+
+### When to Use Each Field
+
+**Core Identification Fields:**
+- `id` (optional): Unique identifier for the attachment. If not provided, system generates one automatically.
+- `title` (optional): Human-readable name for the attachment.
+- `url` (optional): External URL where the attachment can be accessed.
+- `content_type` (optional): MIME type of the attachment (e.g., "application/pdf", "text/plain").
+- `content_url` (optional): API endpoint URL for retrieving attachment content.
+
+**Content Storage Fields:**
+Use these fields to store different types of content directly in the attachment:
+
+- `content.text`: Use for plain text content. Best for simple text documents, notes, or extracted text from other formats.
+- `content.html_base64`: Use for HTML content encoded in base64. Ideal for web pages, rich text documents, or formatted content that needs to preserve HTML structure.
+- `content.csv_base64`: Use for CSV data encoded in base64. Perfect for tabular data, spreadsheets, or structured data exports.
+- `content.markdown`: Use for Markdown-formatted content. Great for documentation, README files, or any content that uses Markdown syntax.
+- `content.files`: Use for binary file attachments as an array of file objects. Each file object should contain at least a `name` and `data` field (base64 encoded).
+- `content.layout`: Use for structured document layouts as an array of layout objects. Useful for complex documents with sections, headers, or custom formatting.
+
+**Metadata Field:**
+- `misc` (optional): Dictionary for storing custom metadata, additional properties, or app-specific information about the attachment.
+
+### Content Format Guidelines
+
+**For Text Content:**
+```json
+{
+  "content": {
+    "text": "This is plain text content that will be processed and indexed."
+  }
+}
+```
+
+**For HTML Content:**
+```json
+{
+  "content": {
+    "html_base64": "PGgxPkhlbGxvIFdvcmxkPC9oMT4="
+  }
+}
+```
+
+**For CSV Data:**
+```json
+{
+  "content": {
+    "csv_base64": "TmFtZSxBbW91bnQKSm9obiwxMDAKSmFuZSwyMDA="
+  }
+}
+```
+
+**For Markdown:**
+```json
+{
+  "content": {
+    "markdown": "# Document Title\n\nThis is **markdown** content with formatting."
+  }
+}
+```
+
+**For File Attachments:**
+```json
+{
+  "content": {
+    "files": [
+      {
+        "name": "document.pdf",
+        "data": "JVBERi0xLjQKJcfsj6IKNSAwIG9iago8PAovVHlwZSAvUGFnZQovUGFyZW50IDMgMCBSCi9NZWRpYUJveCBbMCAwIDU5NSA4NDJdCi9SZXNvdXJjZXMgPDwKL0ZvbnQgPDwKL0YxIDIgMCBSCj4+Cj4+Ci9Db250ZW50cyA0IDAgUgo+PgplbmRvYmoK..."
+      }
+    ]
+  }
+}
+```
+
+### Best Practices
+
+1. **Choose the Right Format**: Use the content field that best matches your data type for optimal processing.
+2. **Base64 Encoding**: Always encode binary data (HTML, CSV, files) in base64 format.
+3. **File Size Limits**: Keep individual attachments under 10MB for optimal processing performance.
+4. **Metadata Usage**: Use the `misc` field to store app-specific metadata that might be useful for filtering or organization.
+5. **Content Type Specification**: Always specify `content_type` when possible to help with proper content processing.
+
+## Error Responses
+
+All endpoints return consistent error responses following the standard format. For detailed error information, see our [Error Responses](/api-reference/error-responses) documentation.
+
+### Common Error Scenarios
+
+**400 Bad Request**: Invalid input parameters or malformed requests
+```json
+{
+  "detail": {
+    "success": false,
+    "message": "Invalid request parameters",
+    "error_code": "INVALID_PARAMETERS"
+  }
+}
+```
+
+**401 Unauthorized**: Invalid or missing API key
+```json
+{
+  "detail": {
+    "success": false,
+    "message": "Authentication required",
+    "error_code": "UNAUTHORIZED"
+  }
+}
+```
+
+**403 Forbidden**: Valid authentication but insufficient permissions
+```json
+{
+  "detail": {
+    "success": false,
+    "message": "Access denied",
+    "error_code": "FORBIDDEN"
+  }
+}
+```
+
+**404 Not Found**: Requested resource does not exist
+```json
+{
+  "detail": {
+    "success": false,
+    "message": "Resource not found",
+    "error_code": "NOT_FOUND"
+  }
+}
+```
+
+**409 Conflict**: Resource already exists or conflicts with existing data
+```json
+{
+  "detail": {
+    "success": false,
+    "message": "Resource already exists",
+    "error_code": "CONFLICT"
+  }
+}
+```
+
+**422 Unprocessable Entity**: Request is well-formed but contains semantic errors
+```json
+{
+  "detail": {
+    "success": false,
+    "message": "Validation failed",
+    "error_code": "VALIDATION_ERROR"
+  }
+}
+```
+
+**500 Internal Server Error**: Unexpected server-side error
+```json
+{
+  "detail": {
+    "success": false,
+    "message": "Internal server error",
+    "error_code": "INTERNAL_ERROR"
+  }
+}
+```
+
+<Note>
+**Error Handling**: Always check the `detail` object in error responses for the actual error information. The outer structure may vary, but the `detail` object always follows the standard format.
+</Note>
+

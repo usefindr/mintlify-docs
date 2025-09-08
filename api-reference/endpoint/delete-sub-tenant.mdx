@@ -77,33 +77,90 @@ DELETE /delete_sub_tenant?tenant_id=consulting_firm&sub_tenant_id=project_alpha
 
 ## Error Responses
 
-### Cannot Delete Default Sub-Tenant
-```json
-{
-  "success": false,
-  "message": "Cannot delete the default sub-tenant",
-  "data": null,
-  "error_code": "CANNOT_DELETE_DEFAULT_SUB_TENANT"
-}
-```
+All endpoints return consistent error responses following the standard format. For detailed error information, see our [Error Responses](/api-reference/error-responses) documentation.
 
 ### Common Error Scenarios
 
-**400 Bad Request**: 
-- Attempting to delete the default sub-tenant
-- Invalid tenant_id or sub_tenant_id format
+**400 Bad Request**: Invalid input parameters or malformed requests
+```json
+{
+  "detail": {
+    "success": false,
+    "message": "Cannot delete the default sub-tenant",
+    "error_code": "CANNOT_DELETE_DEFAULT_SUB_TENANT"
+  }
+}
+```
 
-**401 Unauthorized**: 
-- Invalid or missing API key
-- Insufficient permissions
+**401 Unauthorized**: Invalid or missing API key
+```json
+{
+  "detail": {
+    "success": false,
+    "message": "Authentication required",
+    "error_code": "UNAUTHORIZED"
+  }
+}
+```
 
-**404 Not Found**: 
-- Tenant does not exist
-- Sub-tenant does not exist within the specified tenant
+**403 Forbidden**: Valid authentication but insufficient permissions
+```json
+{
+  "detail": {
+    "success": false,
+    "message": "Access denied",
+    "error_code": "FORBIDDEN"
+  }
+}
+```
 
-**500 Internal Server Error**: 
-- Server processing error
-- Database connectivity issues
+**404 Not Found**: Requested resource does not exist
+```json
+{
+  "detail": {
+    "success": false,
+    "message": "Resource not found",
+    "error_code": "NOT_FOUND"
+  }
+}
+```
+
+**409 Conflict**: Resource already exists or conflicts with existing data
+```json
+{
+  "detail": {
+    "success": false,
+    "message": "Resource already exists",
+    "error_code": "CONFLICT"
+  }
+}
+```
+
+**422 Unprocessable Entity**: Request is well-formed but contains semantic errors
+```json
+{
+  "detail": {
+    "success": false,
+    "message": "Validation failed",
+    "error_code": "VALIDATION_ERROR"
+  }
+}
+```
+
+**500 Internal Server Error**: Unexpected server-side error
+```json
+{
+  "detail": {
+    "success": false,
+    "message": "Internal server error",
+    "error_code": "INTERNAL_ERROR"
+  }
+}
+```
+
+<Note>
+**Error Handling**: Always check the `detail` object in error responses for the actual error information. The outer structure may vary, but the `detail` object always follows the standard format.
+</Note>
 
 ## Best Practices
 

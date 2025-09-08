@@ -8,3 +8,90 @@ openapi: 'POST /user_memory/generate_user_memory'
 - Automatically stores and builds a network of user memories (just like a second brain)
 - Most sophisticated endpoint combining query processing, memory generation, and storage
 
+
+## Error Responses
+
+All endpoints return consistent error responses following the standard format. For detailed error information, see our [Error Responses](/api-reference/error-responses) documentation.
+
+### Common Error Scenarios
+
+**400 Bad Request**: Invalid input parameters or malformed requests
+```json
+{
+  "detail": {
+    "success": false,
+    "message": "Invalid request parameters",
+    "error_code": "INVALID_PARAMETERS"
+  }
+}
+```
+
+**401 Unauthorized**: Invalid or missing API key
+```json
+{
+  "detail": {
+    "success": false,
+    "message": "Authentication required",
+    "error_code": "UNAUTHORIZED"
+  }
+}
+```
+
+**403 Forbidden**: Valid authentication but insufficient permissions
+```json
+{
+  "detail": {
+    "success": false,
+    "message": "Access denied",
+    "error_code": "FORBIDDEN"
+  }
+}
+```
+
+**404 Not Found**: Requested resource does not exist
+```json
+{
+  "detail": {
+    "success": false,
+    "message": "Resource not found",
+    "error_code": "NOT_FOUND"
+  }
+}
+```
+
+**409 Conflict**: Resource already exists or conflicts with existing data
+```json
+{
+  "detail": {
+    "success": false,
+    "message": "Resource already exists",
+    "error_code": "CONFLICT"
+  }
+}
+```
+
+**422 Unprocessable Entity**: Request is well-formed but contains semantic errors
+```json
+{
+  "detail": {
+    "success": false,
+    "message": "Validation failed",
+    "error_code": "VALIDATION_ERROR"
+  }
+}
+```
+
+**500 Internal Server Error**: Unexpected server-side error
+```json
+{
+  "detail": {
+    "success": false,
+    "message": "Internal server error",
+    "error_code": "INTERNAL_ERROR"
+  }
+}
+```
+
+<Note>
+**Error Handling**: Always check the `detail` object in error responses for the actual error information. The outer structure may vary, but the `detail` object always follows the standard format.
+</Note>
