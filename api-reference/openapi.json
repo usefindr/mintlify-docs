@@ -846,7 +846,8 @@
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id"
             },
-            "description": "Unique identifier for the tenant/organization"
+            "description": "Unique identifier for the tenant/organization",
+            "example": "tenant_abcdefg"
           },
           {
             "name": "sub_tenant_id",
@@ -858,7 +859,8 @@
               "default": "",
               "title": "Sub Tenant Id"
             },
-            "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id"
+            "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id",
+            "example": "sub_tenant_abcdef"
           }
         ],
         "requestBody": {
@@ -1120,7 +1122,8 @@
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id"
             },
-            "description": "Unique identifier for the tenant/organization"
+            "description": "Unique identifier for the tenant/organization",
+            "example": "1234"
           },
           {
             "name": "sub_tenant_id",
@@ -1132,7 +1135,8 @@
               "default": "",
               "title": "Sub Tenant Id"
             },
-            "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id"
+            "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id",
+            "example": "5678"
           }
         ],
         "requestBody": {
@@ -1268,7 +1272,8 @@
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id"
             },
-            "description": "Unique identifier for the tenant/organization"
+            "description": "Unique identifier for the tenant/organization",
+            "example": "1234"
           },
           {
             "name": "sub_tenant_id",
@@ -1280,7 +1285,8 @@
               "default": "",
               "title": "Sub Tenant Id"
             },
-            "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id"
+            "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id",
+            "example": "5678"
           }
         ],
         "requestBody": {
@@ -2429,15 +2435,6 @@
             "description": "Optional custom file ID for the scraped content. If not provided, a unique ID will be generated"
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/Body_scrape_webpage_upload_scrape_webpage_post"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -2587,15 +2584,6 @@
             "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id"
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/Body_update_scrape_job_upload_update_webpage_patch"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -2685,57 +2673,6 @@
         ]
       }
     },
-    "/upload/delete_source": {
-      "delete": {
-        "tags": [
-          "upload"
-        ],
-        "summary": "Delete Memory",
-        "description": "Remove documents and content from your knowledge base.\n\nThis endpoint permanently deletes the specified sources from your knowledge base. Once deleted, the content will no longer be available for search or retrieval.\n\nUse this carefully as the action cannot be undone. The system will confirm successful deletion of each source ID you specify.",
-        "operationId": "delete_memory_upload_delete_source_delete",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DeleteMemoryRequest",
-                "description": "Request body containing the source IDs to delete and tenant information"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "x-fern-sdk-group-name": "upload",
-        "x-fern-sdk-method-name": "delete_source",
-        "x-fern-sdk-audience": [
-          "public"
-        ]
-      }
-    },
     "/upload/delete_memory": {
       "delete": {
         "tags": [
@@ -2760,16 +2697,78 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteSources"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - Resource does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
               }
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Unprocessable Entity - Validation failed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
                 }
               }
             }
@@ -2782,6 +2781,119 @@
         ],
         "x-fern-sdk-group-name": "upload",
         "x-fern-sdk-method-name": "delete_memory",
+        "x-fern-sdk-audience": [
+          "public"
+        ]
+      }
+    },
+    "/upload/delete_source": {
+      "delete": {
+        "tags": [
+          "upload"
+        ],
+        "summary": "Delete Memory",
+        "description": "Remove documents and content from your knowledge base.\n\nThis endpoint permanently deletes the specified sources from your knowledge base. Once deleted, the content will no longer be available for search or retrieval.\n\nUse this carefully as the action cannot be undone. The system will confirm successful deletion of each source ID you specify.",
+        "operationId": "delete_memory_upload_delete_source_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteMemoryRequest",
+                "description": "Request body containing the source IDs to delete and tenant information"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteSources"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - Resource does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity - Validation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "x-fern-sdk-group-name": "upload",
+        "x-fern-sdk-method-name": "delete_source",
         "x-fern-sdk-audience": [
           "public"
         ]
@@ -4265,18 +4377,6 @@
             ],
             "title": "Document Metadata",
             "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: \u003E \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n"
-          },
-          "relations": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Relations",
-            "description": "Optional JSON string containing relations as key-value pairs"
           }
         },
         "type": "object",
@@ -4319,18 +4419,6 @@
             ],
             "title": "Document Metadata",
             "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: \u003E \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n"
-          },
-          "relations": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Relations",
-            "description": "Optional JSON string containing relations as key-value pairs"
           }
         },
         "type": "object",
@@ -4359,24 +4447,6 @@
         },
         "type": "object",
         "title": "Body_create_tenant_user_create_tenant_post"
-      },
-      "Body_scrape_webpage_upload_scrape_webpage_post": {
-        "properties": {
-          "relations": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Relations",
-            "description": "Optional JSON string containing relations as key-value pairs"
-          }
-        },
-        "type": "object",
-        "title": "Body_scrape_webpage_upload_scrape_webpage_post"
       },
       "Body_update_file_upload_update_document_patch": {
         "properties": {
@@ -4409,18 +4479,6 @@
             ],
             "title": "Document Metadata",
             "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: \u003E \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n"
-          },
-          "relations": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Relations",
-            "description": "Optional JSON string containing relations as key-value pairs"
           }
         },
         "type": "object",
@@ -4428,24 +4486,6 @@
           "file"
         ],
         "title": "Body_update_file_upload_update_document_patch"
-      },
-      "Body_update_scrape_job_upload_update_webpage_patch": {
-        "properties": {
-          "relations": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Relations",
-            "description": "Optional JSON string containing relations as key-value pairs"
-          }
-        },
-        "type": "object",
-        "title": "Body_update_scrape_job_upload_update_webpage_patch"
       },
       "Body_upload_files_upload_upload_document_post": {
         "properties": {
@@ -4478,18 +4518,6 @@
             ],
             "title": "Document Metadata",
             "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: \u003E \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n"
-          },
-          "relations": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Relations",
-            "description": "Optional JSON string containing relations as key-value pairs"
           }
         },
         "type": "object",
@@ -4550,18 +4578,21 @@
         "properties": {
           "tenant_id": {
             "type": "string",
-            "title": "Tenant Id"
+            "title": "Tenant Id",
+            "description": "Unique identifier for the tenant/organization"
           },
           "source_ids": {
             "items": {
               "type": "string"
             },
             "type": "array",
-            "title": "Source Ids"
+            "title": "Source Ids",
+            "description": "List of source IDs to delete"
           },
           "sub_tenant_id": {
             "type": "string",
             "title": "Sub Tenant Id",
+            "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id",
             "default": ""
           }
         },
@@ -4571,6 +4602,22 @@
           "source_ids"
         ],
         "title": "DeleteMemoryRequest"
+      },
+      "DeleteSources": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Sources deleted successfully"
+          }
+        },
+        "type": "object",
+        "title": "DeleteSources"
       },
       "DeleteSubTenantData": {
         "properties": {
@@ -5179,17 +5226,6 @@
             ],
             "title": "Document Metadata",
             "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: \u003E \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n"
-          },
-          "relations": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/Relations"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Optional JSON string containing relations as key-value pairs"
           }
         },
         "type": "object",
@@ -5440,40 +5476,6 @@
         ],
         "title": "QnARequest"
       },
-      "Relations": {
-        "properties": {
-          "cortex_source_ids": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Cortex Source Ids",
-            "description": "List of cortex source IDs to directly relate with"
-          },
-          "auto_discovery": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Auto Discovery",
-            "description": "Key value pairs to allow cortex to automatically discover relations"
-          }
-        },
-        "type": "object",
-        "title": "Relations"
-      },
       "SearchChunk": {
         "properties": {
           "chunk_uuid": {
@@ -5642,19 +5644,6 @@
             "title": "Recency Bias",
             "description": "Preference for newer content (0.0 = no bias, 1.0 = strong recency preference)",
             "default": 0.5
-          },
-          "num_related_chunks": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Num Related Chunks",
-            "description": "Number of related content chunks to include",
-            "default": 0
           }
         },
         "type": "object",
