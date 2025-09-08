@@ -368,6 +368,7 @@
           "user_memory"
         ],
         "summary": "List User Memories",
+        "description": "Retrieve all stored user memories for your tenant.\n\nThis endpoint returns a comprehensive list of all user memories that have been stored, \nwhether they were added manually or generated through AI. User memories help personalize \nyour experience by storing context, preferences, and important information.\n\nYou can optionally specify a sub-tenant to filter memories within that specific scope.",
         "operationId": "list_user_memories_user_memory_list_user_memories_get",
         "security": [
           {
@@ -381,17 +382,22 @@
             "required": true,
             "schema": {
               "type": "string",
+              "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id"
-            }
+            },
+            "description": "Unique identifier for the tenant/organization"
           },
           {
             "name": "sub_tenant_id",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string",
+              "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id",
+              "default": "",
               "title": "Sub Tenant Id"
-            }
+            },
+            "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id"
           }
         ],
         "responses": {
@@ -399,16 +405,78 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/ListUserMemoriesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - Resource does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
               }
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Unprocessable Entity - Validation failed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
                 }
               }
             }
@@ -427,6 +495,7 @@
           "user_memory"
         ],
         "summary": "Delete User Memory",
+        "description": "Permanently remove a specific user memory from storage.\n\nThis endpoint allows you to delete a user memory by its unique identifier. \nOnce deleted, the memory cannot be recovered, so use this operation carefully.\n\nThe memory will be removed from your tenant's storage and will no longer \nappear in search results or memory listings.",
         "operationId": "delete_user_memory_user_memory_delete_user_memory_delete",
         "security": [
           {
@@ -440,8 +509,10 @@
             "required": true,
             "schema": {
               "type": "string",
+              "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id"
-            }
+            },
+            "description": "Unique identifier for the tenant/organization"
           },
           {
             "name": "memory_id",
@@ -449,17 +520,22 @@
             "required": true,
             "schema": {
               "type": "string",
+              "description": "Unique identifier of the memory to delete",
               "title": "Memory Id"
-            }
+            },
+            "description": "Unique identifier of the memory to delete"
           },
           {
             "name": "sub_tenant_id",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string",
+              "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id",
+              "default": "",
               "title": "Sub Tenant Id"
-            }
+            },
+            "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id"
           }
         ],
         "responses": {
@@ -467,16 +543,78 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteUserMemoryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - Resource does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
               }
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Unprocessable Entity - Validation failed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
                 }
               }
             }
@@ -495,6 +633,7 @@
           "user_memory"
         ],
         "summary": "Retrieve User Memory",
+        "description": "Find relevant user memories using semantic search.\n\nThis endpoint performs a semantic search across all your stored user memories \nto find the most relevant ones based on your query. The results are ranked by \nsimilarity score, with the most relevant memories returned first.\n\nUse this to recall past preferences, context, or information that might be \nrelevant to your current task or query.",
         "operationId": "retrieve_user_memory_user_memory_retrieve_user_memory_get",
         "security": [
           {
@@ -508,8 +647,10 @@
             "required": true,
             "schema": {
               "type": "string",
+              "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id"
-            }
+            },
+            "description": "Unique identifier for the tenant/organization"
           },
           {
             "name": "query",
@@ -517,17 +658,22 @@
             "required": true,
             "schema": {
               "type": "string",
+              "description": "Search query to find relevant user memories",
               "title": "Query"
-            }
+            },
+            "description": "Search query to find relevant user memories"
           },
           {
             "name": "sub_tenant_id",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string",
+              "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id",
+              "default": "",
               "title": "Sub Tenant Id"
-            }
+            },
+            "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id"
           },
           {
             "name": "max_count",
@@ -535,9 +681,13 @@
             "required": false,
             "schema": {
               "type": "integer",
+              "maximum": 50,
+              "minimum": 1,
+              "description": "Maximum number of memories to return (default: 5)",
               "default": 5,
               "title": "Max Count"
-            }
+            },
+            "description": "Maximum number of memories to return (default: 5)"
           }
         ],
         "responses": {
@@ -545,16 +695,78 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/RetrieveUserMemoryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - Resource does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
               }
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Unprocessable Entity - Validation failed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
                 }
               }
             }
@@ -573,6 +785,7 @@
           "user_memory"
         ],
         "summary": "Generate User Memory",
+        "description": "Generate AI-powered user memories from your query and context.\n\nThis endpoint uses artificial intelligence to create personalized memories \nbased on your query and user context. The AI analyzes your input and generates \nrelevant, contextual memories that can help improve future interactions.\n\nGenerated memories are automatically stored and can be retrieved through \nthe standard memory search endpoints.",
         "operationId": "generate_user_memory_user_memory_generate_user_memory_post",
         "security": [
           {
@@ -586,8 +799,10 @@
             "required": true,
             "schema": {
               "type": "string",
+              "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id"
-            }
+            },
+            "description": "Unique identifier for the tenant/organization"
           },
           {
             "name": "user_query",
@@ -595,8 +810,10 @@
             "required": true,
             "schema": {
               "type": "string",
+              "description": "Your query or context for AI memory generation",
               "title": "User Query"
-            }
+            },
+            "description": "Your query or context for AI memory generation"
           },
           {
             "name": "user_name",
@@ -604,17 +821,22 @@
             "required": true,
             "schema": {
               "type": "string",
+              "description": "Your name to personalize the generated memories",
               "title": "User Name"
-            }
+            },
+            "description": "Your name to personalize the generated memories"
           },
           {
             "name": "sub_tenant_id",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string",
+              "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id",
+              "default": "",
               "title": "Sub Tenant Id"
-            }
+            },
+            "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id"
           }
         ],
         "responses": {
@@ -622,16 +844,78 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/GenerateUserMemoryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - Resource does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
               }
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Unprocessable Entity - Validation failed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
                 }
               }
             }
@@ -650,6 +934,7 @@
           "user_memory"
         ],
         "summary": "Add User Memory",
+        "description": "Store a new user memory for future reference.\n\nThis endpoint allows you to manually add a memory that will be stored and \ncan be retrieved later through memory search. Use this to save important \npreferences, context, or information that you want the system to remember.\n\nThe stored memory will be indexed and available for semantic search, making \nit accessible when relevant to future queries or interactions.",
         "operationId": "add_user_memory_user_memory_add_user_memory_post",
         "security": [
           {
@@ -663,8 +948,10 @@
             "required": true,
             "schema": {
               "type": "string",
+              "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id"
-            }
+            },
+            "description": "Unique identifier for the tenant/organization"
           },
           {
             "name": "user_memory",
@@ -672,17 +959,22 @@
             "required": true,
             "schema": {
               "type": "string",
+              "description": "The memory content to store for future reference",
               "title": "User Memory"
-            }
+            },
+            "description": "The memory content to store for future reference"
           },
           {
             "name": "sub_tenant_id",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string",
+              "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id",
+              "default": "",
               "title": "Sub Tenant Id"
-            }
+            },
+            "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id"
           }
         ],
         "responses": {
@@ -690,16 +982,78 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/AddUserMemoryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - Resource does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
               }
             }
           },
           "422": {
-            "description": "Validation Error",
+            "description": "Unprocessable Entity - Validation failed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
                 }
               }
             }
@@ -4331,6 +4685,42 @@
         ],
         "title": "ActualErrorResponse"
       },
+      "AddUserMemoryResponse": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "description": "Indicates whether the memory addition operation was successful",
+            "example": true
+          },
+          "user_memory_added": {
+            "type": "boolean",
+            "title": "User Memory Added",
+            "description": "Confirms whether the memory was successfully stored in the system",
+            "example": true
+          },
+          "user_memory_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "User Memory Id",
+            "description": "Unique identifier assigned to the newly created memory",
+            "example": "CortexUserMemory39243c65851949fbab283cce9085a5f61757340796"
+          }
+        },
+        "type": "object",
+        "required": [
+          "success",
+          "user_memory_added"
+        ],
+        "title": "AddUserMemoryResponse",
+        "description": "Response model for adding a new user memory."
+      },
       "AppSourcesUploadData": {
         "properties": {
           "uploaded": {
@@ -4775,6 +5165,29 @@
           "sub_tenant_id"
         ],
         "title": "DeleteSubTenantData"
+      },
+      "DeleteUserMemoryResponse": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "description": "Indicates whether the memory deletion operation was successful",
+            "example": true
+          },
+          "user_memory_deleted": {
+            "type": "boolean",
+            "title": "User Memory Deleted",
+            "description": "Confirms whether the specific memory was successfully deleted",
+            "example": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "success",
+          "user_memory_deleted"
+        ],
+        "title": "DeleteUserMemoryResponse",
+        "description": "Response model for deleting a user memory."
       },
       "EmbeddingsCreateCollectionData": {
         "properties": {
@@ -5229,6 +5642,67 @@
         ],
         "title": "FullTextSearchRequest"
       },
+      "GenerateUserMemoryResponse": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "description": "Indicates whether the memory generation operation was successful",
+            "example": true
+          },
+          "generated_user_memories": {
+            "items": {
+              "$ref": "#/components/schemas/GeneratedUserMemory"
+            },
+            "type": "array",
+            "title": "Generated User Memories",
+            "description": "Array of AI-generated memories based on your query and user context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "success"
+        ],
+        "title": "GenerateUserMemoryResponse",
+        "description": "Response model for AI-generated user memories."
+      },
+      "GeneratedUserMemory": {
+        "properties": {
+          "memory_id": {
+            "type": "string",
+            "title": "Memory Id",
+            "description": "Unique identifier for the generated memory",
+            "example": "CortexUserMemory39243c65851949fbab283cce9085a5f61757340796"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content",
+            "description": "AI-generated memory content based on your query and context",
+            "example": "Based on user's workflow patterns, they prefer automated testing and CI/CD pipelines"
+          },
+          "timestamp": {
+            "type": "integer",
+            "title": "Timestamp",
+            "description": "Unix timestamp when the memory was generated",
+            "example": 1234567890
+          },
+          "source": {
+            "type": "string",
+            "title": "Source",
+            "description": "Source of the memory creation (always 'ai_generated' for this endpoint)",
+            "default": "ai_generated",
+            "example": "ai_generated"
+          }
+        },
+        "type": "object",
+        "required": [
+          "memory_id",
+          "content",
+          "timestamp"
+        ],
+        "title": "GeneratedUserMemory",
+        "description": "Represents an AI-generated user memory."
+      },
       "GetEmbeddingsBasedOnChunkIdsRequest": {
         "properties": {
           "chunk_ids": {
@@ -5257,19 +5731,6 @@
           "tenant_id"
         ],
         "title": "GetEmbeddingsBasedOnChunkIdsRequest"
-      },
-      "HTTPValidationError": {
-        "properties": {
-          "detail": {
-            "items": {
-              "$ref": "#/components/schemas/ValidationError"
-            },
-            "type": "array",
-            "title": "Detail"
-          }
-        },
-        "type": "object",
-        "title": "HTTPValidationError"
       },
       "ListSourcesResponse": {
         "properties": {
@@ -5306,6 +5767,30 @@
           "sources"
         ],
         "title": "ListSourcesResponse"
+      },
+      "ListUserMemoriesResponse": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "description": "Indicates whether the memory listing operation was successful",
+            "example": true
+          },
+          "user_memories": {
+            "items": {
+              "$ref": "#/components/schemas/UserMemory"
+            },
+            "type": "array",
+            "title": "User Memories",
+            "description": "Array of all user memories associated with your tenant"
+          }
+        },
+        "type": "object",
+        "required": [
+          "success"
+        ],
+        "title": "ListUserMemoriesResponse",
+        "description": "Response model for listing all user memories."
       },
       "MarkdownUploadRequest": {
         "properties": {
@@ -5588,6 +6073,69 @@
           "tenant_id"
         ],
         "title": "QnARequest"
+      },
+      "RetrieveUserMemoryResponse": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "description": "Indicates whether the memory retrieval operation was successful",
+            "example": true
+          },
+          "retrieved_user_memories": {
+            "items": {
+              "$ref": "#/components/schemas/RetrievedUserMemory"
+            },
+            "type": "array",
+            "title": "Retrieved User Memories",
+            "description": "Array of user memories ranked by relevance to your search query"
+          }
+        },
+        "type": "object",
+        "required": [
+          "success"
+        ],
+        "title": "RetrieveUserMemoryResponse",
+        "description": "Response model for retrieving user memories through semantic search."
+      },
+      "RetrievedUserMemory": {
+        "properties": {
+          "memory_id": {
+            "type": "string",
+            "title": "Memory Id",
+            "description": "Unique identifier for the retrieved memory",
+            "example": "CortexUserMemory39243c65851949fbab283cce9085a5f61757340796"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content",
+            "description": "The memory content text that matches your search query",
+            "example": "User prefers dark mode interface and uses keyboard shortcuts frequently"
+          },
+          "similarity_score": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0,
+            "title": "Similarity Score",
+            "description": "Relevance score indicating how well this memory matches your query (0.0 to 1.0)",
+            "example": 0.95
+          },
+          "timestamp": {
+            "type": "integer",
+            "title": "Timestamp",
+            "description": "Unix timestamp when the memory was originally created",
+            "example": 1234567890
+          }
+        },
+        "type": "object",
+        "required": [
+          "memory_id",
+          "content",
+          "similarity_score",
+          "timestamp"
+        ],
+        "title": "RetrievedUserMemory",
+        "description": "Represents a user memory retrieved through semantic search."
       },
       "SearchChunk": {
         "properties": {
@@ -6092,38 +6640,42 @@
         ],
         "title": "TenantStats"
       },
-      "ValidationError": {
+      "UserMemory": {
         "properties": {
-          "loc": {
-            "items": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            },
-            "type": "array",
-            "title": "Location"
-          },
-          "msg": {
+          "memory_id": {
             "type": "string",
-            "title": "Message"
+            "title": "Memory Id",
+            "description": "Unique identifier for the user memory",
+            "example": "CortexUserMemory39243c65851949fbab283cce9085a5f61757340796"
           },
-          "type": {
+          "content": {
             "type": "string",
-            "title": "Error Type"
+            "title": "Content",
+            "description": "The actual memory content text that was stored",
+            "example": "User prefers dark mode interface and uses keyboard shortcuts frequently"
+          },
+          "timestamp": {
+            "type": "integer",
+            "title": "Timestamp",
+            "description": "Unix timestamp when the memory was created",
+            "example": 1234567890
+          },
+          "source": {
+            "type": "string",
+            "title": "Source",
+            "description": "Source of the memory creation (user_generated or ai_generated)",
+            "example": "user_generated"
           }
         },
         "type": "object",
         "required": [
-          "loc",
-          "msg",
-          "type"
+          "memory_id",
+          "content",
+          "timestamp",
+          "source"
         ],
-        "title": "ValidationError"
+        "title": "UserMemory",
+        "description": "Represents a user memory stored in the system."
       }
     },
     "securitySchemes": {
