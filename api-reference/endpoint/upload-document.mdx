@@ -5,6 +5,15 @@ openapi: 'POST /upload/upload_document'
 
 Upload a document to your tenant's knowledge base. The document will be processed, chunked, and indexed for search and retrieval.
 
+
+<Info>
+**Complete Reference**: For a comprehensive list of all supported file formats with detailed information, see our [Supported File Formats](/essentials/file-formats) documentation.
+</Info>
+
+<Warning>
+**Unsupported File Formats**: If you attempt to upload a file format that is not supported, you will receive an error response with status code `400` and the message: `"Unsupported file format: [filename]. Please check our supported file formats documentation."` Ensure your files are in one of the supported formats listed above before uploading.
+</Warning>
+
 ## Document Processing Pipeline
 
 When you upload a document, it goes through a comprehensive processing pipeline designed to make your content searchable and retrievable:
