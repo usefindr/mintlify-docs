@@ -3499,7 +3499,7 @@
           "search"
         ],
         "summary": "Search",
-        "description": "Search for relevant content within your indexed sources.\n\nThis endpoint returns the chunks related to the query you make. We use neural (embedding) search to give you the most relevant chunks. \nResults are ranked by relevance and can be customized with parameters like result limits and recency preferences.",
+        "description": "Search for relevant content within your indexed sources.\n\nThis API returns the chunks related to the query you make. We use neural (embedding) search to give you the most relevant chunks. \nResults are ranked by relevance and can be customized with parameters like result limits and recency preferences.",
         "operationId": "search_search_retrieve_post",
         "requestBody": {
           "content": {
@@ -5837,7 +5837,7 @@
           "file_id": {
             "type": "string",
             "title": "File Id",
-            "description": "Identifier fo the file whose status is being retrieved"
+            "description": "Identifier for the file whose status is being retrieved"
           },
           "indexing_status": {
             "type": "string",
@@ -6197,6 +6197,18 @@
             "title": "Layout",
             "description": "Layout of the chunk in original document. You will generally receive a stringified dict with 2 keys, `offsets` and `page`(optional). Offsets will have `document_level_start_index` and `page_level_start_index`(optional)",
             "example": "{\"offsets\": {\"document_level_start_index\": 1024, \"page_level_start_index\": 50}, \"page\": 2}"
+          },
+          "relevancy_score": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Relevancy Score",
+            "description": "Score indicating how relevant this chunk is to your search query, with higher values indicating better matches"
           },
           "document_metadata": {
             "anyOf": [
