@@ -628,13 +628,13 @@
       }
     },
     "/user_memory/retrieve_user_memory": {
-      "get": {
+      "post": {
         "tags": [
           "user_memory"
         ],
         "summary": "Retrieve User Memory",
         "description": "Find relevant user memories using semantic search.\n\nThis endpoint performs a semantic search across all your stored user memories \nto find the most relevant ones based on your query. The results are ranked by \nsimilarity score, with the most relevant memories returned first.\n\nUse this to recall past preferences, context, or information that might be \nrelevant to your current task or query.",
-        "operationId": "retrieve_user_memory_user_memory_retrieve_user_memory_get",
+        "operationId": "retrieve_user_memory_user_memory_retrieve_user_memory_post",
         "security": [
           {
             "HTTPBearer": []
@@ -651,17 +651,6 @@
               "title": "Tenant Id"
             },
             "description": "Unique identifier for the tenant/organization"
-          },
-          {
-            "name": "query",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "Search query to find relevant user memories",
-              "title": "Query"
-            },
-            "description": "Search query to find relevant user memories"
           },
           {
             "name": "sub_tenant_id",
@@ -690,6 +679,17 @@
             "description": "Maximum number of memories to return (default: 5)"
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RetrieveUserMemoryRequest",
+                "description": "Request body containing the search query"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -805,28 +805,6 @@
             "description": "Unique identifier for the tenant/organization"
           },
           {
-            "name": "user_query",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "Your query or context for AI memory generation",
-              "title": "User Query"
-            },
-            "description": "Your query or context for AI memory generation"
-          },
-          {
-            "name": "user_name",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "Your name to personalize the generated memories",
-              "title": "User Name"
-            },
-            "description": "Your name to personalize the generated memories"
-          },
-          {
             "name": "sub_tenant_id",
             "in": "query",
             "required": false,
@@ -839,6 +817,17 @@
             "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id"
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateUserMemoryRequest",
+                "description": "Request body containing the user query and context"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -954,17 +943,6 @@
             "description": "Unique identifier for the tenant/organization"
           },
           {
-            "name": "user_memory",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The memory content to store for future reference",
-              "title": "User Memory"
-            },
-            "description": "The memory content to store for future reference"
-          },
-          {
             "name": "sub_tenant_id",
             "in": "query",
             "required": false,
@@ -977,6 +955,17 @@
             "description": "Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id"
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddUserMemoryRequest",
+                "description": "Request body containing the user memory to add"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -4685,6 +4674,20 @@
         ],
         "title": "ActualErrorResponse"
       },
+      "AddUserMemoryRequest": {
+        "properties": {
+          "user_memory": {
+            "type": "string",
+            "title": "User Memory",
+            "description": "The memory content to store for future reference"
+          }
+        },
+        "type": "object",
+        "required": [
+          "user_memory"
+        ],
+        "title": "AddUserMemoryRequest"
+      },
       "AddUserMemoryResponse": {
         "properties": {
           "success": {
@@ -4699,7 +4702,7 @@
             "description": "Confirms whether the memory was successfully stored in the system",
             "example": true
           },
-          "user_memory_id": {
+          "memory_id": {
             "anyOf": [
               {
                 "type": "string"
@@ -4708,7 +4711,7 @@
                 "type": "null"
               }
             ],
-            "title": "User Memory Id",
+            "title": "Memory Id",
             "description": "Unique identifier assigned to the newly created memory",
             "example": "CortexUserMemory39243c65851949fbab283cce9085a5f61757340796"
           }
@@ -5642,6 +5645,26 @@
         ],
         "title": "FullTextSearchRequest"
       },
+      "GenerateUserMemoryRequest": {
+        "properties": {
+          "user_query": {
+            "type": "string",
+            "title": "User Query",
+            "description": "Your query or context for AI memory generation"
+          },
+          "user_name": {
+            "type": "string",
+            "title": "User Name",
+            "description": "Your name to personalize the generated memories"
+          }
+        },
+        "type": "object",
+        "required": [
+          "user_query",
+          "user_name"
+        ],
+        "title": "GenerateUserMemoryRequest"
+      },
       "GenerateUserMemoryResponse": {
         "properties": {
           "success": {
@@ -5652,7 +5675,7 @@
           },
           "generated_user_memories": {
             "items": {
-              "$ref": "#/components/schemas/GeneratedUserMemory"
+              "$ref": "#/components/schemas/UserMemory"
             },
             "type": "array",
             "title": "Generated User Memories",
@@ -5665,43 +5688,6 @@
         ],
         "title": "GenerateUserMemoryResponse",
         "description": "Response model for AI-generated user memories."
-      },
-      "GeneratedUserMemory": {
-        "properties": {
-          "memory_id": {
-            "type": "string",
-            "title": "Memory Id",
-            "description": "Unique identifier for the generated memory",
-            "example": "CortexUserMemory39243c65851949fbab283cce9085a5f61757340796"
-          },
-          "content": {
-            "type": "string",
-            "title": "Content",
-            "description": "AI-generated memory content based on your query and context",
-            "example": "Based on user's workflow patterns, they prefer automated testing and CI/CD pipelines"
-          },
-          "timestamp": {
-            "type": "integer",
-            "title": "Timestamp",
-            "description": "Unix timestamp when the memory was generated",
-            "example": 1234567890
-          },
-          "source": {
-            "type": "string",
-            "title": "Source",
-            "description": "Source of the memory creation (always 'ai_generated' for this endpoint)",
-            "default": "ai_generated",
-            "example": "ai_generated"
-          }
-        },
-        "type": "object",
-        "required": [
-          "memory_id",
-          "content",
-          "timestamp"
-        ],
-        "title": "GeneratedUserMemory",
-        "description": "Represents an AI-generated user memory."
       },
       "GetEmbeddingsBasedOnChunkIdsRequest": {
         "properties": {
@@ -6074,6 +6060,20 @@
         ],
         "title": "QnARequest"
       },
+      "RetrieveUserMemoryRequest": {
+        "properties": {
+          "query": {
+            "type": "string",
+            "title": "Query",
+            "description": "Search query to find relevant user memories"
+          }
+        },
+        "type": "object",
+        "required": [
+          "query"
+        ],
+        "title": "RetrieveUserMemoryRequest"
+      },
       "RetrieveUserMemoryResponse": {
         "properties": {
           "success": {
@@ -6084,7 +6084,7 @@
           },
           "retrieved_user_memories": {
             "items": {
-              "$ref": "#/components/schemas/RetrievedUserMemory"
+              "$ref": "#/components/schemas/UserMemory"
             },
             "type": "array",
             "title": "Retrieved User Memories",
@@ -6097,45 +6097,6 @@
         ],
         "title": "RetrieveUserMemoryResponse",
         "description": "Response model for retrieving user memories through semantic search."
-      },
-      "RetrievedUserMemory": {
-        "properties": {
-          "memory_id": {
-            "type": "string",
-            "title": "Memory Id",
-            "description": "Unique identifier for the retrieved memory",
-            "example": "CortexUserMemory39243c65851949fbab283cce9085a5f61757340796"
-          },
-          "content": {
-            "type": "string",
-            "title": "Content",
-            "description": "The memory content text that matches your search query",
-            "example": "User prefers dark mode interface and uses keyboard shortcuts frequently"
-          },
-          "similarity_score": {
-            "type": "number",
-            "maximum": 1,
-            "minimum": 0,
-            "title": "Similarity Score",
-            "description": "Relevance score indicating how well this memory matches your query (0.0 to 1.0)",
-            "example": 0.95
-          },
-          "timestamp": {
-            "type": "integer",
-            "title": "Timestamp",
-            "description": "Unix timestamp when the memory was originally created",
-            "example": 1234567890
-          }
-        },
-        "type": "object",
-        "required": [
-          "memory_id",
-          "content",
-          "similarity_score",
-          "timestamp"
-        ],
-        "title": "RetrievedUserMemory",
-        "description": "Represents a user memory retrieved through semantic search."
       },
       "SearchChunk": {
         "properties": {
@@ -6660,31 +6621,17 @@
             "description": "Unique identifier for the user memory",
             "example": "CortexUserMemory39243c65851949fbab283cce9085a5f61757340796"
           },
-          "content": {
+          "memory_content": {
             "type": "string",
-            "title": "Content",
+            "title": "Memory Content",
             "description": "The actual memory content text that was stored",
             "example": "User prefers dark mode interface and uses keyboard shortcuts frequently"
-          },
-          "timestamp": {
-            "type": "integer",
-            "title": "Timestamp",
-            "description": "Unix timestamp when the memory was created",
-            "example": 1234567890
-          },
-          "source": {
-            "type": "string",
-            "title": "Source",
-            "description": "Source of the memory creation (user_generated or ai_generated)",
-            "example": "user_generated"
           }
         },
         "type": "object",
         "required": [
           "memory_id",
-          "content",
-          "timestamp",
-          "source"
+          "memory_content"
         ],
         "title": "UserMemory",
         "description": "Represents a user memory stored in the system."
