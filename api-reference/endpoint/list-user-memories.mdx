@@ -3,9 +3,92 @@ title: 'List User Memories'
 openapi: 'GET /user_memory/list_user_memories'
 ---
 
-### Functionality
-- Fetches all user memories from the vector store using the combined tenant ID
-- Returns a simplified list containing source_id and source_content for each memory
+## Overview
+
+The List User Memories endpoint retrieves all stored memories for a specific user within a tenant/sub-tenant combination. This endpoint provides a comprehensive view of all user memories, allowing you to see what information has been stored and manage the user's memory profile.
+
+## Functionality
+
+- **Complete Memory Retrieval**: Fetches all user memories
+- **Tenant-Based Filtering**: Returns memories specific to the provided tenant and sub-tenant combination
+- **Simplified Response**: Provides essential memory information including unique IDs and content
+- **User Context Integration**: Automatically filters memories based on the authenticated user
+- **Memory Management**: Enables you to review and manage stored user memories
+
+## Use Cases
+
+- **Memory Audit**: Review all stored memories for a user to ensure data quality
+- **User Profile Overview**: Get a complete picture of what the system knows about a user
+- **Memory Management**: Identify memories that may need updating or deletion
+- **Debugging**: Troubleshoot issues with user personalization by examining stored memories
+- **Data Export**: Retrieve all user memories for data analysis or migration
+
+## Example Usage
+
+### Basic Memory Listing
+
+```bash
+curl -X GET "https://api.cortex.com/user_memory/list_user_memories?tenant_id=company_123&sub_tenant_id=marketing_team" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+### Response
+
+```json
+{
+  "success": true,
+  "user_memories": [
+    {
+      "source_id": "mem_001_abc123",
+      "source_content": "User prefers detailed technical explanations and works in the Pacific timezone"
+    },
+    {
+      "source_id": "mem_002_def456",
+      "source_content": "User is interested in machine learning and AI technologies"
+    },
+    {
+      "source_id": "mem_003_ghi789",
+      "source_content": "User prefers email communication over phone calls for project updates"
+    }
+  ]
+}
+```
+
+### With Optional Sub-tenant
+
+```bash
+curl -X GET "https://api.cortex.com/user_memory/list_user_memories?tenant_id=company_123" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+<Note>
+**Sub-tenant Default**: If no sub_tenant_id is provided, the system uses DEFAULT sub-tenant which was created while creating the tenant.
+</Note>
+
+## Important Notes
+
+<Warning>
+**Memory Privacy**: This endpoint returns all memories for the authenticated user. Ensure proper access controls are in place to prevent unauthorized access to user memory data.
+</Warning>
+
+<Info>
+**Memory IDs**: Each memory has a unique `source_id` that can be used with the [Delete User Memory](/api-reference/endpoint/delete-user-memory) endpoint to remove specific memories.
+</Info>
+
+<Tip>
+**Pro Tip**: Use this endpoint in combination with [Retrieve User Memory](/api-reference/endpoint/retrieve-user-memory) to first search for relevant memories, then list all memories to get the complete context.
+</Tip>
+
+## Response Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `success` | boolean | Indicates whether the operation was successful |
+| `user_memories` | array | List of user memory objects |
+| `user_memories[].source_id` | string | Unique identifier for the memory |
+| `user_memories[].source_content` | string | The actual content of the memory |
 
 ## Error Responses
 
