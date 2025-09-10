@@ -3,12 +3,71 @@ title: 'Add User Memory'
 openapi: 'POST /user_memory/add_user_memory'
 ---
 
-### Functionality
-- Takes user memory content from request body
-- Extracts user context from Firebase token
-- Inserts the new user memory into the vector store
-- Returns confirmation of successful insertion
-- Handles errors and returns false on failure
+## Overview
+
+The Add User Memory endpoint allows you to manually store personal memories for a specific user. These memories are used to enhance personalization and provide context-aware responses in your AI applications.
+
+## What are User Memories?
+
+User memories are personal, contextual information stored for individual users that help your AI system:
+- Remember user preferences and past interactions
+- Provide personalized responses based on user history
+- Enhance user experience through adaptive behavior
+
+## Functionality
+
+- **Manual Memory Addition**: Allows you to explicitly add specific memories for a user
+- **Vector Store Integration**: Stores memories in a searchable vector database for semantic retrieval
+- **Tenant Isolation**: Ensures memories are properly isolated by tenant and sub-tenant
+- **Automatic Provisioning**: If the tenant/sub-tenant combination doesn't exist for user memory, it will be automatically provisioned on first use
+
+## Use Cases
+
+- **Preference Storage**: Store user preferences like preferred communication style, timezone, or language
+- **Context Preservation**: Remember important details from previous conversations
+- **Personalization Data**: Store information that helps tailor responses to individual users
+
+## Example Usage
+
+### Basic Memory Addition
+
+```bash
+curl -X POST "https://api.cortex.com/user_memory/add_user_memory" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "tenant_id": "company_123",
+    "sub_tenant_id": "marketing_team",
+    "user_memory": "I prefer detailed technical explanations and works in the Pacific timezone"
+  }'
+```
+
+### Response
+
+```json
+{
+  "success": true,
+  "user_memory_added": true
+}
+```
+
+## Important Notes
+
+<Warning>
+**Automatic Tenant Provisioning**: If you receive an error stating "Tenant-id/sub-tenant-id combination either does not exist or is not provisioned for user memory", this means the tenant/sub-tenant combination hasn't been set up for user memory functionality yet. This will be automatically provisioned when you add or generate your first user memory for this combination.
+</Warning>
+
+<Note>
+**Memory Persistence**: User memories are stored permanently until explicitly deleted. They persist across sessions and can be retrieved using the [Retrieve User Memory](/api-reference/endpoint/retrieve-user-memory) endpoint.
+</Note>
+
+<Info>
+**Best Practices**: 
+- Use clear, descriptive memory content that will be useful for future AI interactions
+- Consider the context in which memories will be retrieved
+- Avoid storing sensitive information unless necessary
+- Use consistent formatting for similar types of memories
+</Info>
 
 ## Error Responses
 
