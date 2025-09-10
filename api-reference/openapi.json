@@ -5774,17 +5774,6 @@
             ],
             "title": "Document Metadata",
             "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: > \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n"
-          },
-          "relations": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/Relations"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Optional JSON string containing relations as key-value pairs"
           }
         },
         "type": "object",
