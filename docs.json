@@ -8,6 +8,14 @@
     "dark": "#5B21B6"
   },
   "favicon": "/favicon.svg",
+  "contextual": {
+    "options": [
+      "copy",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ]
+  },
   "navigation": {
     "tabs": [
       {
@@ -134,8 +142,7 @@
         ]
       }
     ],
-    "global": {
-    }
+    "global": {}
   },
   "logo": {
     "light": "/logo/light.svg",
