@@ -25,7 +25,7 @@ for endpoint in openapi["paths"]:
         if "parameters" in openapi["paths"][endpoint][method]:
             for param in openapi["paths"][endpoint][method]["parameters"]:
                 if param["in"] == "query":
-                    param["schema"]["default"] = defaults[param["name"]]
+                    param["schema"]["default"] = defaults.get(param["name"], f"<{type(param['name']).__name__}>")
 print("Default values added to query params.")
 
 

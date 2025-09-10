@@ -3519,7 +3519,7 @@
           "search"
         ],
         "summary": "Full Text Search",
-        "description": "Perform full text search for exact matches within your indexed sources.\n\nUse this endpoint to find content chunks using BM25-based text matching with configurable operators.\nChoose between OR and AND operators to control how search terms are combined for precise text matching.",
+        "description": "Perform full text search for exact matches within your indexed sources.\n\nUse this endpoint to find content chunks using BM25-based text matching with configurable operators.\nChoose between 'OR' and 'AND' operators to control how search terms are combined for precise text matching.",
         "operationId": "full_text_search_search_full_text_search_post",
         "requestBody": {
           "content": {
@@ -6303,7 +6303,7 @@
             ],
             "title": "Recency Bias",
             "description": "Preference for newer content (0.0 = no bias, 1.0 = strong recency preference)",
-            "default": 0.5
+            "default": 0
           }
         },
         "type": "object",
