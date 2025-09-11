@@ -39,10 +39,10 @@
       description: Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided
       schema:
         type: string
-    - name: user_query
+    - name: user_message
       in: query
       required: true
-      description: User query to generate memories from
+      description: User message to generate memories from
       schema:
         type: string
     - name: user_name

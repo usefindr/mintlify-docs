@@ -242,7 +242,7 @@ class PersonalizationEngine {
     await this.cortex.generateUserMemory({
       tenant_id: userInteraction.tenantId,
       sub_tenant_id: userInteraction.userId,
-      user_query: `User searched for: ${userInteraction.query}. 
+      user_message: `User searched for: ${userInteraction.query}. 
                    They showed interest in: ${userInteraction.clickedItems.join(', ')}. 
                    They booked: ${userInteraction.bookedItems.join(', ')}.`,
       user_name: userInteraction.userName
@@ -449,7 +449,7 @@ const analyzeBookingPatterns = async (userId, bookingData) => {
   await cortex.generateUserMemory({
     tenant_id: userId,
     sub_tenant_id: userId,
-    user_query: analysisQuery,
+    user_message: analysisQuery,
     user_name: bookingData[0].userName
   });
 };
