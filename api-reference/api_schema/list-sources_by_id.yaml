@@ -41,7 +41,7 @@
                 example: tenant_456
               sub_tenant_id:
                 type: string
-                description: Sub-tenant identifier
+                description: Optional sub-tenant identifier for organizing data within a tenant. If not provided, defaults to tenant_id
                 example: subtenant_123
               source_ids:
                 type: array
