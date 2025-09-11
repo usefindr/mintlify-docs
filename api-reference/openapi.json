@@ -676,7 +676,7 @@
             "schema": {
               "type": "integer",
               "maximum": 50,
-              "minimum": 1,
+              "minimum": 0,
               "description": "Maximum number of memories to return (default: 5)",
               "default": 5,
               "title": "Max Count"

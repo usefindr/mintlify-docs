@@ -52,6 +52,8 @@
       description: Maximum number of memories to return
       schema:
         type: integer
+        minimum: 0
+        maximum: 50
       example: 10
     # --- Responses ---
     responses:
