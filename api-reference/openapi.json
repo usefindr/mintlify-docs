@@ -5598,10 +5598,10 @@
       },
       "GenerateUserMemoryRequest": {
         "properties": {
-          "user_query": {
+          "user_message": {
             "type": "string",
-            "title": "User Query",
-            "description": "Your query or context for AI memory generation"
+            "title": "User Message",
+            "description": "Your message for AI memory generation"
           },
           "user_name": {
             "type": "string",
@@ -5611,7 +5611,7 @@
         },
         "type": "object",
         "required": [
-          "user_query",
+          "user_message",
           "user_name"
         ],
         "title": "GenerateUserMemoryRequest"
