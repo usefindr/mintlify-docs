@@ -3,13 +3,37 @@ title: "Supported File Formats"
 description: "Comprehensive list of all supported file formats for document processing in Cortex"
 ---
 
-# Supported File Formats
-
 Cortex supports a comprehensive range of file formats for document processing. Files are automatically parsed and their content extracted for indexing and search. This page provides a complete reference of all supported formats.
 
 <Warning>
 **Unsupported File Formats**: If you attempt to upload a file format that is not supported, you will receive an error response with status code `400` and the message: `"Unsupported file format: [filename]. Please check our supported file formats documentation."` Ensure your files are in one of the supported formats listed below before uploading.
 </Warning>
+
+
+## Word Processing and Presentations
+
+Office documents and presentation files:
+
+- **PDF**
+- **ODT (OpenDocument Text)**
+- **RTF (Rich Text Format)**
+- **DOC**
+- **DOCX (Office Open XML)**
+- **DOCM, DOT, DOTM**
+- **Pages**
+- **CWK, LWP, MW, MCW, HWP, PBD, zabw**
+- **WPD, WPS**
+- **XML**
+- **Key**
+- **PPT, PPTX, PPTM, POT, POTM, POTX, SDD, SDA, SDP, SGL, STI, SXI, STW, SXW, SXG, UOP**
+
+## Spreadsheets
+
+Data and spreadsheet formats:
+
+- **XLSX**
+- **XLS**
+- **XLSM, XLSB, XLW, CSV, TSV, DIF, SYLK, SLK, PRN, NUMBERS, ET, ODS, FODS, UOS1, UOS2, DBF, WK1, WK2, WK3, WK4, WKS, 123, WQ1, WQ2, WB1, WB2, WB3, QPW, XLR, ETH**
 
 ## Markup and Documentation
 
@@ -36,31 +60,6 @@ These formats are ideal for documentation, wikis, and structured text content:
 - **Creole, Jira wiki markup**
 - **Markua, txt2tags**
 - **Plain text (TXT)**
-
-## Word Processing and Presentations
-
-Office documents and presentation files:
-
-- **PDF**
-- **ODT (OpenDocument Text)**
-- **RTF (Rich Text Format)**
-- **DOC**
-- **DOCX (Office Open XML)**
-- **DOCM, DOT, DOTM**
-- **Pages**
-- **CWK, LWP, MW, MCW, HWP, PBD, zabw**
-- **WPD, WPS**
-- **XML**
-- **Key**
-- **PPT, PPTX, PPTM, POT, POTM, POTX, SDD, SDA, SDP, SGL, STI, SXI, STW, SXW, SXG, UOP**
-
-## Spreadsheets
-
-Data and spreadsheet formats:
-
-- **XLSX**
-- **XLS**
-- **XLSM, XLSB, XLW, CSV, TSV, DIF, SYLK, SLK, PRN, NUMBERS, ET, ODS, FODS, UOS1, UOS2, DBF, WK1, WK2, WK3, WK4, WKS, 123, WQ1, WQ2, WB1, WB2, WB3, QPW, XLR, ETH**
 
 ## Images
 
@@ -115,12 +114,18 @@ Specialized and niche formats:
 ### **File Size Limits**
 - **Maximum file size**: 50MB per file
 - **Recommended size**: Under 10MB for optimal processing speed
-- **Large files**: Files over 100 pages may take up to 15 minutes to process
+- **Large files**: Files over 100 pages may take longer to process
 
 ### **Processing Time**
-- **Small files** (< 10 pages): 1-2 minutes
-- **Medium files** (10-100 pages): 2-5 minutes  
-- **Large files** (100+ pages): 5-15 minutes
+Cortex is optimized for speed and typically processes files much faster than traditional solutions:
+
+- **Small files** (< 10 pages): **Under 2 minutes** (typically 30 seconds to 1 minute)
+- **Medium files** (10-100 pages): **2-5 minutes** (typically 1-3 minutes)
+- **Large files** (100+ pages): **5-15 minutes** (typically 3-8 minutes)
+
+<Note>
+**Performance Note**: Cortex's processing times are significantly faster than traditional document processing solutions. Most files under 10 pages are processed in under 2 minutes, with many completing in under 1 minute.
+</Note>
 
 ## Best Practices
 

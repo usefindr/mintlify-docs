@@ -145,33 +145,8 @@ With `max_count=0`, Cortex will analyze all available memories and return only t
 </Info>
 
 <Tip>
-**Pro Tip**: This endpoint is most powerful when used in combination with other user memory endpoints. Use [Generate User Memory](/api-reference/endpoint/generate-user-memory) to create memories from user interactions, then use this endpoint to retrieve relevant context for future interactions.
+**Pro Tip**: This API is most powerful when used in combination with other user memory APIs. Use [Generate User Memory](/api-reference/endpoint/generate-user-memory) to create memories from user interactions, then use this API to retrieve relevant context for future interactions.
 </Tip>
-
-## Response Fields
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `success` | boolean | Indicates whether the operation was successful |
-| `user_memories` | array | Array of relevant user memory objects, ranked by relevance |
-| `user_memories[].source_id` | string | Unique identifier for the memory |
-| `user_memories[].source_content` | string | The actual content of the memory |
-
-## Parameters
-
-### Query Parameters
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `tenant_id` | string | Yes | Primary organizational identifier |
-| `sub_tenant_id` | string | No | Secondary organizational identifier (defaults to empty string) |
-| `max_count` | integer | No | Maximum number of memories to return (default: 5, min: 0, max: 50). When set to 0, Cortex intelligently selects the best memories based on relevance and context. |
-
-### Request Body Parameters
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `query` | string | Yes | Search query to find relevant memories |
 
 ## Error Responses
 

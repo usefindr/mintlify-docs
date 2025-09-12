@@ -18,7 +18,7 @@ curl --request GET \
   ```
 
 
-Retrieve all sub-tenant IDs contained within a specific tenant. This endpoint fetches the sub-tenant IDs directly from the underlying data store and provides a comprehensive list of all subdivisions within your tenant.
+Retrieve all sub-tenant IDs contained within a specific tenant directly from the underlying data store for a comprehensive list of all subdivisions.
 
 ## Use Cases
 
@@ -134,11 +134,11 @@ The `count` field represents the total number of sub-tenants, including:
 ```
 
 <Info>
-**Performance**: This endpoint provides real-time data directly from the underlying data store, ensuring you always get the most current list of sub-tenants.
+**Performance**: This API provides real-time data directly from the underlying data store, ensuring you always get the most current list of sub-tenants.
 </Info>
 
 <Warning>
-**Rate Limiting**: While this endpoint is efficient, avoid calling it excessively in production applications. Consider caching the results for a reasonable period if you need frequent access to this data.
+**Rate Limiting**: While this API is efficient, avoid calling it excessively in production applications. Consider caching the results for a reasonable period if you need frequent access to this data.
 </Warning>
 ## Error Responses
 

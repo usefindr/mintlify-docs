@@ -24,7 +24,7 @@ curl --request PATCH \
   ```
 
 
-If a `source_id` (in the provided `source_ids[]`) does not exist, a new entry with that source ID will be created. This endpoint essentially performs an upsert operation.
+Update multiple sources in bulk, creating new entries for any `source_id` that doesn't exist (upsert operation).
 > Provide one `source_id` per file. The number of `source_id`s must match the number of files.
 
 ## Error Responses

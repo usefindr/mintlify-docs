@@ -17,7 +17,7 @@ curl --request GET \
   --url 'https://api.usecortex.ai/tenant/stats?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
   --header 'Authorization: Bearer YOUR_API_KEY'
   ```
-Retrieve statistics for a specific tenant or sub-tenant. This endpoint provides insights into organizational data including object count, vector dimensions, and tenant information within Cortex's multi-tenant architecture.
+Retrieve statistics for a specific tenant or sub-tenant to get insights into organizational data including object count, vector dimensions, and tenant information.
 
 
 ### Query Parameters
@@ -25,7 +25,7 @@ Retrieve statistics for a specific tenant or sub-tenant. This endpoint provides 
 - **sub_tenant_id**: Optional string - Secondary organizational identifier (e.g., department, team, project) within a tenant for hierarchical data organization; defaults to tenant_id if not provided
 
 ### Multi-Tenant Context
-This endpoint leverages Cortex's hierarchical tenant system where:
+This API leverages Cortex's hierarchical tenant system where:
 - **Tenant Level**: Stats for an entire organization (e.g., "acme_corp")
 - **Sub-Tenant Level**: Stats for specific departments or teams within an organization (e.g., "engineering" within "acme_corp")
 - **Data Isolation**: All statistics are completely isolated per tenant/sub-tenant combination
@@ -38,7 +38,7 @@ This endpoint leverages Cortex's hierarchical tenant system where:
 
 ## Use Cases
 
-This endpoint is useful for:
+This API is useful for:
 - **Monitoring**: Track the number of embeddings stored for a tenant or department
 - **Validation**: Verify vector dimensions before uploading new embeddings to ensure compatibility
 - **Analytics**: Generate usage reports and statistics for billing, compliance, or optimization

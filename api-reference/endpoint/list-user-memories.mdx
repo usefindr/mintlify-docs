@@ -20,7 +20,7 @@ curl --request GET \
 
 ## Overview
 
-The List User Memories endpoint retrieves all stored memories for a specific user within a tenant/sub-tenant combination. This endpoint provides a comprehensive view of all user memories, allowing you to see what information has been stored and manage the user's memory profile.
+Retrieve all stored memories for a specific user within a tenant/sub-tenant combination to view and manage the user's complete memory profile.
 
 ## Functionality
 
@@ -53,7 +53,7 @@ curl -X GET "https://api.cortex.com/user_memory/list_user_memories?tenant_id=com
 ## Important Notes
 
 <Warning>
-**Memory Privacy**: This endpoint returns all memories for the authenticated user. Ensure proper access controls are in place to prevent unauthorized access to user memory data.
+**Memory Privacy**: This API returns all memories for the authenticated user. Ensure proper access controls are in place to prevent unauthorized access to user memory data.
 </Warning>
 
 <Info>
@@ -61,7 +61,7 @@ curl -X GET "https://api.cortex.com/user_memory/list_user_memories?tenant_id=com
 </Info>
 
 <Tip>
-**Pro Tip**: Use this endpoint in combination with [Retrieve User Memory](/api-reference/endpoint/retrieve-user-memory) to first search for relevant memories, then list all memories to get the complete context.
+**Pro Tip**: Use this API in combination with [Retrieve User Memory](/api-reference/endpoint/retrieve-user-memory) to first search for relevant memories, then list all memories to get the complete context.
 </Tip>
 
 ## Response Fields
