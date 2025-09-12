@@ -49,7 +49,7 @@
     - name: max_count
       in: query
       required: false
-      description: Maximum number of memories to return
+      description: Maximum number of memories to return. When set to 0, Cortex intelligently selects the best memories based on relevance and context.
       schema:
         type: integer
         minimum: 0
