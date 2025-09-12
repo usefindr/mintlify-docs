@@ -3,6 +3,8 @@ title: 'Add User Memory'
 openapi: 'POST /user_memory/add_user_memory'
 ---
 
+import { TableOfContents } from '/snippets/table-of-contents.jsx'
+
 ## Overview
 
 The Add User Memory endpoint allows you to manually store personal memories for a specific user. These memories are used to enhance personalization and provide context-aware responses in your AI applications.
@@ -155,3 +157,7 @@ All endpoints return consistent error responses following the standard format. F
 <Note>
 **Error Handling**: Always check the `detail` object in error responses for the actual error information. The outer structure may vary, but the `detail` object always follows the standard format.
 </Note>
+
+<Panel>
+  <TableOfContents />
+</Panel>
