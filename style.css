@@ -1,3 +1,9 @@
+body {
+    width: 95vw;
+    overflow-x: hidden;
+}
+
+
 #content-side-layout div.code-group {
     display: none;
 }
@@ -53,11 +59,11 @@
   }
 
 #content-side-layout {
-    max-width: 20rem !important;
+    max-width: 18rem !important;
 }
 
 #content-area {
-    width: calc(100% - 22rem) !important;
+    width: calc(100% - 20rem) !important;
 }
 
 #chat-assistant-sheet {
