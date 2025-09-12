@@ -4,10 +4,24 @@ openapi: 'POST /user_memory/generate_user_memory'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
+import TryIt from '/snippets/try-it.mdx'
 
 <Panel>
   <TableOfContents />
 </Panel>
+### Sample Request
+<TryIt />
+```bash
+curl --request POST \
+  --url 'https://api.usecortex.ai/user_memory/generate_user_memory?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "user_message": "<string>",
+  "user_name": "<string>"
+}'
+  ```
+
 
 ## Overview
 
@@ -38,37 +52,6 @@ This API goes beyond simple memory storage by:
 - **Meeting Notes**: Convert meeting transcripts into structured user memories
 - **Feedback Processing**: Transform user feedback into actionable memory insights
 - **Learning Path Creation**: Generate memories that help track user learning progress
-
-## Example Usage
-
-### Basic Memory Generation
-
-```bash
-curl -X POST "https://api.cortex.com/user_memory/generate_user_memory" \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "tenant_id": "company_123",
-    "sub_tenant_id": "engineering_team",
-    "user_message": "I just finished working on the authentication system. I prefer using JWT tokens over session-based auth because they're stateless and work better with our microservices architecture. I also learned that implementing rate limiting is crucial for security.",
-    "user_name": "John Smith"
-  }'
-```
-
-### Response
-
-```json
-{
-  "success": true,
-  "generated_user_memories": [
-    "User prefers JWT tokens over session-based authentication for microservices",
-    "User has experience with authentication system implementation",
-    "User understands the importance of rate limiting for security",
-    "User works with microservices architecture",
-    "User values stateless authentication approaches"
-  ]
-}
-```
 
 ### Advanced Usage: Meeting Notes Processing
 

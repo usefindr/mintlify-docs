@@ -4,10 +4,23 @@ openapi: 'PATCH /upload/update_embeddings'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
+import TryIt from '/snippets/try-it.mdx'
 
 <Panel>
   <TableOfContents />
 </Panel>
+### Sample Request
+<TryIt />
+```bash
+curl --request PATCH \
+  --url 'https://api.usecortex.ai/upload/update_embeddings?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "embeddings": {}
+}'
+  ```
+
 
 ### Requirements
 - **Maximum dimensions**: 2000 rows × 3024 columns; i.e. 2000 chunks with a maximum dimension of 3024

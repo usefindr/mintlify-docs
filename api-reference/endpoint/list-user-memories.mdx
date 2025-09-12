@@ -4,10 +4,19 @@ openapi: 'GET /user_memory/list_user_memories'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
+import TryIt from '/snippets/try-it.mdx'
 
 <Panel>
   <TableOfContents />
 </Panel>
+### Sample Request
+<TryIt />
+```bash
+curl --request GET \
+  --url 'https://api.usecortex.ai/user_memory/list_user_memories?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
+  --header 'Authorization: Bearer YOUR_API_KEY'
+  ```
+
 
 ## Overview
 
@@ -28,38 +37,6 @@ The List User Memories endpoint retrieves all stored memories for a specific use
 - **Memory Management**: Identify memories that may need updating or deletion
 - **Debugging**: Troubleshoot issues with user personalization by examining stored memories
 - **Data Export**: Retrieve all user memories for data analysis or migration
-
-## Example Usage
-
-### Basic Memory Listing
-
-```bash
-curl -X GET "https://api.cortex.com/user_memory/list_user_memories?tenant_id=company_123&sub_tenant_id=marketing_team" \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json"
-```
-
-### Response
-
-```json
-{
-  "success": true,
-  "user_memories": [
-    {
-      "source_id": "mem_001_abc123",
-      "source_content": "User prefers detailed technical explanations and works in the Pacific timezone"
-    },
-    {
-      "source_id": "mem_002_def456",
-      "source_content": "User is interested in machine learning and AI technologies"
-    },
-    {
-      "source_id": "mem_003_ghi789",
-      "source_content": "User prefers email communication over phone calls for project updates"
-    }
-  ]
-}
-```
 
 ### With Optional Sub-tenant
 

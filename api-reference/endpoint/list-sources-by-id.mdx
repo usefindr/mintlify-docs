@@ -4,10 +4,23 @@ openapi: 'POST /list/sources_by_id'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
+import TryIt from '/snippets/try-it.mdx'
 
 <Panel>
   <TableOfContents />
 </Panel>
+### Sample Request
+<TryIt />
+```bash
+curl --request POST \
+  --url https://api.usecortex.ai/list/sources_by_id \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "sub_tenant_id": ""
+}'
+  ```
+
 
 ## Overview
 

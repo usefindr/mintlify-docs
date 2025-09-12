@@ -4,10 +4,23 @@ openapi: 'POST /upload/upload_document'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
+import TryIt from '/snippets/try-it.mdx'
 
 <Panel>
   <TableOfContents />
 </Panel>
+### Sample Request
+<TryIt />
+```bash
+curl --request POST \
+  --url 'https://api.usecortex.ai/upload/upload_document?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Content-Type: multipart/form-data' \
+  --form 'tenant_metadata=<string>' \
+  --form 'document_metadata=<string>' \
+  --form file=@example-file
+  ```
+
 
 Upload a document to your tenant's knowledge base. The document will be processed, chunked, and indexed for search and retrieval.
 

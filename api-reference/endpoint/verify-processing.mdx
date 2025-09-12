@@ -4,10 +4,19 @@ openapi: 'POST /upload/verify_processing'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
+import TryIt from '/snippets/try-it.mdx'
 
 <Panel>
   <TableOfContents />
 </Panel>
+### Sample Request
+<TryIt />
+```bash
+curl --request POST \
+  --url 'https://api.usecortex.ai/upload/verify_processing?file_id=CortexDoc1234&tenant_id=tenant_1234' \
+  --header 'Authorization: Bearer YOUR_API_KEY'
+  ```
+
 
 ## Error Responses
 

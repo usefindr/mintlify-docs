@@ -4,10 +4,24 @@ openapi: 'POST /fetch/fetch_content'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
+import TryIt from '/snippets/try-it.mdx'
 
 <Panel>
   <TableOfContents />
 </Panel>
+### Sample Request
+<TryIt />
+```bash
+curl --request POST \
+  --url https://api.usecortex.ai/fetch/fetch_content \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "return_content": true,
+  "sub_tenant_id": ""
+}'
+  ```
+
 
 ### Functionality
 - Extracts user credentials and organization details from the API key

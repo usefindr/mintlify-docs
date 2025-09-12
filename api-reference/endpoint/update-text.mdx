@@ -4,10 +4,25 @@ openapi: 'PATCH /upload/update_text'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
+import TryIt from '/snippets/try-it.mdx'
 
 <Panel>
   <TableOfContents />
 </Panel>
+### Sample Request
+<TryIt />
+```bash
+curl --request PATCH \
+  --url 'https://api.usecortex.ai/upload/update_text?source_id=CortexDoc1234&tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "content": "<string>",
+  "tenant_metadata": {},
+  "document_metadata": {}
+}'
+  ```
+
 If the `source_id` does not exist, a new entry with that source ID will be created. This endpoint essentially performs an upsert (update or insert) operation.
 
 

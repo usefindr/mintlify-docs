@@ -4,10 +4,32 @@ openapi: 'POST /search/qna'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
+import TryIt from '/snippets/try-it.mdx'
 
 <Panel>
   <TableOfContents />
 </Panel>
+### Sample Request
+<TryIt />
+```bash
+curl --request POST \
+  --url https://api.usecortex.ai/search/qna \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "sub_tenant_id": "",
+  "highlight_chunks": false,
+  "stream": false,
+  "search_alpha": 0.8,
+  "recency_bias": 0.2,
+  "ai_generation": true,
+  "user_name": "",
+  "user_instructions": "",
+  "multi_step_reasoning": true,
+  "auto_agent_routing": true
+}'
+  ```
+
 
 Ask questions and get AI-generated answers based on your tenant's knowledge base. This endpoint combines search and AI generation to provide conversational responses with citations.
 

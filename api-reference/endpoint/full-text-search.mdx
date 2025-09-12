@@ -4,10 +4,24 @@ openapi: 'POST /search/full-text-search'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
+import TryIt from '/snippets/try-it.mdx'
 
 <Panel>
   <TableOfContents />
 </Panel>
+### Sample Request
+<TryIt />
+```bash
+curl --request POST \
+  --url https://api.usecortex.ai/search/full-text-search \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "sub_tenant_id": "",
+  "max_chunks": 25
+}'
+  ```
+
 
 ## Search Options
 

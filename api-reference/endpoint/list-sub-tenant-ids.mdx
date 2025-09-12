@@ -4,10 +4,19 @@ openapi: 'GET /tenant/sub_tenant_ids'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
+import TryIt from '/snippets/try-it.mdx'
 
 <Panel>
   <TableOfContents />
 </Panel>
+### Sample Request
+<TryIt />
+```bash
+curl --request GET \
+  --url 'https://api.usecortex.ai/tenant/sub_tenant_ids?tenant_id=tenant_1234' \
+  --header 'Authorization: Bearer YOUR_API_KEY'
+  ```
+
 
 Retrieve all sub-tenant IDs contained within a specific tenant. This endpoint fetches the sub-tenant IDs directly from the underlying data store and provides a comprehensive list of all subdivisions within your tenant.
 

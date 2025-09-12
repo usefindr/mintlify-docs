@@ -4,10 +4,23 @@ openapi: 'POST /embeddings/by-chunk-ids'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
+import TryIt from '/snippets/try-it.mdx'
 
 <Panel>
   <TableOfContents />
 </Panel>
+### Sample Request
+<TryIt />
+```bash
+curl --request POST \
+  --url https://api.usecortex.ai/embeddings/by-chunk-ids \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "sub_tenant_id": ""
+}'
+  ```
+
 
 Retrieve embeddings for specific chunk IDs. This endpoint allows you to fetch the embedding vectors for a list of chunk IDs that you previously obtained from uploading embeddings or searching.
 

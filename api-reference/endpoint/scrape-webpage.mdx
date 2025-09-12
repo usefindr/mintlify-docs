@@ -4,10 +4,20 @@ openapi: 'POST /upload/scrape_webpage'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
+import TryIt from '/snippets/try-it.mdx'
 
 <Panel>
   <TableOfContents />
 </Panel>
+### Sample Request
+<TryIt />
+```bash
+curl --request POST \
+  --url 'https://api.usecortex.ai/upload/scrape_webpage?web_url=https%3A%2F%2Fwww.usecortex.ai%2F&tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567&file_id=CortexDoc1234' \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Content-Type: application/x-www-form-urlencoded'
+  ```
+
 
 Scrape and process webpage content directly from a URL. The webpage will be scraped, processed, chunked, and indexed for search and retrieval.
 

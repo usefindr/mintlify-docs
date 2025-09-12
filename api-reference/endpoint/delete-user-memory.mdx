@@ -4,10 +4,19 @@ openapi: 'DELETE /user_memory/delete_user_memory'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
+import TryIt from '/snippets/try-it.mdx'
 
 <Panel>
   <TableOfContents />
 </Panel>
+### Sample Request
+<TryIt />
+```bash
+curl --request DELETE \
+  --url 'https://api.usecortex.ai/user_memory/delete_user_memory?tenant_id=tenant_1234&memory_id=memory_1234&sub_tenant_id=sub_tenant_4567' \
+  --header 'Authorization: Bearer YOUR_API_KEY'
+  ```
+
 
 ## Overview
 
@@ -28,25 +37,6 @@ The Delete User Memory endpoint allows you to remove specific memories from a us
 - **Memory Management**: Maintain high-quality memory profiles by removing irrelevant information
 - **Error Correction**: Delete memories that were added incorrectly
 - **User Control**: Give users the ability to manage their own memory data
-
-## Example Usage
-
-### Basic Memory Deletion
-
-```bash
-curl -X DELETE "https://api.cortex.com/user_memory/delete_user_memory?tenant_id=company_123&sub_tenant_id=marketing_team&memory_id=mem_001_abc123" \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json"
-```
-
-### Response
-
-```json
-{
-  "success": true,
-  "user_memory_deleted": true
-}
-```
 
 ### Finding Memory IDs
 

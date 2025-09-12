@@ -4,10 +4,23 @@ openapi: 'DELETE /upload/delete_source'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
+import TryIt from '/snippets/try-it.mdx'
 
 <Panel>
   <TableOfContents />
 </Panel>
+### Sample Request
+<TryIt />
+```bash
+curl --request DELETE \
+  --url https://api.usecortex.ai/upload/delete_source \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "sub_tenant_id": ""
+}'
+  ```
+
 
 
 ## Error Responses

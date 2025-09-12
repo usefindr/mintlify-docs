@@ -4,10 +4,24 @@ openapi: 'POST /embeddings/search'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
+import TryIt from '/snippets/try-it.mdx'
 
 <Panel>
   <TableOfContents />
 </Panel>
+### Sample Request
+<TryIt />
+```bash
+curl --request POST \
+  --url https://api.usecortex.ai/embeddings/search \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "sub_tenant_id": "",
+  "max_chunks": 10
+}'
+  ```
+
 
 Search for similar content using vector embeddings. This endpoint performs semantic similarity search by comparing your input embedding against the vector database to find the most similar content chunks.
 

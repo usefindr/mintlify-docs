@@ -4,10 +4,22 @@ openapi: 'POST /user_memory/retrieve_user_memory'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
+import TryIt from '/snippets/try-it.mdx'
 
 <Panel>
   <TableOfContents />
 </Panel>
+### Sample Request
+<TryIt />
+```bash
+curl -X POST "https://api.cortex.com/user_memory/retrieve_user_memory?tenant_id=company_123&sub_tenant_id=engineering_team&max_count=5" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "authentication preferences"
+  }'
+```
+
 
 ## Overview
 
@@ -36,18 +48,6 @@ Unlike traditional keyword search, semantic search understands the meaning and c
 - **Recommendation Systems**: Use user memories to provide personalized recommendations
 - **Customer Support**: Access user history and preferences for better support
 
-## Example Usage
-
-### Basic Memory Retrieval
-
-```bash
-curl -X POST "https://api.cortex.com/user_memory/retrieve_user_memory?tenant_id=company_123&sub_tenant_id=engineering_team&max_count=5" \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "query": "authentication preferences"
-  }'
-```
 
 ### Response
 

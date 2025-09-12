@@ -4,12 +4,27 @@ openapi: 'POST /user/create_tenant'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
+import TryIt from '/snippets/try-it.mdx'
 
 <Panel>
   <TableOfContents />
 </Panel>
 
 Create a new tenant. If you pass `tenant_id` as a query parameter, that ID will be used. If not provided, the service generates a new `tenant_id` and returns it.
+
+### Sample Request:
+<TryIt />
+```bash
+curl --request POST \
+  --url 'https://api.usecortex.ai/user/create_tenant?tenant_id=tenant_1234' \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "tenant_metadata_schema": [
+    {}
+  ]
+}'
+```
 
 <Note>
 **Important**: When a tenant is created, Cortex automatically creates a **DEFAULT sub-tenant** that acts as a global space for that tenant. Any documents ingested or API calls made with the `tenant_id` but without specifying a `sub_tenant_id` will automatically reference this default sub-tenant.
