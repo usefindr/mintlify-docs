@@ -24,3 +24,8 @@
     max-height: none !important;
     overflow: visible !important;
 }
+
+#table-of-contents-content {
+    position: absolute;
+    right: 0;
+  }
