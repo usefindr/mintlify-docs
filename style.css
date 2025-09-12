@@ -1,3 +1,26 @@
 #content-side-layout div.code-group {
     display: none;
 }
+
+/* Override Panel height restrictions for table of contents */
+.panel:has(#table-of-contents) {
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+/* Fallback for browsers that don't support :has() */
+.panel #table-of-contents {
+    position: relative;
+    z-index: 1;
+}
+
+.panel #table-of-contents::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    max-height: none !important;
+    overflow: visible !important;
+}

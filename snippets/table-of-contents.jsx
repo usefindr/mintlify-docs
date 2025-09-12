@@ -110,7 +110,7 @@ export const TableOfContents = ({
   const data = toc && toc.length ? toc : items || []
 
   return (
-    <div className={`text-gray-600 text-sm leading-6 w-[16.5rem] space-y-2 pb-4 -mt-10 pt-10 hidden lg:block max-h-none overflow-visible ${className}`} id="table-of-contents" style={{maxHeight: 'none', overflow: 'visible'}}>
+    <div className={`text-gray-600 text-sm leading-6 w-[16.5rem] space-y-2 pb-4 -mt-10 pt-10 hidden lg:block ${className}`} id="table-of-contents">
       <div className="text-gray-700 dark:text-gray-300 font-medium flex items-center space-x-2">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" xmlns="http://www.w3.org/2000/svg" className="h-3 w-3">
           <path d="M2.44434 12.6665H13.5554" strokeLinecap="round" strokeLinejoin="round"></path>
