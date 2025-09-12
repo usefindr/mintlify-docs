@@ -13,30 +13,6 @@
     overflow: visible !important;
 }
 
-/* Override xl:w-[28rem] specifically for the panel containing table of contents */
-/* @media (min-width: 1280px) {
-    .panel.w-full.xl\:w-\[28rem\].mb-6.relative.max-h-\[calc\(100\%-32px\)\].overflow-y-auto:has(#table-of-contents-custom) {
-        width: auto !important;
-        max-width: none !important;
-    }
-} */
-
-/* Fallback for browsers that don't support :has() */
-/* .panel #table-of-contents-custom {
-    position: relative;
-    z-index: 1;
-}
-
-.panel #table-of-contents-custom::before {
-    content: '';
-    position: absolute;
-    left: -20px;
-    right: -20px;
-    bottom: -20px;
-    max-height: none !important;
-    overflow: visible !important;
-} */
-
 /* Hide elements with specific Tailwind utility classes */
 :where(.mt-8.lg\\:mt-0.flex.flex-col.gap-6.xl\\:hidden.max-h-\\[30rem\\]),
 :where([class*='mt-8 '][class*='lg:mt-0 '][class*='flex '][class*='flex-col '][class*='gap-6 '][class*='xl:hidden '][class*='max-h-[30rem]']) {
@@ -51,11 +27,6 @@
     clip: rect(0, 0, 0, 0) !important;
     overflow: hidden !important;
 }
-
-/* #table-of-contents-content-custom {
-    position: absolute;
-    right: 0;
-  } */
 
 #content-side-layout {
     max-width: 18rem !important;
