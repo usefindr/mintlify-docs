@@ -157,6 +157,10 @@ All error responses follow this consistent structure:
 }
 ```
 
+<Note>
+**Error Handling**: Always check the `detail` object in error responses for the actual error information. The outer structure may vary, but the `detail` object always follows the standard format.
+</Note>
+
 **Common scenarios**:
 - Database connectivity issues
 - Processing pipeline failures

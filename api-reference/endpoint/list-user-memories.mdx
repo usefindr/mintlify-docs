@@ -3,6 +3,21 @@ title: 'List User Memories'
 openapi: 'GET /user_memory/list_user_memories'
 ---
 
+import { TableOfContents } from '/snippets/table-of-contents.jsx'
+import TryIt from '/snippets/try-it.mdx'
+
+<Panel>
+  <TableOfContents />
+</Panel>
+<TryIt />
+### Sample Request
+```bash
+curl --request GET \
+  --url 'https://api.usecortex.ai/user_memory/list_user_memories?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
+  --header 'Authorization: Bearer YOUR_API_KEY'
+  ```
+
+
 ## Overview
 
 The List User Memories endpoint retrieves all stored memories for a specific user within a tenant/sub-tenant combination. This endpoint provides a comprehensive view of all user memories, allowing you to see what information has been stored and manage the user's memory profile.
@@ -22,38 +37,6 @@ The List User Memories endpoint retrieves all stored memories for a specific use
 - **Memory Management**: Identify memories that may need updating or deletion
 - **Debugging**: Troubleshoot issues with user personalization by examining stored memories
 - **Data Export**: Retrieve all user memories for data analysis or migration
-
-## Example Usage
-
-### Basic Memory Listing
-
-```bash
-curl -X GET "https://api.cortex.com/user_memory/list_user_memories?tenant_id=company_123&sub_tenant_id=marketing_team" \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json"
-```
-
-### Response
-
-```json
-{
-  "success": true,
-  "user_memories": [
-    {
-      "source_id": "mem_001_abc123",
-      "source_content": "User prefers detailed technical explanations and works in the Pacific timezone"
-    },
-    {
-      "source_id": "mem_002_def456",
-      "source_content": "User is interested in machine learning and AI technologies"
-    },
-    {
-      "source_id": "mem_003_ghi789",
-      "source_content": "User prefers email communication over phone calls for project updates"
-    }
-  ]
-}
-```
 
 ### With Optional Sub-tenant
 
@@ -94,85 +77,3 @@ curl -X GET "https://api.cortex.com/user_memory/list_user_memories?tenant_id=com
 
 All endpoints return consistent error responses following the standard format. For detailed error information, see our [Error Responses](/api-reference/error-responses) documentation.
 
-### Common Error Scenarios
-
-**400 Bad Request**: Invalid input parameters or malformed requests
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Invalid request parameters",
-    "error_code": "INVALID_PARAMETERS"
-  }
-}
-```
-
-**401 Unauthorized**: Invalid or missing API key
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Authentication required",
-    "error_code": "UNAUTHORIZED"
-  }
-}
-```
-
-**403 Forbidden**: Valid authentication but insufficient permissions
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Access denied",
-    "error_code": "FORBIDDEN"
-  }
-}
-```
-
-**404 Not Found**: Requested resource does not exist
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Resource not found",
-    "error_code": "NOT_FOUND"
-  }
-}
-```
-
-**409 Conflict**: Resource already exists or conflicts with existing data
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Resource already exists",
-    "error_code": "CONFLICT"
-  }
-}
-```
-
-**422 Unprocessable Entity**: Request is well-formed but contains semantic errors
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Validation failed",
-    "error_code": "VALIDATION_ERROR"
-  }
-}
-```
-
-**500 Internal Server Error**: Unexpected server-side error
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Internal server error",
-    "error_code": "INTERNAL_ERROR"
-  }
-}
-```
-
-<Note>
-**Error Handling**: Always check the `detail` object in error responses for the actual error information. The outer structure may vary, but the `detail` object always follows the standard format.
-</Note>

@@ -3,6 +3,21 @@ title: 'Delete User Memory'
 openapi: 'DELETE /user_memory/delete_user_memory'
 ---
 
+import { TableOfContents } from '/snippets/table-of-contents.jsx'
+import TryIt from '/snippets/try-it.mdx'
+
+<Panel>
+  <TableOfContents />
+</Panel>
+<TryIt />
+### Sample Request
+```bash
+curl --request DELETE \
+  --url 'https://api.usecortex.ai/user_memory/delete_user_memory?tenant_id=tenant_1234&memory_id=memory_1234&sub_tenant_id=sub_tenant_4567' \
+  --header 'Authorization: Bearer YOUR_API_KEY'
+  ```
+
+
 ## Overview
 
 The Delete User Memory endpoint allows you to remove specific memories from a user's memory profile. This is useful for maintaining data quality, removing outdated information, or giving users control over their stored personal data.
@@ -22,25 +37,6 @@ The Delete User Memory endpoint allows you to remove specific memories from a us
 - **Memory Management**: Maintain high-quality memory profiles by removing irrelevant information
 - **Error Correction**: Delete memories that were added incorrectly
 - **User Control**: Give users the ability to manage their own memory data
-
-## Example Usage
-
-### Basic Memory Deletion
-
-```bash
-curl -X DELETE "https://api.cortex.com/user_memory/delete_user_memory?tenant_id=company_123&sub_tenant_id=marketing_team&memory_id=mem_001_abc123" \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json"
-```
-
-### Response
-
-```json
-{
-  "success": true,
-  "user_memory_deleted": true
-}
-```
 
 ### Finding Memory IDs
 
@@ -108,85 +104,3 @@ curl -X DELETE "https://api.cortex.com/user_memory/delete_user_memory?tenant_id=
 
 All endpoints return consistent error responses following the standard format. For detailed error information, see our [Error Responses](/api-reference/error-responses) documentation.
 
-### Common Error Scenarios
-
-**400 Bad Request**: Invalid input parameters or malformed requests
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Invalid request parameters",
-    "error_code": "INVALID_PARAMETERS"
-  }
-}
-```
-
-**401 Unauthorized**: Invalid or missing API key
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Authentication required",
-    "error_code": "UNAUTHORIZED"
-  }
-}
-```
-
-**403 Forbidden**: Valid authentication but insufficient permissions
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Access denied",
-    "error_code": "FORBIDDEN"
-  }
-}
-```
-
-**404 Not Found**: Requested resource does not exist
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Resource not found",
-    "error_code": "NOT_FOUND"
-  }
-}
-```
-
-**409 Conflict**: Resource already exists or conflicts with existing data
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Resource already exists",
-    "error_code": "CONFLICT"
-  }
-}
-```
-
-**422 Unprocessable Entity**: Request is well-formed but contains semantic errors
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Validation failed",
-    "error_code": "VALIDATION_ERROR"
-  }
-}
-```
-
-**500 Internal Server Error**: Unexpected server-side error
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Internal server error",
-    "error_code": "INTERNAL_ERROR"
-  }
-}
-```
-
-<Note>
-**Error Handling**: Always check the `detail` object in error responses for the actual error information. The outer structure may vary, but the `detail` object always follows the standard format.
-</Note>

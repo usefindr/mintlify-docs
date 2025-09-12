@@ -3,6 +3,25 @@ title: 'Upload Document'
 openapi: 'POST /upload/upload_document'
 ---
 
+import { TableOfContents } from '/snippets/table-of-contents.jsx'
+import TryIt from '/snippets/try-it.mdx'
+
+<Panel>
+  <TableOfContents />
+</Panel>
+<TryIt />
+### Sample Request
+```bash
+curl --request POST \
+  --url 'https://api.usecortex.ai/upload/upload_document?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Content-Type: multipart/form-data' \
+  --form 'tenant_metadata=<string>' \
+  --form 'document_metadata=<string>' \
+  --form file=@example-file
+  ```
+
+
 Upload a document to your tenant's knowledge base. The document will be processed, chunked, and indexed for search and retrieval.
 
 
@@ -159,85 +178,3 @@ Once processing is complete, your document will be:
 
 All endpoints return consistent error responses following the standard format. For detailed error information, see our [Error Responses](/api-reference/error-responses) documentation.
 
-### Common Error Scenarios
-
-**400 Bad Request**: Invalid input parameters or malformed requests
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Invalid request parameters",
-    "error_code": "INVALID_PARAMETERS"
-  }
-}
-```
-
-**401 Unauthorized**: Invalid or missing API key
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Authentication required",
-    "error_code": "UNAUTHORIZED"
-  }
-}
-```
-
-**403 Forbidden**: Valid authentication but insufficient permissions
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Access denied",
-    "error_code": "FORBIDDEN"
-  }
-}
-```
-
-**404 Not Found**: Requested resource does not exist
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Resource not found",
-    "error_code": "NOT_FOUND"
-  }
-}
-```
-
-**409 Conflict**: Resource already exists or conflicts with existing data
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Resource already exists",
-    "error_code": "CONFLICT"
-  }
-}
-```
-
-**422 Unprocessable Entity**: Request is well-formed but contains semantic errors
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Validation failed",
-    "error_code": "VALIDATION_ERROR"
-  }
-}
-```
-
-**500 Internal Server Error**: Unexpected server-side error
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Internal server error",
-    "error_code": "INTERNAL_ERROR"
-  }
-}
-```
-
-<Note>
-**Error Handling**: Always check the `detail` object in error responses for the actual error information. The outer structure may vary, but the `detail` object always follows the standard format.
-</Note>

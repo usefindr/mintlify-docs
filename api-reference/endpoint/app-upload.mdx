@@ -4,6 +4,56 @@ openapi: "POST /upload/upload_app_sources"
 description: "Specifically built to handle knowledge from workplace apps. Parsing, chunking, and indexing depends on the kind of app (eg - gmail, slack, documents, etc). "
 ---
 
+import { TableOfContents } from '/snippets/table-of-contents.jsx'
+import TryIt from '/snippets/try-it.mdx'
+
+<Panel>
+  <TableOfContents />
+</Panel>
+
+<TryIt />
+
+### Sample
+``` bash expandable
+curl --request POST \
+  --url 'https://api.usecortex.ai/upload/upload_app_sources?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '[
+  {
+    "id": "", "title": "", "type": "", "description": "", "note": "", "url": "", "timestamp": "",
+    "content": {
+      "text": "<string>", "html_base64": "<string>", "csv_base64": "<string>", "markdown": "<string>", "files": [{}], "layout": [{}]
+    },
+    "tenant_metadata": {},
+    "document_metadata": {},
+    "meta": {},
+    "attachments": [
+      {
+        "id": "",
+        "url": "",
+        "title": "",
+        "content_type": "",
+        "content_url": "",
+        "misc": {},
+        "content": {
+          "text": "<string>",
+          "html_base64": "<string>",
+          "csv_base64": "<string>",
+          "markdown": "<string>",
+          "files": [
+            {}
+          ],
+          "layout": [
+            {}
+          ]
+        }
+      }
+    ]
+  }
+]'
+```
+
 Works similar to the upload endpoint but is specifically designed to upload multiple app sources (e.g., Gmail, Slack, Notion) in a single request for processing and indexing.
 Each app upload is handled using specialized pipelines inside Cortex and can include various content types with rich metadata.
 
@@ -235,87 +285,4 @@ Use these fields to store different types of content directly in the attachment:
 ## Error Responses
 
 All endpoints return consistent error responses following the standard format. For detailed error information, see our [Error Responses](/api-reference/error-responses) documentation.
-
-### Common Error Scenarios
-
-**400 Bad Request**: Invalid input parameters or malformed requests
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Invalid request parameters",
-    "error_code": "INVALID_PARAMETERS"
-  }
-}
-```
-
-**401 Unauthorized**: Invalid or missing API key
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Authentication required",
-    "error_code": "UNAUTHORIZED"
-  }
-}
-```
-
-**403 Forbidden**: Valid authentication but insufficient permissions
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Access denied",
-    "error_code": "FORBIDDEN"
-  }
-}
-```
-
-**404 Not Found**: Requested resource does not exist
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Resource not found",
-    "error_code": "NOT_FOUND"
-  }
-}
-```
-
-**409 Conflict**: Resource already exists or conflicts with existing data
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Resource already exists",
-    "error_code": "CONFLICT"
-  }
-}
-```
-
-**422 Unprocessable Entity**: Request is well-formed but contains semantic errors
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Validation failed",
-    "error_code": "VALIDATION_ERROR"
-  }
-}
-```
-
-**500 Internal Server Error**: Unexpected server-side error
-```json
-{
-  "detail": {
-    "success": false,
-    "message": "Internal server error",
-    "error_code": "INTERNAL_ERROR"
-  }
-}
-```
-
-<Note>
-**Error Handling**: Always check the `detail` object in error responses for the actual error information. The outer structure may vary, but the `detail` object always follows the standard format.
-</Note>
 
