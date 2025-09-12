@@ -18,7 +18,7 @@ curl --request DELETE \
   ```
 
 
-Delete a specific sub-tenant from a given tenant. This endpoint validates that the sub-tenant is not the primary/default sub-tenant before deletion.
+Delete a specific sub-tenant from a given tenant after validating it's not the primary/default sub-tenant.
 
 <Warning>
 **Important**: You cannot delete the default sub-tenant. The default sub-tenant is automatically created when a tenant is created and serves as the organization-wide workspace. Attempting to delete it will result in a 400 Bad Request error.
@@ -34,7 +34,7 @@ When you delete a sub-tenant, the following occurs:
 
 ### What Cannot Be Deleted
 - **Default Sub-Tenant**: The automatically created default sub-tenant cannot be deleted
-- **Primary Tenant**: You cannot delete the main tenant itself using this endpoint
+- **Primary Tenant**: You cannot delete the main tenant itself using this API
 
 <Note>
 **Default Sub-Tenant Protection**: Cortex automatically protects the default sub-tenant from deletion to ensure your organization always has a primary workspace. If you need to clean up the default sub-tenant, you would need to delete and recreate the entire tenant.

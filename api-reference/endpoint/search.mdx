@@ -24,7 +24,7 @@ curl --request POST \
   ```
 
 
-Perform a hybrid search across your tenant's knowledge base using both semantic and keyword matching.
+Search across your tenant's knowledge base using both semantic and keyword matching for comprehensive results.
 
 <Note>
 **Default Sub-Tenant Behavior**: If you don't specify a `sub_tenant_id`, the search will be performed within the default sub-tenant created when your tenant was set up. This searches across organization-wide documents.
@@ -138,7 +138,7 @@ Returns an array of relevant content chunks from your indexed sources based on t
 ]
 ```
 
-> **Note:** This endpoint returns hybrid search results without AI-generated answers. For conversational Q&A with AI-generated responses, use the `/search/qna` endpoint instead.
+> **Note:** This API returns hybrid search results without AI-generated answers. For conversational Q&A with AI-generated responses, use the `/search/qna` API instead.
 
 ### Alpha Parameter
 The `alpha` parameter controls the balance between semantic and keyword search:
