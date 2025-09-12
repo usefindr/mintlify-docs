@@ -1,7 +1,14 @@
 ---
 title: 'Batch Upload'
 openapi: 'POST /upload/batch_upload'
+# mode: 'wide'
 ---
+
+import { TableOfContents } from '/snippets/table-of-contents.jsx'
+
+<Panel>
+  <TableOfContents />
+</Panel>
 
 Upload multiple documents simultaneously to your tenant's knowledge base. All documents will be processed, chunked, and indexed for search and retrieval.
 

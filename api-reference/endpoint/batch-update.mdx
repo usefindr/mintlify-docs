@@ -2,6 +2,12 @@
 title: 'Batch Update'
 openapi: 'PATCH /upload/batch_update'
 ---
+import { TableOfContents } from '/snippets/table-of-contents.jsx'
+
+<Panel>
+  <TableOfContents />
+</Panel>
+
 If a `source_id` (in the provided `source_ids[]`) does not exist, a new entry with that source ID will be created. This endpoint essentially performs an upsert operation.
 > Provide one `source_id` per file. The number of `source_id`s must match the number of files.
 

@@ -3,6 +3,12 @@ title: 'Update Document'
 openapi: 'PATCH /upload/update_document'
 ---
 
+import { TableOfContents } from '/snippets/table-of-contents.jsx'
+
+<Panel>
+  <TableOfContents />
+</Panel>
+
 If the `source_id` does not exist, a new entry with that source ID will be created. This endpoint essentially performs an upsert (update or insert) operation.
 
 
