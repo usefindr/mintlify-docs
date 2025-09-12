@@ -54,12 +54,6 @@ sub_tenant_id: "client_acme_corp"
 **Naming Convention**: Use consistent prefixes like `user_`, `dept_`, or `project_` to make the purpose of each sub-tenant clear. Avoid special characters and keep names descriptive but concise.
 </Info>
 
-### Query Parameters
-- **tenant_id**: Optional string — If provided, will be used as the tenant identifier; otherwise a new one is generated.
-
-### Body Parameters
-- **tenant_metadata_schema**: Optional array of objects — Defines the **immutable** tenant-level metadata schema for your organization. Once set, these keys cannot be changed and will apply to all documents in this tenant.
-
 <Warning>
 **Important**: Tenant metadata keys are **immutable** once set during tenant creation. Choose your keys carefully as they cannot be modified later. Document metadata remains fully flexible and can be set per document during upload.
 </Warning>
@@ -95,7 +89,7 @@ Cortex supports a comprehensive range of data types for metadata fields:
 
 Understanding the difference between `searchable` and `filterable` is crucial for optimal metadata design:
 
-### Searchable Fields
+**1. Searchable Fields**
 - **Purpose**: Fields that can be used in **semantic search queries** and **QnA operations**
 - **Behavior**: Content is indexed for AI-powered search and question answering
 - **Use When**: You want users to find documents by asking questions about these fields
@@ -110,7 +104,7 @@ Understanding the difference between `searchable` and `filterable` is crucial fo
 }
 ```
 
-### Filterable Fields
+**2. Filterable Fields**
 - **Purpose**: Fields that can be used for **precise filtering** and **exact matching**
 - **Behavior**: Content is indexed for fast exact-match filtering operations
 - **Use When**: You want to narrow down results with precise criteria
@@ -125,7 +119,7 @@ Understanding the difference between `searchable` and `filterable` is crucial fo
 }
 ```
 
-### Combined Usage
+**3. Combined Usage**
 ```json
 {
   "key": "compliance_framework", 
@@ -137,7 +131,7 @@ Understanding the difference between `searchable` and `filterable` is crucial fo
 
 ## Comprehensive Examples
 
-### Enterprise Setup - Multi-Department Organization
+**Enterprise Setup - Multi-Department Organization**
 ```json
 [
   {
@@ -185,7 +179,7 @@ Understanding the difference between `searchable` and `filterable` is crucial fo
 ]
 ```
 
-### Legal Firm Setup - Client and Case Management
+**Legal Firm Setup - Client and Case Management**
 ```json
 [
   {
@@ -227,7 +221,7 @@ Understanding the difference between `searchable` and `filterable` is crucial fo
 ]
 ```
 
-### Engineering Team Setup - Project and Component Management
+**Engineering Team Setup - Project and Component Management**
 ```json
 [
   {
@@ -269,7 +263,7 @@ Understanding the difference between `searchable` and `filterable` is crucial fo
 ]
 ```
 
-### Simple Setup - Basic Organization
+**Simple Setup - Basic Organization**
 ```json
 [
   {
@@ -295,12 +289,12 @@ Understanding the difference between `searchable` and `filterable` is crucial fo
 
 ## Metadata Best Practices
 
-### 1. Naming Conventions
+**1. Naming Conventions**
 - **Use snake_case**: `business_unit` instead of `businessUnit`
 - **Be descriptive**: `data_classification_level` instead of `classification`
 - **Use consistent prefixes**: `compliance_*`, `security_*`, `business_*`
 
-### 2. Type Selection Guidelines
+**2. Type Selection Guidelines**
 - **Strings**: For categorical data, identifiers, and labels
 - **Numbers**: For quantitative metrics, versions, and priorities
 - **Booleans**: For binary flags and status indicators
@@ -308,13 +302,13 @@ Understanding the difference between `searchable` and `filterable` is crucial fo
 - **Arrays**: For multi-value fields like tags and categories
 - **Objects**: For structured, hierarchical data
 
-### 3. Searchable vs Filterable Strategy
+**3. Searchable vs Filterable Strategy**
 - **Make searchable**: Fields users will ask questions about
 - **Make filterable**: Fields used for precise result narrowing
 - **Combine both**: For fields used in both semantic search and filtering
 - **Filterable only**: For sensitive data or exact-match requirements
 
-### 4. Performance Considerations
+**4. Performance Considerations**
 - **Limit total fields**: Keep metadata schema focused and purposeful
 - **Use appropriate types**: Choose the most specific type for your data
 - **Consider query patterns**: Design for your most common use cases
