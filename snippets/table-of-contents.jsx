@@ -110,8 +110,8 @@ export const TableOfContents = ({
   const data = toc && toc.length ? toc : items || []
 
   return (
-    <div className={`text-gray-600 text-sm leading-6 w-[18rem] pb-4 -mt-10 pt-10 hidden xl:block ${className}`} id="table-of-contents">
-      <ul id="table-of-contents-content" className="toc">
+    <div className={`text-gray-600 text-sm leading-6 w-[18rem] pb-4 -mt-10 pt-10 hidden xl:block ${className}`} id="table-of-contents-custom">
+      <ul id="table-of-contents-custom-content" className="toc">
         <li className="toc-item relative">
           <div className="text-gray-700 dark:text-gray-300 font-medium flex items-center space-x-2 py-1">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" xmlns="http://www.w3.org/2000/svg" className="h-3 w-3">

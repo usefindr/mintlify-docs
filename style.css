@@ -3,21 +3,20 @@
 }
 
 /* Override Panel height restrictions for table of contents */
-.panel:has(#table-of-contents) {
+.panel:has(#table-of-contents-custom) {
     max-height: none !important;
     overflow: visible !important;
 }
 
 /* Fallback for browsers that don't support :has() */
-.panel #table-of-contents {
+.panel #table-of-contents-custom {
     position: relative;
     z-index: 1;
 }
 
-.panel #table-of-contents::before {
+.panel #table-of-contents-custom::before {
     content: '';
     position: absolute;
-    top: -20px;
     left: -20px;
     right: -20px;
     bottom: -20px;
@@ -40,7 +39,7 @@
     overflow: hidden !important;
 }
 
-#table-of-contents-content {
+#table-of-contents-content-custom {
     position: absolute;
     right: 0;
   }
@@ -52,3 +51,8 @@
 #content-area {
     width: calc(100% - 20rem) !important;
 }
+
+#chat-assistant-sheet {
+    display: none !important;   
+}
+    
