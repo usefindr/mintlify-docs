@@ -29,3 +29,7 @@
     position: absolute;
     right: 0;
   }
+
+#content-side-layout {
+    max-width: 20rem !important;
+}

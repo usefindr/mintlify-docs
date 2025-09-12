@@ -87,7 +87,7 @@ export const TableOfContents = ({
   const Item = ({ node, depth = 0 }) => {
     const isActive = activeId === node.id
     return (
-      <li className="toc-item relative ml-5" data-depth={depth}>
+      <li className="toc-item relative ml-6" data-depth={depth}>
         <a
           href={node.href}
           className={`py-1 block font-medium ${isActive ? activeClassName : inactiveClassName}`}
