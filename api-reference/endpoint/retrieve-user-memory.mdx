@@ -12,6 +12,7 @@ The Retrieve User Memory endpoint performs semantic search through a user's stor
 - **Semantic Search**: Uses advanced vector search to find memories that are semantically similar to your query
 - **Relevance Ranking**: Returns memories ranked by relevance to the search query
 - **Configurable Results**: Control the number of memories returned with the `max_count` parameter
+- **Intelligent Selection**: When `max_count` is set to 0, Cortex intelligently selects the best memories based on relevance and context
 - **Context-Aware**: Finds memories that are contextually relevant, not just keyword matches
 
 ## How Semantic Search Works
@@ -104,7 +105,21 @@ curl -X POST "https://api.cortex.com/user_memory/retrieve_user_memory?tenant_id=
   -d '{
     "query": "current project work"
   }'
+
+### Intelligent Selection (max_count=0)
+
+When you want Cortex to intelligently select the most relevant memories without specifying a count:
+
+```bash
+curl -X POST "https://api.cortex.com/user_memory/retrieve_user_memory?tenant_id=company_123&sub_tenant_id=engineering_team&max_count=0" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "authentication preferences"
+  }'
 ```
+
+With `max_count=0`, Cortex will analyze all available memories and return only the most relevant ones based on semantic similarity and contextual relevance, automatically determining the optimal number of memories to return.
 
 ## Important Notes
 
@@ -144,7 +159,7 @@ curl -X POST "https://api.cortex.com/user_memory/retrieve_user_memory?tenant_id=
 |-----------|------|----------|-------------|
 | `tenant_id` | string | Yes | Primary organizational identifier |
 | `sub_tenant_id` | string | No | Secondary organizational identifier (defaults to empty string) |
-| `max_count` | integer | No | Maximum number of memories to return (default: 5, min: 0, max: 50) |
+| `max_count` | integer | No | Maximum number of memories to return (default: 5, min: 0, max: 50). When set to 0, Cortex intelligently selects the best memories based on relevance and context. |
 
 ### Request Body Parameters
 
