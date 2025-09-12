@@ -87,7 +87,7 @@ export const TableOfContents = ({
   const Item = ({ node, depth = 0 }) => {
     const isActive = activeId === node.id
     return (
-      <li className="toc-item relative" data-depth={depth}>
+      <li className="toc-item relative ml-5" data-depth={depth}>
         <a
           href={node.href}
           className={`py-1 block font-medium ${isActive ? activeClassName : inactiveClassName}`}
@@ -110,7 +110,7 @@ export const TableOfContents = ({
   const data = toc && toc.length ? toc : items || []
 
   return (
-    <div className={`text-gray-600 text-sm leading-6 w-[22rem] pb-4 -mt-10 pt-10 hidden lg:block ${className}`} id="table-of-contents">
+    <div className={`text-gray-600 text-sm leading-6 w-[18rem] pb-4 -mt-10 pt-10 hidden lg:block ${className}`} id="table-of-contents">
       <ul id="table-of-contents-content" className="toc">
         <li className="toc-item relative">
           <div className="text-gray-700 dark:text-gray-300 font-medium flex items-center space-x-2 py-1">
