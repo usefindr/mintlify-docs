@@ -1,5 +1,5 @@
 body {
-    width: 95vw;
+    width: 99.2vw;
     overflow-x: hidden;
 }
 
@@ -70,3 +70,14 @@ body {
     display: none !important;   
 }
     
+#navbar {
+    position: fixed
+}
+
+
+@media (min-width: 1024px) {
+    #header.relative {
+        margin-top: 5rem;
+        /* padding-top: 10rem */
+    }
+}
