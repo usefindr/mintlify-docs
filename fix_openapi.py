@@ -32,7 +32,7 @@ defaults = {
         {
             "key": "data_classification",
             "type": "string",
-            "searchable": False,  
+            "searchable": False,
             "filterable": True
         }
     ],
@@ -40,6 +40,11 @@ defaults = {
 }
 
 full_text_query = "John Smith Jake"
+
+update_embeddings_emb = {
+    "CortexEmbeddings123_0": [0.123413, 0.655367, 0.987654, 0.123456, 0.789012],
+    "CortexEmbeddings123_1": [0.123413, 0.655367, 0.987654, 0.123456, 0.789012]
+}
 
 OPEN_API_PATH = "./api-reference/openapi.json"
 
@@ -52,7 +57,8 @@ for endpoint in openapi["paths"]:
         if "parameters" in openapi["paths"][endpoint][method]:
             for param in openapi["paths"][endpoint][method]["parameters"]:
                 if param["in"] == "query":
-                    param["schema"]["default"] = defaults.get(param["name"], f"<{type(param['name']).__name__}>")
+                    param["schema"]["default"] = defaults.get(
+                        param["name"], f"<{type(param['name']).__name__}>")
 print("Default values added to query params.")
 
 print("Adding default values to components.schemas")
@@ -63,6 +69,8 @@ if "components" in openapi and "schemas" in openapi["components"]:
                 # Special case for FullTextSearchRequest query property
                 if schema_name == "FullTextSearchRequest" and prop_name == "query":
                     prop_def["default"] = full_text_query
+                elif schema_name == "EmbeddingsUpdateRequest" and prop_name == "embeddings":
+                    prop_def["default"] = update_embeddings_emb
                 elif prop_name in defaults:
                     prop_def["default"] = defaults[prop_name]
                 elif "type" in prop_def:
@@ -80,6 +88,7 @@ print("Default values added to components.schemas.")
 
 
 property_tag_to_hide = "x-cortex-docs-hide"
+
 
 def recursive_filter(data):
     """
@@ -119,10 +128,11 @@ def recursive_filter(data):
     else:
         return data
 
+
 # Process the original openapi spec
 final_open_api_spec = recursive_filter(openapi)
 
 with open(OPEN_API_PATH, "w") as f:
     json.dump(final_open_api_spec, f, indent=2)
-    
+
 print("Updated OpenAPI file")
