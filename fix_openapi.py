@@ -15,7 +15,27 @@ defaults = {
     "message": "<string>",
     "embeddings": [[0.123413, 0.655367, 0.987654, 0.123456, 0.789012], [0.123413, 0.655367, 0.987654, 0.123456, 0.789012]],
     "question": "What is Cortex AI",
-    "session_id": "chat_session_1234"
+    "session_id": "chat_session_1234",
+    "tenant_metadata_schema": [
+        {
+            "key": "department",
+            "type": "string",
+            "searchable": True,
+            "filterable": True
+        },
+        {
+            "key": "compliance_framework",
+            "type": "string",
+            "searchable": True,
+            "filterable": False
+        },
+        {
+            "key": "data_classification",
+            "type": "string",
+            "searchable": False,  
+            "filterable": True
+        }
+    ]
 }
 
 full_text_query = "John Smith AND Jake"

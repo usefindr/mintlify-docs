@@ -4878,7 +4878,27 @@
                 "type": "null"
               }
             ],
-            "title": "Tenant Metadata Schema"
+            "title": "Tenant Metadata Schema",
+            "default": [
+              {
+                "key": "department",
+                "type": "string",
+                "searchable": true,
+                "filterable": true
+              },
+              {
+                "key": "compliance_framework",
+                "type": "string",
+                "searchable": true,
+                "filterable": false
+              },
+              {
+                "key": "data_classification",
+                "type": "string",
+                "searchable": false,
+                "filterable": true
+              }
+            ]
           }
         },
         "type": "object",
