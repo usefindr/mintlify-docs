@@ -12,14 +12,13 @@ import TryIt from '/snippets/try-it.mdx'
 <TryIt />
 ### Sample Request
 ```bash
-curl -X POST "https://api.cortex.com/user_memory/add_user_memory" \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "tenant_id": "company_123",
-    "sub_tenant_id": "marketing_team",
-    "user_memory": "I prefer detailed technical explanations and works in the Pacific timezone"
-  }'
+curl --request POST \
+  --url 'https://api.usecortex.ai/user_memory/add_user_memory?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "user_memory": "I prefer detailed technical explanations and works in the Pacific timezone"
+}'
   ```
 
 

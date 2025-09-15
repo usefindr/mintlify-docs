@@ -14,16 +14,19 @@ import TryIt from '/snippets/try-it.mdx'
 ```bash
 curl --request POST \
   --url https://api.usecortex.ai/search/qna \
-  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Authorization: Bearer <token>' \
   --header 'Content-Type: application/json' \
   --data '{
-  "sub_tenant_id": "",
+  "question": "What is Cortex AI",
+  "session_id": "chat_session_1234",
+  "tenant_id": "tenant_1234",
+  "sub_tenant_id": "sub_tenant_4567",
   "highlight_chunks": false,
   "stream": false,
   "search_alpha": 0.8,
   "recency_bias": 0.2,
   "ai_generation": true,
-  "user_name": "",
+  "user_name": "John Doe",
   "user_instructions": "",
   "multi_step_reasoning": true,
   "auto_agent_routing": true

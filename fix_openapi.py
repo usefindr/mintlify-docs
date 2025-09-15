@@ -4,15 +4,42 @@ defaults = {
     "tenant_id": "tenant_1234",
     "sub_tenant_id": "sub_tenant_4567",
     "memory_id": "memory_1234",
-    "user_memory": "user_memory_1234",
+    "user_memory": "I prefer detailed technical explanations and works in the Pacific timezone",
     "query": "Which mode does user prefer",
     "user_query": "Which mode does user prefer",
     "max_count": 5,
     "web_url": "https://www.usecortex.ai/",
     "file_id": "CortexDoc1234",
     "source_id": "CortexDoc1234",
-    "user_name": "John Doe"
+    "user_name": "John Doe",
+    "message": "<string>",
+    "embeddings": [[0.123413, 0.655367, 0.987654, 0.123456, 0.789012], [0.123413, 0.655367, 0.987654, 0.123456, 0.789012]],
+    "question": "What is Cortex AI",
+    "session_id": "chat_session_1234",
+    "tenant_metadata_schema": [
+        {
+            "key": "department",
+            "type": "string",
+            "searchable": True,
+            "filterable": True
+        },
+        {
+            "key": "compliance_framework",
+            "type": "string",
+            "searchable": True,
+            "filterable": False
+        },
+        {
+            "key": "data_classification",
+            "type": "string",
+            "searchable": False,  
+            "filterable": True
+        }
+    ],
+    "operator": "and"
 }
+
+full_text_query = "John Smith Jake"
 
 OPEN_API_PATH = "./api-reference/openapi.json"
 
@@ -27,6 +54,29 @@ for endpoint in openapi["paths"]:
                 if param["in"] == "query":
                     param["schema"]["default"] = defaults.get(param["name"], f"<{type(param['name']).__name__}>")
 print("Default values added to query params.")
+
+print("Adding default values to components.schemas")
+if "components" in openapi and "schemas" in openapi["components"]:
+    for schema_name, schema_def in openapi["components"]["schemas"].items():
+        if "properties" in schema_def:
+            for prop_name, prop_def in schema_def["properties"].items():
+                # Special case for FullTextSearchRequest query property
+                if schema_name == "FullTextSearchRequest" and prop_name == "query":
+                    prop_def["default"] = full_text_query
+                elif prop_name in defaults:
+                    prop_def["default"] = defaults[prop_name]
+                elif "type" in prop_def:
+                    if prop_def["type"] == "string":
+                        prop_def["default"] = f"<{prop_name}>"
+                    elif prop_def["type"] == "integer":
+                        prop_def["default"] = 1
+                    elif prop_def["type"] == "number":
+                        prop_def["default"] = 1.0
+                    elif prop_def["type"] == "boolean":
+                        prop_def["default"] = True
+                    elif prop_def["type"] == "array":
+                        prop_def["default"] = []
+print("Default values added to components.schemas.")
 
 
 property_tag_to_hide = "x-cortex-docs-hide"
