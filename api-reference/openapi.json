@@ -4600,7 +4600,7 @@
             "type": "string",
             "title": "User Memory",
             "description": "The memory content to store for future reference",
-            "default": "user_memory_1234"
+            "default": "I prefer detailed technical explanations and works in the Pacific timezone"
           }
         },
         "type": "object",
@@ -5670,7 +5670,7 @@
             "type": "string",
             "title": "Query",
             "description": "Search terms to find in your content",
-            "default": "John Smith AND Jake"
+            "default": "John Smith Jake"
           },
           "tenant_id": {
             "type": "string",
@@ -5694,7 +5694,7 @@
           "operator": {
             "$ref": "#/components/schemas/BM25OperatorType",
             "description": "How to combine search terms (OR or AND)",
-            "default": "or"
+            "default": "and"
           },
           "max_chunks": {
             "anyOf": [

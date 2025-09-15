@@ -11,14 +11,31 @@ import TryIt from '/snippets/try-it.mdx'
 </Panel>
 <TryIt />
 ### Sample Request
-```bash
+```bash expandable
 curl --request POST \
   --url https://api.usecortex.ai/embeddings/search \
-  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Authorization: Bearer <token>' \
   --header 'Content-Type: application/json' \
   --data '{
-  "sub_tenant_id": "",
-  "max_chunks": 10
+  "tenant_id": "tenant_1234",
+  "embeddings": [
+    [
+      0.123413,
+      0.655367,
+      0.987654,
+      0.123456,
+      0.789012
+    ],
+    [
+      0.123413,
+      0.655367,
+      0.987654,
+      0.123456,
+      0.789012
+    ]
+  ],
+  "sub_tenant_id": "sub_tenant_4567",
+  "max_chunks": 1
 }'
   ```
 

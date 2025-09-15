@@ -4,7 +4,7 @@ defaults = {
     "tenant_id": "tenant_1234",
     "sub_tenant_id": "sub_tenant_4567",
     "memory_id": "memory_1234",
-    "user_memory": "user_memory_1234",
+    "user_memory": "I prefer detailed technical explanations and works in the Pacific timezone",
     "query": "Which mode does user prefer",
     "user_query": "Which mode does user prefer",
     "max_count": 5,
@@ -35,10 +35,11 @@ defaults = {
             "searchable": False,  
             "filterable": True
         }
-    ]
+    ],
+    "operator": "and"
 }
 
-full_text_query = "John Smith AND Jake"
+full_text_query = "John Smith Jake"
 
 OPEN_API_PATH = "./api-reference/openapi.json"
 

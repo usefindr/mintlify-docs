@@ -14,14 +14,31 @@ Create a new tenant. If you pass `tenant_id` as a query parameter, that ID will 
 
 <TryIt />
 ### Sample Request:
-```bash
+```bash expandable
 curl --request POST \
   --url 'https://api.usecortex.ai/user/create_tenant?tenant_id=tenant_1234' \
-  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Authorization: Bearer <token>' \
   --header 'Content-Type: application/json' \
   --data '{
   "tenant_metadata_schema": [
-    {}
+    {
+      "key": "department",
+      "type": "string",
+      "searchable": true,
+      "filterable": true
+    },
+    {
+      "key": "compliance_framework",
+      "type": "string",
+      "searchable": true,
+      "filterable": false
+    },
+    {
+      "key": "data_classification",
+      "type": "string",
+      "searchable": false,
+      "filterable": true
+    }
   ]
 }'
 ```

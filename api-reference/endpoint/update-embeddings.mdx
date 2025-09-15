@@ -11,13 +11,28 @@ import TryIt from '/snippets/try-it.mdx'
 </Panel>
 <TryIt />
 ### Sample Request
-```bash
+```bash expandable
 curl --request PATCH \
   --url 'https://api.usecortex.ai/upload/update_embeddings?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
-  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Authorization: Bearer <token>' \
   --header 'Content-Type: application/json' \
   --data '{
-  "embeddings": {}
+  "embeddings": [
+    [
+      0.123413,
+      0.655367,
+      0.987654,
+      0.123456,
+      0.789012
+    ],
+    [
+      0.123413,
+      0.655367,
+      0.987654,
+      0.123456,
+      0.789012
+    ]
+  ]
 }'
   ```
 
