@@ -1,6 +1,6 @@
 ---
 title: 'Get Embeddings by Chunk IDs'
-openapi: 'POST /embeddings/by-chunk-ids'
+openapi: 'POST /embeddings/retrieve_by_ids'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
@@ -13,7 +13,7 @@ import TryIt from '/snippets/try-it.mdx'
 ### Sample Request
 ```bash
 curl --request POST \
-  --url https://api.usecortex.ai/embeddings/by-chunk-ids \
+  --url https://api.usecortex.ai/embeddings/retrieve_by_ids \
   --header 'Authorization: Bearer YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
