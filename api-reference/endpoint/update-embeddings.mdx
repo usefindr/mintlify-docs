@@ -17,22 +17,22 @@ curl --request PATCH \
   --header 'Authorization: Bearer <token>' \
   --header 'Content-Type: application/json' \
   --data '{
-  "embeddings": [
-    [
+  "embeddings": {
+    "CortexEmbeddings123_0": [
       0.123413,
       0.655367,
       0.987654,
       0.123456,
       0.789012
     ],
-    [
+    "CortexEmbeddings123_1": [
       0.123413,
       0.655367,
       0.987654,
       0.123456,
       0.789012
     ]
-  ]
+  }
 }'
   ```
 
