@@ -249,10 +249,11 @@ class PersonalizationEngine {
     });
   }
 
-  async getPersonalizedRecommendations(userId, destination) {
+  async getPersonalizedRecommendations(userId, destination, userName) {
     // Retrieve user memories to provide personalized recommendations
     const memories = await this.cortex.retrieveUserMemory({
       query: `travel preferences for ${destination}`,
+      user_name: userName,
       max_count: 10
     });
 

@@ -6092,6 +6092,12 @@
             "type": "string",
             "title": "Query",
             "description": "Search query to find relevant user memories"
+          },
+          "user_name": {
+            "type": "string",
+            "title": "User Name",
+            "description": "User's name to enhance personalisation",
+            "default": ""
           }
         },
         "type": "object",

@@ -16,7 +16,8 @@ curl -X POST "https://api.cortex.com/user_memory/retrieve_user_memory?tenant_id=
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "query": "authentication preferences"
+    "query": "authentication preferences",
+    "user_name": "John Doe"
   }'
 ```
 
@@ -32,6 +33,7 @@ The Retrieve User Memory endpoint performs semantic search through a user's stor
 - **Configurable Results**: Control the number of memories returned with the `max_count` parameter
 - **Intelligent Selection**: When `max_count` is set to 0, Cortex intelligently selects the best memories based on relevance and context
 - **Context-Aware**: Finds memories that are contextually relevant, not just keyword matches
+- **Personalization**: Optional `user_name` parameter enhances personalization by providing user context for more targeted memory retrieval
 
 ## How Semantic Search Works
 
@@ -79,7 +81,8 @@ curl -X POST "https://api.cortex.com/user_memory/retrieve_user_memory?tenant_id=
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "query": "user onboarding feedback"
+    "query": "user onboarding feedback",
+    "user_name": "Sarah Johnson"
   }'
 
 # Then use these memories to generate a personalized response
@@ -93,7 +96,8 @@ curl -X POST "https://api.cortex.com/user_memory/retrieve_user_memory?tenant_id=
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "query": "communication style preferences"
+    "query": "communication style preferences",
+    "user_name": "Mike Chen"
   }'
 
 # Find technical expertise areas  
@@ -101,7 +105,8 @@ curl -X POST "https://api.cortex.com/user_memory/retrieve_user_memory?tenant_id=
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "query": "technical skills and experience"
+    "query": "technical skills and experience",
+    "user_name": "Alex Rodriguez"
   }'
 
 # Find project-related memories
@@ -109,7 +114,8 @@ curl -X POST "https://api.cortex.com/user_memory/retrieve_user_memory?tenant_id=
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "query": "current project work"
+    "query": "current project work",
+    "user_name": "Emma Wilson"
   }'
 
 ### Intelligent Selection (max_count=0)
@@ -121,7 +127,8 @@ curl -X POST "https://api.cortex.com/user_memory/retrieve_user_memory?tenant_id=
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "query": "authentication preferences"
+    "query": "authentication preferences",
+    "user_name": "David Kim"
   }'
 ```
 
@@ -142,6 +149,7 @@ With `max_count=0`, Cortex will analyze all available memories and return only t
 - Be specific about the type of information you're looking for
 - Consider using synonyms or related terms if initial queries don't return results
 - Shorter, focused queries often work better than long, complex ones
+- Include the `user_name` parameter for enhanced personalization and more targeted memory retrieval
 </Info>
 
 <Tip>
