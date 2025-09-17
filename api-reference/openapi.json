@@ -6458,6 +6458,19 @@
             "title": "Recency Bias",
             "description": "Preference for newer content (0.0 = no bias, 1.0 = strong recency preference)",
             "default": 0
+          },
+          "personalise_search": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Personalise Search",
+            "description": "Enable personalized search results based on user preferences",
+            "default": false
           }
         },
         "type": "object",

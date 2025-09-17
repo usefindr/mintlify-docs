@@ -21,7 +21,8 @@ curl --request POST \
   "tenant_id": "tenant_1234",
   "sub_tenant_id": "sub_tenant_4567",
   "alpha": 0.8,
-  "recency_bias": 0
+  "recency_bias": 0,
+  "personalise_search": true
 }'
   ```
 
@@ -86,6 +87,22 @@ Controls the number of results returned:
 - **Default**: System limit
 - **Recommendation**: Start with 10-20 for most use cases
 
+### Personalise Search
+Enables personalized search results based on user memories from the corresponding tenant and sub-tenant combination:
+
+- **`true`** - Enable personalized search results
+  - Leverages user memories stored in the tenant/sub-tenant combination
+  - Provides more relevant and tailored search results
+  - Considers user's historical interactions and preferences
+  
+- **`false`** - Standard search without personalization (default)
+  - Returns results based purely on content relevance
+  - No user-specific context applied
+
+<Info>
+**Best Practice**: Enable personalise_search for applications where user context significantly impacts result relevance, such as personalized dashboards, recommendation systems, or user-specific knowledge bases.
+</Info>
+
 ## Search Optimization Tips
 
 ### For Better Precision
@@ -104,6 +121,7 @@ Controls the number of results returned:
 - Combine **specific terms with conceptual language**
 - Adjust **recency bias** based on content type
 - Experiment with **different alpha values** to find optimal results
+- Enable **personalise_search** for user-specific contexts and preferences
 
 
 ### Response
