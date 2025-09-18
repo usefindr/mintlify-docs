@@ -5496,12 +5496,12 @@
           "success": {
             "type": "boolean",
             "title": "Success",
-            "default": true
+            "default": false
           },
           "message": {
             "type": "string",
             "title": "Message",
-            "default": "<string>"
+            "default": "Error occurred"
           },
           "error_code": {
             "anyOf": [

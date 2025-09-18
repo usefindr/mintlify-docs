@@ -46,6 +46,8 @@ update_embeddings_emb = {
     "CortexEmbeddings123_1": [0.123413, 0.655367, 0.987654, 0.123456, 0.789012]
 }
 
+schemas_to_ignore = {"ErrorResponse"}
+
 OPEN_API_PATH = "./api-reference/openapi.json"
 
 with open(OPEN_API_PATH, "r") as f:
@@ -64,6 +66,8 @@ print("Default values added to query params.")
 print("Adding default values to components.schemas")
 if "components" in openapi and "schemas" in openapi["components"]:
     for schema_name, schema_def in openapi["components"]["schemas"].items():
+        if schema_name in schemas_to_ignore:
+            continue
         if "properties" in schema_def:
             for prop_name, prop_def in schema_def["properties"].items():
                 # Special case for FullTextSearchRequest query property
