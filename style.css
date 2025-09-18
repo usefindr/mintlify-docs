@@ -14,8 +14,8 @@
 }
 
 /* Hide elements with specific Tailwind utility classes */
-:where(.mt-8.lg\\:mt-0.flex.flex-col.gap-6.xl\\:hidden.max-h-\\[30rem\\]),
-:where([class*='mt-8 '][class*='lg:mt-0 '][class*='flex '][class*='flex-col '][class*='gap-6 '][class*='xl:hidden '][class*='max-h-[30rem]']) {
+:where(.mt-8.lg\:mt-0.flex.flex-col.gap-6.xl\:hidden.max-h-\[30rem\]),
+:where([class*="mt-8"][class*="lg:mt-0"][class*="flex"][class*="flex-col"][class*="gap-6"][class*="xl:hidden"][class*="max-h-[30rem]"]) {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;

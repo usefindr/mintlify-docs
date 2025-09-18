@@ -4678,13 +4678,21 @@
             "type": "array",
             "title": "Uploaded",
             "description": "List of successfully uploaded app source for indexing",
-            "example": []
+            "example": [
+              {
+                "file_id": "CortexDoc1234",
+                "filename": "document1.pdf"
+              },
+              {
+                "file_id": "CortexDoc4567",
+                "filename": "document2.docx"
+              }
+            ]
           },
           "message": {
             "type": "string",
             "title": "Message",
-            "description": "Status message indicating app sources upload scheduled",
-            "example": "<string>"
+            "description": "Status message indicating app sources upload scheduled"
           },
           "success": {
             "type": "boolean",
@@ -4768,13 +4776,21 @@
             "type": "array",
             "title": "Uploaded",
             "description": "List of successfully uploaded files for processing",
-            "example": []
+            "example": [
+              {
+                "file_id": "CortexDoc1234",
+                "filename": "document1.pdf"
+              },
+              {
+                "file_id": "CortexDoc4567",
+                "filename": "document2.docx"
+              }
+            ]
           },
           "message": {
             "type": "string",
             "title": "Message",
-            "description": "Status message indicating batch document parsing scheduled",
-            "example": "<string>"
+            "description": "Status message indicating batch document parsing scheduled"
           },
           "success": {
             "type": "boolean",
@@ -4799,8 +4815,7 @@
             },
             "type": "array",
             "title": "Files",
-            "description": "The document file to upload (e.g., PDF, DOCX, TXT)",
-            "example": []
+            "description": "The document file to upload (e.g., PDF, DOCX, TXT)"
           },
           "source_ids": {
             "anyOf": [
@@ -4815,7 +4830,11 @@
               }
             ],
             "title": "Source Ids",
-            "description": "List of source IDs corresponding to the files being updated"
+            "description": "List of source IDs corresponding to the files being updated",
+            "example": [
+              "CortexDoc1234",
+              "CortexDoc4567"
+            ]
           },
           "tenant_metadata": {
             "anyOf": [
@@ -4827,8 +4846,7 @@
               }
             ],
             "title": "Tenant Metadata",
-            "description": "JSON string containing tenant-level document metadata (e.g., department, compliance_tag)\n\nExample: > \"{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}\"\n\n",
-            "example": "{}"
+            "description": "JSON string containing tenant-level document metadata (e.g., department, compliance_tag)\n\nExample: > \"{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}\"\n\n"
           },
           "document_metadata": {
             "anyOf": [
@@ -4840,8 +4858,7 @@
               }
             ],
             "title": "Document Metadata",
-            "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: > \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n",
-            "example": "{}"
+            "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: > \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n"
           }
         },
         "type": "object",
@@ -4859,8 +4876,7 @@
             },
             "type": "array",
             "title": "Files",
-            "description": "The document file to upload (e.g., PDF, DOCX, TXT)",
-            "example": []
+            "description": "The document file to upload (e.g., PDF, DOCX, TXT)"
           },
           "tenant_metadata": {
             "anyOf": [
@@ -4872,8 +4888,7 @@
               }
             ],
             "title": "Tenant Metadata",
-            "description": "JSON string containing tenant-level document metadata (e.g., department, compliance_tag)\n\nExample: > \"{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}\"\n\n",
-            "example": "{}"
+            "description": "JSON string containing tenant-level document metadata (e.g., department, compliance_tag)\n\nExample: > \"{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}\"\n\n"
           },
           "document_metadata": {
             "anyOf": [
@@ -4885,8 +4900,7 @@
               }
             ],
             "title": "Document Metadata",
-            "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: > \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n",
-            "example": "{}"
+            "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: > \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n"
           }
         },
         "type": "object",
@@ -4960,8 +4974,7 @@
               }
             ],
             "title": "Tenant Metadata",
-            "description": "JSON string containing tenant-level document metadata (e.g., department, compliance_tag)\n\nExample: > \"{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}\"\n\n",
-            "example": "{}"
+            "description": "JSON string containing tenant-level document metadata (e.g., department, compliance_tag)\n\nExample: > \"{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}\"\n\n"
           },
           "document_metadata": {
             "anyOf": [
@@ -4973,8 +4986,7 @@
               }
             ],
             "title": "Document Metadata",
-            "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: > \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n",
-            "example": "{}"
+            "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: > \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n"
           }
         },
         "type": "object",
@@ -5007,8 +5019,7 @@
               }
             ],
             "title": "Tenant Metadata",
-            "description": "JSON string containing tenant-level document metadata (e.g., department, compliance_tag)\n\nExample: > \"{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}\"\n\n",
-            "example": "{}"
+            "description": "JSON string containing tenant-level document metadata (e.g., department, compliance_tag)\n\nExample: > \"{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}\"\n\n"
           },
           "document_metadata": {
             "anyOf": [
@@ -5020,8 +5031,7 @@
               }
             ],
             "title": "Document Metadata",
-            "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: > \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n",
-            "example": "{}"
+            "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: > \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n"
           }
         },
         "type": "object",
@@ -5067,8 +5077,7 @@
             },
             "type": "array",
             "title": "Files",
-            "description": "List of file descriptors associated with the source (e.g., filenames, sizes).",
-            "example": []
+            "description": "List of file descriptors associated with the source (e.g., filenames, sizes)."
           },
           "layout": {
             "items": {
@@ -5099,7 +5108,10 @@
             "type": "array",
             "title": "Source Ids",
             "description": "List of source IDs to delete",
-            "example": []
+            "example": [
+              "CortexDoc1234",
+              "CortexDoc4567"
+            ]
           },
           "sub_tenant_id": {
             "type": "string",
@@ -5127,8 +5139,7 @@
           "message": {
             "type": "string",
             "title": "Message",
-            "default": "Sources deleted successfully",
-            "example": "<string>"
+            "default": "Sources deleted successfully"
           }
         },
         "type": "object",
@@ -5140,7 +5151,7 @@
             "type": "string",
             "title": "Status",
             "description": "The status of the deletion operation.",
-            "example": "<status>"
+            "example": "success"
           },
           "tenant_id": {
             "type": "string",
@@ -5165,8 +5176,7 @@
             "type": "string",
             "title": "Message",
             "description": "Response message describing the operation result.",
-            "default": "Sub-tenant deleted successfully",
-            "example": "<string>"
+            "default": "Sub-tenant deleted successfully"
           }
         },
         "type": "object",
@@ -5225,8 +5235,7 @@
             "type": "string",
             "title": "Message",
             "description": "Status message about the tenant creation operation",
-            "default": "Embeddings collection created successfully",
-            "example": "<string>"
+            "default": "Embeddings collection created successfully"
           }
         },
         "type": "object",
@@ -5263,8 +5272,7 @@
             "type": "string",
             "title": "Message",
             "description": "Status message about the deletion operation",
-            "default": "Embeddings deleted successfully",
-            "example": "<string>"
+            "default": "Embeddings deleted successfully"
           }
         },
         "type": "object",
@@ -5283,7 +5291,10 @@
             "type": "array",
             "title": "Chunk Ids",
             "description": "The chunk IDs of the source you want to delete",
-            "example": []
+            "example": [
+              "CortexEmbeddings123_0",
+              "CortexEmbeddings123_1"
+            ]
           },
           "tenant_id": {
             "type": "string",
@@ -5341,8 +5352,7 @@
             },
             "type": "array",
             "title": "Not Found Chunk Ids",
-            "description": "List of chunk IDs that were not found in the embeddings collection",
-            "example": []
+            "description": "List of chunk IDs that were not found in the embeddings collection"
           },
           "success": {
             "type": "boolean",
@@ -5355,8 +5365,7 @@
             "type": "string",
             "title": "Message",
             "description": "Status message about the retrieval operation",
-            "default": "Embeddings retrieved successfully",
-            "example": "<string>"
+            "default": "Embeddings retrieved successfully"
           }
         },
         "type": "object",
@@ -5374,8 +5383,7 @@
             },
             "type": "array",
             "title": "Chunk Ids",
-            "description": "List of chunk IDs that match the search query",
-            "example": []
+            "description": "List of chunk IDs that match the search query"
           },
           "scores": {
             "items": {
@@ -5383,8 +5391,7 @@
             },
             "type": "array",
             "title": "Scores",
-            "description": "Similarity scores for each matching chunk (higher is more similar)",
-            "example": []
+            "description": "Similarity scores for each matching chunk (higher is more similar)"
           },
           "success": {
             "type": "boolean",
@@ -5397,8 +5404,7 @@
             "type": "string",
             "title": "Message",
             "description": "Status message about the search operation",
-            "default": "Embeddings search completed successfully",
-            "example": "<string>"
+            "default": "Embeddings search completed successfully"
           }
         },
         "type": "object",
@@ -5623,8 +5629,7 @@
             "type": "string",
             "title": "Message",
             "description": "Status message about the fetch operation",
-            "default": "Content fetched successfully",
-            "example": "<string>"
+            "default": "Content fetched successfully"
           }
         },
         "type": "object",
@@ -5808,7 +5813,16 @@
             "type": "array",
             "title": "Generated User Memories",
             "description": "Array of AI-generated memories based on your query and user context",
-            "example": []
+            "example": [
+              {
+                "memory_id": "memory_1234",
+                "memory_content": "User prefers detailed technical explanations and works in the Pacific timezone"
+              },
+              {
+                "memory_id": "memory_4567",
+                "memory_content": "User prefers dark mode"
+              }
+            ]
           }
         },
         "type": "object",
@@ -5827,7 +5841,10 @@
             "type": "array",
             "title": "Chunk Ids",
             "description": "The chunk IDs of the source you want to get embeddings for",
-            "example": []
+            "example": [
+              "CortexEmbeddings123_0",
+              "CortexEmbeddings123_1"
+            ]
           },
           "tenant_id": {
             "type": "string",
@@ -5879,8 +5896,7 @@
             },
             "type": "array",
             "title": "Sources",
-            "description": "List of source documents retrieved",
-            "example": []
+            "description": "List of source documents retrieved"
           },
           "success": {
             "type": "boolean",
@@ -5893,8 +5909,7 @@
             "type": "string",
             "title": "Message",
             "description": "Response message describing the operation result",
-            "default": "Sources retrieved successfully",
-            "example": "<string>"
+            "default": "Sources retrieved successfully"
           }
         },
         "type": "object",
@@ -5918,7 +5933,16 @@
             "type": "array",
             "title": "User Memories",
             "description": "Array of all user memories associated with your tenant",
-            "example": []
+            "example": [
+              {
+                "memory_id": "memory_1234",
+                "memory_content": "I prefer detailed technical explanations and works in the Pacific timezone"
+              },
+              {
+                "memory_id": "memory_4567",
+                "memory_content": "I prefer dark mode"
+              }
+            ]
           }
         },
         "type": "object",
@@ -5947,8 +5971,7 @@
               }
             ],
             "title": "Tenant Metadata",
-            "description": "JSON string containing tenant-level document metadata (e.g., department, compliance_tag)\n\nExample: > \"{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}\"\n\n",
-            "example": "{}"
+            "description": "JSON string containing tenant-level document metadata (e.g., department, compliance_tag)\n\nExample: > \"{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}\"\n\n"
           },
           "document_metadata": {
             "anyOf": [
@@ -5961,8 +5984,7 @@
               }
             ],
             "title": "Document Metadata",
-            "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: > \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n",
-            "example": "{}"
+            "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: > \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n"
           }
         },
         "type": "object",
@@ -5995,8 +6017,7 @@
             "type": "string",
             "title": "Message",
             "description": "Detailed status message about the processing operation",
-            "default": "Processing status retrieved successfully",
-            "example": "<string>"
+            "default": "Processing status retrieved successfully"
           }
         },
         "type": "object",
@@ -6325,7 +6346,16 @@
             "type": "array",
             "title": "Retrieved User Memories",
             "description": "Array of user memories ranked by relevance to your search query",
-            "example": []
+            "example": [
+              {
+                "memory_id": "memory_1234",
+                "memory_content": "I prefer detailed technical explanations and works in the Pacific timezone"
+              },
+              {
+                "memory_id": "memory_4567",
+                "memory_content": "I prefer dark mode"
+              }
+            ]
           }
         },
         "type": "object",
@@ -6420,7 +6450,10 @@
             ],
             "title": "Document Metadata",
             "description": "Metadata extracted from the source document",
-            "example": "{}"
+            "example": {
+              "author": "John Doe",
+              "category": "Internal"
+            }
           },
           "tenant_metadata": {
             "anyOf": [
@@ -6434,7 +6467,9 @@
             ],
             "title": "Tenant Metadata",
             "description": "Custom metadata associated with your tenant",
-            "example": "{}"
+            "example": {
+              "department": "R&D"
+            }
           }
         },
         "type": "object",
@@ -6546,8 +6581,7 @@
           "message": {
             "type": "string",
             "title": "Message",
-            "description": "Status message indicating document parsing scheduled or update completed",
-            "example": "<string>"
+            "description": "Status message indicating document parsing scheduled or update completed"
           },
           "success": {
             "type": "boolean",
@@ -6601,14 +6635,19 @@
             "type": "object",
             "title": "Document Metadata",
             "description": "Additional metadata specific to the document",
-            "example": "{}"
+            "example": {
+              "quarter": 3,
+              "year": 2023
+            }
           },
           "tenant_metadata": {
             "additionalProperties": true,
             "type": "object",
             "title": "Tenant Metadata",
             "description": "Metadata related to the tenant and organizational context",
-            "example": "{}"
+            "example": {
+              "confidentiality": "high"
+            }
           }
         },
         "type": "object",
@@ -6635,7 +6674,10 @@
             "type": "array",
             "title": "Source Ids",
             "description": "List of source IDs to fetch",
-            "example": []
+            "example": [
+              "CortexDoc1234",
+              "CortexDoc4567"
+            ]
           },
           "sub_tenant_id": {
             "type": "string",
@@ -6711,15 +6753,13 @@
             "additionalProperties": true,
             "type": "object",
             "title": "Tenant Metadata",
-            "description": "JSON string containing tenant-level document metadata (e.g., department, compliance_tag)\n\nExample: > \"{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}\"\n\n",
-            "example": "{}"
+            "description": "JSON string containing tenant-level document metadata (e.g., department, compliance_tag)\n\nExample: > \"{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}\"\n\n"
           },
           "document_metadata": {
             "additionalProperties": true,
             "type": "object",
             "title": "Document Metadata",
-            "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: > \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n",
-            "example": "{}"
+            "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: > \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n"
           },
           "meta": {
             "additionalProperties": true,
@@ -6733,8 +6773,7 @@
             },
             "type": "array",
             "title": "Attachments",
-            "description": "Attachments related to the source such as images, PDFs, or supplemental files.",
-            "example": []
+            "description": "Attachments related to the source such as images, PDFs, or supplemental files."
           }
         },
         "type": "object",
@@ -6755,7 +6794,10 @@
             "type": "array",
             "title": "Sub Tenant Ids",
             "description": "Array of all sub-tenant IDs within the tenant",
-            "example": []
+            "example": [
+              "sub_tenant_1234",
+              "sub_tenant_4567"
+            ]
           },
           "count": {
             "type": "integer",
@@ -6775,8 +6817,7 @@
             "type": "string",
             "title": "Message",
             "description": "Response message describing the operation result",
-            "default": "Sub-tenant IDs fetched successfully",
-            "example": "<string>"
+            "default": "Sub-tenant IDs fetched successfully"
           }
         },
         "type": "object",
@@ -6793,7 +6834,7 @@
             "type": "string",
             "title": "Status",
             "description": "Current status of the tenant creation process",
-            "example": "<status>"
+            "example": "success"
           },
           "tenant_id": {
             "type": "string",
@@ -6812,8 +6853,7 @@
             "type": "string",
             "title": "Message",
             "description": "Response message describing the creation result",
-            "default": "Tenant created successfully",
-            "example": "<string>"
+            "default": "Tenant created successfully"
           }
         },
         "type": "object",
@@ -6862,8 +6902,7 @@
             "type": "string",
             "title": "Message",
             "description": "Response message describing the operation result",
-            "default": "Tenant stats retrieved successfully",
-            "example": "<string>"
+            "default": "Tenant stats retrieved successfully"
           }
         },
         "type": "object",
