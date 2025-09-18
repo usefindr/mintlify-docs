@@ -145,7 +145,7 @@
               "type": "string",
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id",
-              "default": "tenant_1234"
+              "example": "tenant_1234"
             },
             "description": "Unique identifier for the tenant/organization"
           },
@@ -156,8 +156,9 @@
             "schema": {
               "type": "string",
               "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-              "default": "sub_tenant_4567",
-              "title": "Sub Tenant Id"
+              "default": "",
+              "title": "Sub Tenant Id",
+              "example": "sub_tenant_4567"
             },
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used."
           }
@@ -385,7 +386,7 @@
               "type": "string",
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id",
-              "default": "tenant_1234"
+              "example": "tenant_1234"
             },
             "description": "Unique identifier for the tenant/organization"
           },
@@ -396,8 +397,9 @@
             "schema": {
               "type": "string",
               "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-              "default": "sub_tenant_4567",
-              "title": "Sub Tenant Id"
+              "default": "",
+              "title": "Sub Tenant Id",
+              "example": "sub_tenant_4567"
             },
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used."
           }
@@ -513,7 +515,7 @@
               "type": "string",
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id",
-              "default": "tenant_1234"
+              "example": "tenant_1234"
             },
             "description": "Unique identifier for the tenant/organization"
           },
@@ -525,7 +527,7 @@
               "type": "string",
               "description": "Unique identifier of the memory to delete",
               "title": "Memory Id",
-              "default": "memory_1234"
+              "example": "memory_1234"
             },
             "description": "Unique identifier of the memory to delete"
           },
@@ -536,8 +538,9 @@
             "schema": {
               "type": "string",
               "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-              "default": "sub_tenant_4567",
-              "title": "Sub Tenant Id"
+              "default": "",
+              "title": "Sub Tenant Id",
+              "example": "sub_tenant_4567"
             },
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used."
           }
@@ -653,7 +656,7 @@
               "type": "string",
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id",
-              "default": "tenant_1234"
+              "example": "tenant_1234"
             },
             "description": "Unique identifier for the tenant/organization"
           },
@@ -664,8 +667,9 @@
             "schema": {
               "type": "string",
               "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-              "default": "sub_tenant_4567",
-              "title": "Sub Tenant Id"
+              "default": "",
+              "title": "Sub Tenant Id",
+              "example": "sub_tenant_4567"
             },
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used."
           },
@@ -679,7 +683,8 @@
               "minimum": 0,
               "description": "Maximum number of memories to return (default: 5)",
               "default": 5,
-              "title": "Max Count"
+              "title": "Max Count",
+              "example": 5
             },
             "description": "Maximum number of memories to return (default: 5)"
           }
@@ -806,7 +811,7 @@
               "type": "string",
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id",
-              "default": "tenant_1234"
+              "example": "tenant_1234"
             },
             "description": "Unique identifier for the tenant/organization"
           },
@@ -817,8 +822,9 @@
             "schema": {
               "type": "string",
               "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-              "default": "sub_tenant_4567",
-              "title": "Sub Tenant Id"
+              "default": "",
+              "title": "Sub Tenant Id",
+              "example": "sub_tenant_4567"
             },
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used."
           }
@@ -945,7 +951,7 @@
               "type": "string",
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id",
-              "default": "tenant_1234"
+              "example": "tenant_1234"
             },
             "description": "Unique identifier for the tenant/organization"
           },
@@ -956,8 +962,9 @@
             "schema": {
               "type": "string",
               "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-              "default": "sub_tenant_4567",
-              "title": "Sub Tenant Id"
+              "default": "",
+              "title": "Sub Tenant Id",
+              "example": "sub_tenant_4567"
             },
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used."
           }
@@ -1195,7 +1202,7 @@
               "type": "string",
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id",
-              "default": "tenant_1234"
+              "example": "tenant_1234"
             },
             "description": "Unique identifier for the tenant/organization"
           },
@@ -1206,8 +1213,9 @@
             "schema": {
               "type": "string",
               "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-              "default": "sub_tenant_4567",
-              "title": "Sub Tenant Id"
+              "default": "",
+              "title": "Sub Tenant Id",
+              "example": "sub_tenant_4567"
             },
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used."
           }
@@ -1333,7 +1341,7 @@
               "type": "string",
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id",
-              "default": "tenant_1234"
+              "example": "tenant_1234"
             },
             "description": "Unique identifier for the tenant/organization"
           },
@@ -1344,8 +1352,9 @@
             "schema": {
               "type": "string",
               "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-              "default": "sub_tenant_4567",
-              "title": "Sub Tenant Id"
+              "default": "",
+              "title": "Sub Tenant Id",
+              "example": "sub_tenant_4567"
             },
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used."
           }
@@ -1471,7 +1480,7 @@
               "type": "string",
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id",
-              "default": "tenant_1234"
+              "example": "tenant_1234"
             },
             "description": "Unique identifier for the tenant/organization"
           },
@@ -1482,8 +1491,9 @@
             "schema": {
               "type": "string",
               "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-              "default": "sub_tenant_4567",
-              "title": "Sub Tenant Id"
+              "default": "",
+              "title": "Sub Tenant Id",
+              "example": "sub_tenant_4567"
             },
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used."
           }
@@ -1609,7 +1619,7 @@
               "type": "string",
               "description": "The source ID of the document to update",
               "title": "Source Id",
-              "default": "CortexDoc1234"
+              "example": "CortexDoc1234"
             },
             "description": "The source ID of the document to update"
           },
@@ -1621,7 +1631,7 @@
               "type": "string",
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id",
-              "default": "tenant_1234"
+              "example": "tenant_1234"
             },
             "description": "Unique identifier for the tenant/organization"
           },
@@ -1632,8 +1642,9 @@
             "schema": {
               "type": "string",
               "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-              "default": "sub_tenant_4567",
-              "title": "Sub Tenant Id"
+              "default": "",
+              "title": "Sub Tenant Id",
+              "example": "sub_tenant_4567"
             },
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used."
           }
@@ -1759,7 +1770,7 @@
               "type": "string",
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id",
-              "default": "tenant_1234"
+              "example": "tenant_1234"
             },
             "description": "Unique identifier for the tenant/organization"
           },
@@ -1770,8 +1781,9 @@
             "schema": {
               "type": "string",
               "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-              "default": "sub_tenant_4567",
-              "title": "Sub Tenant Id"
+              "default": "",
+              "title": "Sub Tenant Id",
+              "example": "sub_tenant_4567"
             },
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used."
           }
@@ -1902,7 +1914,7 @@
               "type": "string",
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id",
-              "default": "tenant_1234"
+              "example": "tenant_1234"
             },
             "description": "Unique identifier for the tenant/organization"
           },
@@ -1913,8 +1925,9 @@
             "schema": {
               "type": "string",
               "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-              "default": "sub_tenant_4567",
-              "title": "Sub Tenant Id"
+              "default": "",
+              "title": "Sub Tenant Id",
+              "example": "sub_tenant_4567"
             },
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used."
           }
@@ -2040,7 +2053,7 @@
               "type": "string",
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id",
-              "default": "tenant_1234"
+              "example": "tenant_1234"
             },
             "description": "Unique identifier for the tenant/organization"
           },
@@ -2051,8 +2064,9 @@
             "schema": {
               "type": "string",
               "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-              "default": "sub_tenant_4567",
-              "title": "Sub Tenant Id"
+              "default": "",
+              "title": "Sub Tenant Id",
+              "example": "sub_tenant_4567"
             },
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used."
           }
@@ -2178,7 +2192,7 @@
               "type": "string",
               "description": "The source ID of the document to update",
               "title": "Source Id",
-              "default": "CortexDoc1234"
+              "example": "CortexDoc1234"
             },
             "description": "The source ID of the document to update"
           },
@@ -2190,7 +2204,7 @@
               "type": "string",
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id",
-              "default": "tenant_1234"
+              "example": "tenant_1234"
             },
             "description": "Unique identifier for the tenant/organization"
           },
@@ -2201,8 +2215,9 @@
             "schema": {
               "type": "string",
               "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-              "default": "sub_tenant_4567",
-              "title": "Sub Tenant Id"
+              "default": "",
+              "title": "Sub Tenant Id",
+              "example": "sub_tenant_4567"
             },
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used."
           }
@@ -2328,7 +2343,7 @@
               "type": "string",
               "description": "The source ID of the document to update",
               "title": "Source Id",
-              "default": "CortexDoc1234"
+              "example": "CortexDoc1234"
             },
             "description": "The source ID of the document to update"
           },
@@ -2340,7 +2355,7 @@
               "type": "string",
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id",
-              "default": "tenant_1234"
+              "example": "tenant_1234"
             },
             "description": "Unique identifier for the tenant/organization"
           },
@@ -2351,8 +2366,9 @@
             "schema": {
               "type": "string",
               "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-              "default": "sub_tenant_4567",
-              "title": "Sub Tenant Id"
+              "default": "",
+              "title": "Sub Tenant Id",
+              "example": "sub_tenant_4567"
             },
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used."
           }
@@ -2478,7 +2494,7 @@
               "type": "string",
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id",
-              "default": "tenant_1234"
+              "example": "tenant_1234"
             },
             "description": "Unique identifier for the tenant/organization"
           },
@@ -2489,8 +2505,9 @@
             "schema": {
               "type": "string",
               "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-              "default": "sub_tenant_4567",
-              "title": "Sub Tenant Id"
+              "default": "",
+              "title": "Sub Tenant Id",
+              "example": "sub_tenant_4567"
             },
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used."
           }
@@ -2616,7 +2633,7 @@
               "type": "string",
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id",
-              "default": "tenant_1234"
+              "example": "tenant_1234"
             },
             "description": "Unique identifier for the tenant/organization"
           },
@@ -2627,8 +2644,9 @@
             "schema": {
               "type": "string",
               "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-              "default": "sub_tenant_4567",
-              "title": "Sub Tenant Id"
+              "default": "",
+              "title": "Sub Tenant Id",
+              "example": "sub_tenant_4567"
             },
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used."
           }
@@ -2754,7 +2772,7 @@
               "type": "string",
               "description": "The URL of the webpage to scrape and index",
               "title": "Web Url",
-              "default": "https://www.usecortex.ai/"
+              "example": "https://www.usecortex.ai/"
             },
             "description": "The URL of the webpage to scrape and index"
           },
@@ -2766,7 +2784,7 @@
               "type": "string",
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id",
-              "default": "tenant_1234"
+              "example": "tenant_1234"
             },
             "description": "Unique identifier for the tenant/organization"
           },
@@ -2777,8 +2795,9 @@
             "schema": {
               "type": "string",
               "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-              "default": "sub_tenant_4567",
-              "title": "Sub Tenant Id"
+              "default": "",
+              "title": "Sub Tenant Id",
+              "example": "sub_tenant_4567"
             },
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used."
           },
@@ -2789,8 +2808,9 @@
             "schema": {
               "type": "string",
               "description": "Optional custom file ID for the scraped content. If not provided, a unique ID will be generated",
-              "default": "CortexDoc1234",
-              "title": "File Id"
+              "default": "",
+              "title": "File Id",
+              "example": "CortexDoc1234"
             },
             "description": "Optional custom file ID for the scraped content. If not provided, a unique ID will be generated"
           }
@@ -2915,7 +2935,7 @@
               "type": "string",
               "description": "The URL of the webpage to re-scrape",
               "title": "Web Url",
-              "default": "https://www.usecortex.ai/"
+              "example": "https://www.usecortex.ai/"
             },
             "description": "The URL of the webpage to re-scrape"
           },
@@ -2927,7 +2947,7 @@
               "type": "string",
               "description": "The file ID of the existing web scraping job to update",
               "title": "Source Id",
-              "default": "CortexDoc1234"
+              "example": "CortexDoc1234"
             },
             "description": "The file ID of the existing web scraping job to update"
           },
@@ -2939,7 +2959,7 @@
               "type": "string",
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id",
-              "default": "tenant_1234"
+              "example": "tenant_1234"
             },
             "description": "Unique identifier for the tenant/organization"
           },
@@ -2950,8 +2970,9 @@
             "schema": {
               "type": "string",
               "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-              "default": "sub_tenant_4567",
-              "title": "Sub Tenant Id"
+              "default": "",
+              "title": "Sub Tenant Id",
+              "example": "sub_tenant_4567"
             },
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used."
           }
@@ -3178,7 +3199,7 @@
               "type": "string",
               "description": "The file ID to check processing status for",
               "title": "File Id",
-              "default": "CortexDoc1234"
+              "example": "CortexDoc1234"
             },
             "description": "The file ID to check processing status for"
           },
@@ -3189,8 +3210,9 @@
             "schema": {
               "type": "string",
               "description": "Unique identifier for the tenant/organization",
-              "default": "tenant_1234",
-              "title": "Tenant Id"
+              "default": "",
+              "title": "Tenant Id",
+              "example": "tenant_1234"
             },
             "description": "Unique identifier for the tenant/organization"
           }
@@ -3987,7 +4009,7 @@
               "type": "string",
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id",
-              "default": "tenant_1234"
+              "example": "tenant_1234"
             },
             "description": "Unique identifier for the tenant/organization"
           }
@@ -4109,8 +4131,9 @@
                 }
               ],
               "description": "Unique identifier for the tenant/organization",
-              "default": "tenant_1234",
-              "title": "Tenant Id"
+              "default": "",
+              "title": "Tenant Id",
+              "example": "tenant_1234"
             },
             "description": "Unique identifier for the tenant/organization"
           }
@@ -4235,7 +4258,7 @@
               "type": "string",
               "description": "Unique identifier for the tenant/organization",
               "title": "Tenant Id",
-              "default": "tenant_1234"
+              "example": "tenant_1234"
             },
             "description": "Unique identifier for the tenant/organization"
           },
@@ -4246,8 +4269,9 @@
             "schema": {
               "type": "string",
               "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-              "default": "sub_tenant_4567",
-              "title": "Sub Tenant Id"
+              "default": "",
+              "title": "Sub Tenant Id",
+              "example": "sub_tenant_4567"
             },
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used."
           }
@@ -4362,7 +4386,7 @@
             "schema": {
               "type": "string",
               "title": "Tenant Id",
-              "default": "tenant_1234"
+              "example": "tenant_1234"
             }
           }
         ],
@@ -4476,7 +4500,7 @@
             "schema": {
               "type": "string",
               "title": "Tenant Id",
-              "default": "tenant_1234"
+              "example": "tenant_1234"
             }
           },
           {
@@ -4486,7 +4510,7 @@
             "schema": {
               "type": "string",
               "title": "Sub Tenant Id",
-              "default": "sub_tenant_4567"
+              "example": "sub_tenant_4567"
             }
           }
         ],
@@ -4600,7 +4624,7 @@
             "type": "string",
             "title": "User Memory",
             "description": "The memory content to store for future reference",
-            "default": "I prefer detailed technical explanations and works in the Pacific timezone"
+            "example": "I prefer detailed technical explanations and works in the Pacific timezone"
           }
         },
         "type": "object",
@@ -4615,15 +4639,13 @@
             "type": "boolean",
             "title": "Success",
             "description": "Indicates whether the memory addition operation was successful",
-            "example": true,
-            "default": true
+            "example": true
           },
           "user_memory_added": {
             "type": "boolean",
             "title": "User Memory Added",
             "description": "Confirms whether the memory was successfully stored in the system",
-            "example": true,
-            "default": true
+            "example": true
           },
           "memory_id": {
             "anyOf": [
@@ -4636,8 +4658,7 @@
             ],
             "title": "Memory Id",
             "description": "Unique identifier assigned to the newly created memory",
-            "example": "CortexUserMemory39243c65851949fbab283cce9085a5f61757340796",
-            "default": "memory_1234"
+            "example": "memory_1234"
           }
         },
         "type": "object",
@@ -4657,18 +4678,27 @@
             "type": "array",
             "title": "Uploaded",
             "description": "List of successfully uploaded app source for indexing",
-            "default": []
+            "example": [
+              {
+                "file_id": "CortexDoc1234",
+                "filename": "document1.pdf"
+              },
+              {
+                "file_id": "CortexDoc4567",
+                "filename": "document2.docx"
+              }
+            ]
           },
           "message": {
             "type": "string",
             "title": "Message",
-            "description": "Status message indicating app sources upload scheduled",
-            "default": "<string>"
+            "description": "Status message indicating app sources upload scheduled"
           },
           "success": {
             "type": "boolean",
             "title": "Success",
-            "default": true
+            "default": true,
+            "example": true
           }
         },
         "type": "object",
@@ -4684,31 +4714,36 @@
             "type": "string",
             "title": "Id",
             "description": "Unique identifier for the attachment.",
-            "default": "<id>"
+            "default": "",
+            "example": "<id>"
           },
           "url": {
             "type": "string",
             "title": "Url",
             "description": "Public or internal URL referencing the attachment resource.",
-            "default": "<url>"
+            "default": "",
+            "example": "<url>"
           },
           "title": {
             "type": "string",
             "title": "Title",
             "description": "Human-readable title or filename of the attachment.",
-            "default": "<title>"
+            "default": "",
+            "example": "<title>"
           },
           "content_type": {
             "type": "string",
             "title": "Content Type",
             "description": "MIME type of the attachment (e.g., application/pdf).",
-            "default": "<content_type>"
+            "default": "",
+            "example": "<content_type>"
           },
           "content_url": {
             "type": "string",
             "title": "Content Url",
             "description": "Direct URL for content retrieval when different from the reference URL.",
-            "default": "<content_url>"
+            "default": "",
+            "example": "<content_url>"
           },
           "misc": {
             "additionalProperties": true,
@@ -4741,18 +4776,27 @@
             "type": "array",
             "title": "Uploaded",
             "description": "List of successfully uploaded files for processing",
-            "default": []
+            "example": [
+              {
+                "file_id": "CortexDoc1234",
+                "filename": "document1.pdf"
+              },
+              {
+                "file_id": "CortexDoc4567",
+                "filename": "document2.docx"
+              }
+            ]
           },
           "message": {
             "type": "string",
             "title": "Message",
-            "description": "Status message indicating batch document parsing scheduled",
-            "default": "<string>"
+            "description": "Status message indicating batch document parsing scheduled"
           },
           "success": {
             "type": "boolean",
             "title": "Success",
-            "default": true
+            "default": true,
+            "example": true
           }
         },
         "type": "object",
@@ -4771,8 +4815,7 @@
             },
             "type": "array",
             "title": "Files",
-            "description": "The document file to upload (e.g., PDF, DOCX, TXT)",
-            "default": []
+            "description": "The document file to upload (e.g., PDF, DOCX, TXT)"
           },
           "source_ids": {
             "anyOf": [
@@ -4787,7 +4830,11 @@
               }
             ],
             "title": "Source Ids",
-            "description": "List of source IDs corresponding to the files being updated"
+            "description": "List of source IDs corresponding to the files being updated",
+            "example": [
+              "CortexDoc1234",
+              "CortexDoc4567"
+            ]
           },
           "tenant_metadata": {
             "anyOf": [
@@ -4829,8 +4876,7 @@
             },
             "type": "array",
             "title": "Files",
-            "description": "The document file to upload (e.g., PDF, DOCX, TXT)",
-            "default": []
+            "description": "The document file to upload (e.g., PDF, DOCX, TXT)"
           },
           "tenant_metadata": {
             "anyOf": [
@@ -4879,7 +4925,7 @@
               }
             ],
             "title": "Tenant Metadata Schema",
-            "default": [
+            "example": [
               {
                 "key": "department",
                 "type": "string",
@@ -4916,7 +4962,7 @@
             "format": "binary",
             "title": "File",
             "description": "The document file to upload (e.g., PDF, DOCX, TXT)",
-            "default": "<file>"
+            "example": "<file>"
           },
           "tenant_metadata": {
             "anyOf": [
@@ -4961,7 +5007,7 @@
             "format": "binary",
             "title": "File",
             "description": "The document file to upload (e.g., PDF, DOCX, TXT)",
-            "default": "<file>"
+            "example": "<file>"
           },
           "tenant_metadata": {
             "anyOf": [
@@ -5000,25 +5046,29 @@
             "type": "string",
             "title": "Text",
             "description": "Plain text content extracted or provided for indexing.",
-            "default": "<text>"
+            "default": "",
+            "example": "<text>"
           },
           "html_base64": {
             "type": "string",
             "title": "Html Base64",
             "description": "Base64-encoded HTML content preserving structure and formatting.",
-            "default": "<html_base64>"
+            "default": "",
+            "example": "<html_base64>"
           },
           "csv_base64": {
             "type": "string",
             "title": "Csv Base64",
             "description": "Base64-encoded CSV data for tabular content ingestion.",
-            "default": "<csv_base64>"
+            "default": "",
+            "example": "<csv_base64>"
           },
           "markdown": {
             "type": "string",
             "title": "Markdown",
             "description": "Raw Markdown content to be indexed as rich text.",
-            "default": "<markdown>"
+            "default": "",
+            "example": "<markdown>"
           },
           "files": {
             "items": {
@@ -5027,8 +5077,7 @@
             },
             "type": "array",
             "title": "Files",
-            "description": "List of file descriptors associated with the source (e.g., filenames, sizes).",
-            "default": []
+            "description": "List of file descriptors associated with the source (e.g., filenames, sizes)."
           },
           "layout": {
             "items": {
@@ -5038,7 +5087,7 @@
             "type": "array",
             "title": "Layout",
             "description": "Optional layout metadata such as sections or blocks to guide chunking.",
-            "default": []
+            "example": []
           }
         },
         "type": "object",
@@ -5050,7 +5099,7 @@
             "type": "string",
             "title": "Tenant Id",
             "description": "Unique identifier for the tenant/organization",
-            "default": "tenant_1234"
+            "example": "tenant_1234"
           },
           "source_ids": {
             "items": {
@@ -5059,13 +5108,17 @@
             "type": "array",
             "title": "Source Ids",
             "description": "List of source IDs to delete",
-            "default": []
+            "example": [
+              "CortexDoc1234",
+              "CortexDoc4567"
+            ]
           },
           "sub_tenant_id": {
             "type": "string",
             "title": "Sub Tenant Id",
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-            "default": "sub_tenant_4567"
+            "default": "",
+            "example": "sub_tenant_4567"
           }
         },
         "type": "object",
@@ -5080,12 +5133,13 @@
           "success": {
             "type": "boolean",
             "title": "Success",
-            "default": true
+            "default": true,
+            "example": true
           },
           "message": {
             "type": "string",
             "title": "Message",
-            "default": "<string>"
+            "default": "Sources deleted successfully"
           }
         },
         "type": "object",
@@ -5097,34 +5151,32 @@
             "type": "string",
             "title": "Status",
             "description": "The status of the deletion operation.",
-            "example": "success",
-            "default": "<status>"
+            "example": "success"
           },
           "tenant_id": {
             "type": "string",
             "title": "Tenant Id",
             "description": "The tenant ID from which the sub-tenant was deleted.",
-            "example": "tenant_abcd",
-            "default": "tenant_1234"
+            "example": "tenant_1234"
           },
           "sub_tenant_id": {
             "type": "string",
             "title": "Sub Tenant Id",
             "description": "The ID of the sub-tenant that was deleted.",
-            "example": "user_12345",
-            "default": "sub_tenant_4567"
+            "example": "sub_tenant_4567"
           },
           "success": {
             "type": "boolean",
             "title": "Success",
             "description": "Indicates whether the sub-tenant deletion was successful.",
-            "default": true
+            "default": true,
+            "example": true
           },
           "message": {
             "type": "string",
             "title": "Message",
             "description": "Response message describing the operation result.",
-            "default": "<string>"
+            "default": "Sub-tenant deleted successfully"
           }
         },
         "type": "object",
@@ -5141,15 +5193,13 @@
             "type": "boolean",
             "title": "Success",
             "description": "Indicates whether the memory deletion operation was successful",
-            "example": true,
-            "default": true
+            "example": true
           },
           "user_memory_deleted": {
             "type": "boolean",
             "title": "User Memory Deleted",
             "description": "Confirms whether the specific memory was successfully deleted",
-            "example": true,
-            "default": true
+            "example": true
           }
         },
         "type": "object",
@@ -5166,25 +5216,26 @@
             "type": "string",
             "title": "Tenant Id",
             "description": "Identifier for the tenant/organization",
-            "default": "tenant_1234"
+            "example": "tenant_1234"
           },
           "sub_tenant_id": {
             "type": "string",
             "title": "Sub Tenant Id",
             "description": "Identifier for the sub-tenant within the tenant",
-            "default": "sub_tenant_4567"
+            "example": "sub_tenant_4567"
           },
           "success": {
             "type": "boolean",
             "title": "Success",
             "description": "Indicates whether the embeddings tenant creation completed successfully",
-            "default": true
+            "default": true,
+            "example": true
           },
           "message": {
             "type": "string",
             "title": "Message",
             "description": "Status message about the tenant creation operation",
-            "default": "<string>"
+            "default": "Embeddings collection created successfully"
           }
         },
         "type": "object",
@@ -5200,7 +5251,7 @@
             "type": "integer",
             "title": "Total Deleted",
             "description": "Total number of embeddings that were successfully deleted",
-            "default": 1
+            "example": 1
           },
           "status": {
             "additionalProperties": {
@@ -5214,13 +5265,14 @@
             "type": "boolean",
             "title": "Success",
             "description": "Indicates whether the embeddings deletion operation completed successfully",
-            "default": true
+            "default": true,
+            "example": true
           },
           "message": {
             "type": "string",
             "title": "Message",
             "description": "Status message about the deletion operation",
-            "default": "<string>"
+            "default": "Embeddings deleted successfully"
           }
         },
         "type": "object",
@@ -5239,19 +5291,23 @@
             "type": "array",
             "title": "Chunk Ids",
             "description": "The chunk IDs of the source you want to delete",
-            "default": []
+            "example": [
+              "CortexEmbeddings123_0",
+              "CortexEmbeddings123_1"
+            ]
           },
           "tenant_id": {
             "type": "string",
             "title": "Tenant Id",
             "description": "Unique identifier for the tenant/organization",
-            "default": "tenant_1234"
+            "example": "tenant_1234"
           },
           "sub_tenant_id": {
             "type": "string",
             "title": "Sub Tenant Id",
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-            "default": "sub_tenant_4567"
+            "default": "",
+            "example": "sub_tenant_4567"
           }
         },
         "type": "object",
@@ -5273,7 +5329,7 @@
             "type": "object",
             "title": "Embeddings",
             "description": "Dictionary mapping chunk IDs to their embedding vectors (lists of float values)",
-            "default": [
+            "example": [
               [
                 0.123413,
                 0.655367,
@@ -5296,20 +5352,20 @@
             },
             "type": "array",
             "title": "Not Found Chunk Ids",
-            "description": "List of chunk IDs that were not found in the embeddings collection",
-            "default": []
+            "description": "List of chunk IDs that were not found in the embeddings collection"
           },
           "success": {
             "type": "boolean",
             "title": "Success",
             "description": "Indicates whether the embeddings retrieval operation completed successfully",
-            "default": true
+            "default": true,
+            "example": true
           },
           "message": {
             "type": "string",
             "title": "Message",
             "description": "Status message about the retrieval operation",
-            "default": "<string>"
+            "default": "Embeddings retrieved successfully"
           }
         },
         "type": "object",
@@ -5327,8 +5383,7 @@
             },
             "type": "array",
             "title": "Chunk Ids",
-            "description": "List of chunk IDs that match the search query",
-            "default": []
+            "description": "List of chunk IDs that match the search query"
           },
           "scores": {
             "items": {
@@ -5336,20 +5391,20 @@
             },
             "type": "array",
             "title": "Scores",
-            "description": "Similarity scores for each matching chunk (higher is more similar)",
-            "default": []
+            "description": "Similarity scores for each matching chunk (higher is more similar)"
           },
           "success": {
             "type": "boolean",
             "title": "Success",
             "description": "Indicates whether the embeddings search operation completed successfully",
-            "default": true
+            "default": true,
+            "example": true
           },
           "message": {
             "type": "string",
             "title": "Message",
             "description": "Status message about the search operation",
-            "default": "<string>"
+            "default": "Embeddings search completed successfully"
           }
         },
         "type": "object",
@@ -5365,7 +5420,7 @@
             "type": "string",
             "title": "Tenant Id",
             "description": "Unique identifier for the tenant/organization",
-            "default": "tenant_1234"
+            "example": "tenant_1234"
           },
           "embeddings": {
             "items": {
@@ -5374,7 +5429,7 @@
             "type": "array",
             "title": "Embeddings",
             "description": "The embedding vector for search",
-            "default": [
+            "example": [
               [
                 0.123413,
                 0.655367,
@@ -5395,12 +5450,14 @@
             "type": "string",
             "title": "Sub Tenant Id",
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-            "default": "sub_tenant_4567"
+            "default": "",
+            "example": "sub_tenant_4567"
           },
           "max_chunks": {
             "type": "integer",
             "title": "Max Chunks",
-            "default": 1
+            "default": 10,
+            "example": 1
           }
         },
         "type": "object",
@@ -5421,7 +5478,7 @@
             "type": "object",
             "title": "Embeddings",
             "description": "The embeddings of source you want to index",
-            "default": {
+            "example": {
               "CortexEmbeddings123_0": [
                 0.123413,
                 0.655367,
@@ -5454,7 +5511,7 @@
             "type": "array",
             "title": "Embeddings",
             "description": "The embeddings of source you want to index",
-            "default": [
+            "example": [
               [
                 0.123413,
                 0.655367,
@@ -5482,7 +5539,8 @@
             ],
             "title": "File Id",
             "description": "The Source ID of the target source you want to index",
-            "default": "CortexDoc1234"
+            "default": "",
+            "example": "CortexDoc1234"
           }
         },
         "type": "object",
@@ -5545,7 +5603,7 @@
             "type": "string",
             "title": "File Id",
             "description": "Unique identifier for the file being fetched",
-            "default": "CortexDoc1234"
+            "example": "CortexDoc1234"
           },
           "file_content": {
             "anyOf": [
@@ -5564,13 +5622,14 @@
             "type": "boolean",
             "title": "Success",
             "description": "Indicates whether the fetch operation completed successfully",
-            "default": true
+            "default": true,
+            "example": true
           },
           "message": {
             "type": "string",
             "title": "Message",
             "description": "Status message about the fetch operation",
-            "default": "<string>"
+            "default": "Content fetched successfully"
           }
         },
         "type": "object",
@@ -5585,19 +5644,19 @@
             "type": "string",
             "title": "File Id",
             "description": "Unique identifier for the file to fetch",
-            "default": "CortexDoc1234"
+            "example": "CortexDoc1234"
           },
           "file_type": {
             "type": "string",
             "title": "File Type",
             "description": "Type of file (e.g., 'app', 'file', or other)",
-            "default": "<file_type>"
+            "example": "<file_type>"
           },
           "tenant_id": {
             "type": "string",
             "title": "Tenant Id",
             "description": "Tenant identifier for multi-tenancy",
-            "default": "tenant_1234"
+            "example": "tenant_1234"
           },
           "return_content": {
             "anyOf": [
@@ -5623,7 +5682,8 @@
             ],
             "title": "Sub Tenant Id",
             "description": "Sub-tenant identifier, defaults to tenant_id if not provided",
-            "default": "sub_tenant_4567"
+            "default": "",
+            "example": "sub_tenant_4567"
           }
         },
         "type": "object",
@@ -5640,7 +5700,7 @@
             "type": "string",
             "title": "File Id",
             "description": "Unique identifier for the file being processed",
-            "default": "CortexDoc1234"
+            "example": "CortexDoc1234"
           },
           "filename": {
             "anyOf": [
@@ -5667,13 +5727,13 @@
             "type": "string",
             "title": "Query",
             "description": "Search terms to find in your content",
-            "default": "John Smith Jake"
+            "example": "John Smith Jake"
           },
           "tenant_id": {
             "type": "string",
             "title": "Tenant Id",
             "description": "Unique identifier for the tenant/organization",
-            "default": "tenant_1234"
+            "example": "tenant_1234"
           },
           "sub_tenant_id": {
             "anyOf": [
@@ -5686,12 +5746,14 @@
             ],
             "title": "Sub Tenant Id",
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-            "default": "sub_tenant_4567"
+            "default": "",
+            "example": "sub_tenant_4567"
           },
           "operator": {
             "$ref": "#/components/schemas/BM25OperatorType",
             "description": "How to combine search terms (OR or AND)",
-            "default": "and"
+            "default": "or",
+            "example": "and"
           },
           "max_chunks": {
             "anyOf": [
@@ -5720,13 +5782,13 @@
             "type": "string",
             "title": "User Message",
             "description": "Your message for AI memory generation",
-            "default": "<user_message>"
+            "example": "I prefer detailed technical explanations and works in the Pacific timezone"
           },
           "user_name": {
             "type": "string",
             "title": "User Name",
             "description": "Your name to personalize the generated memories",
-            "default": "John Doe"
+            "example": "John Doe"
           }
         },
         "type": "object",
@@ -5742,8 +5804,7 @@
             "type": "boolean",
             "title": "Success",
             "description": "Indicates whether the memory generation operation was successful",
-            "example": true,
-            "default": true
+            "example": true
           },
           "generated_user_memories": {
             "items": {
@@ -5752,7 +5813,16 @@
             "type": "array",
             "title": "Generated User Memories",
             "description": "Array of AI-generated memories based on your query and user context",
-            "default": []
+            "example": [
+              {
+                "memory_id": "memory_1234",
+                "memory_content": "User prefers detailed technical explanations and works in the Pacific timezone"
+              },
+              {
+                "memory_id": "memory_4567",
+                "memory_content": "User prefers dark mode"
+              }
+            ]
           }
         },
         "type": "object",
@@ -5771,19 +5841,23 @@
             "type": "array",
             "title": "Chunk Ids",
             "description": "The chunk IDs of the source you want to get embeddings for",
-            "default": []
+            "example": [
+              "CortexEmbeddings123_0",
+              "CortexEmbeddings123_1"
+            ]
           },
           "tenant_id": {
             "type": "string",
             "title": "Tenant Id",
             "description": "Unique identifier for the tenant/organization",
-            "default": "tenant_1234"
+            "example": "tenant_1234"
           },
           "sub_tenant_id": {
             "type": "string",
             "title": "Sub Tenant Id",
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-            "default": "sub_tenant_4567"
+            "default": "",
+            "example": "sub_tenant_4567"
           }
         },
         "type": "object",
@@ -5801,7 +5875,7 @@
             },
             "type": "array",
             "title": "Detail",
-            "default": []
+            "example": []
           }
         },
         "type": "object",
@@ -5822,20 +5896,20 @@
             },
             "type": "array",
             "title": "Sources",
-            "description": "List of source documents retrieved",
-            "default": []
+            "description": "List of source documents retrieved"
           },
           "success": {
             "type": "boolean",
             "title": "Success",
             "description": "Indicates whether the request was successful",
-            "default": true
+            "default": true,
+            "example": true
           },
           "message": {
             "type": "string",
             "title": "Message",
             "description": "Response message describing the operation result",
-            "default": "<string>"
+            "default": "Sources retrieved successfully"
           }
         },
         "type": "object",
@@ -5850,8 +5924,7 @@
             "type": "boolean",
             "title": "Success",
             "description": "Indicates whether the memory listing operation was successful",
-            "example": true,
-            "default": true
+            "example": true
           },
           "user_memories": {
             "items": {
@@ -5860,7 +5933,16 @@
             "type": "array",
             "title": "User Memories",
             "description": "Array of all user memories associated with your tenant",
-            "default": []
+            "example": [
+              {
+                "memory_id": "memory_1234",
+                "memory_content": "I prefer detailed technical explanations and works in the Pacific timezone"
+              },
+              {
+                "memory_id": "memory_4567",
+                "memory_content": "I prefer dark mode"
+              }
+            ]
           }
         },
         "type": "object",
@@ -5876,7 +5958,7 @@
             "type": "string",
             "title": "Content",
             "description": "The text or markdown content to upload",
-            "default": "<content>"
+            "example": "<content>"
           },
           "tenant_metadata": {
             "anyOf": [
@@ -5917,24 +5999,25 @@
             "type": "string",
             "title": "File Id",
             "description": "Identifier for the file whose status is being retrieved",
-            "default": "CortexDoc1234"
+            "example": "CortexDoc1234"
           },
           "indexing_status": {
             "type": "string",
             "title": "Indexing Status",
             "description": "Current status of the file. Possible values are 'queued', 'processing', 'completed', 'failed'",
-            "default": "<indexing_status>"
+            "example": "<indexing_status>"
           },
           "success": {
             "type": "boolean",
             "title": "Success",
-            "default": true
+            "default": true,
+            "example": true
           },
           "message": {
             "type": "string",
             "title": "Message",
             "description": "Detailed status message about the processing operation",
-            "default": "<string>"
+            "default": "Processing status retrieved successfully"
           }
         },
         "type": "object",
@@ -5950,19 +6033,19 @@
             "type": "string",
             "title": "Question",
             "description": "The question to be answered",
-            "default": "What is Cortex AI"
+            "example": "What is Cortex AI"
           },
           "session_id": {
             "type": "string",
             "title": "Session Id",
             "description": "Unique identifier for the conversation session. Keep it same when the current question refers to a previous answer or question",
-            "default": "chat_session_1234"
+            "example": "chat_session_1234"
           },
           "tenant_id": {
             "type": "string",
             "title": "Tenant Id",
             "description": "Identifier for the tenant/organization",
-            "default": "tenant_1234"
+            "example": "tenant_1234"
           },
           "context_list": {
             "anyOf": [
@@ -6005,7 +6088,8 @@
             ],
             "title": "Sub Tenant Id",
             "description": "Identifier for sub-tenant within the tenant",
-            "default": "sub_tenant_4567"
+            "default": "",
+            "example": "sub_tenant_4567"
           },
           "highlight_chunks": {
             "anyOf": [
@@ -6095,7 +6179,8 @@
             ],
             "title": "User Name",
             "description": "Name of the user making the request. This helps LLM to know the user's name if semantics around the username are involved in query. Its generally a good practice to include it possible.",
-            "default": "John Doe"
+            "default": "",
+            "example": "John Doe"
           },
           "user_instructions": {
             "anyOf": [
@@ -6163,22 +6248,23 @@
           "source_id": {
             "type": "string",
             "title": "Source Id",
-            "default": "CortexDoc1234"
+            "example": "CortexDoc1234"
           },
           "chunk_uuid": {
             "type": "string",
             "title": "Chunk Uuid",
-            "default": "<chunk_uuid>"
+            "example": "<chunk_uuid>"
           },
           "chunk_content": {
             "type": "string",
             "title": "Chunk Content",
-            "default": "<chunk_content>"
+            "example": "<chunk_content>"
           },
           "source_title": {
             "type": "string",
             "title": "Source Title",
-            "default": "<source_title>"
+            "default": "",
+            "example": "<source_title>"
           }
         },
         "type": "object",
@@ -6229,13 +6315,14 @@
             "type": "string",
             "title": "Query",
             "description": "Search query to find relevant user memories",
-            "default": "Which mode does user prefer"
+            "example": "Which mode does user prefer"
           },
           "user_name": {
             "type": "string",
             "title": "User Name",
             "description": "User's name to enhance personalisation",
-            "default": "John Doe"
+            "default": "",
+            "example": "John Doe"
           }
         },
         "type": "object",
@@ -6250,8 +6337,7 @@
             "type": "boolean",
             "title": "Success",
             "description": "Indicates whether the memory retrieval operation was successful",
-            "example": true,
-            "default": true
+            "example": true
           },
           "retrieved_user_memories": {
             "items": {
@@ -6260,7 +6346,16 @@
             "type": "array",
             "title": "Retrieved User Memories",
             "description": "Array of user memories ranked by relevance to your search query",
-            "default": []
+            "example": [
+              {
+                "memory_id": "memory_1234",
+                "memory_content": "I prefer detailed technical explanations and works in the Pacific timezone"
+              },
+              {
+                "memory_id": "memory_4567",
+                "memory_content": "I prefer dark mode"
+              }
+            ]
           }
         },
         "type": "object",
@@ -6276,50 +6371,47 @@
             "type": "string",
             "title": "Chunk Uuid",
             "description": "Unique identifier for this content chunk",
-            "example": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
-            "default": "<chunk_uuid>"
+            "example": "<chunk_uuid>"
           },
           "source_id": {
             "type": "string",
             "title": "Source Id",
             "description": "Unique identifier for the source document",
-            "example": "doc_12345",
-            "default": "CortexDoc1234"
+            "example": "CortexDoc1234"
           },
           "chunk_content": {
             "type": "string",
             "title": "Chunk Content",
             "description": "The actual text content of this chunk",
-            "example": "This is a chunk of text from the source document.",
-            "default": "<chunk_content>"
+            "example": "<chunk_content>"
           },
           "source_type": {
             "type": "string",
             "title": "Source Type",
             "description": "Type of the source document (file, webpage, etc.)",
-            "default": "<source_type>",
-            "example": "file"
+            "default": "",
+            "example": "<source_type>"
           },
           "source_upload_time": {
             "type": "string",
             "title": "Source Upload Time",
             "description": "When the source document was originally uploaded",
-            "default": "<source_upload_time>",
-            "example": "2023-10-27T10:00:00Z"
+            "default": "",
+            "example": "<source_upload_time>"
           },
           "source_title": {
             "type": "string",
             "title": "Source Title",
             "description": "Title or name of the source document",
-            "default": "<source_title>",
-            "example": "Project Phoenix Overview"
+            "default": "",
+            "example": "<source_title>"
           },
           "source_last_updated_time": {
             "type": "string",
             "title": "Source Last Updated Time",
             "description": "When the source document was last modified",
-            "default": "<source_last_updated_time>",
-            "example": "2023-10-27T12:30:00Z"
+            "default": "",
+            "example": "<source_last_updated_time>"
           },
           "layout": {
             "anyOf": [
@@ -6394,13 +6486,13 @@
             "type": "string",
             "title": "Query",
             "description": "Search terms to find relevant content",
-            "default": "Which mode does user prefer"
+            "example": "Which mode does user prefer"
           },
           "tenant_id": {
             "type": "string",
             "title": "Tenant Id",
             "description": "Unique identifier for the tenant/organization",
-            "default": "tenant_1234"
+            "example": "tenant_1234"
           },
           "sub_tenant_id": {
             "anyOf": [
@@ -6413,7 +6505,8 @@
             ],
             "title": "Sub Tenant Id",
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-            "default": "sub_tenant_4567"
+            "default": "",
+            "example": "sub_tenant_4567"
           },
           "max_chunks": {
             "anyOf": [
@@ -6483,18 +6576,18 @@
             "type": "string",
             "title": "File Id",
             "description": "Unique identifier for the file being processed",
-            "default": "CortexDoc1234"
+            "example": "CortexDoc1234"
           },
           "message": {
             "type": "string",
             "title": "Message",
-            "description": "Status message indicating document parsing scheduled or update completed",
-            "default": "<string>"
+            "description": "Status message indicating document parsing scheduled or update completed"
           },
           "success": {
             "type": "boolean",
             "title": "Success",
-            "default": true
+            "default": true,
+            "example": true
           }
         },
         "type": "object",
@@ -6510,36 +6603,32 @@
             "type": "string",
             "title": "Id",
             "description": "Unique identifier for the source document",
-            "example": "doc_67890",
-            "default": "<id>"
+            "example": "<id>"
           },
           "title": {
             "type": "string",
             "title": "Title",
             "description": "Display title of the source document",
-            "example": "Q3 Financial Report",
-            "default": "<title>"
+            "example": "<title>"
           },
           "type": {
             "type": "string",
             "title": "Type",
             "description": "Type of content (document, file, text, etc.)",
-            "example": "document",
-            "default": "<type>"
+            "example": "<type>"
           },
           "timestamp": {
             "type": "string",
             "title": "Timestamp",
             "description": "When the source was originally created or uploaded",
-            "example": "2023-09-30T15:00:00Z",
-            "default": "<timestamp>"
+            "example": "<timestamp>"
           },
           "description": {
             "type": "string",
             "title": "Description",
             "description": "Brief summary or description of the source content",
-            "default": "<description>",
-            "example": "Financial report for the third quarter."
+            "default": "",
+            "example": "<description>"
           },
           "document_metadata": {
             "additionalProperties": true,
@@ -6576,7 +6665,7 @@
             "type": "string",
             "title": "Tenant Id",
             "description": "Unique identifier for the tenant/organization",
-            "default": "tenant_1234"
+            "example": "tenant_1234"
           },
           "source_ids": {
             "items": {
@@ -6585,13 +6674,17 @@
             "type": "array",
             "title": "Source Ids",
             "description": "List of source IDs to fetch",
-            "default": []
+            "example": [
+              "CortexDoc1234",
+              "CortexDoc4567"
+            ]
           },
           "sub_tenant_id": {
             "type": "string",
             "title": "Sub Tenant Id",
             "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-            "default": "sub_tenant_4567"
+            "default": "",
+            "example": "sub_tenant_4567"
           }
         },
         "type": "object",
@@ -6607,43 +6700,50 @@
             "type": "string",
             "title": "Id",
             "description": "Stable, unique identifier for the source. If omitted, one may be generated upstream.",
-            "default": "<id>"
+            "default": "",
+            "example": "<id>"
           },
           "title": {
             "type": "string",
             "title": "Title",
             "description": "Short human-readable title for the source.",
-            "default": "<title>"
+            "default": "",
+            "example": "<title>"
           },
           "type": {
             "type": "string",
             "title": "Type",
             "description": "High-level category of the source (e.g., document, email, ticket).",
-            "default": "<type>"
+            "default": "",
+            "example": "<type>"
           },
           "description": {
             "type": "string",
             "title": "Description",
             "description": "Optional long-form description providing additional context.",
-            "default": "<description>"
+            "default": "",
+            "example": "<description>"
           },
           "note": {
             "type": "string",
             "title": "Note",
             "description": "Free-form notes for internal use or ingestion hints.",
-            "default": "<note>"
+            "default": "",
+            "example": "<note>"
           },
           "url": {
             "type": "string",
             "title": "Url",
             "description": "Canonical URL or reference link associated with the source.",
-            "default": "<url>"
+            "default": "",
+            "example": "<url>"
           },
           "timestamp": {
             "type": "string",
             "title": "Timestamp",
             "description": "Creation or last-updated timestamp of the source in ISO-8601 format.",
-            "default": "<timestamp>"
+            "default": "",
+            "example": "<timestamp>"
           },
           "content": {
             "$ref": "#/components/schemas/ContentModel",
@@ -6673,8 +6773,7 @@
             },
             "type": "array",
             "title": "Attachments",
-            "description": "Attachments related to the source such as images, PDFs, or supplemental files.",
-            "default": []
+            "description": "Attachments related to the source such as images, PDFs, or supplemental files."
           }
         },
         "type": "object",
@@ -6686,8 +6785,7 @@
             "type": "string",
             "title": "Tenant Id",
             "description": "The tenant ID that was queried",
-            "example": "tenant_abcd",
-            "default": "tenant_1234"
+            "example": "tenant_1234"
           },
           "sub_tenant_ids": {
             "items": {
@@ -6697,36 +6795,29 @@
             "title": "Sub Tenant Ids",
             "description": "Array of all sub-tenant IDs within the tenant",
             "example": [
-              "default",
-              "engineering",
-              "sales",
-              "marketing",
-              "hr",
-              "user_12345",
-              "user_67890",
-              "project_alpha"
-            ],
-            "default": []
+              "sub_tenant_1234",
+              "sub_tenant_4567"
+            ]
           },
           "count": {
             "type": "integer",
             "minimum": 0,
             "title": "Count",
             "description": "Total number of sub-tenants found",
-            "example": 8,
-            "default": 1
+            "example": 1
           },
           "success": {
             "type": "boolean",
             "title": "Success",
             "description": "Indicates whether the sub-tenant retrieval was successful",
-            "default": true
+            "default": true,
+            "example": true
           },
           "message": {
             "type": "string",
             "title": "Message",
             "description": "Response message describing the operation result",
-            "default": "<string>"
+            "default": "Sub-tenant IDs fetched successfully"
           }
         },
         "type": "object",
@@ -6743,27 +6834,26 @@
             "type": "string",
             "title": "Status",
             "description": "Current status of the tenant creation process",
-            "example": "success",
-            "default": "<status>"
+            "example": "success"
           },
           "tenant_id": {
             "type": "string",
             "title": "Tenant Id",
             "description": "Unique identifier assigned to the new tenant",
-            "example": "tenant_abcd",
-            "default": "tenant_1234"
+            "example": "tenant_1234"
           },
           "success": {
             "type": "boolean",
             "title": "Success",
             "description": "Indicates whether the tenant creation was successful",
-            "default": true
+            "default": true,
+            "example": true
           },
           "message": {
             "type": "string",
             "title": "Message",
             "description": "Response message describing the creation result",
-            "default": "<string>"
+            "default": "Tenant created successfully"
           }
         },
         "type": "object",
@@ -6780,15 +6870,13 @@
             "minimum": 0,
             "title": "Object Count",
             "description": "Total number of objects stored for this tenant",
-            "example": 1500,
-            "default": 1
+            "example": 1
           },
           "tenant_name": {
             "type": "string",
             "title": "Tenant Name",
             "description": "Name identifier for the tenant",
-            "example": "tenant_abcd",
-            "default": "<tenant_name>"
+            "example": "<tenant_name>"
           },
           "vector_dimension": {
             "anyOf": [
@@ -6807,13 +6895,14 @@
             "type": "boolean",
             "title": "Success",
             "description": "Indicates whether the stats retrieval was successful",
-            "default": true
+            "default": true,
+            "example": true
           },
           "message": {
             "type": "string",
             "title": "Message",
             "description": "Response message describing the operation result",
-            "default": "<string>"
+            "default": "Tenant stats retrieved successfully"
           }
         },
         "type": "object",
@@ -6829,15 +6918,13 @@
             "type": "string",
             "title": "Memory Id",
             "description": "Unique identifier for the user memory",
-            "example": "CortexUserMemory39243c65851949fbab283cce9085a5f61757340796",
-            "default": "memory_1234"
+            "example": "memory_1234"
           },
           "memory_content": {
             "type": "string",
             "title": "Memory Content",
             "description": "The actual memory content text that was stored",
-            "example": "User prefers dark mode interface and uses keyboard shortcuts frequently",
-            "default": "<memory_content>"
+            "example": "<memory_content>"
           }
         },
         "type": "object",
@@ -6863,17 +6950,17 @@
             },
             "type": "array",
             "title": "Location",
-            "default": []
+            "example": []
           },
           "msg": {
             "type": "string",
             "title": "Message",
-            "default": "<msg>"
+            "example": "<msg>"
           },
           "type": {
             "type": "string",
             "title": "Error Type",
-            "default": "<type>"
+            "example": "<type>"
           }
         },
         "type": "object",

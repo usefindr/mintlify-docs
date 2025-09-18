@@ -16,8 +16,8 @@ curl --request PATCH \
   --url 'https://api.usecortex.ai/upload/update_document?source_id=CortexDoc1234&tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
   --header 'Authorization: Bearer YOUR_API_KEY' \
   --header 'Content-Type: multipart/form-data' \
-  --form 'tenant_metadata=<string>' \
-  --form 'document_metadata=<string>' \
+  --form 'tenant_metadata={}' \
+  --form 'document_metadata={}' \
   --form file=@example-file
   ```
 

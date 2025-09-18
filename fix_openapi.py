@@ -12,7 +12,7 @@ defaults = {
     "file_id": "CortexDoc1234",
     "source_id": "CortexDoc1234",
     "user_name": "John Doe",
-    "message": "<string>",
+    # "message": "<string>",÷
     "embeddings": [[0.123413, 0.655367, 0.987654, 0.123456, 0.789012], [0.123413, 0.655367, 0.987654, 0.123456, 0.789012]],
     "question": "What is Cortex AI",
     "session_id": "chat_session_1234",
@@ -36,7 +36,53 @@ defaults = {
             "filterable": True
         }
     ],
-    "operator": "and"
+    "operator": "and",
+    "user_message": "I prefer detailed technical explanations and works in the Pacific timezone",
+    # "tenant_metadata": "{}",
+    # "document_metadata": "{}",
+    "sub_tenant_ids": ["sub_tenant_1234", "sub_tenant_4567"],
+    "source_ids": ["CortexDoc1234", "CortexDoc4567"],
+    "chunk_ids": ["CortexEmbeddings123_0", "CortexEmbeddings123_1"],
+    "user_memories": [
+        {
+            "memory_id": "memory_1234",
+            "memory_content": "I prefer detailed technical explanations and works in the Pacific timezone"
+        },
+        {
+            "memory_id": "memory_4567",
+            "memory_content": "I prefer dark mode"
+        }
+    ],
+    "retrieved_user_memories": [
+        {
+            "memory_id": "memory_1234",
+            "memory_content": "I prefer detailed technical explanations and works in the Pacific timezone"
+        },
+        {
+            "memory_id": "memory_4567",
+            "memory_content": "I prefer dark mode"
+        }
+    ],
+    "generated_user_memories": [
+        {
+            "memory_id": "memory_1234",
+            "memory_content": "User prefers detailed technical explanations and works in the Pacific timezone"
+        },
+        {
+            "memory_id": "memory_4567",
+            "memory_content": "User prefers dark mode"
+        }
+    ],
+    "uploaded":  [
+        {
+            "file_id": "CortexDoc1234",
+            "filename": "document1.pdf"
+        },
+        {
+            "file_id": "CortexDoc4567",
+            "filename": "document2.docx"
+        }
+    ]
 }
 
 full_text_query = "John Smith Jake"
@@ -46,48 +92,64 @@ update_embeddings_emb = {
     "CortexEmbeddings123_1": [0.123413, 0.655367, 0.987654, 0.123456, 0.789012]
 }
 
+example_exclusion_by_schema_name = {
+    # "Body_upload_files_upload_upload_document_post": ["tenant_metadata", "document_metadata"]
+    "SourceModel": ["attachments"],
+    "EmbeddingsSearchData": ["scores", "chunk_ids"]
+}
+
 schemas_to_ignore = {"ErrorResponse"}
+
+properties_to_ignore = {"message", "status", "tenant_metadata",
+                        "document_metadata", "files", "sources", "not_found_chunk_ids"}
 
 OPEN_API_PATH = "./api-reference/openapi.json"
 
 with open(OPEN_API_PATH, "r") as f:
     openapi = json.load(f)
 
-print("Adding default values to query params")
+print("Adding example values to query params")
 for endpoint in openapi["paths"]:
     for method in openapi["paths"][endpoint]:
         if "parameters" in openapi["paths"][endpoint][method]:
             for param in openapi["paths"][endpoint][method]["parameters"]:
                 if param["in"] == "query":
-                    param["schema"]["default"] = defaults.get(
+                    param["schema"]["example"] = defaults.get(
                         param["name"], f"<{type(param['name']).__name__}>")
 print("Default values added to query params.")
 
-print("Adding default values to components.schemas")
+print("Adding example values to components.schemas")
 if "components" in openapi and "schemas" in openapi["components"]:
     for schema_name, schema_def in openapi["components"]["schemas"].items():
         if schema_name in schemas_to_ignore:
             continue
         if "properties" in schema_def:
             for prop_name, prop_def in schema_def["properties"].items():
+                if prop_name in properties_to_ignore:
+                    print(f"Skipping {prop_name} for {schema_name}")
+                    continue
+                if schema_name in example_exclusion_by_schema_name:
+                    if prop_name in example_exclusion_by_schema_name[schema_name]:
+                        print(f"Skipping {prop_name} for {schema_name}")
+                        continue
                 # Special case for FullTextSearchRequest query property
                 if schema_name == "FullTextSearchRequest" and prop_name == "query":
-                    prop_def["default"] = full_text_query
+                    prop_def["example"] = full_text_query
                 elif schema_name == "EmbeddingsUpdateRequest" and prop_name == "embeddings":
-                    prop_def["default"] = update_embeddings_emb
+                    prop_def["example"] = update_embeddings_emb
                 elif prop_name in defaults:
-                    prop_def["default"] = defaults[prop_name]
+                    prop_def["example"] = defaults[prop_name]
                 elif "type" in prop_def:
                     if prop_def["type"] == "string":
-                        prop_def["default"] = f"<{prop_name}>"
+                        prop_def["example"] = f"<{prop_name}>"
                     elif prop_def["type"] == "integer":
-                        prop_def["default"] = 1
+                        prop_def["example"] = 1
                     elif prop_def["type"] == "number":
-                        prop_def["default"] = 1.0
+                        prop_def["example"] = 1.0
                     elif prop_def["type"] == "boolean":
-                        prop_def["default"] = True
+                        prop_def["example"] = True
                     elif prop_def["type"] == "array":
-                        prop_def["default"] = []
+                        prop_def["example"] = []
 print("Default values added to components.schemas.")
 
 
