@@ -5095,15 +5095,13 @@
         "properties": {
           "status": {
             "type": "string",
-            "minLength": 1,
             "title": "Status",
             "description": "The status of the deletion operation.",
-            "example": "deleted",
+            "example": "success",
             "default": "<status>"
           },
           "tenant_id": {
             "type": "string",
-            "minLength": 1,
             "title": "Tenant Id",
             "description": "The tenant ID from which the sub-tenant was deleted.",
             "example": "tenant_abcd",
@@ -5111,7 +5109,6 @@
           },
           "sub_tenant_id": {
             "type": "string",
-            "minLength": 1,
             "title": "Sub Tenant Id",
             "description": "The ID of the sub-tenant that was deleted.",
             "example": "user_12345",
@@ -6687,7 +6684,6 @@
         "properties": {
           "tenant_id": {
             "type": "string",
-            "minLength": 1,
             "title": "Tenant Id",
             "description": "The tenant ID that was queried",
             "example": "tenant_abcd",
@@ -6745,15 +6741,13 @@
         "properties": {
           "status": {
             "type": "string",
-            "minLength": 1,
             "title": "Status",
             "description": "Current status of the tenant creation process",
-            "example": "created",
+            "example": "success",
             "default": "<status>"
           },
           "tenant_id": {
             "type": "string",
-            "minLength": 1,
             "title": "Tenant Id",
             "description": "Unique identifier assigned to the new tenant",
             "example": "tenant_abcd",
@@ -6791,7 +6785,6 @@
           },
           "tenant_name": {
             "type": "string",
-            "minLength": 1,
             "title": "Tenant Name",
             "description": "Name identifier for the tenant",
             "example": "tenant_abcd",
