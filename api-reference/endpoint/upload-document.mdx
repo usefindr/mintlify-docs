@@ -13,11 +13,11 @@ import TryIt from '/snippets/try-it.mdx'
 ### Sample Request
 ```bash
 curl --request POST \
-  --url 'https://api.usecortex.ai/upload/upload_document?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
-  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --url https://api.usecortex.ai/upload/upload_document \
+  --header 'Authorization: Bearer 3e0a174b-bd11-414c-8259-9612a4b99a3f' \
   --header 'Content-Type: multipart/form-data' \
-  --form 'tenant_metadata=<string>' \
-  --form 'document_metadata=<string>' \
+  --form 'tenant_metadata={}' \
+  --form 'document_metadata={}' \
   --form file=@example-file
   ```
 
