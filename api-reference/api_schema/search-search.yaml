@@ -60,6 +60,10 @@
                 format: float
                 default: 0.5
                 description: Bias towards more recent content. A value of 0 means no preference, a value of 1 means recent sources are strongly preferred.
+              personalise_search:
+                type: boolean
+                default: false
+                description: Enable personalized search results based on user memories from the corresponding tenant and sub-tenant combination
             required:
             - query
     # --- Responses ---
