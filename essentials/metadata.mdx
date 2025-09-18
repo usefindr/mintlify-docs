@@ -175,6 +175,31 @@ Is this attribute the same for ALL documents in your tenant?
 | **Objects** | `"location": {"city": "SF", "country": "USA"}` | Structured data |
 | **Nested Objects** | `"author": {"name": "John", "role": "Manager"}` | Hierarchical relationships |
 
+## Reserved Keywords
+
+The following keywords are **reserved** and cannot be used as keys in `tenant_metadata_schema`:
+
+- `source_id`
+- `source_title`
+- `source_url`
+- `source_type`
+- `source_collection`
+- `source_owner`
+- `source_collaborator`
+- `source_upload_time`
+- `source_last_updated_time`
+- `chunk_id`
+- `chunk_uuid`
+- `chunk_content`
+- `document_metadata`
+- `base_metadata`
+- `layout`
+- `description`
+
+<Warning>
+**Important**: These keywords are used internally by Cortex for document processing and search functionality. Using any of these reserved keywords as tenant metadata keys will result in an error during tenant creation.
+</Warning>
+
 ## Metadata Best Practices
 
 ### 1. Naming Conventions and Standards
