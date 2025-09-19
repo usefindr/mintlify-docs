@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Cortex SDK API",
-    "description": "REST API wrapper around the Cortex Python SDK (Findr Integration)",
+    "description": "REST APIs for Cortex AI retrieval engine",
     "version": "0.0.1"
   },
   "servers": [
@@ -358,7 +358,7 @@
           }
         ],
         "x-fern-sdk-group-name": "sources",
-        "x-fern-sdk-method-name": "get_by_ids",
+        "x-fern-sdk-method-name": "get_all",
         "x-fern-sdk-audience": [
           "public"
         ]
@@ -370,7 +370,7 @@
           "user_memory"
         ],
         "summary": "List User Memories",
-        "description": "Retrieve all stored user memories for your tenant.\n\nThis endpoint returns a comprehensive list of all user memories that have been stored, \nwhether they were added manually or generated through AI. User memories help personalize \nyour experience by storing context, preferences, and important information.\n\nYou can optionally specify a sub-tenant to filter memories within that specific scope.",
+        "description": "Retrieve all stored user memories for your tenant.\n\nThis endpoint returns a comprehensive list of all user memories that have been stored,\nwhether they were added manually or generated through AI. User memories help personalize\nyour experience by storing context, preferences, and important information.\n\nYou can optionally specify a sub-tenant to filter memories within that specific scope.",
         "operationId": "list_user_memories_user_memory_list_user_memories_get",
         "security": [
           {
@@ -499,7 +499,7 @@
           "user_memory"
         ],
         "summary": "Delete User Memory",
-        "description": "Permanently remove a specific user memory from storage.\n\nThis endpoint allows you to delete a user memory by its unique identifier. \nOnce deleted, the memory cannot be recovered, so use this operation carefully.\n\nThe memory will be removed from your tenant's storage and will no longer \nappear in search results or memory listings.",
+        "description": "Permanently remove a specific user memory from storage.\n\nThis endpoint allows you to delete a user memory by its unique identifier.\nOnce deleted, the memory cannot be recovered, so use this operation carefully.\n\nThe memory will be removed from your tenant's storage and will no longer\nappear in search results or memory listings.",
         "operationId": "delete_user_memory_user_memory_delete_user_memory_delete",
         "security": [
           {
@@ -640,7 +640,7 @@
           "user_memory"
         ],
         "summary": "Retrieve User Memory",
-        "description": "Find relevant user memories using semantic search.\n\nThis endpoint performs a semantic search across all your stored user memories \nto find the most relevant ones based on your query. The results are ranked by \nsimilarity score, with the most relevant memories returned first.\n\nUse this to recall past preferences, context, or information that might be \nrelevant to your current task or query.",
+        "description": "Find relevant user memories using semantic search.\n\nThis endpoint performs a semantic search across all your stored user memories\nto find the most relevant ones based on your query. The results are ranked by\nsimilarity score, with the most relevant memories returned first.\n\nUse this to recall past preferences, context, or information that might be\nrelevant to your current task or query.",
         "operationId": "retrieve_user_memory_user_memory_retrieve_user_memory_post",
         "security": [
           {
@@ -795,7 +795,7 @@
           "user_memory"
         ],
         "summary": "Generate User Memory",
-        "description": "Generate AI-powered user memories from your query and context.\n\nThis endpoint uses artificial intelligence to create personalized memories \nbased on your query and user context. The AI analyzes your input and generates \nrelevant, contextual memories that can help improve future interactions.\n\nGenerated memories are automatically stored and can be retrieved through \nthe standard memory search endpoints.",
+        "description": "Generate AI-powered user memories from your query and context.\n\nThis endpoint uses artificial intelligence to create personalized memories\nbased on your query and user context. The AI analyzes your input and generates\nrelevant, contextual memories that can help improve future interactions.\n\nGenerated memories are automatically stored and can be retrieved through\nthe standard memory search endpoints.",
         "operationId": "generate_user_memory_user_memory_generate_user_memory_post",
         "security": [
           {
@@ -935,7 +935,7 @@
           "user_memory"
         ],
         "summary": "Add User Memory",
-        "description": "Store a new user memory for future reference.\n\nThis endpoint allows you to manually add a memory that will be stored and \ncan be retrieved later through memory search. Use this to save important \npreferences, context, or information that you want the system to remember.\n\nThe stored memory will be indexed and available for semantic search, making \nit accessible when relevant to future queries or interactions.",
+        "description": "Store a new user memory for future reference.\n\nThis endpoint allows you to manually add a memory that will be stored and\ncan be retrieved later through memory search. Use this to save important\npreferences, context, or information that you want the system to remember.\n\nThe stored memory will be indexed and available for semantic search, making\nit accessible when relevant to future queries or interactions.",
         "operationId": "add_user_memory_user_memory_add_user_memory_post",
         "security": [
           {
@@ -3306,126 +3306,13 @@
         ]
       }
     },
-    "/document/delete": {
-      "delete": {
-        "tags": [
-          "document"
-        ],
-        "summary": "Delete Memory",
-        "description": "Remove documents and content from your knowledge base.\n\nThis endpoint permanently deletes the specified sources from your knowledge base. Once deleted, the content will no longer be available for search or retrieval.\n\nUse this carefully as the action cannot be undone. The system will confirm successful deletion of each source ID you specify.",
-        "operationId": "delete_memory_document_delete_delete",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DeleteMemoryRequest",
-                "description": "Request body containing the source IDs to delete and tenant information"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeleteSources"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request - Invalid input parameters",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ActualErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized - Authentication required",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ActualErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden - Access denied",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ActualErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found - Resource does not exist",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ActualErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity - Validation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ActualErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ActualErrorResponse"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Service Unavailable",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ActualErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "x-fern-sdk-group-name": "document",
-        "x-fern-sdk-method-name": "delete",
-        "x-fern-sdk-audience": [
-          "public"
-        ]
-      }
-    },
     "/search/retrieve": {
       "post": {
         "tags": [
           "search"
         ],
         "summary": "Search",
-        "description": "Search for relevant content within your indexed sources.\n\nThis API returns the chunks related to the query you make. We use neural (embedding) search to give you the most relevant chunks. \nResults are ranked by relevance and can be customized with parameters like result limits and recency preferences.",
+        "description": "Search for relevant content within your indexed sources.\n\nThis API returns the chunks related to the query you make. We use neural (embedding) search to give you the most relevant chunks.\nResults are ranked by relevance and can be customized with parameters like result limits and recency preferences.",
         "operationId": "search_search_retrieve_post",
         "requestBody": {
           "content": {
@@ -3880,9 +3767,9 @@
         "tags": [
           "embeddings"
         ],
-        "summary": "Get Embeddings Based On Chunk Ids",
+        "summary": "Retrieve Embeddings Based On Chunk Ids",
         "description": "Retrieve embeddings for specific chunk IDs.\n\nUse this when you already know the chunk IDs and need their corresponding embeddings.",
-        "operationId": "get_embeddings_based_on_chunk_ids_embeddings_retrieve_by_ids_post",
+        "operationId": "retrieve_embeddings_based_on_chunk_ids_embeddings_retrieve_by_ids_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -4136,6 +4023,17 @@
               "example": "tenant_1234"
             },
             "description": "Unique identifier for the tenant/organization"
+          },
+          {
+            "name": "note",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "",
+              "title": "Note",
+              "example": "<str>"
+            }
           }
         ],
         "requestBody": {
@@ -4602,6 +4500,135 @@
           "public"
         ]
       }
+    },
+    "/document/delete": {
+      "delete": {
+        "tags": [
+          "document"
+        ],
+        "summary": "Delete Memory",
+        "description": "Remove documents and content from your knowledge base.\n\nThis endpoint permanently deletes the specified sources from your knowledge base. Once deleted, the content will no longer be available for search or retrieval.\n\nUse this carefully as the action cannot be undone. The system will confirm successful deletion of each source ID you specify.",
+        "operationId": "delete_memory_document_delete_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteMemoryRequest",
+                "description": "Request body containing the source IDs to delete and tenant information"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteSources"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - Resource does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity - Validation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "x-fern-sdk-group-name": "document",
+        "x-fern-sdk-method-name": "delete",
+        "x-fern-sdk-audience": [
+          "public"
+        ]
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Root",
+        "operationId": "root__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -4878,6 +4905,18 @@
             "title": "Files",
             "description": "The document file to upload (e.g., PDF, DOCX, TXT)"
           },
+          "file_ids": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "File Ids",
+            "description": "Optional JSON string array of file IDs for the uploaded content. If not provided or empty, will be generated automatically."
+          },
           "tenant_metadata": {
             "anyOf": [
               {
@@ -5008,6 +5047,20 @@
             "title": "File",
             "description": "The document file to upload (e.g., PDF, DOCX, TXT)",
             "example": "<file>"
+          },
+          "file_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "File Id",
+            "description": "Optional file ID for the uploaded content. If not provided, will be generated automatically.",
+            "default": "",
+            "example": "CortexDoc1234"
           },
           "tenant_metadata": {
             "anyOf": [
@@ -5643,19 +5696,16 @@
           "file_id": {
             "type": "string",
             "title": "File Id",
-            "description": "Unique identifier for the file to fetch",
             "example": "CortexDoc1234"
           },
           "file_type": {
             "type": "string",
             "title": "File Type",
-            "description": "Type of file (e.g., 'app', 'file', or other)",
             "example": "<file_type>"
           },
           "tenant_id": {
             "type": "string",
             "title": "Tenant Id",
-            "description": "Tenant identifier for multi-tenancy",
             "example": "tenant_1234"
           },
           "return_content": {
@@ -5668,7 +5718,6 @@
               }
             ],
             "title": "Return Content",
-            "description": "Whether to return the file content along with the URL",
             "default": true
           },
           "sub_tenant_id": {
@@ -5681,7 +5730,6 @@
               }
             ],
             "title": "Sub Tenant Id",
-            "description": "Sub-tenant identifier, defaults to tenant_id if not provided",
             "default": "",
             "example": "sub_tenant_4567"
           }
@@ -5781,7 +5829,7 @@
           "user_message": {
             "type": "string",
             "title": "User Message",
-            "description": "Your message for AI memory generation",
+            "description": "Your query or context for AI memory generation",
             "example": "I prefer detailed technical explanations and works in the Pacific timezone"
           },
           "user_name": {
@@ -5959,6 +6007,20 @@
             "title": "Content",
             "description": "The text or markdown content to upload",
             "example": "<content>"
+          },
+          "file_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "File Id",
+            "description": "Optional file ID for the uploaded content. If not provided, will be generated automatically.",
+            "default": "",
+            "example": "CortexDoc1234"
           },
           "tenant_metadata": {
             "anyOf": [
@@ -6806,6 +6868,33 @@
             "description": "Total number of sub-tenants found",
             "example": 1
           },
+          "tenant_schema": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tenant Schema",
+            "description": "Schema configuration for the tenant collection",
+            "example": {
+              "properties": [
+                {
+                  "field_name": "field_1",
+                  "index_filterable": true,
+                  "index_searchable": true
+                },
+                {
+                  "field_name": "field_2",
+                  "index_filterable": false,
+                  "index_searchable": true
+                }
+              ]
+            }
+          },
           "success": {
             "type": "boolean",
             "title": "Success",
@@ -6834,7 +6923,7 @@
             "type": "string",
             "title": "Status",
             "description": "Current status of the tenant creation process",
-            "example": "success"
+            "example": "created"
           },
           "tenant_id": {
             "type": "string",
@@ -6872,11 +6961,12 @@
             "description": "Total number of objects stored for this tenant",
             "example": 1
           },
-          "tenant_name": {
+          "tenant_id": {
             "type": "string",
-            "title": "Tenant Name",
-            "description": "Name identifier for the tenant",
-            "example": "<tenant_name>"
+            "minLength": 1,
+            "title": "Tenant Id",
+            "description": "identifier for the tenant",
+            "example": "tenant_1234"
           },
           "vector_dimension": {
             "anyOf": [
@@ -6908,7 +6998,7 @@
         "type": "object",
         "required": [
           "object_count",
-          "tenant_name"
+          "tenant_id"
         ],
         "title": "TenantStats"
       },
