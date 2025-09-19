@@ -16,6 +16,7 @@ curl --request POST \
   --url https://api.usecortex.ai/upload/upload_document \
   --header 'Authorization: Bearer 3e0a174b-bd11-414c-8259-9612a4b99a3f' \
   --header 'Content-Type: multipart/form-data' \
+  --form 'file_id=doc_123456' \
   --form 'tenant_metadata={}' \
   --form 'document_metadata={}' \
   --form file=@example-file
@@ -80,7 +81,10 @@ Our system automatically handles:
 **Default Sub-Tenant Behavior**: If you don't specify a `sub_tenant_id`, the document will be uploaded to the default sub-tenant created when your tenant was set up. This is perfect for organization-wide documents that should be accessible across all departments.
 </Note>
 
-> **File ID Management**: When you provide a `file_id` as a key in the `document_metadata` object, that specific ID will be used to identify your content. If no `file_id` is provided in the `document_metadata`, the system will automatically generate a unique identifier for you. This allows you to maintain consistent references to your content across your application while ensuring every piece of content has a unique identifier.
+> **File ID Management**: The system uses a priority-based approach for file ID assignment:
+> 1. **First Priority**: If you provide a `file_id` as a direct body parameter, that specific ID will be used
+> 2. **Second Priority**: If no direct `file_id` is provided, the system checks for a `file_id` in the `document_metadata` object
+> 3. **Auto-Generation**: If neither source provides a `file_id`, the system will automatically generate a unique identifier
 
 ### **Duplicate File ID Behavior**
 
