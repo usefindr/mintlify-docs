@@ -1,5 +1,7 @@
 import json
 
+genr_type = 'sdk' # docs or sdk. If sdk is selected, then default values are not applied. Only examples are applied.
+
 defaults = {
     "tenant_id": "tenant_1234",
     "sub_tenant_id": "sub_tenant_4567",
@@ -98,6 +100,17 @@ example_exclusion_by_schema_name = {
     "EmbeddingsSearchData": ["scores", "chunk_ids"]
 }
 
+defaults_by_schema_name = {
+    "Body_batch_upload_upload_batch_upload_post": {
+        "tenant_metadata": "{}",
+        "document_metadata": "{}"
+    },
+    "Body_batch_update_upload_batch_update_patch": {
+        "tenant_metadata": "{}",
+        "document_metadata": "{}"
+    }
+} if genr_type != 'sdk' else {}
+
 schemas_to_ignore = {"ErrorResponse"}
 
 properties_to_ignore = {"message", "status", "tenant_metadata",
@@ -125,6 +138,11 @@ if "components" in openapi and "schemas" in openapi["components"]:
             continue
         if "properties" in schema_def:
             for prop_name, prop_def in schema_def["properties"].items():
+                if schema_name in defaults_by_schema_name:
+                    if prop_name in defaults_by_schema_name[schema_name]:
+                        prop_def["default"] = defaults_by_schema_name[schema_name][prop_name]
+                        print(f"Adding example value for {prop_name} for {schema_name}")
+                        continue
                 if prop_name in properties_to_ignore:
                     print(f"Skipping {prop_name} for {schema_name}")
                     continue
@@ -149,7 +167,7 @@ if "components" in openapi and "schemas" in openapi["components"]:
                     elif prop_def["type"] == "boolean":
                         prop_def["example"] = True
                     elif prop_def["type"] == "array":
-                        prop_def["example"] = []
+                        prop_def["example"] = []            
 print("Default values added to components.schemas.")
 
 
