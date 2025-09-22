@@ -358,7 +358,7 @@
           }
         ],
         "x-fern-sdk-group-name": "sources",
-        "x-fern-sdk-method-name": "get_all",
+        "x-fern-sdk-method-name": "get_by_ids",
         "x-fern-sdk-audience": [
           "public"
         ]
@@ -4873,6 +4873,7 @@
               }
             ],
             "title": "Tenant Metadata",
+            "default": "{}",
             "description": "JSON string containing tenant-level document metadata (e.g., department, compliance_tag)\n\nExample: > \"{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}\"\n\n"
           },
           "document_metadata": {
@@ -4885,6 +4886,7 @@
               }
             ],
             "title": "Document Metadata",
+            "default": "{}",
             "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: > \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n"
           }
         },
@@ -4927,6 +4929,7 @@
               }
             ],
             "title": "Tenant Metadata",
+            "default": "{}",
             "description": "JSON string containing tenant-level document metadata (e.g., department, compliance_tag)\n\nExample: > \"{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}\"\n\n"
           },
           "document_metadata": {
@@ -4939,6 +4942,7 @@
               }
             ],
             "title": "Document Metadata",
+            "default": "{}",
             "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: > \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n"
           }
         },

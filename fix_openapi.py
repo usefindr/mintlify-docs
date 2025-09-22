@@ -98,6 +98,17 @@ example_exclusion_by_schema_name = {
     "EmbeddingsSearchData": ["scores", "chunk_ids"]
 }
 
+defaults_by_schema_name = {
+    "Body_batch_upload_upload_batch_upload_post": {
+        "tenant_metadata": "{}",
+        "document_metadata": "{}"
+    },
+    "Body_batch_update_upload_batch_update_patch": {
+        "tenant_metadata": "{}",
+        "document_metadata": "{}"
+    }
+}
+
 schemas_to_ignore = {"ErrorResponse"}
 
 properties_to_ignore = {"message", "status", "tenant_metadata",
@@ -133,6 +144,11 @@ if "components" in openapi and "schemas" in openapi["components"]:
                         print(f"Skipping {prop_name} for {schema_name}")
                         continue
                 # Special case for FullTextSearchRequest query property
+                if schema_name in defaults_by_schema_name:
+                    if prop_name in defaults_by_schema_name[schema_name]:
+                        prop_def["default"] = defaults_by_schema_name[schema_name][prop_name]
+                        print(f"Adding example value for {prop_name} for {schema_name}")
+                        continue
                 if schema_name == "FullTextSearchRequest" and prop_name == "query":
                     prop_def["example"] = full_text_query
                 elif schema_name == "EmbeddingsUpdateRequest" and prop_name == "embeddings":
@@ -149,7 +165,7 @@ if "components" in openapi and "schemas" in openapi["components"]:
                     elif prop_def["type"] == "boolean":
                         prop_def["example"] = True
                     elif prop_def["type"] == "array":
-                        prop_def["example"] = []
+                        prop_def["example"] = []            
 print("Default values added to components.schemas.")
 
 
