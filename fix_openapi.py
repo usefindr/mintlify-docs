@@ -136,6 +136,11 @@ if "components" in openapi and "schemas" in openapi["components"]:
             continue
         if "properties" in schema_def:
             for prop_name, prop_def in schema_def["properties"].items():
+                if schema_name in defaults_by_schema_name:
+                    if prop_name in defaults_by_schema_name[schema_name]:
+                        prop_def["default"] = defaults_by_schema_name[schema_name][prop_name]
+                        print(f"Adding example value for {prop_name} for {schema_name}")
+                        continue
                 if prop_name in properties_to_ignore:
                     print(f"Skipping {prop_name} for {schema_name}")
                     continue
@@ -144,11 +149,6 @@ if "components" in openapi and "schemas" in openapi["components"]:
                         print(f"Skipping {prop_name} for {schema_name}")
                         continue
                 # Special case for FullTextSearchRequest query property
-                if schema_name in defaults_by_schema_name:
-                    if prop_name in defaults_by_schema_name[schema_name]:
-                        prop_def["default"] = defaults_by_schema_name[schema_name][prop_name]
-                        print(f"Adding example value for {prop_name} for {schema_name}")
-                        continue
                 if schema_name == "FullTextSearchRequest" and prop_name == "query":
                     prop_def["example"] = full_text_query
                 elif schema_name == "EmbeddingsUpdateRequest" and prop_name == "embeddings":
