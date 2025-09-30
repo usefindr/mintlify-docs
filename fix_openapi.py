@@ -1,6 +1,6 @@
 import json
 
-genr_type = 'sdk' # docs or sdk. If sdk is selected, then default values are not applied. Only examples are applied.
+genr_type = 'docs' # docs or sdk. If sdk is selected, then default values are not applied. Only examples are applied.
 
 defaults = {
     "tenant_id": "tenant_1234",

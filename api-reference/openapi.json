@@ -3215,6 +3215,25 @@
               "example": "tenant_1234"
             },
             "description": "Unique identifier for the tenant/organization"
+          },
+          {
+            "name": "sub_tenant_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
+              "title": "Sub Tenant Id",
+              "example": "sub_tenant_4567"
+            },
+            "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used."
           }
         ],
         "responses": {
