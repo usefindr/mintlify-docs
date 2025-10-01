@@ -4633,6 +4633,495 @@
         ]
       }
     },
+    "/cost-tracking/dashboard": {
+      "get": {
+        "tags": [
+          "cost-tracking"
+        ],
+        "summary": "Get Cost Dashboard",
+        "description": "Get cost tracking dashboard data for the authenticated user.\n\nReturns comprehensive cost information including:\n- Total costs and units consumed\n- Service breakdown\n- Daily trend data\n- Recent activity",
+        "operationId": "get_cost_dashboard_cost_tracking_dashboard_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "days",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "description": "Number of days to include in summary",
+              "default": 30,
+              "title": "Days",
+              "example": "<str>"
+            },
+            "description": "Number of days to include in summary"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CostSummaryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cost-tracking/alerts": {
+      "get": {
+        "tags": [
+          "cost-tracking"
+        ],
+        "summary": "Get Cost Alerts",
+        "description": "Get cost alerts for the authenticated user.\n\nAlerts include:\n- Cost threshold warnings\n- Unusual spending patterns\n- Service-specific alerts",
+        "operationId": "get_cost_alerts_cost_tracking_alerts_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "threshold",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "description": "Cost threshold for alerts",
+              "default": 100.0,
+              "title": "Threshold",
+              "example": "<str>"
+            },
+            "description": "Cost threshold for alerts"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CostAlertResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cost-tracking/organization-dashboard": {
+      "get": {
+        "tags": [
+          "cost-tracking"
+        ],
+        "summary": "Get Organization Cost Dashboard",
+        "description": "Get cost tracking dashboard data for the entire organization.\n\nRequires organization-level permissions.",
+        "operationId": "get_organization_cost_dashboard_cost_tracking_organization_dashboard_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "days",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "description": "Number of days to include in summary",
+              "default": 30,
+              "title": "Days",
+              "example": "<str>"
+            },
+            "description": "Number of days to include in summary"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cost-tracking/sync": {
+      "post": {
+        "tags": [
+          "cost-tracking"
+        ],
+        "summary": "Sync Pending Costs",
+        "description": "Manually trigger sync of pending cost events.\n\nThis endpoint can be used to ensure cost data is current\nfor dashboard display.",
+        "operationId": "sync_pending_costs_cost_tracking_sync_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/cost-tracking/service-rates": {
+      "get": {
+        "tags": [
+          "cost-tracking"
+        ],
+        "summary": "Get Service Cost Rates",
+        "description": "Get current cost rates for all supported services.\n\nThis endpoint provides transparency about how costs are calculated.",
+        "operationId": "get_service_cost_rates_cost_tracking_service_rates_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cost-tracking/quota/status": {
+      "get": {
+        "tags": [
+          "cost-tracking"
+        ],
+        "summary": "Get Quota Status",
+        "description": "Get user's quota status and usage",
+        "operationId": "get_quota_status_cost_tracking_quota_status_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "User ID",
+              "title": "User Id",
+              "example": "<str>"
+            },
+            "description": "User ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Get Quota Status Cost Tracking Quota Status Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cost-tracking/quota/create": {
+      "post": {
+        "tags": [
+          "cost-tracking"
+        ],
+        "summary": "Create User Quota",
+        "description": "Create or update user quota",
+        "operationId": "create_user_quota_cost_tracking_quota_create_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "User ID",
+              "title": "User Id",
+              "example": "<str>"
+            },
+            "description": "User ID"
+          },
+          {
+            "name": "plan",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Plan name (e.g., 'enterprise', 'pro')",
+              "title": "Plan",
+              "example": "<str>"
+            },
+            "description": "Plan name (e.g., 'enterprise', 'pro')"
+          },
+          {
+            "name": "quota_usd",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "description": "Monthly quota in USD",
+              "title": "Quota Usd",
+              "example": "<str>"
+            },
+            "description": "Monthly quota in USD"
+          },
+          {
+            "name": "overage_rate",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "description": "Overage rate per unit",
+              "default": 0.002,
+              "title": "Overage Rate",
+              "example": "<str>"
+            },
+            "description": "Overage rate per unit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Create User Quota Cost Tracking Quota Create Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cost-tracking/quota/reset": {
+      "post": {
+        "tags": [
+          "cost-tracking"
+        ],
+        "summary": "Reset Monthly Quota",
+        "description": "Reset user's monthly quota",
+        "operationId": "reset_monthly_quota_cost_tracking_quota_reset_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "User ID",
+              "title": "User Id",
+              "example": "<str>"
+            },
+            "description": "User ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Reset Monthly Quota Cost Tracking Quota Reset Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cost-tracking/refresh-organization/{organization_id}": {
+      "post": {
+        "tags": [
+          "cost-tracking"
+        ],
+        "summary": "Refresh Organization Data",
+        "description": "Refresh cost data for an organization by processing pending events",
+        "operationId": "refresh_organization_data_cost_tracking_refresh_organization__organization_id__post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "organization_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Organization Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Refresh Organization Data Cost Tracking Refresh Organization  Organization Id  Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/manual-stripe-update": {
+      "post": {
+        "summary": "Manual Stripe Update",
+        "description": "Manually process pending DDB entries for API_KEY and organization\n\nThis API checks DDB entries for the given API_KEY and organization,\nbatches them, sends to Stripe, updates MongoDB aggregation, and marks DDB as success.",
+        "operationId": "manual_stripe_update_manual_stripe_update_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManualStripeUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManualStripeUpdateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/": {
       "get": {
         "summary": "Root",
@@ -5168,6 +5657,118 @@
         },
         "type": "object",
         "title": "ContentModel"
+      },
+      "CostAlertResponse": {
+        "properties": {
+          "alerts": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Alerts",
+            "example": []
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id",
+            "example": "<user_id>"
+          },
+          "timestamp": {
+            "type": "string",
+            "title": "Timestamp",
+            "example": "<timestamp>"
+          }
+        },
+        "type": "object",
+        "required": [
+          "alerts",
+          "user_id",
+          "timestamp"
+        ],
+        "title": "CostAlertResponse",
+        "description": "Response model for cost alerts"
+      },
+      "CostSummaryResponse": {
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "title": "User Id",
+            "example": "<user_id>"
+          },
+          "period_days": {
+            "type": "integer",
+            "title": "Period Days",
+            "example": 1
+          },
+          "total_cost": {
+            "type": "number",
+            "title": "Total Cost",
+            "example": 1.0
+          },
+          "total_units": {
+            "type": "number",
+            "title": "Total Units",
+            "example": 1.0
+          },
+          "service_breakdown": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Service Breakdown",
+            "example": []
+          },
+          "daily_trend": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Daily Trend",
+            "example": []
+          },
+          "last_updated": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Updated"
+          },
+          "is_current": {
+            "type": "boolean",
+            "title": "Is Current",
+            "example": true
+          },
+          "recent_activity": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Recent Activity",
+            "example": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "user_id",
+          "period_days",
+          "total_cost",
+          "total_units",
+          "service_breakdown",
+          "daily_trend",
+          "last_updated",
+          "is_current",
+          "recent_activity"
+        ],
+        "title": "CostSummaryResponse",
+        "description": "Response model for cost summary"
       },
       "DeleteMemoryRequest": {
         "properties": {
@@ -6023,6 +6624,63 @@
         "title": "ListUserMemoriesResponse",
         "description": "Response model for listing all user memories."
       },
+      "ManualStripeUpdateRequest": {
+        "properties": {
+          "api_key": {
+            "type": "string",
+            "title": "Api Key",
+            "example": "<api_key>"
+          },
+          "organization_id": {
+            "type": "string",
+            "title": "Organization Id",
+            "example": "<organization_id>"
+          }
+        },
+        "type": "object",
+        "required": [
+          "api_key",
+          "organization_id"
+        ],
+        "title": "ManualStripeUpdateRequest"
+      },
+      "ManualStripeUpdateResponse": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "processed_events": {
+            "type": "integer",
+            "title": "Processed Events",
+            "example": 1
+          },
+          "total_amount": {
+            "type": "number",
+            "title": "Total Amount",
+            "example": 1.0
+          },
+          "stripe_events_sent": {
+            "type": "integer",
+            "title": "Stripe Events Sent",
+            "example": 1
+          }
+        },
+        "type": "object",
+        "required": [
+          "success",
+          "message",
+          "processed_events",
+          "total_amount",
+          "stripe_events_sent"
+        ],
+        "title": "ManualStripeUpdateResponse"
+      },
       "MarkdownUploadRequest": {
         "properties": {
           "content": {
@@ -6089,7 +6747,7 @@
           "indexing_status": {
             "type": "string",
             "title": "Indexing Status",
-            "description": "Current status of the file. Possible values are 'queued', 'processing', 'completed', 'failed'",
+            "description": "Current status of the file. Possible values are 'queued', 'processing', 'completed', 'errored'",
             "example": "<indexing_status>"
           },
           "success": {
@@ -6632,7 +7290,7 @@
             ],
             "title": "Recency Bias",
             "description": "Preference for newer content (0.0 = no bias, 1.0 = strong recency preference)",
-            "default": 0
+            "default": 0.0
           },
           "personalise_search": {
             "anyOf": [
@@ -6886,7 +7544,7 @@
           },
           "count": {
             "type": "integer",
-            "minimum": 0,
+            "minimum": 0.0,
             "title": "Count",
             "description": "Total number of sub-tenants found",
             "example": 1
@@ -6979,7 +7637,7 @@
         "properties": {
           "object_count": {
             "type": "integer",
-            "minimum": 0,
+            "minimum": 0.0,
             "title": "Object Count",
             "description": "Total number of objects stored for this tenant",
             "example": 1
