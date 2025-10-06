@@ -6089,8 +6089,15 @@
           "indexing_status": {
             "type": "string",
             "title": "Indexing Status",
-            "description": "Current status of the file. Possible values are 'queued', 'processing', 'completed', 'failed'",
+            "description": "Current status of the file. Possible values are 'queued', 'processing', 'completed', 'errored'",
             "example": "<indexing_status>"
+          },
+          "error_code": {
+            "type": "string",
+            "title": "Error Code",
+            "description": "Error code for the file. You may share this code with us to help us diagnose and resolve the issue.",
+            "default": "",
+            "example": "<error_code>"
           },
           "success": {
             "type": "boolean",
@@ -6632,7 +6639,7 @@
             ],
             "title": "Recency Bias",
             "description": "Preference for newer content (0.0 = no bias, 1.0 = strong recency preference)",
-            "default": 0
+            "default": 0.0
           },
           "personalise_search": {
             "anyOf": [
@@ -6886,7 +6893,7 @@
           },
           "count": {
             "type": "integer",
-            "minimum": 0,
+            "minimum": 0.0,
             "title": "Count",
             "description": "Total number of sub-tenants found",
             "example": 1
@@ -6979,7 +6986,7 @@
         "properties": {
           "object_count": {
             "type": "integer",
-            "minimum": 0,
+            "minimum": 0.0,
             "title": "Object Count",
             "description": "Total number of objects stored for this tenant",
             "example": 1
