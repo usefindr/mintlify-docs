@@ -1,0 +1,358 @@
+---
+title: "Knowledge Graphs"
+description: "Automatically extract and leverage entity relationships from your data to provide richer context and deeper insights in every search and answer."
+---
+
+Cortex automatically builds a knowledge graph from your content, extracting entities and their relationships to help your AI understand not just individual pieces of information, but how everything connects. This means your AI can provide richer, more contextual answers by understanding the web of relationships in your data.
+
+## What is a Knowledge Graph?
+
+A knowledge graph is a network of entities (people, organizations, projects, products, concepts) and the relationships between them. Instead of treating each document as isolated text, Cortex understands the underlying structure of your information.
+
+**Think of it this way**: Semantic search finds documents that *mention* similar concepts. A knowledge graph understands how those concepts *actually relate*. When you search for "Project Phoenix budget", semantic search finds documents containing those semantics. The knowledge graph knows that Sarah Chen leads Project Phoenix, which depends on the Authentication Service, was approved by the Engineering VP, and has a Q2 deadline—providing rich relational context that flat search simply cannot capture.
+
+## How It Works
+
+### Automatic Entity Extraction
+
+When you upload content to Cortex, our system automatically:
+1. **Identifies entities** in your documents (people, organizations, projects, products, technical terms, etc.)
+2. **Extracts relationships** between entities with rich contextual information
+3. **Builds a connected graph** that captures how everything relates
+4. **Updates dynamically** as you add more content
+
+All of this happens automatically—no manual tagging or configuration required.
+
+<Info>
+**Zero Configuration Required**: Knowledge graphs are built automatically for all content you upload. There's nothing to set up or configure.
+</Info>
+
+### Intelligent Entity Disambiguation
+
+Cortex automatically resolves entity ambiguity using contextual understanding. Consider the name "Mercury"—it could refer to a team member's name, a customer company, a project codename, or the chemical element. Cortex disambiguates entities by analyzing:
+
+- **Surrounding context**: What's being discussed when the entity is mentioned
+- **Source type**: Whether it's from an email, document, meeting note, or support ticket
+- **Unique identifiers**: Email addresses, employee IDs, URLs, or other identifiers that definitively identify entities
+- **Relationship patterns**: Who interacts with this entity and in what capacity
+
+This contextual intelligence ensures that "Mercury" the team member is never confused with "Mercury" the customer company or "Mercury" the project, even if all appear across your documents.
+
+### Cross-Source Entity Linking
+
+Cortex automatically connects entities across different sources when they share matching identifiers or appear in similar contexts:
+
+**Automatic Connection Examples:**
+- If two documents mention "John Smith" and both reference the email `john.smith@company.com`, Cortex merges them into one entity
+- If a Slack conversation and a project document both discuss "Project Phoenix" with consistent context, they're automatically linked
+- When multiple sources reference the same customer ID or employee number, all information is unified under one entity
+
+<Tip>
+**Pro Tip**: Including unique identifiers in your content (email addresses, employee IDs, ticket numbers, URLs) helps Cortex connect entities more accurately. The more specific your identifiers, the better the entity linking.
+</Tip>
+
+**Closing the Semantic Gap**: Traditional vector search understands meaning but not structure. It can find similar content but cannot tell you that Document A's "critical bug" is the same issue mentioned in Document B's support ticket, or that three different teams are working on related aspects of the same project. Knowledge graphs bridge this gap by understanding actual relationships, not just semantic similarity—enabling your AI to reason about connections that pure semantic search would miss.
+
+### Entity Types
+
+Cortex recognizes various entity types including:
+- **People**: Team members, customers, stakeholders
+- **Organizations**: Companies, departments, teams
+- **Projects**: Initiatives, products, features
+- **Technical Terms**: APIs, error codes, system components
+- **Concepts**: Business processes, methodologies, frameworks
+
+Each entity is tracked with:
+- **Name**: The entity's identifier
+- **Type**: What kind of entity it is
+- **Namespace**: Contextual categorization (e.g., "employees", "projects", "customers")
+- **Relationships**: Connections to other entities with detailed context
+
+### Relationship Context
+
+For every relationship between entities, Cortex captures:
+- **The relationship type**: "works for", "reports to", "depends on", "caused by"
+- **Rich context**: Detailed information about how and why entities are related
+- **Source references**: Which documents contain evidence of this relationship
+- **Temporal details**: Time-based information like "last week" or "in 2023"
+- **Confidence scores**: How certain the system is about each relationship
+
+## Automatic Availability
+
+<Check>
+**Available Everywhere**: Knowledge graph context is automatically included in all search and retrieval responses. You don't need to make special API calls. 
+</Check>
+
+Every time you use Cortex's search or question-answering endpoints, the knowledge graph works behind the scenes to enhance results with relevant entity relationships.
+
+## How to Use Graph Context
+
+### In Search Results
+
+When you search for information, Cortex automatically enhances results with graph context:
+
+**What you get in each search result:**
+- **`extra_context.chunk_relations`**: Entities and relationships directly mentioned in that specific chunk
+- **`extra_graph_context`**: Additional entity relationships extracted from the user's query to provide broader context
+
+```json
+{
+  "chunks": [
+    {
+      "chunk_uuid": "a1b2c3d4...",
+      "chunk_content": "John Smith started working on Project Phoenix...",
+      "extra_context": {
+        "chunk_relations": [
+          {
+            "source": {"name": "John Smith", "type": "PERSON"},
+            "target": {"name": "Project Phoenix", "type": "PROJECT"},
+            "relations": [
+              {
+                "canonical_predicate": "works on",
+                "context": "John Smith was assigned as lead engineer for Project Phoenix...",
+                "confidence": 0.92
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "extra_graph_context": [
+    {
+      "source": {"name": "Project Phoenix", "type": "PROJECT"},
+      "target": {"name": "Engineering Department", "type": "ORGANIZATION"},
+      "relations": [
+        {
+          "canonical_predicate": "belongs to",
+          "context": "Project Phoenix is a strategic initiative...",
+          "confidence": 0.88
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Understanding the Response Structure
+
+#### Chunk Relations (`extra_context.chunk_relations`)
+These are entities and relationships **directly found within the returned chunk**. Use these to understand the immediate context of what's being discussed in each result.
+
+**When to use**: When you need to highlight specific entities or relationships mentioned in a particular piece of content.
+
+#### Extra Graph Context (`extra_graph_context`)
+These are additional related entities and relationships **extracted from your query** but not necessarily in the returned chunks. This provides broader context about important entities you asked about.
+
+**When to use**: When you want to give your AI agent more background information about key entities in the user's question, even if those details aren't in the specific chunks returned.
+
+### Practical Applications
+
+#### Enriching AI Responses
+
+Use entity relationships to provide richer, more informed answers:
+
+```javascript
+// Example: Building a context-aware answer
+const searchResults = await cortex.search.retrieve({
+  query: "What is John working on?",
+  tenant_id: "your-tenant",
+  sub_tenant_id: "engineering",
+  max_chunks: 10,
+  graph_context: true
+});
+
+// Combine chunk content with graph context
+let context = searchResults.chunks.map(chunk => {
+  let text = chunk.chunk_content;
+  
+  // Add relationship context in readable format
+  if (chunk.extra_context?.chunk_relations) {
+    const relationTexts = chunk.extra_context.chunk_relations.map(triple => {
+      // Format: "Source Entity → Target Entity"
+      // With detailed context from all relations
+      const relationContexts = triple.relations
+        .map(rel => rel.context)
+        .join(" ");
+      return `${triple.source.name} related to ${triple.target.name} — ${relationContexts}`;
+    });
+    
+    text += `\n\n[Graph Context]\n${relationTexts.join("\n")}`;
+  }
+  
+  return text;
+}).join("\n\n");
+
+// Also include broader context from the query
+if (searchResults.extra_graph_context) {
+  const graphContext = searchResults.extra_graph_context
+    .map(r => r.relations[0].context)
+    .join("\n");
+  context = `Background:\n${graphContext}\n\nRelevant Information:\n${context}`;
+}
+
+// Now pass this enriched context to your LLM
+const answer = await generateAnswer(context, query);
+```
+
+#### Entity-Focused Search
+
+Find information by focusing on specific entities and their connections:
+
+```javascript
+// When searching for "Project Phoenix timeline"
+// Cortex automatically:
+// 1. Identifies "Project Phoenix" as a key entity
+// 2. Finds chunks mentioning it
+// 3. Includes relationships like:
+//    - "Project Phoenix" → "depends on" → "Authentication Service"
+//    - "Engineering Team" → "works on" → "Project Phoenix"
+//    - "Sarah Chen" → "leads" → "Project Phoenix"
+```
+
+#### Building Smart Features
+
+Leverage knowledge graph data to build intelligent UX features:
+
+**Connected Information Panels**
+```javascript
+// When displaying a search result, show related entities
+const relatedEntities = chunk.extra_context?.chunk_relations || [];
+const entitySummary = relatedEntities.map(triple => ({
+  entity: triple.target.name,
+  type: triple.target.type,
+  relationship: triple.relations[0].canonical_predicate
+}));
+// Display: "This document mentions: Sarah Chen (PERSON, leads), 
+//          Authentication Service (PRODUCT, depends on)"
+```
+
+**Smart Entity Navigation**
+```javascript
+// Enable "jump to related content" by entity
+// When user clicks on "Sarah Chen", search for all chunks 
+// containing that entity to show her full context
+const entityQuery = `entity:"${entity.name}"`;
+const relatedContent = await cortex.search.retrieve({
+  query: entityQuery,
+  tenant_id: tenant_id,
+  sub_tenant_id: sub_tenant_id
+});
+```
+
+**Timeline Views**
+```javascript
+// Use temporal_details from relations to build chronologies
+const timelineEvents = chunk.extra_context?.chunk_relations
+  .filter(r => r.relations.some(rel => rel.temporal_details))
+  .map(r => ({
+    when: r.relations[0].temporal_details,
+    what: r.relations[0].context,
+    entities: [r.source.name, r.target.name]
+  }));
+// Example output: "Last week: Sarah Chen started leading Project Phoenix"
+```
+
+**Contextual Auto-Suggestions**
+```javascript
+// As users type, suggest entities from the graph
+// If they type "Sarah", suggest "Sarah Chen (Engineering Manager)"
+// based on entity type and relationships in their graph
+```
+
+## Key Benefits
+
+1. **Deeper Understanding**: Your AI doesn't just match keywords—it understands how concepts, people, and projects relate to each other.
+
+2. **Richer Context**: Every answer is informed by the broader context of relationships, not just isolated facts.
+
+3. **Better Relevance**: Search results include not just matching documents, but related entities that provide additional useful context.
+
+4. **Automatic Maintenance**: The graph updates as you add content, maintaining an always-current view of your information landscape.
+
+5. **Privacy & Isolation**: Each tenant's knowledge graph is completely isolated, ensuring data privacy and security.
+
+## Use Cases
+
+1. **Customer Support**: Understand relationships between error codes, affected systems, and past solutions to provide faster, more accurate support.
+
+2. **Sales Enablement**: Connect prospects with relevant case studies, team members, and product capabilities based on relationship patterns.
+
+3. **Research & Discovery**: Help users explore connections between research papers, authors, methodologies, and findings.
+
+4. **Project Management**: Track relationships between team members, projects, dependencies, and deliverables automatically.
+
+5. **Onboarding**: Help new team members understand organizational structure, project relationships, and key stakeholders.
+
+## Best Practices
+
+### Make the Most of Graph Context
+
+**For search results:**
+- Use `chunk_relations` to highlight key entities mentioned in specific results
+- Display relationship information to help users understand context at a glance
+
+**For AI-generated answers:**
+- Include both `chunk_relations` and `extra_graph_context` in your prompts
+- Format relationship context clearly so your LLM can leverage it effectively
+
+**For UX features:**
+- Create "related entities" sidebars showing connected information
+- Build navigation features that follow relationship links
+- Use entity mentions to create automatic cross-references
+
+### Understanding Graph Quality
+
+The knowledge graph gets smarter as you add more content:
+- **More documents** = More complete relationship networks
+- **Detailed content** = Richer relationship context
+- **Clear writing** = Better entity extraction accuracy
+
+### Privacy Considerations
+
+- Knowledge graphs are **tenant-isolated** by default
+- Each tenant's graph only contains entities from their own content
+- Sub-tenants can have their own scoped graphs for additional organization
+
+## Getting Started
+
+Knowledge graphs work automatically—just start using Cortex's search and retrieval endpoints:
+
+1. **Upload your content** using any [Knowledge Ingestion](/api-reference/endpoint/upload-document) endpoint
+2. **Use Search or Q&A** via [Search](/api-reference/endpoint/search) or [Q&A](/api-reference/endpoint/qna) endpoints
+3. **Access graph context** in the response fields `chunk_relations` and `extra_graph_context`
+4. **Enhance your UI** by displaying entity relationships alongside results
+
+That's it! The knowledge graph is built and maintained automatically behind the scenes.
+
+## Technical Details
+
+<Note>
+**For developers interested in the underlying structure:**
+
+Each relationship in the graph stores multiple "evidences" from different documents, allowing the system to:
+- Track how relationships evolve over time
+- Provide multiple sources for each connection
+- Weight relationships based on frequency and confidence
+- Update relationships as new information arrives
+</Note>
+
+## FAQ
+
+1. **Do I need to enable knowledge graphs?**  
+No, they're automatically built for all content and included in all retrieval responses.
+
+2. **Can I customize entity extraction?**  
+The system uses advanced AI models optimized for accuracy. Custom extraction rules aren't currently exposed, but the system handles most use cases automatically.
+
+3. **How do I see all entities in my graph?**  
+Use the search endpoints with entity names to explore relationships. A dedicated graph visualization interface may be available in the future.
+
+4. **Does this work with AI memories?**  
+Yes! AI memories are also processed through the knowledge graph, helping your AI understand relationships in user-specific context.
+
+5. **What if entity extraction makes mistakes?**  
+The system includes confidence scores and uses multiple evidences to validate relationships. As you add more content, accuracy improves naturally.
+
+6. **How is this different from vector search?**  
+Vector search finds semantically similar content. Knowledge graphs understand explicit relationships. Cortex uses both together for optimal results.

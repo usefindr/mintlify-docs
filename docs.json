@@ -33,6 +33,7 @@
             "group": "Essentials",
             "pages": [
               "essentials/retrievals",
+              "essentials/graph-rag",
               "essentials/multi-step",
               "essentials/answers",
               "essentials/metadata",
