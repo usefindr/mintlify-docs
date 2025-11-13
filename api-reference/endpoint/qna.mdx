@@ -33,6 +33,47 @@ curl --request POST \
 }'
   ```
 
+### SDK Examples
+
+<Tabs>
+  <Tab title="TypeScript">
+    ```ts
+    const answer = await client.search.qna({
+      question: "What is Cortex AI",
+      session_id: "chat_session_1234",
+      tenant_id: "tenant_1234",
+      sub_tenant_id: "sub_tenant_4567",
+      highlight_chunks: false,
+      stream: false,
+      search_alpha: 0.8,
+      recency_bias: 0.2,
+      ai_generation: true,
+      user_name: "John Doe",
+      multi_step_reasoning: true,
+      auto_agent_routing: true
+    });
+    ```
+  </Tab>
+  <Tab title="Python (Sync)">
+    ```python
+    # Async usage is similar, just use async_client and await
+    answer = client.search.qna(
+        question="What is Cortex AI",
+        session_id="chat_session_1234",
+        tenant_id="tenant_1234",
+        sub_tenant_id="sub_tenant_4567",
+        highlight_chunks=False,
+        stream=False,
+        search_alpha=0.8,
+        recency_bias=0.2,
+        ai_generation=True,
+        user_name="John Doe",
+        multi_step_reasoning=True,
+        auto_agent_routing=True
+    )
+    ```
+  </Tab>
+</Tabs>
 
 Ask questions and get AI-generated answers based on your tenant's knowledge base with conversational responses and citations.
 

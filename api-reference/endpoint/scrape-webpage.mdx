@@ -18,6 +18,31 @@ curl --request POST \
   --header 'Content-Type: application/x-www-form-urlencoded'
   ```
 
+### SDK Examples
+
+<Tabs>
+  <Tab title="TypeScript">
+    ```ts
+    const result = await client.upload.scrapeWebpage({
+      web_url: "https://www.usecortex.ai/",
+      tenant_id: "tenant_1234",
+      sub_tenant_id: "sub_tenant_4567",
+      file_id: "CortexDoc1234"
+    });
+    ```
+  </Tab>
+  <Tab title="Python (Sync)">
+    ```python
+    # Async usage is similar, just use async_client and await
+    result = client.upload.scrape_webpage(
+        web_url="https://www.usecortex.ai/",
+        tenant_id="tenant_1234",
+        sub_tenant_id="sub_tenant_4567",
+        file_id="CortexDoc1234"
+    )
+    ```
+  </Tab>
+</Tabs>
 
 Scrape and process webpage content directly from a URL. The webpage will be scraped, processed, chunked, and indexed for search and retrieval.
 

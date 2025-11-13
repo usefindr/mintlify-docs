@@ -19,25 +19,46 @@ curl --request POST \
   --data '{
   "tenant_id": "tenant_1234",
   "embeddings": [
-    [
       0.123413,
       0.655367,
       0.987654,
       0.123456,
       0.789012
-    ],
-    [
-      0.123413,
-      0.655367,
-      0.987654,
-      0.123456,
-      0.789012
-    ]
   ],
   "sub_tenant_id": "sub_tenant_4567",
   "max_chunks": 1
 }'
   ```
+
+### SDK Examples
+
+<Tabs>
+  <Tab title="TypeScript">
+    ```ts
+    const results = await client.embeddings.search({
+      tenant_id: "tenant_1234",
+      sub_tenant_id: "sub_tenant_4567",
+      embeddings: [
+        0.123413, 0.655367, 0.987654, 0.123456, 0.789012
+      ],
+      max_chunks: 10
+    });
+    ```
+  </Tab>
+  <Tab title="Python (Sync)">
+    ```python
+    # Async usage is similar, just use async_client and await
+    results = client.embeddings.search(
+        tenant_id="tenant_1234",
+        sub_tenant_id="sub_tenant_4567",
+        embeddings=[
+            0.123413, 0.655367, 0.987654, 0.123456, 0.789012
+        ],
+        max_chunks=10
+    )
+    ```
+  </Tab>
+</Tabs>
 
 
 Search for similar content using vector embeddings by comparing your input embedding against the vector database to find the most similar content chunks.

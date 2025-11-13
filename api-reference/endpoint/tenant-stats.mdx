@@ -17,6 +17,29 @@ curl --request GET \
   --url 'https://api.usecortex.ai/tenant/stats?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
   --header 'Authorization: Bearer YOUR_API_KEY'
   ```
+
+### SDK Examples
+
+<Tabs>
+  <Tab title="TypeScript">
+    ```ts
+    const stats = await client.tenant.stats({
+      tenant_id: "tenant_1234",
+      sub_tenant_id: "sub_tenant_4567"
+    });
+    ```
+  </Tab>
+  <Tab title="Python (Sync)">
+    ```python
+    # Async usage is similar, just use async_client and await
+    stats = client.tenant.stats(
+        tenant_id="tenant_1234",
+        sub_tenant_id="sub_tenant_4567"
+    )
+    ```
+  </Tab>
+</Tabs>
+
 Retrieve statistics for a specific tenant or sub-tenant to get insights into organizational data including object count, vector dimensions, and tenant information.
 
 

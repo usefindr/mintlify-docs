@@ -21,6 +21,31 @@ curl -X POST "https://api.cortex.com/user_memory/retrieve_user_memory?tenant_id=
   }'
 ```
 
+### SDK Examples
+
+<Tabs>
+  <Tab title="TypeScript">
+    ```ts
+    const memory = await client.userMemory.retrieveUserMemory({
+      tenant_id: "company_123",
+      sub_tenant_id: "engineering_team",
+      query: "authentication preferences",
+      max_count: 5
+    });
+    ```
+  </Tab>
+  <Tab title="Python (Sync)">
+    ```python
+    # Async usage is similar, just use async_client and await
+    memory = client.user_memory.retrieve_user_memory(
+        tenant_id="company_123",
+        sub_tenant_id="engineering_team",
+        query="authentication preferences",
+        max_count=5
+    )
+    ```
+  </Tab>
+</Tabs>
 
 ## Overview
 

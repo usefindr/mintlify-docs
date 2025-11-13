@@ -22,6 +22,31 @@ curl --request POST \
 }'
   ```
 
+### SDK Examples
+
+<Tabs>
+  <Tab title="TypeScript">
+    ```ts
+    const generatedMemory = await client.userMemory.generateUserMemory({
+      tenant_id: "tenant_1234",
+      sub_tenant_id: "sub_tenant_4567",
+      user_id: "user_123",
+      context: "User mentioned they work with Python and prefer REST APIs over GraphQL"
+    });
+    ```
+  </Tab>
+  <Tab title="Python (Sync)">
+    ```python
+    # Async usage is similar, just use async_client and await
+    generated_memory = client.user_memory.generate_user_memory(
+        tenant_id="tenant_1234",
+        sub_tenant_id="sub_tenant_4567",
+        user_id="user_123",
+        context="User mentioned they work with Python and prefer REST APIs over GraphQL"
+    )
+    ```
+  </Tab>
+</Tabs>
 
 ## Overview
 

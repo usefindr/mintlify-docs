@@ -21,6 +21,39 @@ curl --request PATCH \
   --form file=@example-file
   ```
 
+### SDK Examples
+
+<Tabs>
+  <Tab title="TypeScript">
+    ```ts
+    import fs from 'fs';
+    
+    const result = await client.upload.updateDocument({
+      file: fs.readFileSync("updated-file.pdf"),
+      source_id: "CortexDoc1234",
+      tenant_id: "tenant_1234",
+      sub_tenant_id: "sub_tenant_4567",
+      tenant_metadata: {},
+      document_metadata: {}
+    });
+    ```
+  </Tab>
+  <Tab title="Python (Sync)">
+    ```python
+    # Async usage is similar, just use async_client and await
+    with open("updated-file.pdf", 'rb') as file_obj:
+        file_data = ("updated-file.pdf", file_obj)
+        result = client.upload.update_document(
+            file=file_data,
+            source_id="CortexDoc1234",
+            tenant_id="tenant_1234",
+            sub_tenant_id="sub_tenant_4567",
+            tenant_metadata={},
+            document_metadata={}
+        )
+    ```
+  </Tab>
+</Tabs>
 
 Update or create document content, performing an upsert operation where new entries are created for non-existent `source_id` values.
 

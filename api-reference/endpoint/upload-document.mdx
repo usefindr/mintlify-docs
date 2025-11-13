@@ -22,6 +22,39 @@ curl --request POST \
   --form file=@example-file
   ```
 
+### SDK Examples
+
+<Tabs>
+  <Tab title="TypeScript">
+    ```ts
+    import fs from 'fs';
+    
+    const uploadResult = await client.upload.uploadDocument({
+      file: fs.readFileSync("example-file.pdf"),
+      tenant_id: "tenant_1234",
+      sub_tenant_id: "sub_tenant_4567",
+      file_id: "doc_123456",
+      tenant_metadata: {},
+      document_metadata: {}
+    });
+    ```
+  </Tab>
+  <Tab title="Python (Sync)">
+    ```python
+    # Async usage is similar, just use async_client and await
+    with open("example-file.pdf", 'rb') as file_obj:
+        file_data = ("example-file.pdf", file_obj)
+        upload_result = client.upload.upload_document(
+            tenant_id="tenant_1234",
+            sub_tenant_id="sub_tenant_4567",
+            file=file_data,
+            file_id="doc_123456",
+            tenant_metadata={},
+            document_metadata={}
+        )
+    ```
+  </Tab>
+</Tabs>
 
 Upload documents to your tenant's knowledge base for processing, chunking, and indexing to enable search and retrieval.
 

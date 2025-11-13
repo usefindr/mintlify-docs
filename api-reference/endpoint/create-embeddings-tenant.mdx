@@ -18,6 +18,25 @@ curl --location --request POST 'https://api.usecortex.ai/embeddings/create_tenan
   --header 'accept: application/json'
 ```
 
+### SDK Examples
+<Tabs>
+  <Tab title="TypeScript">
+    ```ts
+    const collection = await client.embeddings.createCollection({
+      tenant_id: "tenant_1234",
+    });
+    ```
+  </Tab>
+  <Tab title="Python (Sync)">
+    ```python
+    # Async usage is similar, just use async_client and await
+    collection = client.embeddings.create_collection(
+        tenant_id="tenant_1234",
+    )
+    ```
+  </Tab>
+</Tabs>
+
 Create a tenant dedicated to directly storing and querying embeddings.
 
 > Use this API only if you plan to upload embeddings directly (via `/upload/upload_embeddings`) and query them (via `/embeddings/*`). For standard document, text/markdown, or webpage ingestion, use `/user/create_tenant` instead.

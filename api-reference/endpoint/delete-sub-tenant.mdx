@@ -17,6 +17,27 @@ curl --request DELETE \
   --header 'Authorization: Bearer YOUR_API_KEY'
   ```
 
+### SDK Examples
+
+<Tabs>
+  <Tab title="TypeScript">
+    ```ts
+    const result = await client.tenant.deleteSubTenant({
+      tenant_id: "tenant_1234",
+      sub_tenant_id: "sub_tenant_4567"
+    });
+    ```
+  </Tab>
+  <Tab title="Python (Sync)">
+    ```python
+    # Async usage is similar, just use async_client and await
+    result = client.tenant.delete_sub_tenant(
+        tenant_id="tenant_1234",
+        sub_tenant_id="sub_tenant_4567"
+    )
+    ```
+  </Tab>
+</Tabs>
 
 Delete a specific sub-tenant from a given tenant after validating it's not the primary/default sub-tenant.
 

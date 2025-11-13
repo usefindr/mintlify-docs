@@ -18,6 +18,32 @@ curl --request PATCH \
   --header 'Content-Type: application/x-www-form-urlencoded'
   ```
 
+### SDK Examples
+
+<Tabs>
+  <Tab title="TypeScript">
+    ```ts
+    const result = await client.upload.updateWebpage({
+      web_url: "https://www.usecortex.ai/",
+      source_id: "CortexDoc1234",
+      tenant_id: "tenant_1234",
+      sub_tenant_id: "sub_tenant_4567"
+    });
+    ```
+  </Tab>
+  <Tab title="Python (Sync)">
+    ```python
+    # Async usage is similar, just use async_client and await
+    result = client.upload.update_webpage(
+        web_url="https://www.usecortex.ai/",
+        source_id="CortexDoc1234",
+        tenant_id="tenant_1234",
+        sub_tenant_id="sub_tenant_4567"
+    )
+    ```
+  </Tab>
+</Tabs>
+
 Update or create webpage content, performing an upsert operation where new entries are created for non-existent `source_id` values.
 
 

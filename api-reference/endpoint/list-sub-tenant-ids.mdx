@@ -17,6 +17,25 @@ curl --request GET \
   --header 'Authorization: Bearer YOUR_API_KEY'
   ```
 
+### SDK Examples
+
+<Tabs>
+  <Tab title="TypeScript">
+    ```ts
+    const subTenants = await client.tenant.getSubTenantIds({
+      tenant_id: "tenant_1234"
+    });
+    ```
+  </Tab>
+  <Tab title="Python (Sync)">
+    ```python
+    # Async usage is similar, just use async_client and await
+    sub_tenants = client.tenant.get_sub_tenant_ids(
+        tenant_id="tenant_1234"
+    )
+    ```
+  </Tab>
+</Tabs>
 
 Retrieve all sub-tenant IDs contained within a specific tenant directly from the underlying data store for a comprehensive list of all subdivisions.
 
