@@ -1,0 +1,18 @@
+---
+title: 'Graph Relations By Source Id'
+openapi: 'GET /list/graph_relations_by_id'
+---
+import { TableOfContents } from '/snippets/table-of-contents.jsx'
+import TryIt from '/snippets/try-it.mdx'
+
+<Panel>
+  <TableOfContents />
+</Panel>
+<TryIt />
+### Sample Request
+```bash
+curl --request GET \
+  --url https://api.usecortex.ai/list/graph_relations_by_id?tenant_id=tenant_1234&source_id=source_1234&sub_tenant_id=sub_tenant_4567 \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  ```
