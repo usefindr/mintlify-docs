@@ -10,16 +10,16 @@ import TryIt from '/snippets/try-it.mdx'
   <TableOfContents />
 </Panel>
 <TryIt />
-### Sample Request
+### Examples
 
-```bash
-curl --location --request POST 'https://api.usecortex.ai/embeddings/create_tenant?tenant_id={TENANT_ID}' \
-  --header 'Authorization: Bearer {API_KEY}' \
-  --header 'accept: application/json'
-```
-
-### SDK Examples
 <Tabs>
+  <Tab title="API Request">
+    ```bash
+    curl --location --request POST 'https://api.usecortex.ai/embeddings/create_tenant?tenant_id={TENANT_ID}' \
+      --header 'Authorization: Bearer {API_KEY}' \
+      --header 'accept: application/json'
+    ```
+  </Tab>
   <Tab title="TypeScript">
     ```ts
     const collection = await client.embeddings.createCollection({

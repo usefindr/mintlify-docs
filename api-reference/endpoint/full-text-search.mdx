@@ -10,24 +10,24 @@ import TryIt from '/snippets/try-it.mdx'
   <TableOfContents />
 </Panel>
 <TryIt />
-### Sample Request
-```bash
-curl --request POST \
-  --url https://api.usecortex.ai/search/full-text-search \
-  --header 'Authorization: Bearer <token>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "query": "John Smith Jake",
-  "tenant_id": "tenant_1234",
-  "sub_tenant_id": "sub_tenant_4567",
-  "max_chunks": 25,
-  "operator": "and"
-}'
-  ```
-
-### SDK Examples
+### Examples
 
 <Tabs>
+  <Tab title="API Request">
+    ```bash
+    curl --request POST \
+      --url https://api.usecortex.ai/search/full-text-search \
+      --header 'Authorization: Bearer <token>' \
+      --header 'Content-Type: application/json' \
+      --data '{
+      "query": "John Smith Jake",
+      "tenant_id": "tenant_1234",
+      "sub_tenant_id": "sub_tenant_4567",
+      "max_chunks": 25,
+      "operator": "and"
+    }'
+      ```
+  </Tab>
   <Tab title="TypeScript">
     ```ts
     const results = await client.search.fullTextSearch({

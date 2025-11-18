@@ -10,35 +10,35 @@ import TryIt from '/snippets/try-it.mdx'
   <TableOfContents />
 </Panel>
 <TryIt />
-### Sample Request
-```bash expandable
-curl --request PATCH \
-  --url 'https://api.usecortex.ai/upload/update_embeddings?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
-  --header 'Authorization: Bearer <token>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "embeddings": {
-    "CortexEmbeddings123_0": [
-      0.123413,
-      0.655367,
-      0.987654,
-      0.123456,
-      0.789012
-    ],
-    "CortexEmbeddings123_1": [
-      0.123413,
-      0.655367,
-      0.987654,
-      0.123456,
-      0.789012
-    ]
-  }
-}'
-  ```
-
-### SDK Examples
+### Examples
 
 <Tabs>
+  <Tab title="API Request">
+    ```bash expandable
+    curl --request PATCH \
+      --url 'https://api.usecortex.ai/upload/update_embeddings?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
+      --header 'Authorization: Bearer <token>' \
+      --header 'Content-Type: application/json' \
+      --data '{
+      "embeddings": {
+        "CortexEmbeddings123_0": [
+          0.123413,
+          0.655367,
+          0.987654,
+          0.123456,
+          0.789012
+        ],
+        "CortexEmbeddings123_1": [
+          0.123413,
+          0.655367,
+          0.987654,
+          0.123456,
+          0.789012
+        ]
+      }
+    }'
+      ```
+  </Tab>
   <Tab title="TypeScript">
     ```ts
     const result = await client.upload.updateEmbeddings({

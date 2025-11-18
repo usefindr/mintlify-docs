@@ -11,16 +11,16 @@ import TryIt from '/snippets/try-it.mdx'
 </Panel>
 
 <TryIt />
-### Sample Request
-```bash wrap
-curl --request GET \
-  --url 'https://api.usecortex.ai/tenant/stats?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
-  --header 'Authorization: Bearer YOUR_API_KEY'
-  ```
-
-### SDK Examples
+### Examples
 
 <Tabs>
+  <Tab title="API Request">
+    ```bash wrap
+    curl --request GET \
+      --url 'https://api.usecortex.ai/tenant/stats?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
+      --header 'Authorization: Bearer YOUR_API_KEY'
+      ```
+  </Tab>
   <Tab title="TypeScript">
     ```ts
     const stats = await client.tenant.stats({

@@ -1,8 +1,7 @@
 ---
-title: 'List Sources'
-openapi: 'GET /list/sources'
+title: 'Graph Relations By Source Id'
+openapi: 'GET /list/graph_relations_by_id'
 ---
-
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
 import TryIt from '/snippets/try-it.mdx'
 
@@ -16,14 +15,16 @@ import TryIt from '/snippets/try-it.mdx'
   <Tab title="API Request">
     ```bash
     curl --request GET \
-      --url 'https://api.usecortex.ai/list/sources?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
-      --header 'Authorization: Bearer YOUR_API_KEY'
+      --url https://api.usecortex.ai/list/graph_relations_by_id?tenant_id=tenant_1234&source_id=source_1234&sub_tenant_id=sub_tenant_4567 \
+      --header 'Authorization: Bearer <token>' \
+      --header 'Content-Type: application/json' \
       ```
   </Tab>
   <Tab title="TypeScript">
     ```ts
-    const allSources = await client.sources.getAll({
+    const relations = await client.sources.getGraphRelations({
       tenant_id: "tenant_1234",
+      source_id: "source_1234",
       sub_tenant_id: "sub_tenant_4567"
     });
     ```
@@ -31,15 +32,11 @@ import TryIt from '/snippets/try-it.mdx'
   <Tab title="Python (Sync)">
     ```python
     # Async usage is similar, just use async_client and await
-    all_sources = client.sources.get_all(
+    relations = client.sources.get_graph_relations(
         tenant_id="tenant_1234",
+        source_id="source_1234",
         sub_tenant_id="sub_tenant_4567"
     )
     ```
   </Tab>
 </Tabs>
-
-## Error Responses
-
-All endpoints return consistent error responses following the standard format. For detailed error information, see our [Error Responses](/api-reference/error-responses) documentation.
-

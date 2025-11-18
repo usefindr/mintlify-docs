@@ -10,32 +10,32 @@ import TryIt from '/snippets/try-it.mdx'
   <TableOfContents />
 </Panel>
 <TryIt />
-### Sample Request
-```bash
-curl --request POST \
-  --url https://api.usecortex.ai/search/qna \
-  --header 'Authorization: Bearer <token>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "question": "What is Cortex AI",
-  "session_id": "chat_session_1234",
-  "tenant_id": "tenant_1234",
-  "sub_tenant_id": "sub_tenant_4567",
-  "highlight_chunks": false,
-  "stream": false,
-  "search_alpha": 0.8,
-  "recency_bias": 0.2,
-  "ai_generation": true,
-  "user_name": "John Doe",
-  "user_instructions": "",
-  "multi_step_reasoning": true,
-  "auto_agent_routing": true
-}'
-  ```
-
-### SDK Examples
+### Examples
 
 <Tabs>
+  <Tab title="API Request">
+    ```bash
+    curl --request POST \
+      --url https://api.usecortex.ai/search/qna \
+      --header 'Authorization: Bearer <token>' \
+      --header 'Content-Type: application/json' \
+      --data '{
+      "question": "What is Cortex AI",
+      "session_id": "chat_session_1234",
+      "tenant_id": "tenant_1234",
+      "sub_tenant_id": "sub_tenant_4567",
+      "highlight_chunks": false,
+      "stream": false,
+      "search_alpha": 0.8,
+      "recency_bias": 0.2,
+      "ai_generation": true,
+      "user_name": "John Doe",
+      "user_instructions": "",
+      "multi_step_reasoning": true,
+      "auto_agent_routing": true
+    }'
+      ```
+  </Tab>
   <Tab title="TypeScript">
     ```ts
     const answer = await client.search.qna({

@@ -10,20 +10,20 @@ import TryIt from '/snippets/try-it.mdx'
   <TableOfContents />
 </Panel>
 <TryIt />
-### Sample Request
-```bash
-curl --request DELETE \
-  --url https://api.usecortex.ai/upload/delete_source \
-  --header 'Authorization: Bearer YOUR_API_KEY' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "sub_tenant_id": ""
-}'
-  ```
-
-### SDK Examples
+### Examples
 
 <Tabs>
+  <Tab title="API Request">
+    ```bash
+    curl --request DELETE \
+      --url https://api.usecortex.ai/upload/delete_source \
+      --header 'Authorization: Bearer YOUR_API_KEY' \
+      --header 'Content-Type: application/json' \
+      --data '{
+      "sub_tenant_id": ""
+    }'
+      ```
+  </Tab>
   <Tab title="TypeScript">
     ```ts
     const result = await client.upload.deleteSource({

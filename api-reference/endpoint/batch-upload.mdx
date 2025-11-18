@@ -11,21 +11,21 @@ import TryIt from '/snippets/try-it.mdx'
   <TableOfContents />
 </Panel>
 <TryIt />
-### Sample Request
-```bash
-curl --request POST \
-  --url 'https://api.usecortex.ai/upload/batch_upload?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
-  --header 'Authorization: Bearer YOUR_API_KEY' \
-  --header 'Content-Type: multipart/form-data' \
-  --form files=@example-file \
-  --form 'file_ids=["doc_123"]' \
-  --form 'tenant_metadata={}' \
-  --form 'document_metadata={}'
-  ```
-
-### SDK Examples
+### Examples
 
 <Tabs>
+  <Tab title="API Request">
+    ```bash
+    curl --request POST \
+      --url 'https://api.usecortex.ai/upload/batch_upload?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
+      --header 'Authorization: Bearer YOUR_API_KEY' \
+      --header 'Content-Type: multipart/form-data' \
+      --form files=@example-file \
+      --form 'file_ids=["doc_123"]' \
+      --form 'tenant_metadata={}' \
+      --form 'document_metadata={}'
+      ```
+  </Tab>
   <Tab title="TypeScript">
     ```ts
     import fs from 'fs';

@@ -10,22 +10,22 @@ import TryIt from '/snippets/try-it.mdx'
   <TableOfContents />
 </Panel>
 <TryIt />
-### Sample Request
-```bash
-curl --request POST \
-  --url https://api.usecortex.ai/embeddings/retrieve_by_ids \
-  --header 'Authorization: Bearer <token>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "chunk_ids": [],
-  "tenant_id": "tenant_1234",
-  "sub_tenant_id": "sub_tenant_4567"
-}'
-  ```
-
-### SDK Examples
+### Examples
 
 <Tabs>
+  <Tab title="API Request">
+    ```bash
+    curl --request POST \
+      --url https://api.usecortex.ai/embeddings/retrieve_by_ids \
+      --header 'Authorization: Bearer <token>' \
+      --header 'Content-Type: application/json' \
+      --data '{
+      "chunk_ids": [],
+      "tenant_id": "tenant_1234",
+      "sub_tenant_id": "sub_tenant_4567"
+    }'
+      ```
+  </Tab>
   <Tab title="TypeScript">
     ```ts
     const embeddings = await client.embeddings.getByChunkIds({

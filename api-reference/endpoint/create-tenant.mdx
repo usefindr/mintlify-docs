@@ -13,41 +13,41 @@ import TryIt from '/snippets/try-it.mdx'
 Create a new tenant. If you pass `tenant_id` as a query parameter, that ID will be used. If not provided, the service generates a new `tenant_id` and returns it.
 
 <TryIt />
-### Sample Request:
-```bash expandable
-curl --request POST \
-  --url 'https://api.usecortex.ai/user/create_tenant?tenant_id=tenant_1234' \
-  --header 'Authorization: Bearer <token>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "tenant_metadata_schema": [
-    {
-      "key": "department",
-      "type": "string",
-      "searchable": true,
-      "filterable": true
-    },
-    {
-      "key": "compliance_framework",
-      "type": "string",
-      "searchable": true,
-      "filterable": false
-    },
-    {
-      "key": "data_classification",
-      "type": "string",
-      "searchable": false,
-      "filterable": true
-    }
-  ]
-}'
-```
-
-### SDK Examples
+### Examples
 
 <Tabs>
+  <Tab title="API Request">
+    ```bash expandable
+    curl --request POST \
+      --url 'https://api.usecortex.ai/user/create_tenant?tenant_id=tenant_1234' \
+      --header 'Authorization: Bearer <token>' \
+      --header 'Content-Type: application/json' \
+      --data '{
+      "tenant_metadata_schema": [
+        {
+          "key": "department",
+          "type": "string",
+          "searchable": true,
+          "filterable": true
+        },
+        {
+          "key": "compliance_framework",
+          "type": "string",
+          "searchable": true,
+          "filterable": false
+        },
+        {
+          "key": "data_classification",
+          "type": "string",
+          "searchable": false,
+          "filterable": true
+        }
+      ]
+    }'
+    ```
+  </Tab>
   <Tab title="TypeScript">
-    ```ts
+    ```ts expandable
     const tenantResponse = await client.user.createTenant({
       tenant_id: "tenant_1234",
       tenant_metadata_schema: [
@@ -74,7 +74,7 @@ curl --request POST \
     ```
   </Tab>
   <Tab title="Python (Sync)">
-    ```python
+    ```python expandable
     # Async usage is similar, just use async_client and await
     tenant_response = client.user.create_tenant(
         tenant_id="tenant_1234",

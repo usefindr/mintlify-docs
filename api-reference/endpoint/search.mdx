@@ -10,25 +10,25 @@ import TryIt from '/snippets/try-it.mdx'
   <TableOfContents />
 </Panel>
 <TryIt />
-### Sample Request
-```bash
-curl --request POST \
-  --url https://api.usecortex.ai/search/retrieve \
-  --header 'Authorization: Bearer <token>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "query": "Which mode does user prefer",
-  "tenant_id": "tenant_1234",
-  "sub_tenant_id": "sub_tenant_4567",
-  "alpha": 0.8,
-  "recency_bias": 0,
-  "personalise_search": true
-}'
-  ```
-
-### SDK Examples
+### Examples
 
 <Tabs>
+  <Tab title="API Request">
+    ```bash
+    curl --request POST \
+      --url https://api.usecortex.ai/search/retrieve \
+      --header 'Authorization: Bearer <token>' \
+      --header 'Content-Type: application/json' \
+      --data '{
+      "query": "Which mode does user prefer",
+      "tenant_id": "tenant_1234",
+      "sub_tenant_id": "sub_tenant_4567",
+      "alpha": 0.8,
+      "recency_bias": 0,
+      "personalise_search": true
+    }'
+      ```
+  </Tab>
   <Tab title="TypeScript">
     ```ts
     const results = await client.search.retrieve({

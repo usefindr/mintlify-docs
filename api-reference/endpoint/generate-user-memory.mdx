@@ -10,21 +10,21 @@ import TryIt from '/snippets/try-it.mdx'
   <TableOfContents />
 </Panel>
 <TryIt />
-### Sample Request
-```bash
-curl --request POST \
-  --url 'https://api.usecortex.ai/user_memory/generate_user_memory?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
-  --header 'Authorization: Bearer YOUR_API_KEY' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "user_message": "<string>",
-  "user_name": "<string>"
-}'
-  ```
-
-### SDK Examples
+### Examples
 
 <Tabs>
+  <Tab title="API Request">
+    ```bash
+    curl --request POST \
+      --url 'https://api.usecortex.ai/user_memory/generate_user_memory?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
+      --header 'Authorization: Bearer YOUR_API_KEY' \
+      --header 'Content-Type: application/json' \
+      --data '{
+      "user_message": "<string>",
+      "user_name": "<string>"
+    }'
+      ```
+  </Tab>
   <Tab title="TypeScript">
     ```ts
     const generatedMemory = await client.userMemory.generateUserMemory({

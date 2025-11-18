@@ -10,16 +10,16 @@ import TryIt from '/snippets/try-it.mdx'
   <TableOfContents />
 </Panel>
 <TryIt />
-### Sample Request
-```bash
-curl --request GET \
-  --url 'https://api.usecortex.ai/tenant/sub_tenant_ids?tenant_id=tenant_1234' \
-  --header 'Authorization: Bearer YOUR_API_KEY'
-  ```
-
-### SDK Examples
+### Examples
 
 <Tabs>
+  <Tab title="API Request">
+    ```bash
+    curl --request GET \
+      --url 'https://api.usecortex.ai/tenant/sub_tenant_ids?tenant_id=tenant_1234' \
+      --header 'Authorization: Bearer YOUR_API_KEY'
+      ```
+  </Tab>
   <Tab title="TypeScript">
     ```ts
     const subTenants = await client.tenant.getSubTenantIds({
