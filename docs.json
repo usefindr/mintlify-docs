@@ -105,7 +105,8 @@
               "api-reference/endpoint/list-sources",
               "api-reference/endpoint/list-sources-by-id",
               "api-reference/endpoint/fetch-content",
-              "api-reference/endpoint/delete-source"
+              "api-reference/endpoint/delete-source",
+              "api-reference/endpoint/graph-relations"
             ]
           },
           {
@@ -125,7 +126,6 @@
               "api-reference/endpoint/list-user-memories",
               "api-reference/endpoint/retrieve-user-memory",
               "api-reference/endpoint/add-user-memory",
-              "api-reference/endpoint/generate-user-memory",
               "api-reference/endpoint/delete-user-memory"
             ]
           }
