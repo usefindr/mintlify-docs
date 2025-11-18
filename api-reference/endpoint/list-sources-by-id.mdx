@@ -10,19 +10,42 @@ import TryIt from '/snippets/try-it.mdx'
   <TableOfContents />
 </Panel>
 <TryIt />
-### Sample Request
-```bash
-curl --request POST \
-  --url https://api.usecortex.ai/list/sources_by_id \
-  --header 'Authorization: Bearer <token>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "tenant_id": "tenant_1234",
-  "source_ids": [],
-  "sub_tenant_id": "sub_tenant_4567"
-}'
-  ```
+### Examples
 
+<Tabs>
+  <Tab title="API Request">
+    ```bash
+    curl --request POST \
+      --url https://api.usecortex.ai/list/sources_by_id \
+      --header 'Authorization: Bearer <token>' \
+      --header 'Content-Type: application/json' \
+      --data '{
+      "tenant_id": "tenant_1234",
+      "source_ids": [],
+      "sub_tenant_id": "sub_tenant_4567"
+    }'
+      ```
+  </Tab>
+  <Tab title="TypeScript">
+    ```ts
+    const specificSources = await client.sources.getByIds({
+      tenant_id: "tenant_1234",
+      sub_tenant_id: "sub_tenant_4567",
+      source_ids: ["doc_123", "doc_456"]
+    });
+    ```
+  </Tab>
+  <Tab title="Python (Sync)">
+    ```python
+    # Async usage is similar, just use async_client and await
+    specific_sources = client.sources.get_by_ids(
+        tenant_id="tenant_1234",
+        sub_tenant_id="sub_tenant_4567",
+        source_ids=["doc_123", "doc_456"]
+    )
+    ```
+  </Tab>
+</Tabs>
 
 ## Overview
 

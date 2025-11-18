@@ -10,32 +10,61 @@ import TryIt from '/snippets/try-it.mdx'
   <TableOfContents />
 </Panel>
 <TryIt />
-### Sample Request
-```bash expandable
-curl --request PATCH \
-  --url 'https://api.usecortex.ai/upload/update_embeddings?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
-  --header 'Authorization: Bearer <token>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "embeddings": {
-    "CortexEmbeddings123_0": [
-      0.123413,
-      0.655367,
-      0.987654,
-      0.123456,
-      0.789012
-    ],
-    "CortexEmbeddings123_1": [
-      0.123413,
-      0.655367,
-      0.987654,
-      0.123456,
-      0.789012
-    ]
-  }
-}'
-  ```
+### Examples
 
+<Tabs>
+  <Tab title="API Request">
+    ```bash expandable
+    curl --request PATCH \
+      --url 'https://api.usecortex.ai/upload/update_embeddings?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
+      --header 'Authorization: Bearer <token>' \
+      --header 'Content-Type: application/json' \
+      --data '{
+      "embeddings": {
+        "CortexEmbeddings123_0": [
+          0.123413,
+          0.655367,
+          0.987654,
+          0.123456,
+          0.789012
+        ],
+        "CortexEmbeddings123_1": [
+          0.123413,
+          0.655367,
+          0.987654,
+          0.123456,
+          0.789012
+        ]
+      }
+    }'
+      ```
+  </Tab>
+  <Tab title="TypeScript">
+    ```ts
+    const result = await client.upload.updateEmbeddings({
+      tenant_id: "tenant_1234",
+      sub_tenant_id: "sub_tenant_4567",
+      embeddings: {
+        "CortexEmbeddings123_0": [0.123413, 0.655367, 0.987654, 0.123456, 0.789012],
+        "CortexEmbeddings123_1": [0.123413, 0.655367, 0.987654, 0.123456, 0.789012]
+      }
+    });
+    ```
+  </Tab>
+  <Tab title="Python (Sync)">
+    ```python
+    # Async usage is similar, just use async_client and await
+    result = client.upload.update_embeddings(
+        tenant_id="tenant_1234",
+        sub_tenant_id="sub_tenant_4567",
+        embeddings={
+            "CortexEmbeddings123_0": [0.123413, 0.655367, 0.987654, 0.123456, 0.789012],
+            "CortexEmbeddings123_1": [0.123413, 0.655367, 0.987654, 0.123456, 0.789012]
+        }
+    )
+    ```
+  </Tab>
+</Tabs>
 
 ### Requirements
 - **Maximum dimensions**: 2000 rows × 3024 columns; i.e. 2000 chunks with a maximum dimension of 3024

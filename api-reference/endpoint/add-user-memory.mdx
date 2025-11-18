@@ -10,17 +10,40 @@ import TryIt from '/snippets/try-it.mdx'
   <TableOfContents />
 </Panel>
 <TryIt />
-### Sample Request
-```bash
-curl --request POST \
-  --url 'https://api.usecortex.ai/user_memory/add_user_memory?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
-  --header 'Authorization: Bearer <token>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "user_memory": "I prefer detailed technical explanations and works in the Pacific timezone"
-}'
-  ```
-
+### Examples
+// TODO: change
+<Tabs>
+  <Tab title="API Request">
+    ```bash
+    curl --request POST \
+      --url 'https://api.usecortex.ai/user_memory/add_user_memory?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
+      --header 'Authorization: Bearer <token>' \
+      --header 'Content-Type: application/json' \
+      --data '{
+      "user_memory": "I prefer detailed technical explanations and works in the Pacific timezone"
+    }'
+      ```
+  </Tab>
+  <Tab title="TypeScript">
+    ```ts
+    const result = await client.userMemory.add({
+      tenant_id: "tenant_1234",
+      sub_tenant_id: "sub_tenant_4567",
+      user_memory: "I prefer detailed technical explanations and works in the Pacific timezone"
+    });
+    ```
+  </Tab>
+  <Tab title="Python (Sync)">
+    ```python
+    # Async usage is similar, just use async_client and await
+    result = client.user_memory.add(
+        tenant_id="tenant_1234",
+        sub_tenant_id="sub_tenant_4567",
+        user_memory="I prefer detailed technical explanations and works in the Pacific timezone"
+    )
+    ```
+  </Tab>
+</Tabs>
 
 ## Overview
 

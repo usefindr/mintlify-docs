@@ -9,10 +9,34 @@ import TryIt from '/snippets/try-it.mdx'
   <TableOfContents />
 </Panel>
 <TryIt />
-### Sample Request
-```bash
-curl --request GET \
-  --url https://api.usecortex.ai/list/graph_relations_by_id?tenant_id=tenant_1234&source_id=source_1234&sub_tenant_id=sub_tenant_4567 \
-  --header 'Authorization: Bearer <token>' \
-  --header 'Content-Type: application/json' \
-  ```
+### Examples
+
+<Tabs>
+  <Tab title="API Request">
+    ```bash
+    curl --request GET \
+      --url https://api.usecortex.ai/list/graph_relations_by_id?tenant_id=tenant_1234&source_id=source_1234&sub_tenant_id=sub_tenant_4567 \
+      --header 'Authorization: Bearer <token>' \
+      --header 'Content-Type: application/json' \
+      ```
+  </Tab>
+  <Tab title="TypeScript">
+    ```ts
+    const relations = await client.sources.getGraphRelations({
+      tenant_id: "tenant_1234",
+      source_id: "source_1234",
+      sub_tenant_id: "sub_tenant_4567"
+    });
+    ```
+  </Tab>
+  <Tab title="Python (Sync)">
+    ```python
+    # Async usage is similar, just use async_client and await
+    relations = client.sources.get_graph_relations(
+        tenant_id="tenant_1234",
+        source_id="source_1234",
+        sub_tenant_id="sub_tenant_4567"
+    )
+    ```
+  </Tab>
+</Tabs>

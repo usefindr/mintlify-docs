@@ -10,20 +10,51 @@ import TryIt from '/snippets/try-it.mdx'
   <TableOfContents />
 </Panel>
 <TryIt />
-### Sample Request
-```bash
-curl --request POST \
-  --url 'https://api.usecortex.ai/upload/upload_text?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
-  --header 'Authorization: Bearer YOUR_API_KEY' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "content": "<string>",
-  "file_id": "text_doc_123456",
-  "tenant_metadata": {},
-  "document_metadata": {}
-}'
-  ```
+### Examples
 
+<Tabs>
+  <Tab title="API Request">
+    ```bash
+    curl --request POST \
+      --url 'https://api.usecortex.ai/upload/upload_text?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
+      --header 'Authorization: Bearer YOUR_API_KEY' \
+      --header 'Content-Type: application/json' \
+      --data '{
+      "content": "<string>",
+      "file_id": "text_doc_123456",
+      "tenant_metadata": {},
+      "document_metadata": {}
+    }'
+    ```
+  </Tab>
+  <Tab title="TypeScript">
+    ```ts
+    const result = await client.upload.uploadText({
+      tenant_id: "tenant_1234",
+      sub_tenant_id: "sub_tenant_4567",
+      body: {
+        content: "Your text content here",
+        file_id: "text_doc_123456",
+        tenant_metadata: {},
+        document_metadata: {}
+      }
+    });
+    ```
+  </Tab>
+  <Tab title="Python (Sync)">
+    ```python
+    # Async usage is similar, just use async_client and await
+    result = client.upload.upload_text(
+        tenant_id="tenant_1234",
+        sub_tenant_id="sub_tenant_4567",
+        content="Your text content here",
+        file_id="text_doc_123456",
+        tenant_metadata={},
+        document_metadata={}
+    )
+    ```
+  </Tab>
+</Tabs>
 
 Upload text content directly to your tenant's knowledge base. The text will be processed, chunked, and indexed for search and retrieval.
 

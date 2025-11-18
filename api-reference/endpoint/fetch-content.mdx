@@ -10,21 +10,48 @@ import TryIt from '/snippets/try-it.mdx'
   <TableOfContents />
 </Panel>
 <TryIt />
-### Sample Request
-```bash
-curl --request POST \
-  --url https://api.usecortex.ai/fetch/fetch_content \
-  --header 'Authorization: Bearer <token>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "file_id": "CortexDoc1234",
-  "file_type": "<file_type>",
-  "tenant_id": "tenant_1234",
-  "return_content": true,
-  "sub_tenant_id": "sub_tenant_4567"
-}'
-  ```
+### Examples
 
+<Tabs>
+  <Tab title="API Request">
+    ```bash
+    curl --request POST \
+      --url https://api.usecortex.ai/fetch/fetch_content \
+      --header 'Authorization: Bearer <token>' \
+      --header 'Content-Type: application/json' \
+      --data '{
+      "file_id": "CortexDoc1234",
+      "file_type": "<file_type>",
+      "tenant_id": "tenant_1234",
+      "return_content": true,
+      "sub_tenant_id": "sub_tenant_4567"
+    }'
+      ```
+  </Tab>
+  <Tab title="TypeScript">
+    ```ts
+    const content = await client.fetch.fetchContent({
+      file_id: "CortexDoc1234",
+      file_type: "pdf",
+      tenant_id: "tenant_1234",
+      return_content: true,
+      sub_tenant_id: "sub_tenant_4567"
+    });
+    ```
+  </Tab>
+  <Tab title="Python (Sync)">
+    ```python
+    # Async usage is similar, just use async_client and await
+    content = client.fetch.fetch_content(
+        file_id="CortexDoc1234",
+        file_type="pdf",
+        tenant_id="tenant_1234",
+        return_content=True,
+        sub_tenant_id="sub_tenant_4567"
+    )
+    ```
+  </Tab>
+</Tabs>
 
 ### Functionality
 - Extracts user credentials and organization details from the API key

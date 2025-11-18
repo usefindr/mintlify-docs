@@ -10,19 +10,42 @@ import TryIt from '/snippets/try-it.mdx'
   <TableOfContents />
 </Panel>
 <TryIt />
-### Sample Request
-```bash
-curl --request POST \
-  --url https://api.usecortex.ai/embeddings/retrieve_by_ids \
-  --header 'Authorization: Bearer <token>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "chunk_ids": [],
-  "tenant_id": "tenant_1234",
-  "sub_tenant_id": "sub_tenant_4567"
-}'
-  ```
+### Examples
 
+<Tabs>
+  <Tab title="API Request">
+    ```bash
+    curl --request POST \
+      --url https://api.usecortex.ai/embeddings/retrieve_by_ids \
+      --header 'Authorization: Bearer <token>' \
+      --header 'Content-Type: application/json' \
+      --data '{
+      "chunk_ids": [],
+      "tenant_id": "tenant_1234",
+      "sub_tenant_id": "sub_tenant_4567"
+    }'
+      ```
+  </Tab>
+  <Tab title="TypeScript">
+    ```ts
+    const embeddings = await client.embeddings.getByChunkIds({
+      tenant_id: "tenant_1234",
+      sub_tenant_id: "sub_tenant_4567",
+      chunk_ids: ["chunk_001", "chunk_002", "chunk_003"]
+    });
+    ```
+  </Tab>
+  <Tab title="Python (Sync)">
+    ```python
+    # Async usage is similar, just use async_client and await
+    embeddings = client.embeddings.get_by_chunk_ids(
+        tenant_id="tenant_1234",
+        sub_tenant_id="sub_tenant_4567",
+        chunk_ids=["chunk_001", "chunk_002", "chunk_003"]
+    )
+    ```
+  </Tab>
+</Tabs>
 
 Retrieve embedding vectors for specific chunk IDs that you previously obtained from uploading embeddings or searching.
 

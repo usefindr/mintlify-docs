@@ -10,22 +10,51 @@ import TryIt from '/snippets/try-it.mdx'
   <TableOfContents />
 </Panel>
 <TryIt />
-### Sample Request
-```bash
-curl --request POST \
-  --url https://api.usecortex.ai/search/retrieve \
-  --header 'Authorization: Bearer <token>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "query": "Which mode does user prefer",
-  "tenant_id": "tenant_1234",
-  "sub_tenant_id": "sub_tenant_4567",
-  "alpha": 0.8,
-  "recency_bias": 0,
-  "personalise_search": true
-}'
-  ```
+### Examples
 
+<Tabs>
+  <Tab title="API Request">
+    ```bash
+    curl --request POST \
+      --url https://api.usecortex.ai/search/retrieve \
+      --header 'Authorization: Bearer <token>' \
+      --header 'Content-Type: application/json' \
+      --data '{
+      "query": "Which mode does user prefer",
+      "tenant_id": "tenant_1234",
+      "sub_tenant_id": "sub_tenant_4567",
+      "alpha": 0.8,
+      "recency_bias": 0,
+      "personalise_search": true
+    }'
+      ```
+  </Tab>
+  <Tab title="TypeScript">
+    ```ts
+    const results = await client.search.retrieve({
+      query: "Which mode does user prefer",
+      tenant_id: "tenant_1234",
+      sub_tenant_id: "sub_tenant_4567",
+      alpha: 0.8,
+      recency_bias: 0,
+      personalise_search: true
+    });
+    ```
+  </Tab>
+  <Tab title="Python (Sync)">
+    ```python
+    # Async usage is similar, just use async_client and await
+    results = client.search.retrieve(
+        query="Which mode does user prefer",
+        tenant_id="tenant_1234",
+        sub_tenant_id="sub_tenant_4567",
+        alpha=0.8,
+        recency_bias=0,
+        personalise_search=True
+    )
+    ```
+  </Tab>
+</Tabs>
 
 Search across your tenant's knowledge base using both semantic and keyword matching for comprehensive results.
 
