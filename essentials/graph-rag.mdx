@@ -11,6 +11,8 @@ A knowledge graph is a network of entities (people, organizations, projects, pro
 
 **Think of it this way**: Semantic search finds documents that *mention* similar concepts. A knowledge graph understands how those concepts *actually relate*. When you search for "Project Phoenix budget", semantic search finds documents containing those semantics. The knowledge graph knows that Sarah Chen leads Project Phoenix, which depends on the Authentication Service, was approved by the Engineering VP, and has a Q2 deadline—providing rich relational context that flat search simply cannot capture.
 
+![Knowledge Graph](/images/graph.png)
+
 ## How It Works
 
 ### Automatic Entity Extraction
@@ -52,6 +54,8 @@ Cortex automatically connects entities across different sources when they share 
 </Tip>
 
 **Closing the Semantic Gap**: Traditional vector search understands meaning but not structure. It can find similar content but cannot tell you that Document A's "critical bug" is the same issue mentioned in Document B's support ticket, or that three different teams are working on related aspects of the same project. Knowledge graphs bridge this gap by understanding actual relationships, not just semantic similarity—enabling your AI to reason about connections that pure semantic search would miss.
+
+![Closing the Semantic Gap](/images/example_graph.png)
 
 ### Entity Types
 
