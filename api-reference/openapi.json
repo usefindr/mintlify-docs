@@ -5611,7 +5611,58 @@
             "type": "array",
             "title": "Entity Paths",
             "description": "Multi-hop paths connecting entities from the query, reranked by relevance. Each path is a chain of connected triplets.",
-            "example": []
+            "example": [
+              {
+                "combined_context": "Sarah Chen is the founder and CEO of Acme Corp. | Marcus Johnson serves as CTO at Acme Corp. | Marcus reports directly to Sarah Chen.",
+                "triplets": [
+                  {
+                    "source": {
+                      "name": "Sarah Chen",
+                      "type": "PERSON",
+                      "namespace": "employees"
+                    },
+                    "target": {
+                      "name": "Acme Corp",
+                      "type": "ORGANIZATION"
+                    },
+                    "relation": {
+                      "canonical_predicate": "FOUNDER_OF",
+                      "context": "Sarah Chen founded Acme Corp in 2019."
+                    }
+                  },
+                  {
+                    "source": {
+                      "name": "Marcus Johnson",
+                      "type": "PERSON",
+                      "namespace": "employees"
+                    },
+                    "target": {
+                      "name": "Acme Corp",
+                      "type": "ORGANIZATION"
+                    },
+                    "relation": {
+                      "canonical_predicate": "WORKS_AT",
+                      "context": "Marcus Johnson is the CTO at Acme Corp."
+                    }
+                  },
+                  {
+                    "source": {
+                      "name": "Marcus Johnson",
+                      "type": "PERSON"
+                    },
+                    "target": {
+                      "name": "Sarah Chen",
+                      "type": "PERSON"
+                    },
+                    "relation": {
+                      "canonical_predicate": "REPORTS_TO",
+                      "context": "Marcus reports directly to Sarah."
+                    }
+                  }
+                ],
+                "relevancy_score": 0.78
+              }
+            ]
           },
           "chunk_triplets": {
             "additionalProperties": {
@@ -5619,7 +5670,54 @@
             },
             "type": "object",
             "title": "Chunk Triplets",
-            "description": "Mapping of group_id to scored triplet. Use chunk.graph_triplet_ids to find which groups belong to a chunk."
+            "description": "Mapping of group_id to scored triplet. Use chunk.graph_triplet_ids to find which groups belong to a chunk.",
+            "example": {
+              "g_0": {
+                "source": {
+                  "name": "Sarah Chen",
+                  "type": "PERSON"
+                },
+                "target": {
+                  "name": "Acme Corp",
+                  "type": "ORGANIZATION"
+                },
+                "relation": {
+                  "canonical_predicate": "FOUNDER_OF",
+                  "context": "Sarah Chen founded Acme Corp in 2019 after leaving TechGiant."
+                },
+                "relevancy_score": 0.85
+              },
+              "g_1": {
+                "source": {
+                  "name": "Marcus Johnson",
+                  "type": "PERSON"
+                },
+                "target": {
+                  "name": "Acme Corp",
+                  "type": "ORGANIZATION"
+                },
+                "relation": {
+                  "canonical_predicate": "WORKS_AT",
+                  "context": "Marcus Johnson is the CTO at Acme Corp."
+                },
+                "relevancy_score": 0.72
+              },
+              "g_2": {
+                "source": {
+                  "name": "Marcus Johnson",
+                  "type": "PERSON"
+                },
+                "target": {
+                  "name": "Sarah Chen",
+                  "type": "PERSON"
+                },
+                "relation": {
+                  "canonical_predicate": "REPORTS_TO",
+                  "context": "Marcus reports directly to Sarah as CTO."
+                },
+                "relevancy_score": 0.68
+              }
+            }
           }
         },
         "type": "object",
@@ -7043,7 +7141,27 @@
             "type": "array",
             "title": "Chunks",
             "description": "Retrieved content chunks",
-            "example": []
+            "example": [
+              {
+                "chunk_uuid": "doc_a1b2c3d4e5f6...",
+                "chunk_content": "Sarah Chen founded Acme Corp in 2019 after leaving her role at TechGiant.",
+                "source_title": "company-history.md",
+                "relevancy_score": 0.85,
+                "graph_triplet_ids": [
+                  "g_0"
+                ]
+              },
+              {
+                "chunk_uuid": "doc_x7y8z9a0b1c2...",
+                "chunk_content": "Marcus Johnson joined as CTO and leads the Platform team, reporting directly to Sarah.",
+                "source_title": "org-structure.md",
+                "relevancy_score": 0.72,
+                "graph_triplet_ids": [
+                  "g_1",
+                  "g_2"
+                ]
+              }
+            ]
           },
           "graph_relations": {
             "anyOf": [
@@ -7147,7 +7265,52 @@
             "type": "array",
             "title": "Triplets",
             "description": "Ordered list of triplets forming the path chain",
-            "example": []
+            "example": [
+              {
+                "source": {
+                  "name": "Sarah Chen",
+                  "type": "PERSON",
+                  "namespace": "employees"
+                },
+                "target": {
+                  "name": "Acme Corp",
+                  "type": "ORGANIZATION"
+                },
+                "relation": {
+                  "canonical_predicate": "FOUNDER_OF",
+                  "context": "Sarah Chen founded Acme Corp in 2019."
+                }
+              },
+              {
+                "source": {
+                  "name": "Marcus Johnson",
+                  "type": "PERSON",
+                  "namespace": "employees"
+                },
+                "target": {
+                  "name": "Acme Corp",
+                  "type": "ORGANIZATION"
+                },
+                "relation": {
+                  "canonical_predicate": "WORKS_AT",
+                  "context": "Marcus Johnson is the CTO at Acme Corp."
+                }
+              },
+              {
+                "source": {
+                  "name": "Marcus Johnson",
+                  "type": "PERSON"
+                },
+                "target": {
+                  "name": "Sarah Chen",
+                  "type": "PERSON"
+                },
+                "relation": {
+                  "canonical_predicate": "REPORTS_TO",
+                  "context": "Marcus reports directly to Sarah."
+                }
+              }
+            ]
           },
           "relevancy_score": {
             "type": "number",
