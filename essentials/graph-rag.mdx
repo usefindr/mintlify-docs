@@ -75,7 +75,6 @@ For every relationship between entities, Cortex captures:
 - **Rich context**: Detailed information about how and why entities are related
 - **Source references**: Which documents contain evidence of this relationship
 - **Temporal details**: Time-based information like "last week" or "in 2023"
-- **Confidence scores**: How certain the system is about each relationship
 
 ## Automatic Availability
 
@@ -92,173 +91,202 @@ Every time you use Cortex's search or question-answering endpoints, the knowledg
 When you search for information, Cortex automatically enhances results with graph context:
 
 **What you get in each search result:**
-- **`extra_context.chunk_relations`**: Entities and relationships directly mentioned in that specific chunk
-- **`extra_graph_context`**: Additional entity relationships extracted from the user's query to provide broader context
+- **`chunks[].graph_triplet_ids`**: IDs linking to specific triplets in `graph_relations.chunk_triplets`
+- **`graph_relations.entity_paths`**: Multi-hop paths connecting entities from your query—often provides complete context for complex questions
+- **`graph_relations.chunk_triplets`**: Individual triplets mapped by ID, referenced from each chunk
 
-```json
+```json expandable
 {
   "chunks": [
     {
-      "chunk_uuid": "a1b2c3d4...",
-      "chunk_content": "John Smith started working on Project Phoenix...",
-      "extra_context": {
-        "chunk_relations": [
-          {
-            "source": {"name": "John Smith", "type": "PERSON"},
-            "target": {"name": "Project Phoenix", "type": "PROJECT"},
-            "relations": [
-              {
-                "canonical_predicate": "works on",
-                "context": "John Smith was assigned as lead engineer for Project Phoenix...",
-                "confidence": 0.92
-              }
-            ]
-          }
-        ]
-      }
+      "chunk_uuid": "doc_a1b2c3d4e5f6...",
+      "chunk_content": "Sarah Chen founded Acme Corp in 2019 after leaving her role at TechGiant.",
+      "source_title": "company-history.md",
+      "relevancy_score": 0.85,
+      "graph_triplet_ids": ["g_0"]
+    },
+    {
+      "chunk_uuid": "doc_x7y8z9a0b1c2...",
+      "chunk_content": "Marcus Johnson joined as CTO and leads the Platform team, reporting directly to Sarah.",
+      "source_title": "org-structure.md",
+      "relevancy_score": 0.72,
+      "graph_triplet_ids": ["g_1", "g_2"]
     }
   ],
-  "extra_graph_context": [
-    {
-      "source": {"name": "Project Phoenix", "type": "PROJECT"},
-      "target": {"name": "Engineering Department", "type": "ORGANIZATION"},
-      "relations": [
-        {
-          "canonical_predicate": "belongs to",
-          "context": "Project Phoenix is a strategic initiative...",
-          "confidence": 0.88
-        }
-      ]
+  "graph_relations": {
+    "entity_paths": [
+      {
+        "combined_context": "Sarah Chen is the founder and CEO of Acme Corp. | Marcus Johnson serves as CTO at Acme Corp. | Marcus reports directly to Sarah Chen.",
+        "triplets": [
+          {
+            "source": {"name": "Sarah Chen", "type": "PERSON", "namespace": "employees"},
+            "target": {"name": "Acme Corp", "type": "ORGANIZATION"},
+            "relation": {"canonical_predicate": "FOUNDER_OF", "context": "Sarah Chen founded Acme Corp in 2019."}
+          },
+          {
+            "source": {"name": "Marcus Johnson", "type": "PERSON", "namespace": "employees"},
+            "target": {"name": "Acme Corp", "type": "ORGANIZATION"},
+            "relation": {"canonical_predicate": "WORKS_AT", "context": "Marcus Johnson is the CTO at Acme Corp."}
+          },
+          {
+            "source": {"name": "Marcus Johnson", "type": "PERSON"},
+            "target": {"name": "Sarah Chen", "type": "PERSON"},
+            "relation": {"canonical_predicate": "REPORTS_TO", "context": "Marcus reports directly to Sarah."}
+          }
+        ],
+        "relevancy_score": 0.78
+      }
+    ],
+    "chunk_triplets": {
+      "g_0": {
+        "source": {"name": "Sarah Chen", "type": "PERSON"},
+        "target": {"name": "Acme Corp", "type": "ORGANIZATION"},
+        "relation": {"canonical_predicate": "FOUNDER_OF", "context": "Sarah Chen founded Acme Corp in 2019 after leaving TechGiant."},
+        "relevancy_score": 0.85
+      },
+      "g_1": {
+        "source": {"name": "Marcus Johnson", "type": "PERSON"},
+        "target": {"name": "Acme Corp", "type": "ORGANIZATION"},
+        "relation": {"canonical_predicate": "WORKS_AT", "context": "Marcus Johnson is the CTO at Acme Corp."},
+        "relevancy_score": 0.72
+      },
+      "g_2": {
+        "source": {"name": "Marcus Johnson", "type": "PERSON"},
+        "target": {"name": "Sarah Chen", "type": "PERSON"},
+        "relation": {"canonical_predicate": "REPORTS_TO", "context": "Marcus reports directly to Sarah as CTO."},
+        "relevancy_score": 0.68
+      }
     }
-  ]
+  }
 }
 ```
 
 ### Understanding the Response Structure
 
-#### Chunk Relations (`extra_context.chunk_relations`)
-These are entities and relationships **directly found within the returned chunk**. Use these to understand the immediate context of what's being discussed in each result.
+#### Entity Paths (`graph_relations.entity_paths`)
+Multi-hop paths connecting entities from your query. Each path contains a `combined_context` summarizing the full relationship chain—**this often provides all the context you need for complex, multi-hop questions**.
 
-**When to use**: When you need to highlight specific entities or relationships mentioned in a particular piece of content.
+**When to use**: For questions like "How is X related to Y?" or "Who works with the founder?"—the `combined_context` gives you a ready-to-use summary.
 
-#### Extra Graph Context (`extra_graph_context`)
-These are additional related entities and relationships **extracted from your query** but not necessarily in the returned chunks. This provides broader context about important entities you asked about.
+#### Chunk Triplets (`graph_relations.chunk_triplets`)
+A mapping of triplet IDs to individual entity relationships. Each chunk references its triplets via `graph_triplet_ids`.
 
-**When to use**: When you want to give your AI agent more background information about key entities in the user's question, even if those details aren't in the specific chunks returned.
+**When to use**: When building context per-chunk for your LLM. Use a Set to track seen triplet IDs and avoid duplicating context across chunks.
 
 ### Practical Applications
 
-#### Enriching AI Responses
+#### Building Context for Your LLM
 
-Use entity relationships to provide richer, more informed answers:
+When passing the response to an LLM, use a Set to deduplicate triplet context across chunks:
 
+<Tabs>
+  <Tab title="JavaScript">
 ```javascript
-// Example: Building a context-aware answer
-const searchResults = await cortex.search.retrieve({
-  query: "What is John working on?",
-  tenant_id: "your-tenant",
-  sub_tenant_id: "engineering",
-  max_chunks: 10,
-  graph_context: true
+const response = await cortex.search.retrieve({
+  query: "Who reports to Sarah?",
+  tenant_id: "acme-corp",
+  max_chunks: 10
 });
 
-// Combine chunk content with graph context
-let context = searchResults.chunks.map(chunk => {
-  let text = chunk.chunk_content;
-  
-  // Add relationship context in readable format
-  if (chunk.extra_context?.chunk_relations) {
-    const relationTexts = chunk.extra_context.chunk_relations.map(triple => {
-      // Format: "Source Entity → Target Entity"
-      // With detailed context from all relations
-      const relationContexts = triple.relations
-        .map(rel => rel.context)
-        .join(" ");
-      return `${triple.source.name} related to ${triple.target.name} — ${relationContexts}`;
-    });
-    
-    text += `\n\n[Graph Context]\n${relationTexts.join("\n")}`;
-  }
-  
-  return text;
-}).join("\n\n");
+const { chunks, graph_relations } = response;
+const seenTriplets = new Set();
+let context = "";
 
-// Also include broader context from the query
-if (searchResults.extra_graph_context) {
-  const graphContext = searchResults.extra_graph_context
-    .map(r => r.relations[0].context)
-    .join("\n");
-  context = `Background:\n${graphContext}\n\nRelevant Information:\n${context}`;
+// Build per-chunk context with deduplicated triplets
+for (const chunk of chunks) {
+  context += `\n---\n${chunk.chunk_content}\n`;
+  
+  for (const tripletId of chunk.graph_triplet_ids || []) {
+    if (seenTriplets.has(tripletId)) continue;
+    seenTriplets.add(tripletId);
+    
+    const triplet = graph_relations?.chunk_triplets?.[tripletId];
+    if (triplet) {
+      context += `[${triplet.source.name}] → ${triplet.relation.canonical_predicate} → [${triplet.target.name}]: ${triplet.relation.context}\n`;
+    }
+  }
 }
 
-// Now pass this enriched context to your LLM
-const answer = await generateAnswer(context, query);
+// Add entity paths for multi-hop context
+for (const path of graph_relations?.entity_paths || []) {
+  const startEntity = path.triplets[0]?.source.name;
+  const endEntity = path.triplets[path.triplets.length - 1]?.target.name;
+  context += `\n[Path: ${startEntity} → ${endEntity}]\n${path.combined_context}\n`;
+}
 ```
+  </Tab>
+  <Tab title="Python">
+```python
+response = cortex.search.retrieve(
+    query="Who reports to Sarah?",
+    tenant_id="acme-corp",
+    max_chunks=10
+)
 
-#### Entity-Focused Search
+chunks = response.chunks
+graph_relations = response.graph_relations
+seen_triplets = set()
+context = ""
 
-Find information by focusing on specific entities and their connections:
+# Build per-chunk context with deduplicated triplets
+for chunk in chunks:
+    context += f"\n---\n{chunk.chunk_content}\n"
+    
+    for triplet_id in chunk.graph_triplet_ids or []:
+        if triplet_id in seen_triplets:
+            continue
+        seen_triplets.add(triplet_id)
+        
+        triplet = graph_relations.chunk_triplets.get(triplet_id) if graph_relations else None
+        if triplet:
+            context += f"[{triplet.source.name}] → {triplet.relation.canonical_predicate} → [{triplet.target.name}]: {triplet.relation.context}\n"
 
+# Add entity paths for multi-hop context
+for path in (graph_relations.entity_paths if graph_relations else []):
+    start_entity = path.triplets[0].source.name if path.triplets else None
+    end_entity = path.triplets[-1].target.name if path.triplets else None
+    context += f"\n[Path: {start_entity} → {end_entity}]\n{path.combined_context}\n"
+```
+  </Tab>
+</Tabs>
+
+#### Quick Access to Multi-Hop Context
+
+For complex questions, `entity_paths` often provides everything you need:
+
+<Tabs>
+  <Tab title="JavaScript">
 ```javascript
-// When searching for "Project Phoenix timeline"
-// Cortex automatically:
-// 1. Identifies "Project Phoenix" as a key entity
-// 2. Finds chunks mentioning it
-// 3. Includes relationships like:
-//    - "Project Phoenix" → "depends on" → "Authentication Service"
-//    - "Engineering Team" → "works on" → "Project Phoenix"
-//    - "Sarah Chen" → "leads" → "Project Phoenix"
+// entity_paths gives you pre-computed multi-hop context
+const paths = response.graph_relations?.entity_paths || [];
+
+for (const path of paths) {
+  // combined_context has the full relationship chain summarized
+  console.log(path.combined_context);
+  
+  // Or extract start/end entities if needed
+  const start = path.triplets[0]?.source;
+  const end = path.triplets[path.triplets.length - 1]?.target;
+  console.log(`${start?.name} (${start?.type}) → ... → ${end?.name} (${end?.type})`);
+}
 ```
+  </Tab>
+  <Tab title="Python">
+```python
+# entity_paths gives you pre-computed multi-hop context
+paths = response.graph_relations.entity_paths if response.graph_relations else []
 
-#### Building Smart Features
-
-Leverage knowledge graph data to build intelligent UX features:
-
-**Connected Information Panels**
-```javascript
-// When displaying a search result, show related entities
-const relatedEntities = chunk.extra_context?.chunk_relations || [];
-const entitySummary = relatedEntities.map(triple => ({
-  entity: triple.target.name,
-  type: triple.target.type,
-  relationship: triple.relations[0].canonical_predicate
-}));
-// Display: "This document mentions: Sarah Chen (PERSON, leads), 
-//          Authentication Service (PRODUCT, depends on)"
+for path in paths:
+    # combined_context has the full relationship chain summarized
+    print(path.combined_context)
+    
+    # Or extract start/end entities if needed
+    start = path.triplets[0].source if path.triplets else None
+    end = path.triplets[-1].target if path.triplets else None
+    print(f"{start.name} ({start.type}) → ... → {end.name} ({end.type})")
 ```
-
-**Smart Entity Navigation**
-```javascript
-// Enable "jump to related content" by entity
-// When user clicks on "Sarah Chen", search for all chunks 
-// containing that entity to show her full context
-const entityQuery = `entity:"${entity.name}"`;
-const relatedContent = await cortex.search.retrieve({
-  query: entityQuery,
-  tenant_id: tenant_id,
-  sub_tenant_id: sub_tenant_id
-});
-```
-
-**Timeline Views**
-```javascript
-// Use temporal_details from relations to build chronologies
-const timelineEvents = chunk.extra_context?.chunk_relations
-  .filter(r => r.relations.some(rel => rel.temporal_details))
-  .map(r => ({
-    when: r.relations[0].temporal_details,
-    what: r.relations[0].context,
-    entities: [r.source.name, r.target.name]
-  }));
-// Example output: "Last week: Sarah Chen started leading Project Phoenix"
-```
-
-**Contextual Auto-Suggestions**
-```javascript
-// As users type, suggest entities from the graph
-// If they type "Sarah", suggest "Sarah Chen (Engineering Manager)"
-// based on entity type and relationships in their graph
-```
+  </Tab>
+</Tabs>
 
 ## Key Benefits
 
@@ -289,15 +317,15 @@ const timelineEvents = chunk.extra_context?.chunk_relations
 ### Make the Most of Graph Context
 
 **For search results:**
-- Use `chunk_relations` to highlight key entities mentioned in specific results
+- Use `chunk_triplets` via `graph_triplet_ids` to show entities mentioned in each chunk
 - Display relationship information to help users understand context at a glance
 
 **For AI-generated answers:**
-- Include both `chunk_relations` and `extra_graph_context` in your prompts
-- Format relationship context clearly so your LLM can leverage it effectively
+- Use `entity_paths.combined_context` for multi-hop questions—it’s often all you need
+- Deduplicate `chunk_triplets` with a Set when building per-chunk context
 
 **For UX features:**
-- Create "related entities" sidebars showing connected information
+- Create "related entities" sidebars using triplet data
 - Build navigation features that follow relationship links
 - Use entity mentions to create automatic cross-references
 
@@ -320,7 +348,7 @@ Knowledge graphs work automatically—just start using Cortex's search and retri
 
 1. **Upload your content** using any [Knowledge Ingestion](/api-reference/endpoint/upload-document) endpoint
 2. **Use Search or Q&A** via [Search](/api-reference/endpoint/search) or [Q&A](/api-reference/endpoint/qna) endpoints
-3. **Access graph context** in the response fields `chunk_relations` and `extra_graph_context`
+3. **Access graph context** in `graph_relations.entity_paths` and `graph_relations.chunk_triplets`
 4. **Enhance your UI** by displaying entity relationships alongside results
 
 That's it! The knowledge graph is built and maintained automatically behind the scenes.
@@ -333,7 +361,7 @@ That's it! The knowledge graph is built and maintained automatically behind the 
 Each relationship in the graph stores multiple "evidences" from different documents, allowing the system to:
 - Track how relationships evolve over time
 - Provide multiple sources for each connection
-- Weight relationships based on frequency and confidence
+- Weight relationships based on frequency and relevance
 - Update relationships as new information arrives
 </Note>
 
@@ -352,7 +380,7 @@ Use the search endpoints with entity names to explore relationships. A dedicated
 Yes! AI memories are also processed through the knowledge graph, helping your AI understand relationships in user-specific context.
 
 5. **What if entity extraction makes mistakes?**  
-The system includes confidence scores and uses multiple evidences to validate relationships. As you add more content, accuracy improves naturally.
+The system uses multiple evidences to validate relationships. As you add more content, accuracy improves naturally.
 
 6. **How is this different from vector search?**  
 Vector search finds semantically similar content. Knowledge graphs understand explicit relationships. Cortex uses both together for optimal results.
