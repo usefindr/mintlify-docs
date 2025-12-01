@@ -5069,836 +5069,6 @@
         ]
       }
     },
-    "/openai/index/chat/completions": {
-      "post": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Index Completion",
-        "description": "Index a conversation while forwarding the request to the specified LLM provider.\n\nThis endpoint performs indexing in parallel with the LLM API call.\nAll OpenAI-native parameters are passed in the request body.\nCustom parameters (provider, tenant_id, etc.) are passed as query parameters.\n\nSupports: OpenAI, Anthropic (Claude), and Google (Gemini) through OpenAI-compatible interface.",
-        "operationId": "index_completion_openai_index_chat_completions_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "provider",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "LLM provider. Supported: openai, anthropic, gemini",
-              "default": "openai",
-              "title": "Provider",
-              "example": "<str>"
-            },
-            "description": "LLM provider. Supported: openai, anthropic, gemini"
-          },
-          {
-            "name": "tenant_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Primary tenant identifier for indexing",
-              "title": "Tenant Id",
-              "example": "tenant_1234"
-            },
-            "description": "Primary tenant identifier for indexing"
-          },
-          {
-            "name": "sub_tenant_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional sub-tenant identifier",
-              "title": "Sub Tenant Id",
-              "example": "sub_tenant_4567"
-            },
-            "description": "Optional sub-tenant identifier"
-          },
-          {
-            "name": "file_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional stable identifier for the indexed conversation",
-              "default": "",
-              "title": "File Id",
-              "example": "CortexDoc1234"
-            },
-            "description": "Optional stable identifier for the indexed conversation"
-          },
-          {
-            "name": "tenant_metadata",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "JSON-encoded tenant-level metadata",
-              "title": "Tenant Metadata",
-              "example": "<str>"
-            },
-            "description": "JSON-encoded tenant-level metadata"
-          },
-          {
-            "name": "document_metadata",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "JSON-encoded document-specific metadata",
-              "title": "Document Metadata",
-              "example": "<str>"
-            },
-            "description": "JSON-encoded document-specific metadata"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OpenAIBaseChatRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OpenAIChatCompletionResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/openai/search/chat/completions": {
-      "post": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Search Completion",
-        "description": "Search knowledge base and augment request with retrieved context.\n\nThis endpoint:\n1. Extracts the last user message and rewrites it for better search\n2. Performs search with the rewritten query\n3. Appends search results to the last user message\n4. Forwards the augmented request to the specified LLM provider\n\nAll OpenAI-native parameters are passed in the request body.\nCustom parameters can be passed as either query parameters OR custom headers (x-provider, x-tenant-id, etc.).\nHeaders are useful when using the OpenAI SDK which doesn't support custom query parameters.\n\nSupports: OpenAI, Anthropic (Claude), and Google (Gemini) through OpenAI-compatible interface.",
-        "operationId": "search_completion_openai_search_chat_completions_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "provider",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "LLM provider. Supported: openai, anthropic, gemini",
-              "default": "openai",
-              "title": "Provider",
-              "example": "<str>"
-            },
-            "description": "LLM provider. Supported: openai, anthropic, gemini"
-          },
-          {
-            "name": "tenant_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Primary tenant identifier for search",
-              "title": "Tenant Id",
-              "example": "tenant_1234"
-            },
-            "description": "Primary tenant identifier for search"
-          },
-          {
-            "name": "sub_tenant_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional sub-tenant identifier",
-              "title": "Sub Tenant Id",
-              "example": "sub_tenant_4567"
-            },
-            "description": "Optional sub-tenant identifier"
-          },
-          {
-            "name": "max_chunks",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 200,
-              "minimum": 1,
-              "description": "Maximum chunks to retrieve",
-              "default": 5,
-              "title": "Max Chunks",
-              "example": "<str>"
-            },
-            "description": "Maximum chunks to retrieve"
-          },
-          {
-            "name": "alpha",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Hybrid search weighting (0.0-1.0 or 'auto')",
-              "title": "Alpha",
-              "example": "<str>"
-            },
-            "description": "Hybrid search weighting (0.0-1.0 or 'auto')"
-          },
-          {
-            "name": "recency_bias",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "number",
-                  "maximum": 1.0,
-                  "minimum": 0.0
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Boost for newer content",
-              "title": "Recency Bias",
-              "example": "<str>"
-            },
-            "description": "Boost for newer content"
-          },
-          {
-            "name": "personalise_search",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "description": "Personalise results based on user memories",
-              "default": false,
-              "title": "Personalise Search",
-              "example": "<str>"
-            },
-            "description": "Personalise results based on user memories"
-          },
-          {
-            "name": "x-provider",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Provider"
-            }
-          },
-          {
-            "name": "x-tenant-id",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-sub-tenant-id",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sub-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-max-chunks",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Max-Chunks"
-            }
-          },
-          {
-            "name": "x-alpha",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Alpha"
-            }
-          },
-          {
-            "name": "x-recency-bias",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Recency-Bias"
-            }
-          },
-          {
-            "name": "x-personalise-search",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "boolean"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Personalise-Search"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OpenAIBaseChatRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OpenAIChatCompletionResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/openai/all/chat/completions": {
-      "post": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Combined Completion",
-        "description": "Perform both indexing and search, then forward to LLM provider with augmented context.\n\nThis endpoint:\n1. Indexes the conversation in parallel with search\n2. Generates a rewritten query and performs search\n3. Appends search results to the last user message\n4. Forwards the augmented request to the specified LLM provider\n5. Returns LLM response with both indexing and retrieval metadata\n\nAll OpenAI-native parameters are passed in the request body.\nCustom parameters can be passed as either query parameters OR custom headers (x-provider, x-tenant-id, etc.).\nHeaders are useful when using the OpenAI SDK which doesn't support custom query parameters.\n\nSupports: OpenAI, Anthropic (Claude), and Google (Gemini) through OpenAI-compatible interface.",
-        "operationId": "combined_completion_openai_all_chat_completions_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "provider",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "LLM provider. Supported: openai, anthropic, gemini",
-              "default": "openai",
-              "title": "Provider",
-              "example": "<str>"
-            },
-            "description": "LLM provider. Supported: openai, anthropic, gemini"
-          },
-          {
-            "name": "tenant_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Primary tenant identifier",
-              "title": "Tenant Id",
-              "example": "tenant_1234"
-            },
-            "description": "Primary tenant identifier"
-          },
-          {
-            "name": "sub_tenant_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional sub-tenant identifier",
-              "title": "Sub Tenant Id",
-              "example": "sub_tenant_4567"
-            },
-            "description": "Optional sub-tenant identifier"
-          },
-          {
-            "name": "max_chunks",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 200,
-              "minimum": 1,
-              "description": "Maximum chunks to retrieve",
-              "default": 15,
-              "title": "Max Chunks",
-              "example": "<str>"
-            },
-            "description": "Maximum chunks to retrieve"
-          },
-          {
-            "name": "alpha",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Hybrid search weighting (0.0-1.0 or 'auto')",
-              "title": "Alpha",
-              "example": "<str>"
-            },
-            "description": "Hybrid search weighting (0.0-1.0 or 'auto')"
-          },
-          {
-            "name": "recency_bias",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "number",
-                  "maximum": 1.0,
-                  "minimum": 0.0
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Boost for newer content",
-              "title": "Recency Bias",
-              "example": "<str>"
-            },
-            "description": "Boost for newer content"
-          },
-          {
-            "name": "personalise_search",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "description": "Personalise results based on user memories",
-              "default": false,
-              "title": "Personalise Search",
-              "example": "<str>"
-            },
-            "description": "Personalise results based on user memories"
-          },
-          {
-            "name": "file_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Optional stable identifier for the indexed conversation",
-              "default": "",
-              "title": "File Id",
-              "example": "CortexDoc1234"
-            },
-            "description": "Optional stable identifier for the indexed conversation"
-          },
-          {
-            "name": "tenant_metadata",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "JSON-encoded tenant-level metadata",
-              "title": "Tenant Metadata",
-              "example": "<str>"
-            },
-            "description": "JSON-encoded tenant-level metadata"
-          },
-          {
-            "name": "document_metadata",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "JSON-encoded document-specific metadata",
-              "title": "Document Metadata",
-              "example": "<str>"
-            },
-            "description": "JSON-encoded document-specific metadata"
-          },
-          {
-            "name": "x-provider",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Provider"
-            }
-          },
-          {
-            "name": "x-tenant-id",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-sub-tenant-id",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sub-Tenant-Id"
-            }
-          },
-          {
-            "name": "x-max-chunks",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Max-Chunks"
-            }
-          },
-          {
-            "name": "x-alpha",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Alpha"
-            }
-          },
-          {
-            "name": "x-recency-bias",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Recency-Bias"
-            }
-          },
-          {
-            "name": "x-personalise-search",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "boolean"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Personalise-Search"
-            }
-          },
-          {
-            "name": "x-file-id",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-File-Id"
-            }
-          },
-          {
-            "name": "x-tenant-metadata",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Tenant-Metadata"
-            }
-          },
-          {
-            "name": "x-document-metadata",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Document-Metadata"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OpenAIBaseChatRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OpenAIChatCompletionResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/": {
       "get": {
         "summary": "Root",
@@ -5942,7 +5112,7 @@
               }
             ],
             "title": "Raw Text",
-            "description": "Single raw text memory to store"
+            "description": "Single raw text memory to store. If both raw_text and user_assistant_pairs are provided, raw_text will be used."
           },
           "user_assistant_pairs": {
             "anyOf": [
@@ -6431,6 +5601,30 @@
           "file"
         ],
         "title": "Body_upload_files_upload_upload_document_post"
+      },
+      "ChunkGraphRelationsResponse": {
+        "properties": {
+          "entity_paths": {
+            "items": {
+              "$ref": "#/components/schemas/ScoredPathResponse"
+            },
+            "type": "array",
+            "title": "Entity Paths",
+            "description": "Multi-hop paths connecting entities from the query, reranked by relevance. Each path is a chain of connected triplets.",
+            "example": []
+          },
+          "chunk_triplets": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ScoredTripletResponse"
+            },
+            "type": "object",
+            "title": "Chunk Triplets",
+            "description": "Mapping of group_id to scored triplet. Use chunk.graph_triplet_ids to find which groups belong to a chunk."
+          }
+        },
+        "type": "object",
+        "title": "ChunkGraphRelationsResponse",
+        "description": "Graph relations with group_id -> triplet mapping"
       },
       "ContentModel": {
         "properties": {
@@ -7022,24 +6216,7 @@
         "title": "ErrorResponse"
       },
       "ExtendedContext": {
-        "properties": {
-          "chunk_relations": {
-            "anyOf": [
-              {
-                "items": {
-                  "$ref": "#/components/schemas/TripleWithEvidence"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Chunk Relations",
-            "description": "Relations linked with this chunk",
-            "default": []
-          }
-        },
+        "properties": {},
         "type": "object",
         "title": "ExtendedContext"
       },
@@ -7430,607 +6607,29 @@
         ],
         "title": "MarkdownUploadRequest"
       },
-      "OpenAIBaseChatRequest": {
+      "PathTriplet": {
         "properties": {
-          "model": {
-            "type": "string",
-            "title": "Model",
-            "description": "Identifier of the chat model to emulate when responding to the request.",
-            "default": "mock-gpt-model",
-            "example": "<model>"
+          "source": {
+            "$ref": "#/components/schemas/Entity",
+            "description": "Source entity"
           },
-          "messages": {
-            "items": {
-              "$ref": "#/components/schemas/OpenAIChatMessage"
-            },
-            "type": "array",
-            "title": "Messages",
-            "description": "Ordered conversation history that should be interpreted as an OpenAI Chat Completions payload.",
-            "example": []
+          "target": {
+            "$ref": "#/components/schemas/Entity",
+            "description": "Target entity"
           },
-          "stream": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Stream",
-            "description": "If true, stream responses as server-sent events following OpenAI's streaming semantics.",
-            "default": false
-          },
-          "stream_options": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Stream Options",
-            "description": "Optional streaming configuration forwarded to OpenAI APIs when streaming is requested."
-          },
-          "temperature": {
-            "anyOf": [
-              {
-                "type": "number",
-                "maximum": 2.0,
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Temperature",
-            "description": "Sampling temperature applied to OpenAI text generation.",
-            "default": 0.4
-          },
-          "top_p": {
-            "anyOf": [
-              {
-                "type": "number",
-                "maximum": 1.0,
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Top P",
-            "description": "Nucleus sampling parameter forwarded to OpenAI.",
-            "default": 0.9
-          },
-          "max_completion_tokens": {
-            "anyOf": [
-              {
-                "type": "integer",
-                "minimum": 1.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Max Completion Tokens",
-            "description": "Upper bound on the number of tokens OpenAI may generate in the completion phase.",
-            "default": 2000
-          },
-          "frequency_penalty": {
-            "anyOf": [
-              {
-                "type": "number",
-                "maximum": 2.0,
-                "minimum": -2.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Frequency Penalty",
-            "description": "OpenAI frequency penalty applied during generation."
-          },
-          "presence_penalty": {
-            "anyOf": [
-              {
-                "type": "number",
-                "maximum": 2.0,
-                "minimum": -2.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Presence Penalty",
-            "description": "OpenAI presence penalty applied during generation."
-          },
-          "n": {
-            "anyOf": [
-              {
-                "type": "integer",
-                "minimum": 1.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "N",
-            "description": "Number of choices to generate via OpenAI chat completions."
-          },
-          "stop": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Stop",
-            "description": "Stop sequence(s) forwarded to OpenAI."
-          },
-          "logit_bias": {
-            "anyOf": [
-              {
-                "additionalProperties": {
-                  "type": "number"
-                },
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Logit Bias",
-            "description": "Modify likelihood of specified tokens in OpenAI generation."
-          },
-          "logprobs": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Logprobs",
-            "description": "Request OpenAI to include token log probabilities when supported."
-          },
-          "top_logprobs": {
-            "anyOf": [
-              {
-                "type": "integer",
-                "maximum": 20.0,
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Top Logprobs",
-            "description": "Number of top token log probabilities OpenAI should return when logprobs=true."
-          },
-          "response_format": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Response Format",
-            "description": "Structured response directive forwarded to OpenAI (e.g. json_schema)."
-          },
-          "seed": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Seed",
-            "description": "Optional sampling seed forwarded to OpenAI for best-effort deterministic output."
-          },
-          "service_tier": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Service Tier",
-            "description": "Processing service tier requested for OpenAI completion."
-          },
-          "store": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Store",
-            "description": "Flag controlling OpenAI response storage."
-          },
-          "tool_choice": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Tool Choice",
-            "description": "Specifies which tool OpenAI should invoke when tools are supplied."
-          },
-          "tools": {
-            "anyOf": [
-              {
-                "items": {
-                  "additionalProperties": true,
-                  "type": "object"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Tools",
-            "description": "Collection of tool definitions forwarded to OpenAI."
-          },
-          "parallel_tool_calls": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Parallel Tool Calls",
-            "description": "Flag enabling OpenAI parallel function/tool calls when supported."
-          },
-          "prediction": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Prediction",
-            "description": "Prediction configuration forwarded to OpenAI Responses/Completions API."
-          },
-          "reasoning_effort": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Reasoning Effort",
-            "description": "Constrains OpenAI reasoning effort for reasoning-capable models."
-          },
-          "modalities": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Modalities",
-            "description": "Modalities requested from multimodal OpenAI models."
-          },
-          "audio": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Audio",
-            "description": "Audio generation configuration forwarded to OpenAI when requesting audio output."
-          },
-          "prompt_cache_key": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Prompt Cache Key",
-            "description": "Stable identifier for leveraging OpenAI prompt caching features."
-          },
-          "safety_identifier": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Safety Identifier",
-            "description": "Identifier used to assist OpenAI with safety signal tracking."
-          },
-          "user": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "User",
-            "description": "End-user identifier forwarded to OpenAI for abuse monitoring."
-          },
-          "verbosity": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Verbosity",
-            "description": "Controls verbosity of OpenAI reasoning models when supported."
-          },
-          "web_search_options": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Web Search Options",
-            "description": "Configuration for OpenAI-integrated web search when enabled."
+          "relation": {
+            "$ref": "#/components/schemas/RelationEvidence",
+            "description": "Relation between entities"
           }
         },
         "type": "object",
         "required": [
-          "messages"
+          "source",
+          "target",
+          "relation"
         ],
-        "title": "OpenAIBaseChatRequest",
-        "description": "Pure OpenAI Chat Completions request model containing only OpenAI-native parameters.\nCustom parameters like tenant_id should be passed as query parameters."
-      },
-      "OpenAIChatCompletionChoice": {
-        "properties": {
-          "index": {
-            "type": "integer",
-            "title": "Index",
-            "example": 1
-          },
-          "message": {
-            "$ref": "#/components/schemas/OpenAIChatMessage"
-          },
-          "finish_reason": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Finish Reason"
-          },
-          "logprobs": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Logprobs"
-          }
-        },
-        "type": "object",
-        "required": [
-          "index",
-          "message"
-        ],
-        "title": "OpenAIChatCompletionChoice"
-      },
-      "OpenAIChatCompletionResponse": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id",
-            "example": "<id>"
-          },
-          "object": {
-            "type": "string",
-            "const": "chat.completion",
-            "title": "Object",
-            "example": "<object>"
-          },
-          "created": {
-            "type": "integer",
-            "title": "Created",
-            "example": 1
-          },
-          "model": {
-            "type": "string",
-            "title": "Model",
-            "example": "<model>"
-          },
-          "choices": {
-            "items": {
-              "$ref": "#/components/schemas/OpenAIChatCompletionChoice"
-            },
-            "type": "array",
-            "title": "Choices",
-            "example": []
-          },
-          "usage": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAIUsage"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "metadata": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Metadata"
-          },
-          "system_fingerprint": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "System Fingerprint"
-          },
-          "service_tier": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Service Tier"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "object",
-          "created",
-          "model",
-          "choices"
-        ],
-        "title": "OpenAIChatCompletionResponse"
-      },
-      "OpenAIChatMessage": {
-        "properties": {
-          "role": {
-            "type": "string",
-            "title": "Role",
-            "description": "Role of the message author. Typically 'system', 'user', or 'assistant'.",
-            "example": "<role>"
-          },
-          "content": {
-            "type": "string",
-            "title": "Content",
-            "description": "Message content supplied by the author in plain text.",
-            "example": "<content>"
-          }
-        },
-        "type": "object",
-        "required": [
-          "role",
-          "content"
-        ],
-        "title": "OpenAIChatMessage"
-      },
-      "OpenAIUsage": {
-        "properties": {
-          "prompt_tokens": {
-            "type": "integer",
-            "title": "Prompt Tokens",
-            "example": 1
-          },
-          "completion_tokens": {
-            "type": "integer",
-            "title": "Completion Tokens",
-            "example": 1
-          },
-          "total_tokens": {
-            "type": "integer",
-            "title": "Total Tokens",
-            "example": 1
-          },
-          "prompt_tokens_details": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Prompt Tokens Details"
-          },
-          "completion_tokens_details": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Completion Tokens Details"
-          }
-        },
-        "type": "object",
-        "required": [
-          "prompt_tokens",
-          "completion_tokens",
-          "total_tokens"
-        ],
-        "title": "OpenAIUsage"
+        "title": "PathTriplet",
+        "description": "Single triplet within a path (without score, as the path is scored as a whole)"
       },
       "ProcessingStatus": {
         "properties": {
@@ -8323,6 +6922,18 @@
       },
       "RelationEvidence": {
         "properties": {
+          "relationship_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Relationship Id",
+            "description": "Unique identifier for this specific relationship edge in the graph. The combination of source entity, target entity, and relationship_id allows disambiguation between multiple relations between the same source and target entities."
+          },
           "canonical_predicate": {
             "type": "string",
             "title": "Canonical Predicate",
@@ -8341,15 +6952,6 @@
             "description": "Rich contextual description of the relationship with surrounding information, details about how/why/when, and any relevant background. Should be comprehensive enough to understand the relationship without referring back to source.",
             "example": "<context>"
           },
-          "confidence": {
-            "type": "number",
-            "maximum": 1.0,
-            "minimum": 0.0,
-            "title": "Confidence",
-            "description": "Confidence score",
-            "default": 0.8,
-            "example": 1.0
-          },
           "temporal_details": {
             "anyOf": [
               {
@@ -8361,6 +6963,18 @@
             ],
             "title": "Temporal Details",
             "description": "Temporal timing information extracted from text (e.g., 'last week', 'in 2023', 'yesterday')"
+          },
+          "chunk_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Chunk Id",
+            "description": "The chunk_id this relation came from"
           },
           "timestamp": {
             "type": "string",
@@ -8376,8 +6990,7 @@
           "raw_predicate",
           "context"
         ],
-        "title": "RelationEvidence",
-        "description": "Single piece of evidence for a relationship between two entities"
+        "title": "RelationEvidence"
       },
       "Relations": {
         "properties": {
@@ -8432,20 +7045,16 @@
             "description": "Retrieved content chunks",
             "example": []
           },
-          "extra_graph_context": {
+          "graph_relations": {
             "anyOf": [
               {
-                "items": {
-                  "$ref": "#/components/schemas/TripleWithEvidence"
-                },
-                "type": "array"
+                "$ref": "#/components/schemas/ChunkGraphRelationsResponse"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Extra Graph Context",
-            "description": "Extra graph context which will help you agent get better understanding of the entities involved in query."
+            "description": "Graph relations with chunk_relations (by chunk_id) and entity_relations (top entity matches)"
           },
           "metadata": {
             "additionalProperties": true,
@@ -8507,11 +7116,11 @@
           },
           "relations": {
             "items": {
-              "$ref": "#/components/schemas/TripleWithEvidence"
+              "$ref": "#/components/schemas/ScoredPathResponse"
             },
             "type": "array",
             "title": "Relations",
-            "description": "Array of relations extracted from the user query",
+            "description": "Array of scored relations extracted from the user query via knowledge graph search",
             "example": []
           }
         },
@@ -8521,6 +7130,70 @@
         ],
         "title": "RetrieveUserMemoryResponse",
         "description": "Response model for retrieving user memories through semantic search."
+      },
+      "ScoredPathResponse": {
+        "properties": {
+          "combined_context": {
+            "type": "string",
+            "title": "Combined Context",
+            "description": "Merged context from all triplets in the path",
+            "default": "",
+            "example": "<combined_context>"
+          },
+          "triplets": {
+            "items": {
+              "$ref": "#/components/schemas/PathTriplet"
+            },
+            "type": "array",
+            "title": "Triplets",
+            "description": "Ordered list of triplets forming the path chain",
+            "example": []
+          },
+          "relevancy_score": {
+            "type": "number",
+            "title": "Relevancy Score",
+            "description": "Relevancy score for the entire path",
+            "default": 0.0,
+            "example": 1.0
+          }
+        },
+        "type": "object",
+        "required": [
+          "triplets"
+        ],
+        "title": "ScoredPathResponse",
+        "description": "A multi-hop path (chain of triplets) with a relevancy score.\n\nRepresents connected paths like: A --rel1--> B --rel2--> C\nThe triplets list preserves the chain order."
+      },
+      "ScoredTripletResponse": {
+        "properties": {
+          "source": {
+            "$ref": "#/components/schemas/Entity",
+            "description": "Source entity"
+          },
+          "target": {
+            "$ref": "#/components/schemas/Entity",
+            "description": "Target entity"
+          },
+          "relation": {
+            "$ref": "#/components/schemas/RelationEvidence",
+            "description": "Relation between entities"
+          },
+          "relevancy_score": {
+            "type": "number",
+            "title": "Relevancy Score",
+            "description": "Relevancy score from reranking",
+            "default": 0.0,
+            "example": 1.0
+          }
+        },
+        "type": "object",
+        "required": [
+          "source",
+          "target",
+          "relation"
+        ],
+        "title": "ScoredTripletResponse",
+        "description": "Individual scored triplet for entity-based search results"
       },
       "SearchChunk": {
         "properties": {
@@ -8639,6 +7312,15 @@
             ],
             "description": "Additional context for this chunk",
             "default": {}
+          },
+          "graph_triplet_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Graph Triplet Ids",
+            "description": "List of group IDs for triplets linked to this chunk. Lookup triplet data in graph_relations.chunk_relations[group_id]",
+            "example": []
           }
         },
         "type": "object",
@@ -9170,8 +7852,7 @@
           "relations",
           "chunk_id"
         ],
-        "title": "TripleWithEvidence",
-        "description": "Triple with multiple evidence items from different chunks"
+        "title": "TripleWithEvidence"
       },
       "UserAssistantPair": {
         "properties": {

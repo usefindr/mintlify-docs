@@ -132,6 +132,20 @@ Enables personalized search results based on user memories from the correspondin
 **Best Practice**: Enable personalise_search for applications where user context significantly impacts result relevance, such as personalized dashboards, recommendation systems, or user-specific knowledge bases.
 </Info>
 
+## Knowledge Graph Context
+
+Search results are automatically enriched with knowledge graph context, providing entity relationships extracted from your content.
+
+**What's included in responses:**
+- **`extra_context.chunk_relations`** — Entities and relationships found within each chunk
+- **`extra_graph_context`** — Additional entity relationships extracted from your query
+
+This helps your AI understand not just *what* is mentioned, but *how* things relate—like knowing that "Sarah Chen" leads "Project Phoenix" which depends on the "Authentication Service".
+
+<Card title="Learn More: Knowledge Graphs" icon="diagram-project" href="/essentials/graph-rag">
+  See how to leverage entity relationships, build context for your LLM, and create intelligent features with graph data.
+</Card>
+
 ## Search Optimization Tips
 
 ### For Better Precision
@@ -152,42 +166,6 @@ Enables personalized search results based on user memories from the correspondin
 - Experiment with **different alpha values** to find optimal results
 - Enable **personalise_search** for user-specific contexts and preferences
 
-
-### Response
-Returns an array of relevant content chunks from your indexed sources based on the search query.
-
-```json
-[
-  {
-    "chunk_uuid": "CortexDoc42f7a8c91e234d89ab7f3e612bc9a1047891234567_15_v1",
-    "source_id": "CortexDoc42f7a8c91e234d89ab7f3e612bc9a1047891234567",
-    "source_title": "Advanced Machine Learning Algorithms.pdf",
-    "chunk_content": "PROCEEDINGS OF NEURAL NETWORKS, VOL. 22, NO. 3, MARCH 2024 8 Fig. 5: Performance metrics comparison between transformer architectures on natural language processing tasks...",
-    "source_upload_time": "1753761802.079415",
-    "source_collection": [],
-    "source_type": "file",
-    "layout": "{\"coordinates\": {\"x\": 48.96399688720703, \"y\": 26.49277114868164, \"width\": 514.0717697143555, \"height\": 721.1119651794434}, \"page\": 12}",
-    "version": "v1",
-    "source_last_updated_time": "",
-    "relevancy_score": 0.8363813161849976,
-  },
-  {
-    "chunk_uuid": "CortexDoc8b1e3d5f72c84a16951e8742abd6f3029876543210_7_v1",
-    "source_id": "CortexDoc8b1e3d5f72c84a16951e8742abd6f3029876543210",
-    "source_title": "Quantum Computing Fundamentals.pdf",
-    "chunk_content": "IV. QUANTUM ALGORITHMS This section explores quantum gate operations and their applications in cryptographic systems. The proposed quantum circuit demonstrates improved efficiency in...",
-    "source_upload_time": "1753762013.1677928",
-    "source_collection": [],
-    "source_type": "file",
-    "layout": "{\"coordinates\": {\"x\": 311.9779968261719, \"y\": 712.3123168945312, \"width\": 251.05746459960938, \"height\": 35.72357177734375}, \"page\": 2}",
-    "version": "v1",
-    "source_last_updated_time": "",
-    "relevancy_score": 0.800000011920929,
-  }
-]
-```
-
-> **Note:** This API returns hybrid search results without AI-generated answers. For conversational Q&A with AI-generated responses, use the `/search/qna` API instead.
 
 ### Alpha Parameter
 The `alpha` parameter controls the balance between semantic and keyword search:
