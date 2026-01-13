@@ -1,6 +1,6 @@
 ---
 title: 'Add User Memory'
-openapi: 'POST /user_memory/add_user_memory'
+openapi: 'POST /memories/add-memories'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
@@ -12,12 +12,23 @@ import TryIt from '/snippets/try-it.mdx'
 <TryIt />
 ### Sample Request
 ```bash
-curl --request POST \
-  --url 'https://api.usecortex.ai/user_memory/add_user_memory?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
-  --header 'Authorization: Bearer <token>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "user_memory": "I prefer detailed technical explanations and works in the Pacific timezone"
+curl -X 'POST' \
+  'http://api.usecortex.ai/memories/add-memories' \
+  -d '{
+  "tenant_id": "string",
+  "sub_tenant_id": "string",
+  "raw_text": "string",
+  "user_assistant_pairs": [
+    {
+      "user": "string",
+      "assistant": "string"
+    }
+  ],
+  "expiry_time": 0,
+  "infer": false,
+  "custom_instructions": "string",
+  "user_name": "string",
+  "memory_id": "string"
 }'
   ```
 

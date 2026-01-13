@@ -12,16 +12,15 @@ import TryIt from '/snippets/try-it.mdx'
 <TryIt />
 ### Sample Request
 ```bash
-curl --request POST \
-  --url https://api.usecortex.ai/search/full-text-search \
-  --header 'Authorization: Bearer <token>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "query": "John Smith Jake",
-  "tenant_id": "tenant_1234",
-  "sub_tenant_id": "sub_tenant_4567",
-  "max_chunks": 25,
-  "operator": "and"
+curl -X 'POST' \
+  'http://api.usecortex.ai/search/full-text-search' \
+  -d '{
+  "tenant_id": "string",
+  "sub_tenant_id": "string",
+  "query": "string",
+  "operator": "or",
+  "max_chunks": 10,
+  "search_mode": "sources"
 }'
   ```
 

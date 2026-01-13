@@ -1,4 +1,18 @@
 import json
+import sys
+
+# Get generation type from command line argument
+# Usage: python fix_openapi.py [docs|sdk]
+# Default: sdk
+if len(sys.argv) > 1:
+    genr_type = sys.argv[1].lower()
+    if genr_type not in ['docs', 'sdk']:
+        print(f"Error: Invalid argument '{sys.argv[1]}'. Use 'docs' or 'sdk'")
+        sys.exit(1)
+else:
+    genr_type = 'sdk'  # Default to sdk mode
+
+print(f"Running in '{genr_type}' mode")
 
 defaults = {
     "tenant_id": "tenant_1234",
@@ -98,6 +112,17 @@ example_exclusion_by_schema_name = {
     "EmbeddingsSearchData": ["scores", "chunk_ids"]
 }
 
+defaults_by_schema_name = {
+    "Body_batch_upload_upload_batch_upload_post": {
+        "tenant_metadata": "{}",
+        "document_metadata": "{}"
+    },
+    "Body_batch_update_upload_batch_update_patch": {
+        "tenant_metadata": "{}",
+        "document_metadata": "{}"
+    }
+} if genr_type != 'sdk' else {}
+
 schemas_to_ignore = {"ErrorResponse"}
 
 properties_to_ignore = {"message", "status", "tenant_metadata",
@@ -125,6 +150,11 @@ if "components" in openapi and "schemas" in openapi["components"]:
             continue
         if "properties" in schema_def:
             for prop_name, prop_def in schema_def["properties"].items():
+                if schema_name in defaults_by_schema_name:
+                    if prop_name in defaults_by_schema_name[schema_name]:
+                        prop_def["default"] = defaults_by_schema_name[schema_name][prop_name]
+                        print(f"Adding example value for {prop_name} for {schema_name}")
+                        continue
                 if prop_name in properties_to_ignore:
                     print(f"Skipping {prop_name} for {schema_name}")
                     continue
@@ -149,7 +179,7 @@ if "components" in openapi and "schemas" in openapi["components"]:
                     elif prop_def["type"] == "boolean":
                         prop_def["example"] = True
                     elif prop_def["type"] == "array":
-                        prop_def["example"] = []
+                        prop_def["example"] = []            
 print("Default values added to components.schemas.")
 
 

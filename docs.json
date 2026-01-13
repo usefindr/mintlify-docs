@@ -70,30 +70,22 @@
             "group": "Tenant Management",
             "pages": [
               "api-reference/endpoint/create-tenant",
-              "api-reference/endpoint/tenant-stats",
-              "api-reference/endpoint/list-sub-tenant-ids",
-              "api-reference/endpoint/delete-sub-tenant"
+              "api-reference/endpoint/tenant-stats"
             ]
           },
           {
             "group": "Knowledge Ingestion",
             "pages": [
               "api-reference/endpoint/upload-document",
-              "api-reference/endpoint/upload-text",
-              "api-reference/endpoint/app-upload",
-              "api-reference/endpoint/scrape-webpage",
-              "api-reference/endpoint/verify-processing",
-              "api-reference/endpoint/batch-upload",
-              "api-reference/endpoint/update-document",
-              "api-reference/endpoint/update-text",
-              "api-reference/endpoint/update-webpage",
-              "api-reference/endpoint/batch-update"
+              "api-reference/endpoint/upload-content",
+              "api-reference/endpoint/upload-app",
+              "api-reference/endpoint/verify-processing"
             ]
           },
           {
             "group": "Query & Retrieval",
             "pages": [
-              "api-reference/endpoint/search",
+              "api-reference/endpoint/hybrid-search",
               "api-reference/endpoint/full-text-search",
               "api-reference/endpoint/qna"
             ]
@@ -103,7 +95,7 @@
             "pages": [
               "api-reference/endpoint/list-sources",
               "api-reference/endpoint/list-sources-by-id",
-              "api-reference/endpoint/fetch-content",
+              "api-reference/endpoint/fetch-source-content",
               "api-reference/endpoint/delete-source"
             ]
           },
@@ -111,21 +103,17 @@
             "group": "Embeddings",
             "pages": [
               "api-reference/endpoint/create-embeddings-tenant",
-              "api-reference/endpoint/upload-embeddings",
-              "api-reference/endpoint/search-embeddings",
-              "api-reference/endpoint/get-embeddings-by-chunk-ids",
-              "api-reference/endpoint/delete-embeddings",
-              "api-reference/endpoint/update-embeddings"
+              "api-reference/endpoint/insert-raw-embeddings",
+              "api-reference/endpoint/search-raw-embeddings",
+              "api-reference/endpoint/filter-raw-embeddings",
+              "api-reference/endpoint/delete-raw-embeddings"
             ]
           },
           {
             "group": "User Memories",
             "pages": [
-              "api-reference/endpoint/list-user-memories",
-              "api-reference/endpoint/retrieve-user-memory",
-              "api-reference/endpoint/add-user-memory",
-              "api-reference/endpoint/generate-user-memory",
-              "api-reference/endpoint/delete-user-memory"
+              "api-reference/endpoint/add-memories",
+              "api-reference/endpoint/delete-memory"
             ]
           }
         ]
