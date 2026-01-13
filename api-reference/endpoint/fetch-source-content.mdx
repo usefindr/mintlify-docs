@@ -1,6 +1,6 @@
 ---
 title: 'Fetch Content'
-openapi: 'POST /fetch/fetch_content'
+openapi: 'POST /fetch/fetch-source-content'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
@@ -15,17 +15,17 @@ import TryIt from '/snippets/try-it.mdx'
 <Tabs>
   <Tab title="API Request">
     ```bash
-    curl --request POST \
-      --url https://api.usecortex.ai/fetch/fetch_content \
-      --header 'Authorization: Bearer <token>' \
-      --header 'Content-Type: application/json' \
-      --data '{
-      "file_id": "CortexDoc1234",
-      "file_type": "<file_type>",
-      "tenant_id": "tenant_1234",
-      "return_content": true,
-      "sub_tenant_id": "sub_tenant_4567"
-    }'
+   curl -X 'POST' \
+  'https://api.usecortex.ai/fetch/fetch-source-content' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "tenant_id": "string",
+  "sub_tenant_id": "string",
+  "source_id": "string",
+  "mode": "content",
+  "expiry_seconds": 3600
+}'
       ```
   </Tab>
   <Tab title="TypeScript">

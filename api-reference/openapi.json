@@ -161,7 +161,7 @@
           "ingestion"
         ],
         "summary": "Upload Document",
-        "description": "Upload one or more documents for ingestion.\nSupports both single and batch uploads.\nFor single file: send one file with the 'files' field.\nFor batch: send multiple files with the 'files' field (FastAPI will parse as list).\n\nFor batch uploads, you can provide per-file metadata using tenant_metadata_list and \ndocument_metadata_list as JSON arrays. If not provided, the single tenant_metadata and \ndocument_metadata will be used for all files.",
+        "description": "Upload one or more documents for ingestion.\nSupports both single and batch uploads.\nFor single file: send one file with the 'files' field.\nFor batch: send multiple files with the 'files' field (FastAPI will parse as list).",
         "operationId": "upload_document_ingestion_upload_document_post",
         "requestBody": {
           "content": {
@@ -399,18 +399,6 @@
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The source ID to fetch relations for",
-              "title": "Source Id",
-              "example": "CortexDoc1234"
-            },
-            "description": "The source ID to fetch relations for"
-          },
-          {
-            "name": "tenant_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
               "description": "The file ID to check processing status for",
               "title": "File Id",
               "example": "CortexDoc1234"
@@ -545,7 +533,7 @@
           "tenants"
         ],
         "summary": "Create Tenant",
-        "description": "Create a tenant and ensure the tenant-specific Kafka topics and infra exist.",
+        "description": "Create a tenant for your account.\n\nUse this endpoint to initialize a tenant space you can use for ingestion, embeddings, and search. Optionally include a metadata schema to enforce consistent attributes across documents.\n\nExpected outcome\n\nA tenant is created and returned with its identifier.\nIf the tenant already exists, you receive a success message with the existing identifier.",
         "operationId": "create_tenant_tenants_create_post",
         "requestBody": {
           "content": {
@@ -652,7 +640,7 @@
           "tenants"
         ],
         "summary": "Get Tenant Stats",
-        "description": "Get statistics for a tenant's vectorstore collections.\n\nReturns statistics including row counts and dimensions for both\nthe normal (context) collection and the memory collection.",
+        "description": "Retrieve usage stats for your tenant.\n\nUse this endpoint to check whether a tenant exists and view core metrics like total indexed objects and vector dimension. This helps you validate setup and monitor ingestion.\n\nExpected outcome\n\nYou receive the current object count and vector dimension for the tenant.\nIf the tenant does not exist, you get a not-found error.",
         "operationId": "get_tenant_stats_tenants_stats_get",
         "security": [
           {
@@ -865,7 +853,7 @@
           "embeddings"
         ],
         "summary": "Insert Raw Embeddings Endpoint",
-        "description": "Insert or upsert raw embeddings into the vectorstore.\n\nThis endpoint allows you to insert raw embedding vectors along with metadata.\nWhen upsert=True, existing embeddings with the same chunk_id will be updated.",
+        "description": "Upload pre-computed embeddings for advanced similarity search.\n\nThis endpoint accepts vector embeddings that you\u2019ve generated externally,\n allowing you to integrate with custom embedding models or existing vector databases.\n  The embeddings represent chunks of your content as numerical vectors.\n\nThe system stores these embeddings and makes them available for semantic search and similarity matching.\n Use this when you want to leverage specialized embedding models or have existing vector representations.\nWhen upsert=True, existing embeddings with the same chunk_id will be updated.",
         "operationId": "insert_raw_embeddings_endpoint_embeddings_insert_raw_embeddings_post",
         "requestBody": {
           "content": {
@@ -972,7 +960,7 @@
           "embeddings"
         ],
         "summary": "Search Raw Embeddings Endpoint",
-        "description": "Search for raw embeddings using a query embedding vector.\n\nPerforms vector similarity search to find the most similar embeddings\nto the provided query embedding.",
+        "description": "Find similar chunks using an embedding vector.\n\nUse this to retrieve the most similar chunk IDs to a single query embedding.\n\nExpected outcome:\n- You receive the closest chunk IDs with optional similarity scores.",
         "operationId": "search_raw_embeddings_endpoint_embeddings_search_raw_embeddings_post",
         "requestBody": {
           "content": {
@@ -1083,7 +1071,7 @@
           "embeddings"
         ],
         "summary": "Filter Raw Embeddings Endpoint",
-        "description": "Filter raw embeddings by chunk IDs or source ID.\n\nThis endpoint allows you to retrieve embeddings by their chunk IDs or by source ID.\nYou must provide either source_id or chunk_ids, but not both.",
+        "description": "Retrieve embeddings for specific chunk IDs.\nUse this when you already know the chunk IDs and need their corresponding embeddings.",
         "operationId": "filter_raw_embeddings_endpoint_embeddings_filter_raw_embeddings_post",
         "requestBody": {
           "content": {
@@ -1194,7 +1182,7 @@
           "embeddings"
         ],
         "summary": "Delete Raw Embeddings Endpoint",
-        "description": "Delete raw embeddings by chunk IDs or source ID.\n\nThis endpoint allows you to delete embeddings by their chunk IDs or by source ID.\nYou must provide either source_id or chunk_ids, but not both.",
+        "description": "Delete embedding chunks by chunk ID.\n\nUse this to remove specific chunks from your embeddings index when they are no longer valid or should not appear in results.",
         "operationId": "delete_raw_embeddings_endpoint_embeddings_delete_raw_embeddings_delete",
         "security": [
           {
@@ -1368,7 +1356,7 @@
           "list"
         ],
         "summary": "Get User Sources",
-        "description": "Retrieve all sources for a specific tenant.\n\nUse this endpoint to fetch a complete list of all sources associated\nwith your tenant. This includes documents, files, and other content\nyou've uploaded for processing.\n\nYou can optionally specify a sub-tenant to narrow down the results to\nsources within that specific sub-tenant scope.",
+        "description": "Retrieve all sources for a specific tenant and subtenant combination.\n\nUse this endpoint to fetch a complete list of all sources associated\nwith your tenant. This includes documents, files, and other content\nyou've uploaded for processing.\n\nYou can optionally specify a sub-tenant to narrow down the results to\nsources within that specific sub-tenant scope.",
         "operationId": "get_user_sources_list_list_sources_get",
         "security": [
           {
@@ -1609,7 +1597,7 @@
           "list"
         ],
         "summary": "Graph Relations By Id",
-        "description": "Retrieve relations for a specific source.\n\nUse this endpoint to fetch all relations associated with a specific\nsource. This is useful when you need to understand the relationships\nbetween entities within a source.\n\nProvide the source ID in the request body along with your tenant\ninformation to get the relations for that source.",
+        "description": "Retrieve relations for a specific source.\n\nUse this endpoint to fetch all relations associated with a specific source.\n This is useful when you need to understand the relationships between entities within a source.\n\nProvide the source ID in the request body along with your tenant information to get the relations for that source.",
         "operationId": "graph_relations_by_id_list_graph_relations_by_id_get",
         "security": [
           {
@@ -1751,14 +1739,14 @@
         ]
       }
     },
-    "/delete/delete-source": {
+    "/delete/delete-sources": {
       "post": {
         "tags": [
           "delete"
         ],
         "summary": "Delete Source",
-        "description": "Delete sources from all storage systems (MongoDB, Milvus, Falkor, MinIO).\n\nThis endpoint permanently deletes sources from:\n- MongoDB (source metadata)\n- Milvus (vector embeddings in normal and memory collections)\n- Falkor (knowledge graph nodes and relations)\n- MinIO (stored files)\n\nProvide the source IDs in the request body along with your tenant information.",
-        "operationId": "delete_source_delete_delete_source_post",
+        "description": "Remove documents and content from your knowledge base.\n\nThis endpoint permanently deletes the specified sources from your knowledge base.\n Once deleted, the content will no longer be available for search or retrieval.\n\nUse this carefully as the action cannot be undone. The system will confirm successful deletion of each source ID you specify.",
+        "operationId": "delete_source_delete_delete_sources_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1869,7 +1857,7 @@
           "fetch"
         ],
         "summary": "Fetch Source",
-        "description": "Fetch the content of a file stored in MinIO.\n\nThis endpoint can return:\n- File content directly (as string or base64)\n- A presigned URL to access the file\n- Both content and presigned URL\n\nThe endpoint will try different object name patterns to locate the file:\n- {tenant_id}/{sub_tenant_id}/{source_id}\n- {tenant_id}/{sub_tenant_id}/{source_id}.txt\n- {tenant_id}/{sub_tenant_id}/{source_id}.json",
+        "description": "Fetch the content of a source ingested.\n\nThis endpoint can return:\n- File content directly (as string or base64)\n- A presigned URL to access the file\n- Both content and presigned URL",
         "operationId": "fetch_source_fetch_fetch_source_content_post",
         "requestBody": {
           "content": {
@@ -1981,7 +1969,7 @@
           "Search"
         ],
         "summary": "Hybrid search",
-        "description": "Search for relevant content within your indexed sources or user memories.\n\n    This API uses Milvus hybrid search combining dense vector (embedding) search \n    with BM25 sparse vector search to find the most relevant chunks.\n    \n    Results are ranked by relevance and can be customized with parameters like \n    result limits, alpha weighting, and recency preferences.\n    \n    Use `search_mode` to specify what to search:\n    - \"sources\" (default): Search over indexed documents\n    - \"memories\": Search over user memories (uses inferred content)\n    \n    Use `mode` to control retrieval quality:\n    - \"fast\" (default): Single query, faster response\n    - \"accurate\": Multi-query generation with reranking, higher quality",
+        "description": "Search for relevant content within your indexed sources or user memories.\n    \n    Results are ranked by relevance and can be customized with parameters like \n    result limits, alpha weighting, and recency preferences.\n    \n    Use `search_mode` to specify what to search:\n    - \"sources\" (default): Search over indexed documents\n    - \"memories\": Search over user memories (uses inferred content)\n    \n    Use `mode` to control retrieval quality:\n    - \"fast\" (default): Single query, faster response\n    - \"accurate\": Multi-query generation with reranking, higher quality",
         "operationId": "hybrid_search_search_hybrid_search_post",
         "requestBody": {
           "content": {
@@ -2098,7 +2086,7 @@
           "Search"
         ],
         "summary": "Full-text search",
-        "description": "Perform full text search for exact matches within your indexed sources or memories.\n\n    This API uses Milvus TEXT_MATCH for keyword-based search.\n    Choose between 'OR' and 'AND' operators to control how search terms are combined\n    for precise text matching.\n    \n    Use `search_mode` to specify what to search:\n    - \"sources\" (default): Search over indexed documents\n    - \"memories\": Search over user memories",
+        "description": "Perform full text search for exact matches within your indexed sources or memories.\n    Choose between 'OR' and 'AND' operators to control how search terms are combined\n    for precise text matching.\n    \n    Use `search_mode` to specify what to search:\n    - \"sources\" (default): Search over indexed documents\n    - \"memories\": Search over user memories",
         "operationId": "full_text_search_search_full_text_search_post",
         "requestBody": {
           "content": {
@@ -2215,7 +2203,7 @@
           "Search"
         ],
         "summary": "Question & Answer with retrieval",
-        "description": "Ask a question and get an AI-generated answer based on your indexed sources or memories.\n\n    This API combines hybrid search retrieval with LLM-based answer generation (RAG):\n    1. Retrieves relevant context using hybrid search (dense + sparse vectors)\n    2. Optionally includes knowledge graph context for enhanced understanding\n    3. Generates a grounded answer using an LLM based on the retrieved context\n\n    The response includes both the AI answer and the source chunks used to generate it,\n    enabling full transparency and citation capabilities.\n\n    Use `search_mode` to specify what to search:\n    - \"sources\" (default): Search over indexed documents\n    - \"memories\": Search over user memories\n\n    Use `mode` to control retrieval quality:\n    - \"fast\" (default): Single query, faster response\n    - \"accurate\": Multi-query generation with reranking, higher quality",
+        "description": "Ask a question and get an AI-generated answer based on your indexed sources or memories.\n\n    The response includes both the AI answer and the source chunks used to generate it,\n    enabling full transparency and citation capabilities.\n\n    Use `search_mode` to specify what to search:\n    - \"sources\" (default): Search over indexed documents\n    - \"memories\": Search over user memories\n\n    Use `mode` to control retrieval quality:\n    - \"fast\" (default): Single query, faster response\n    - \"accurate\": Multi-query generation with reranking, higher quality",
         "operationId": "qna_search_search_qna_post",
         "requestBody": {
           "content": {
@@ -2694,130 +2682,6 @@
         }
       }
     },
-    "/user/refresh-api-key": {
-      "post": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Refresh Api Key",
-        "operationId": "refresh_api_key_user_refresh_api_key_post",
-        "parameters": [
-          {
-            "name": "x-cortex-secret",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Cortex-Secret"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "string",
-                "title": "User Id"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "title": "Response Refresh Api Key User Refresh Api Key Post"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request - Invalid input parameters",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ActualErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized - Authentication required",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ActualErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden - Access denied",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ActualErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found - Resource does not exist",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ActualErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity - Validation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ActualErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ActualErrorResponse"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Service Unavailable",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ActualErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/": {
       "get": {
         "tags": [
@@ -2988,7 +2852,6 @@
             "example": true
           },
           "memory_id": {
-            "type": "string",
             "type": "string",
             "title": "Memory Id",
             "description": "Unique identifier assigned to the newly created memory",
@@ -3808,25 +3671,6 @@
       },
       "ContentUploadRequest": {
         "properties": {
-          "tenant_id": {
-            "type": "string",
-            "title": "Tenant Id",
-            "description": "Unique identifier for the tenant/organization",
-            "example": "tenant_1234"
-          },
-          "sub_tenant_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Sub Tenant Id",
-            "description": "Optional sub-tenant identifier used to organize data within a tenant. If omitted, the default sub-tenant created during tenant setup will be used.",
-            "example": "sub_tenant_4567"
-          },
           "contents": {
             "items": {
               "$ref": "#/components/schemas/ContentUploadItem"
@@ -3838,9 +3682,6 @@
           }
         },
         "type": "object",
-        "required": [
-          "tenant_id"
-        ],
         "title": "ContentUploadRequest"
       },
       "DeleteResult": {
@@ -4408,15 +4249,7 @@
             ],
             "title": "Indexing Status",
             "description": "Current status of the file. Possible values are 'queued', 'processing', 'completed', 'errored'",
-            "description": "Current status of the file. Possible values are 'queued', 'processing', 'completed', 'errored'",
             "example": "<indexing_status>"
-          },
-          "error_code": {
-            "type": "string",
-            "title": "Error Code",
-            "description": "Error code for the file. You may share this code with us to help us diagnose and resolve the issue.",
-            "default": "",
-            "example": "<error_code>"
           },
           "error_code": {
             "type": "string",
@@ -5610,15 +5443,6 @@
             "title": "Tenant Id",
             "description": "Unique tenant identifier",
             "example": "tenant_1234"
-          },
-          "wait_time_seconds": {
-            "type": "integer",
-            "maximum": 600,
-            "minimum": 10,
-            "title": "Wait Time Seconds",
-            "description": "Time to wait for infra status checks",
-            "default": 120,
-            "example": 1
           }
         },
         "type": "object",

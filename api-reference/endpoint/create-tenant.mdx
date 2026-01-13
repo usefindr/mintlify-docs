@@ -1,6 +1,6 @@
 ---
 title: 'Create Tenant'
-openapi: 'POST /user/create_tenant'
+openapi: 'POST /tenants/create'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
@@ -18,59 +18,13 @@ Create a new tenant. If you pass `tenant_id` as a query parameter, that ID will 
 <Tabs>
   <Tab title="API Request">
     ```bash expandable
-    curl --request POST \
-      --url 'https://api.usecortex.ai/user/create_tenant?tenant_id=tenant_1234' \
-      --header 'Authorization: Bearer <token>' \
-      --header 'Content-Type: application/json' \
-      --data '{
-      "tenant_metadata_schema": [
-        {
-          "key": "department",
-          "type": "string",
-          "searchable": true,
-          "filterable": true
-        },
-        {
-          "key": "compliance_framework",
-          "type": "string",
-          "searchable": true,
-          "filterable": false
-        },
-        {
-          "key": "data_classification",
-          "type": "string",
-          "searchable": false,
-          "filterable": true
-        }
-      ]
-    }'
-    ```
-  </Tab>
-  <Tab title="TypeScript">
-    ```ts expandable
-    const tenantResponse = await client.user.createTenant({
-      tenant_id: "tenant_1234",
-      tenant_metadata_schema: [
-        {
-          key: "department",
-          type: "string",
-          searchable: true,
-          filterable: true
-        },
-        {
-          key: "compliance_framework",
-          type: "string",
-          searchable: true,
-          filterable: false
-        },
-        {
-          key: "data_classification",
-          type: "string",
-          searchable: false,
-          filterable: true
-        }
-      ]
-    });
+    curl -X 'POST' \
+  'https://api.usecortex.ai/tenants/create' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "tenant_id": "string"
+  }'
     ```
   </Tab>
   <Tab title="Python (Sync)">

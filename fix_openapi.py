@@ -27,26 +27,28 @@ defaults = {
     "source_id": "CortexDoc1234",
     "user_name": "John Doe",
     # "message": "<string>",÷
-    "embeddings": [
-        [0.123413, 0.655367, 0.987654, 0.123456, 0.789012],
-        [0.123413, 0.655367, 0.987654, 0.123456, 0.789012],
-    ],
+    "embeddings": [[0.123413, 0.655367, 0.987654, 0.123456, 0.789012], [0.123413, 0.655367, 0.987654, 0.123456, 0.789012]],
     "question": "What is Cortex AI",
     "session_id": "chat_session_1234",
     "tenant_metadata_schema": [
-        {"key": "department", "type": "string", "searchable": True, "filterable": True},
+        {
+            "key": "department",
+            "type": "string",
+            "searchable": True,
+            "filterable": True
+        },
         {
             "key": "compliance_framework",
             "type": "string",
             "searchable": True,
-            "filterable": False,
+            "filterable": False
         },
         {
             "key": "data_classification",
             "type": "string",
             "searchable": False,
-            "filterable": True,
-        },
+            "filterable": True
+        }
     ],
     "operator": "and",
     "user_message": "I prefer detailed technical explanations and works in the Pacific timezone",
@@ -55,167 +57,59 @@ defaults = {
     "sub_tenant_ids": ["sub_tenant_1234", "sub_tenant_4567"],
     "source_ids": ["CortexDoc1234", "CortexDoc4567"],
     "chunk_ids": ["CortexEmbeddings123_0", "CortexEmbeddings123_1"],
-    # "graph_relations_example": {
-    "chunks": [
-        {
-            "chunk_uuid": "doc_a1b2c3d4e5f6...",
-            "chunk_content": "Sarah Chen founded Acme Corp in 2019 after leaving her role at TechGiant.",
-            "source_title": "company-history.md",
-            "relevancy_score": 0.85,
-            "graph_triplet_ids": ["g_0"],
-        },
-        {
-            "chunk_uuid": "doc_x7y8z9a0b1c2...",
-            "chunk_content": "Marcus Johnson joined as CTO and leads the Platform team, reporting directly to Sarah.",
-            "source_title": "org-structure.md",
-            "relevancy_score": 0.72,
-            "graph_triplet_ids": ["g_1", "g_2"],
-        },
-    ],
-    "triplets": [
-        {
-            "source": {
-                "name": "Sarah Chen",
-                "type": "PERSON",
-                "namespace": "employees",
-            },
-            "target": {"name": "Acme Corp", "type": "ORGANIZATION"},
-            "relation": {
-                "canonical_predicate": "FOUNDER_OF",
-                "context": "Sarah Chen founded Acme Corp in 2019.",
-            },
-        },
-        {
-            "source": {
-                "name": "Marcus Johnson",
-                "type": "PERSON",
-                "namespace": "employees",
-            },
-            "target": {"name": "Acme Corp", "type": "ORGANIZATION"},
-            "relation": {
-                "canonical_predicate": "WORKS_AT",
-                "context": "Marcus Johnson is the CTO at Acme Corp.",
-            },
-        },
-        {
-            "source": {"name": "Marcus Johnson", "type": "PERSON"},
-            "target": {"name": "Sarah Chen", "type": "PERSON"},
-            "relation": {
-                "canonical_predicate": "REPORTS_TO",
-                "context": "Marcus reports directly to Sarah.",
-            },
-        },
-    ],
-    # "graph_relations": {
-    "entity_paths": [
-        {
-            "combined_context": "Sarah Chen is the founder and CEO of Acme Corp. | Marcus Johnson serves as CTO at Acme Corp. | Marcus reports directly to Sarah Chen.",
-            "triplets": [
-                {
-                    "source": {
-                        "name": "Sarah Chen",
-                        "type": "PERSON",
-                        "namespace": "employees",
-                    },
-                    "target": {"name": "Acme Corp", "type": "ORGANIZATION"},
-                    "relation": {
-                        "canonical_predicate": "FOUNDER_OF",
-                        "context": "Sarah Chen founded Acme Corp in 2019.",
-                    },
-                },
-                {
-                    "source": {
-                        "name": "Marcus Johnson",
-                        "type": "PERSON",
-                        "namespace": "employees",
-                    },
-                    "target": {"name": "Acme Corp", "type": "ORGANIZATION"},
-                    "relation": {
-                        "canonical_predicate": "WORKS_AT",
-                        "context": "Marcus Johnson is the CTO at Acme Corp.",
-                    },
-                },
-                {
-                    "source": {"name": "Marcus Johnson", "type": "PERSON"},
-                    "target": {"name": "Sarah Chen", "type": "PERSON"},
-                    "relation": {
-                        "canonical_predicate": "REPORTS_TO",
-                        "context": "Marcus reports directly to Sarah.",
-                    },
-                },
-            ],
-            "relevancy_score": 0.78,
-        }
-    ],
-    "chunk_triplets": {
-        "g_0": {
-            "source": {"name": "Sarah Chen", "type": "PERSON"},
-            "target": {"name": "Acme Corp", "type": "ORGANIZATION"},
-            "relation": {
-                "canonical_predicate": "FOUNDER_OF",
-                "context": "Sarah Chen founded Acme Corp in 2019 after leaving TechGiant.",
-            },
-            "relevancy_score": 0.85,
-        },
-        "g_1": {
-            "source": {"name": "Marcus Johnson", "type": "PERSON"},
-            "target": {"name": "Acme Corp", "type": "ORGANIZATION"},
-            "relation": {
-                "canonical_predicate": "WORKS_AT",
-                "context": "Marcus Johnson is the CTO at Acme Corp.",
-            },
-            "relevancy_score": 0.72,
-        },
-        "g_2": {
-            "source": {"name": "Marcus Johnson", "type": "PERSON"},
-            "target": {"name": "Sarah Chen", "type": "PERSON"},
-            "relation": {
-                "canonical_predicate": "REPORTS_TO",
-                "context": "Marcus reports directly to Sarah as CTO.",
-            },
-            "relevancy_score": 0.68,
-        },
-    },
-    # },
-    # },
     "user_memories": [
         {
             "memory_id": "memory_1234",
-            "memory_content": "I prefer detailed technical explanations and works in the Pacific timezone",
+            "memory_content": "I prefer detailed technical explanations and works in the Pacific timezone"
         },
-        {"memory_id": "memory_4567", "memory_content": "I prefer dark mode"},
+        {
+            "memory_id": "memory_4567",
+            "memory_content": "I prefer dark mode"
+        }
     ],
     "retrieved_user_memories": [
         {
             "memory_id": "memory_1234",
-            "memory_content": "I prefer detailed technical explanations and works in the Pacific timezone",
+            "memory_content": "I prefer detailed technical explanations and works in the Pacific timezone"
         },
-        {"memory_id": "memory_4567", "memory_content": "I prefer dark mode"},
+        {
+            "memory_id": "memory_4567",
+            "memory_content": "I prefer dark mode"
+        }
     ],
     "generated_user_memories": [
         {
             "memory_id": "memory_1234",
-            "memory_content": "User prefers detailed technical explanations and works in the Pacific timezone",
+            "memory_content": "User prefers detailed technical explanations and works in the Pacific timezone"
         },
-        {"memory_id": "memory_4567", "memory_content": "User prefers dark mode"},
+        {
+            "memory_id": "memory_4567",
+            "memory_content": "User prefers dark mode"
+        }
     ],
-    "uploaded": [
-        {"file_id": "CortexDoc1234", "filename": "document1.pdf"},
-        {"file_id": "CortexDoc4567", "filename": "document2.docx"},
-    ],
+    "uploaded":  [
+        {
+            "file_id": "CortexDoc1234",
+            "filename": "document1.pdf"
+        },
+        {
+            "file_id": "CortexDoc4567",
+            "filename": "document2.docx"
+        }
+    ]
 }
 
 full_text_query = "John Smith Jake"
 
 update_embeddings_emb = {
     "CortexEmbeddings123_0": [0.123413, 0.655367, 0.987654, 0.123456, 0.789012],
-    "CortexEmbeddings123_1": [0.123413, 0.655367, 0.987654, 0.123456, 0.789012],
+    "CortexEmbeddings123_1": [0.123413, 0.655367, 0.987654, 0.123456, 0.789012]
 }
 
 example_exclusion_by_schema_name = {
     # "Body_upload_files_upload_upload_document_post": ["tenant_metadata", "document_metadata"]
     "SourceModel": ["attachments"],
-    "EmbeddingsSearchData": ["scores", "chunk_ids"],
+    "EmbeddingsSearchData": ["scores", "chunk_ids"]
 }
 
 defaults_by_schema_name = {
@@ -231,15 +125,8 @@ defaults_by_schema_name = {
 
 schemas_to_ignore = {"ErrorResponse"}
 
-properties_to_ignore = {
-    "message",
-    "status",
-    "tenant_metadata",
-    "document_metadata",
-    "files",
-    "sources",
-    "not_found_chunk_ids",
-}
+properties_to_ignore = {"message", "status", "tenant_metadata",
+                        "document_metadata", "files", "sources", "not_found_chunk_ids"}
 
 OPEN_API_PATH = "./api-reference/openapi.json"
 
@@ -253,8 +140,7 @@ for endpoint in openapi["paths"]:
             for param in openapi["paths"][endpoint][method]["parameters"]:
                 if param["in"] == "query":
                     param["schema"]["example"] = defaults.get(
-                        param["name"], f"<{type(param['name']).__name__}>"
-                    )
+                        param["name"], f"<{type(param['name']).__name__}>")
 print("Default values added to query params.")
 
 print("Adding example values to components.schemas")
@@ -279,10 +165,7 @@ if "components" in openapi and "schemas" in openapi["components"]:
                 # Special case for FullTextSearchRequest query property
                 if schema_name == "FullTextSearchRequest" and prop_name == "query":
                     prop_def["example"] = full_text_query
-                elif (
-                    schema_name == "EmbeddingsUpdateRequest"
-                    and prop_name == "embeddings"
-                ):
+                elif schema_name == "EmbeddingsUpdateRequest" and prop_name == "embeddings":
                     prop_def["example"] = update_embeddings_emb
                 elif prop_name in defaults:
                     prop_def["example"] = defaults[prop_name]

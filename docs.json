@@ -98,7 +98,8 @@
               "api-reference/endpoint/list-sources",
               "api-reference/endpoint/list-sources-by-id",
               "api-reference/endpoint/fetch-source-content",
-              "api-reference/endpoint/delete-source"
+              "api-reference/endpoint/delete-sources",
+              "api-reference/endpoint/graph-relations"
             ]
           },
           {

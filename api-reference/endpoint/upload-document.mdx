@@ -1,6 +1,6 @@
 ---
 title: 'Upload Document'
-openapi: 'POST /upload/upload_document'
+openapi: 'POST /ingestion/upload-document'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
@@ -15,14 +15,20 @@ import TryIt from '/snippets/try-it.mdx'
 <Tabs>
   <Tab title="API Request">
     ```bash
-    curl --request POST \
-      --url https://api.usecortex.ai/upload/upload_document \
-      --header 'Authorization: Bearer 3e0a174b-bd11-414c-8259-9612a4b99a3f' \
-      --header 'Content-Type: multipart/form-data' \
-      --form 'file_id=doc_123456' \
-      --form 'tenant_metadata={}' \
-      --form 'document_metadata={}' \
-      --form file=@example-file
+    curl -X 'POST' \
+  'https://api.usecortex.ai/ingestion/upload-document' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: multipart/form-data' \
+  -F 'tenant_metadata=string' \
+  -F 'document_metadata_list=string' \
+  -F 'upsert=true' \
+  -F 'tenant_id=string' \
+  -F 'sub_tenant_id=' \
+  -F 'document_metadata=string' \
+  -F 'relations=false' \
+  -F 'files=@temp-test.pdf;type=application/pdf' \
+  -F 'tenant_metadata_list=string' \
+  -F 'file_id=string'
       ```
   </Tab>
   <Tab title="TypeScript">

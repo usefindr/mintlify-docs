@@ -1,6 +1,6 @@
 ---
 title: 'List Sources By ID'
-openapi: 'POST /list/sources_by_id'
+openapi: 'POST /list/list-sources-by-id'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
@@ -15,15 +15,17 @@ import TryIt from '/snippets/try-it.mdx'
 <Tabs>
   <Tab title="API Request">
     ```bash
-    curl --request POST \
-      --url https://api.usecortex.ai/list/sources_by_id \
-      --header 'Authorization: Bearer <token>' \
-      --header 'Content-Type: application/json' \
-      --data '{
-      "tenant_id": "tenant_1234",
-      "source_ids": [],
-      "sub_tenant_id": "sub_tenant_4567"
-    }'
+   curl -X 'POST' \
+  'https://api.usecortex.ai/list/list-sources-by-id' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "source_ids": [
+    "string"
+  ],
+  "tenant_id": "string",
+  "sub_tenant_id": "string"
+}'
       ```
   </Tab>
   <Tab title="TypeScript">

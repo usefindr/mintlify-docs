@@ -1,6 +1,6 @@
 ---
 title: 'Search Embeddings'
-openapi: 'POST /embeddings/search'
+openapi: 'POST /embeddings/search-raw-embeddings'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
@@ -15,22 +15,22 @@ import TryIt from '/snippets/try-it.mdx'
 <Tabs>
   <Tab title="API Request">
     ```bash expandable
-    curl --request POST \
-      --url https://api.usecortex.ai/embeddings/search \
-      --header 'Authorization: Bearer <token>' \
-      --header 'Content-Type: application/json' \
-      --data '{
-      "tenant_id": "tenant_1234",
-      "embeddings": [
-          0.123413,
-          0.655367,
-          0.987654,
-          0.123456,
-          0.789012
-      ],
-      "sub_tenant_id": "sub_tenant_4567",
-      "max_chunks": 1
-    }'
+    curl -X 'POST' \
+  'https://api.usecortex.ai/embeddings/search-raw-embeddings' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "tenant_id": "string",
+  "sub_tenant_id": "string",
+  "query_embedding": [
+    0
+  ],
+  "limit": 10,
+  "filter_expr": "string",
+  "output_fields": [
+    "string"
+  ]
+}'
       ```
   </Tab>
   <Tab title="TypeScript">
