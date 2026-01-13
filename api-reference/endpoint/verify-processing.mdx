@@ -1,6 +1,6 @@
 ---
 title: 'Verify Processing'
-openapi: 'POST /upload/verify_processing'
+openapi: 'POST /ingestion/verify-processing'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
@@ -15,8 +15,9 @@ import TryIt from '/snippets/try-it.mdx'
 <Tabs>
   <Tab title="API Request">
     ```bash
-    curl --request POST \
-      --url 'https://api.usecortex.ai/upload/verify_processing?file_id=CortexDoc1234&tenant_id=tenant_1234' \
+    curl -X 'POST' \
+    'https://api.usecortex.ai/ingestion/verify-processing?file_id=file_123' \
+    -H 'accept: application/json' \
       --header 'Authorization: Bearer YOUR_API_KEY'
       ```
   </Tab>

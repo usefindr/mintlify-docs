@@ -1,6 +1,6 @@
 ---
 title: 'Upload Embeddings'
-openapi: 'POST /upload/upload_embeddings'
+openapi: 'POST /embeddings/insert-raw-embeddings'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
@@ -15,29 +15,33 @@ import TryIt from '/snippets/try-it.mdx'
 <Tabs>
   <Tab title="API Request">
     ```bash expandable
-    curl --request POST \
-      --url 'https://api.usecortex.ai/upload/upload_embeddings?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
-      --header 'Authorization: Bearer <token>' \
-      --header 'Content-Type: application/json' \
-      --data '{
+    curl -X 'POST' \
+  'https://api.usecortex.ai/embeddings/insert-raw-embeddings' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "tenant_id": "string",
+  "sub_tenant_id": "",
+  "embeddings": [
+    {
+      "tenant_id": "string",
+      "sub_tenant_id": "string",
+      "source_id": "string",
+      "metadata": {
+        "additionalProp1": {}
+      },
       "embeddings": [
-        [
-          0.123413,
-          0.655367,
-          0.987654,
-          0.123456,
-          0.789012
-        ],
-        [
-          0.123413,
-          0.655367,
-          0.987654,
-          0.123456,
-          0.789012
-        ]
-      ],
-      "file_id": "CortexDoc1234"
-    }'
+        {
+          "chunk_id": "string",
+          "embedding": [
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "upsert": false
+}'
       ```
   </Tab>
   <Tab title="TypeScript">

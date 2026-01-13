@@ -1,6 +1,6 @@
 ---
-title: 'Get Embeddings by Chunk IDs'
-openapi: 'POST /embeddings/retrieve_by_ids'
+title: 'Filter Raw Embeddings'
+openapi: 'POST /embeddings/filter-raw-embeddings'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
@@ -15,15 +15,22 @@ import TryIt from '/snippets/try-it.mdx'
 <Tabs>
   <Tab title="API Request">
     ```bash
-    curl --request POST \
-      --url https://api.usecortex.ai/embeddings/retrieve_by_ids \
-      --header 'Authorization: Bearer <token>' \
-      --header 'Content-Type: application/json' \
-      --data '{
-      "chunk_ids": [],
-      "tenant_id": "tenant_1234",
-      "sub_tenant_id": "sub_tenant_4567"
-    }'
+    curl -X 'POST' \
+  'https://api.usecortex.ai/embeddings/filter-raw-embeddings' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "tenant_id": "string",
+  "sub_tenant_id": "string",
+  "source_id": "string",
+  "chunk_ids": [
+    "string"
+  ],
+  "output_fields": [
+    "string"
+  ],
+  "limit": 100
+}'
       ```
   </Tab>
   <Tab title="TypeScript">

@@ -1,6 +1,6 @@
 ---
-title: 'Delete Source'
-openapi: 'DELETE /upload/delete_source'
+title: 'Delete Sources'
+openapi: 'DELETE /delete/delete-sources'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
@@ -16,7 +16,7 @@ import TryIt from '/snippets/try-it.mdx'
   <Tab title="API Request">
     ```bash
     curl --request DELETE \
-      --url https://api.usecortex.ai/upload/delete_source \
+      --url https://api.usecortex.ai/delete/delete-sources \
       --header 'Authorization: Bearer YOUR_API_KEY' \
       --header 'Content-Type: application/json' \
       --data '{

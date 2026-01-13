@@ -1,6 +1,6 @@
 ---
-title: 'Upload Text'
-openapi: 'POST /upload/upload_text'
+title: 'Upload Content'
+openapi: 'POST /ingestion/upload-content'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
@@ -15,16 +15,29 @@ import TryIt from '/snippets/try-it.mdx'
 <Tabs>
   <Tab title="API Request">
     ```bash
-    curl --request POST \
-      --url 'https://api.usecortex.ai/upload/upload_text?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
-      --header 'Authorization: Bearer YOUR_API_KEY' \
-      --header 'Content-Type: application/json' \
-      --data '{
-      "content": "<string>",
-      "file_id": "text_doc_123456",
-      "tenant_metadata": {},
-      "document_metadata": {}
-    }'
+    curl -X 'POST' \
+  'https://api.usecortex.ai/ingestion/upload-content' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "content": {
+    "contents": [
+      {
+        "source_id": "doc_67890",
+        "title": "Q3 Financial Report",
+        "tenant_metadata": "string",
+        "document_metadata": "string",
+        "file_id": "string",
+        "content": "# Introduction\n\nThis is the document content.",
+        "is_markdown": false,
+        "relations": false
+      }
+    ]
+  },
+  "tenant_id": "string",
+  "sub_tenant_id": "",
+  "upsert": true
+}'
     ```
   </Tab>
   <Tab title="TypeScript">

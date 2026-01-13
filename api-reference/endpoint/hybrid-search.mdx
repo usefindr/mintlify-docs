@@ -1,6 +1,6 @@
 ---
 title: 'Hybrid Search'
-openapi: 'POST /search/retrieve'
+openapi: 'POST /search/hybrid-search'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
@@ -15,18 +15,24 @@ import TryIt from '/snippets/try-it.mdx'
 <Tabs>
   <Tab title="API Request">
     ```bash
-    curl --request POST \
-      --url https://api.usecortex.ai/search/retrieve \
-      --header 'Authorization: Bearer <token>' \
-      --header 'Content-Type: application/json' \
-      --data '{
-      "query": "Which mode does user prefer",
-      "tenant_id": "tenant_1234",
-      "sub_tenant_id": "sub_tenant_4567",
-      "alpha": 0.8,
-      "recency_bias": 0,
-      "personalise_search": true
-    }'
+    curl -X 'POST' \
+  'https://api.usecortex.ai/search/hybrid-search' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "tenant_id": "string",
+  "sub_tenant_id": "string",
+  "query": "string",
+  "max_chunks": 0,
+  "mode": "fast",
+  "alpha": "0.8",
+  "recency_bias": 0,
+  "num_related_chunks": 10,
+  "personalise_search": false,
+  "graph_context": false,
+  "extra_context": "string",
+  "search_mode": "sources"
+}'
       ```
   </Tab>
   <Tab title="TypeScript">

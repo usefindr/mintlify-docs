@@ -15,19 +15,46 @@ import TryIt from '/snippets/try-it.mdx'
 
 ### Sample
 ``` bash expandable
-curl --request POST \
-  --url 'https://api.usecortex.ai/upload/upload_app_sources?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
-  --header 'Authorization: Bearer YOUR_API_KEY' \
-  --header 'Content-Type: application/json' \
-  --data '[
-  {
-    "id": "", "title": "", "type": "", "description": "", "note": "", "url": "", "timestamp": "",
+curl -X 'POST' \
+  'https://api.usecortex.ai/ingestion/upload-app' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "app_sources": {
+    "id": "string",
+    "tenant_id": "string",
+    "sub_tenant_id": "string",
+    "title": "",
+    "type": "",
+    "description": "",
+    "note": "",
+    "url": "",
+    "timestamp": "",
     "content": {
-      "text": "<string>", "html_base64": "<string>", "csv_base64": "<string>", "markdown": "<string>", "files": [{}], "layout": [{}]
+      "text": "",
+      "html_base64": "",
+      "csv_base64": "",
+      "markdown": "",
+      "files": [
+        {
+          "additionalProp1": {}
+        }
+      ],
+      "layout": [
+        {
+          "additionalProp1": {}
+        }
+      ]
     },
-    "tenant_metadata": {},
-    "document_metadata": {},
-    "meta": {},
+    "tenant_metadata": {
+      "additionalProp1": {}
+    },
+    "document_metadata": {
+      "additionalProp1": {}
+    },
+    "meta": {
+      "additionalProp1": {}
+    },
     "attachments": [
       {
         "id": "",
@@ -35,23 +62,32 @@ curl --request POST \
         "title": "",
         "content_type": "",
         "content_url": "",
-        "misc": {},
+        "misc": {
+          "additionalProp1": {}
+        },
         "content": {
-          "text": "<string>",
-          "html_base64": "<string>",
-          "csv_base64": "<string>",
-          "markdown": "<string>",
+          "text": "",
+          "html_base64": "",
+          "csv_base64": "",
+          "markdown": "",
           "files": [
-            {}
+            {
+              "additionalProp1": {}
+            }
           ],
           "layout": [
-            {}
+            {
+              "additionalProp1": {}
+            }
           ]
         }
       }
     ]
-  }
-]'
+  },
+  "tenant_id": "string",
+  "sub_tenant_id": "",
+  "upsert": true
+}'
 ```
 
 ### SDK Examples

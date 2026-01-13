@@ -1,6 +1,6 @@
 ---
 title: 'Get Tenant Stats'
-openapi: 'GET /tenant/stats'
+openapi: 'GET /tenants/stats'
 ---
 
 import { TableOfContents } from '/snippets/table-of-contents.jsx'
@@ -16,8 +16,8 @@ import TryIt from '/snippets/try-it.mdx'
 <Tabs>
   <Tab title="API Request">
     ```bash wrap
-    curl --request GET \
-      --url 'https://api.usecortex.ai/tenant/stats?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
+      curl -X 'GET' \
+     'https://api.usecortex.ai/tenants/stats?tenant_id=tenant_123' \
       --header 'Authorization: Bearer YOUR_API_KEY'
       ```
   </Tab>
