@@ -10,27 +10,70 @@ import TryIt from '/snippets/try-it.mdx'
   <TableOfContents />
 </Panel>
 <TryIt />
-### Sample Request
-```bash
-curl -X 'POST' \
-  'http://api.usecortex.ai/search/qna' \
-  -d '{
-  "tenant_id": "string",
-  "sub_tenant_id": "string",
-  "question": "string",
-  "max_chunks": 10,
-  "mode": "fast",
-  "alpha": 0.8,
-  "search_mode": "sources",
-  "include_graph_context": true,
-  "extra_context": "string",
-  "llm_provider": "groq",
-  "model": "string",
-  "temperature": 0.3,
-  "max_tokens": 4096
-}'
-  ```
+### Examples
 
+<Tabs>
+  <Tab title="API Request">
+    ```bash
+    curl --request POST \
+      --url https://api.usecortex.ai/search/qna \
+      --header 'Authorization: Bearer <token>' \
+      --header 'Content-Type: application/json' \
+      --data '{
+      "question": "What is Cortex AI",
+      "session_id": "chat_session_1234",
+      "tenant_id": "tenant_1234",
+      "sub_tenant_id": "sub_tenant_4567",
+      "highlight_chunks": false,
+      "stream": false,
+      "search_alpha": 0.8,
+      "recency_bias": 0.2,
+      "ai_generation": true,
+      "user_name": "John Doe",
+      "user_instructions": "",
+      "multi_step_reasoning": true,
+      "auto_agent_routing": true
+    }'
+      ```
+  </Tab>
+  <Tab title="TypeScript">
+    ```ts
+    const answer = await client.search.qna({
+      question: "What is Cortex AI",
+      session_id: "chat_session_1234",
+      tenant_id: "tenant_1234",
+      sub_tenant_id: "sub_tenant_4567",
+      highlight_chunks: false,
+      stream: false,
+      search_alpha: 0.8,
+      recency_bias: 0.2,
+      ai_generation: true,
+      user_name: "John Doe",
+      multi_step_reasoning: true,
+      auto_agent_routing: true
+    });
+    ```
+  </Tab>
+  <Tab title="Python (Sync)">
+    ```python
+    # Async usage is similar, just use async_client and await
+    answer = client.search.qna(
+        question="What is Cortex AI",
+        session_id="chat_session_1234",
+        tenant_id="tenant_1234",
+        sub_tenant_id="sub_tenant_4567",
+        highlight_chunks=False,
+        stream=False,
+        search_alpha=0.8,
+        recency_bias=0.2,
+        ai_generation=True,
+        user_name="John Doe",
+        multi_step_reasoning=True,
+        auto_agent_routing=True
+    )
+    ```
+  </Tab>
+</Tabs>
 
 Ask questions and get AI-generated answers based on your tenant's knowledge base with conversational responses and citations.
 

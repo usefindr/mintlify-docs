@@ -10,33 +10,64 @@ import TryIt from '/snippets/try-it.mdx'
   <TableOfContents />
 </Panel>
 <TryIt />
-### Sample Request
-```bash expandable
-curl --request POST \
-  --url 'https://api.usecortex.ai/upload/upload_embeddings?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
-  --header 'Authorization: Bearer <token>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "embeddings": [
-    [
-      0.123413,
-      0.655367,
-      0.987654,
-      0.123456,
-      0.789012
-    ],
-    [
-      0.123413,
-      0.655367,
-      0.987654,
-      0.123456,
-      0.789012
-    ]
-  ],
-  "file_id": "CortexDoc1234"
-}'
-  ```
+### Examples
 
+<Tabs>
+  <Tab title="API Request">
+    ```bash expandable
+    curl --request POST \
+      --url 'https://api.usecortex.ai/upload/upload_embeddings?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
+      --header 'Authorization: Bearer <token>' \
+      --header 'Content-Type: application/json' \
+      --data '{
+      "embeddings": [
+        [
+          0.123413,
+          0.655367,
+          0.987654,
+          0.123456,
+          0.789012
+        ],
+        [
+          0.123413,
+          0.655367,
+          0.987654,
+          0.123456,
+          0.789012
+        ]
+      ],
+      "file_id": "CortexDoc1234"
+    }'
+      ```
+  </Tab>
+  <Tab title="TypeScript">
+    ```ts
+    const result = await client.upload.uploadEmbeddings({
+      tenant_id: "tenant_1234",
+      sub_tenant_id: "sub_tenant_4567",
+      embeddings: [
+        [0.123413, 0.655367, 0.987654, 0.123456, 0.789012],
+        [0.123413, 0.655367, 0.987654, 0.123456, 0.789012]
+      ],
+      file_id: "CortexDoc1234"
+    });
+    ```
+  </Tab>
+  <Tab title="Python (Sync)">
+    ```python
+    # Async usage is similar, just use async_client and await
+    result = client.upload.upload_embeddings(
+        tenant_id="tenant_1234",
+        sub_tenant_id="sub_tenant_4567",
+        embeddings=[
+            [0.123413, 0.655367, 0.987654, 0.123456, 0.789012],
+            [0.123413, 0.655367, 0.987654, 0.123456, 0.789012]
+        ],
+        file_id="CortexDoc1234"
+    )
+    ```
+  </Tab>
+</Tabs>
 
 Upload pre-computed embedding vectors directly to your tenant's knowledge base. This is useful when you have your own embedding model or want to use embeddings from external sources.
 

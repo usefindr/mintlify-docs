@@ -11,17 +11,57 @@ import TryIt from '/snippets/try-it.mdx'
   <TableOfContents />
 </Panel>
 <TryIt />
-### Sample Request
-```bash
-curl --request POST \
-  --url 'https://api.usecortex.ai/upload/batch_upload?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
-  --header 'Authorization: Bearer YOUR_API_KEY' \
-  --header 'Content-Type: multipart/form-data' \
-  --form files=@example-file \
-  --form 'tenant_metadata={}' \
-  --form 'document_metadata={}'
-  ```
+### Examples
 
+<Tabs>
+  <Tab title="API Request">
+    ```bash
+    curl --request POST \
+      --url 'https://api.usecortex.ai/upload/batch_upload?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
+      --header 'Authorization: Bearer YOUR_API_KEY' \
+      --header 'Content-Type: multipart/form-data' \
+      --form files=@example-file \
+      --form 'file_ids=["doc_123"]' \
+      --form 'tenant_metadata={}' \
+      --form 'document_metadata={}'
+      ```
+  </Tab>
+  <Tab title="TypeScript">
+    ```ts
+    import fs from 'fs';
+    
+    const results = await client.upload.batchUpload({
+      files: [
+        fs.readFileSync("doc1.pdf"),
+        fs.readFileSync("doc2.pdf")
+      ],
+      tenant_id: "tenant_1234",
+      sub_tenant_id: "sub_tenant_4567",
+      file_ids: ["doc_123", "doc_456"],
+      tenant_metadata: {},
+      document_metadata: {}
+    });
+    ```
+  </Tab>
+  <Tab title="Python (Sync)">
+    ```python
+    # Async usage is similar, just use async_client and await
+    with open("doc1.pdf", 'rb') as f1, open("doc2.pdf", 'rb') as f2:
+        files = [
+            ("doc1.pdf", f1),
+            ("doc2.pdf", f2)
+        ]
+        results = client.upload.batch_upload(
+            tenant_id="tenant_1234",
+            sub_tenant_id="sub_tenant_4567",
+            files=files,
+            file_ids=["doc_123", "doc_456"],
+            tenant_metadata={},
+            document_metadata={}
+        )
+    ```
+  </Tab>
+</Tabs>
 
 Upload multiple documents simultaneously to your tenant's knowledge base. All documents will be processed, chunked, and indexed for search and retrieval.
 
@@ -72,7 +112,10 @@ Each document is processed independently with:
 
 > **Recommended**: For optimal performance, limit each batch to a maximum of **20 sources** per request. Send multiple batch requests with an interval of **1 second** between each request.
 
-> **File ID Management**: When you provide a `file_id` as a key in the `document_metadata` object, that specific ID will be used to identify your content. If no `file_id` is provided in the `document_metadata`, the system will automatically generate a unique identifier for you. This allows you to maintain consistent references to your content across your application while ensuring every piece of content has a unique identifier.
+> **File ID Management**: The system uses a priority-based approach for file ID assignment:
+> 1. **First Priority**: If you provide a `file_id` as a direct body parameter, that specific ID will be used
+> 2. **Second Priority**: If no direct `file_id` is provided, the system checks for a `file_id` in the `document_metadata` object
+> 3. **Auto-Generation**: If neither source provides a `file_id`, the system will automatically generate a unique identifier
 
 ### **Duplicate File ID Behavior**
 

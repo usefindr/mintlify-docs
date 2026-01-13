@@ -399,6 +399,18 @@
             "required": true,
             "schema": {
               "type": "string",
+              "description": "The source ID to fetch relations for",
+              "title": "Source Id",
+              "example": "CortexDoc1234"
+            },
+            "description": "The source ID to fetch relations for"
+          },
+          {
+            "name": "tenant_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
               "description": "The file ID to check processing status for",
               "title": "File Id",
               "example": "CortexDoc1234"
@@ -2977,6 +2989,7 @@
           },
           "memory_id": {
             "type": "string",
+            "type": "string",
             "title": "Memory Id",
             "description": "Unique identifier assigned to the newly created memory",
             "default": "",
@@ -4395,7 +4408,15 @@
             ],
             "title": "Indexing Status",
             "description": "Current status of the file. Possible values are 'queued', 'processing', 'completed', 'errored'",
+            "description": "Current status of the file. Possible values are 'queued', 'processing', 'completed', 'errored'",
             "example": "<indexing_status>"
+          },
+          "error_code": {
+            "type": "string",
+            "title": "Error Code",
+            "description": "Error code for the file. You may share this code with us to help us diagnose and resolve the issue.",
+            "default": "",
+            "example": "<error_code>"
           },
           "error_code": {
             "type": "string",

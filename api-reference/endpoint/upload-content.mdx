@@ -10,19 +10,51 @@ import TryIt from '/snippets/try-it.mdx'
   <TableOfContents />
 </Panel>
 <TryIt />
-### Sample Request
-```bash
-curl --request POST \
-  --url 'https://api.usecortex.ai/upload/upload_text?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
-  --header 'Authorization: Bearer YOUR_API_KEY' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "content": "<string>",
-  "tenant_metadata": {},
-  "document_metadata": {}
-}'
-  ```
+### Examples
 
+<Tabs>
+  <Tab title="API Request">
+    ```bash
+    curl --request POST \
+      --url 'https://api.usecortex.ai/upload/upload_text?tenant_id=tenant_1234&sub_tenant_id=sub_tenant_4567' \
+      --header 'Authorization: Bearer YOUR_API_KEY' \
+      --header 'Content-Type: application/json' \
+      --data '{
+      "content": "<string>",
+      "file_id": "text_doc_123456",
+      "tenant_metadata": {},
+      "document_metadata": {}
+    }'
+    ```
+  </Tab>
+  <Tab title="TypeScript">
+    ```ts
+    const result = await client.upload.uploadText({
+      tenant_id: "tenant_1234",
+      sub_tenant_id: "sub_tenant_4567",
+      body: {
+        content: "Your text content here",
+        file_id: "text_doc_123456",
+        tenant_metadata: {},
+        document_metadata: {}
+      }
+    });
+    ```
+  </Tab>
+  <Tab title="Python (Sync)">
+    ```python
+    # Async usage is similar, just use async_client and await
+    result = client.upload.upload_text(
+        tenant_id="tenant_1234",
+        sub_tenant_id="sub_tenant_4567",
+        content="Your text content here",
+        file_id="text_doc_123456",
+        tenant_metadata={},
+        document_metadata={}
+    )
+    ```
+  </Tab>
+</Tabs>
 
 Upload text content directly to your tenant's knowledge base. The text will be processed, chunked, and indexed for search and retrieval.
 
@@ -71,7 +103,10 @@ Our system automatically handles:
 **Default Sub-Tenant Behavior**: If you don't specify a `sub_tenant_id`, the text content will be uploaded to the default sub-tenant created when your tenant was set up. This is perfect for organization-wide content that should be accessible across all departments.
 </Note>
 
-> **File ID Management**: When you provide a `file_id` as a key in the `document_metadata` object, that specific ID will be used to identify your content. If no `file_id` is provided in the `document_metadata`, the system will automatically generate a unique identifier for you. This allows you to maintain consistent references to your content across your application while ensuring every piece of content has a unique identifier.
+> **File ID Management**: The system uses a priority-based approach for file ID assignment:
+> 1. **First Priority**: If you provide a `file_id` as a direct body parameter, that specific ID will be used
+> 2. **Second Priority**: If no direct `file_id` is provided, the system checks for a `file_id` in the `document_metadata` object
+> 3. **Auto-Generation**: If neither source provides a `file_id`, the system will automatically generate a unique identifier
 
 ### **Duplicate File ID Behavior**
 

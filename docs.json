@@ -33,6 +33,7 @@
             "group": "Essentials",
             "pages": [
               "essentials/retrievals",
+              "essentials/graph-rag",
               "essentials/multi-step",
               "essentials/answers",
               "essentials/metadata",
@@ -63,7 +64,8 @@
             "group": "API Documentation",
             "pages": [
               "api-reference/introduction",
-              "api-reference/error-responses"
+              "api-reference/error-responses",
+              "api-reference/sdks"
             ]
           },
           {
