@@ -15,7 +15,7 @@ import TryIt from '/snippets/try-it.mdx'
 <Tabs>
   <Tab title="API Request">
     ```bash
-    curl -X POST "https://api.cortex.com/user_memory/retrieve_user_memory?tenant_id=company_123&sub_tenant_id=engineering_team&max_count=5" \
+    curl -X POST "https://api.usecortex.ai/user_memory/retrieve_user_memory?tenant_id=company_123&sub_tenant_id=engineering_team&max_count=5" \
       -H "Authorization: Bearer YOUR_API_KEY" \
       -H "Content-Type: application/json" \
       -d '{
@@ -102,7 +102,7 @@ Unlike traditional keyword search, semantic search understands the meaning and c
 
 ```bash
 # First, retrieve relevant memories
-curl -X POST "https://api.cortex.com/user_memory/retrieve_user_memory?tenant_id=company_123&sub_tenant_id=product_team&max_count=3" \
+curl -X POST "https://api.usecortex.ai/user_memory/retrieve_user_memory?tenant_id=company_123&sub_tenant_id=product_team&max_count=3" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -117,7 +117,7 @@ curl -X POST "https://api.cortex.com/user_memory/retrieve_user_memory?tenant_id=
 
 ```bash
 # Find communication preferences
-curl -X POST "https://api.cortex.com/user_memory/retrieve_user_memory?tenant_id=company_123&sub_tenant_id=marketing_team&max_count=2" \
+curl -X POST "https://api.usecortex.ai/user_memory/retrieve_user_memory?tenant_id=company_123&sub_tenant_id=marketing_team&max_count=2" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -126,7 +126,7 @@ curl -X POST "https://api.cortex.com/user_memory/retrieve_user_memory?tenant_id=
   }'
 
 # Find technical expertise areas  
-curl -X POST "https://api.cortex.com/user_memory/retrieve_user_memory?tenant_id=company_123&sub_tenant_id=engineering_team&max_count=5" \
+curl -X POST "https://api.usecortex.ai/user_memory/retrieve_user_memory?tenant_id=company_123&sub_tenant_id=engineering_team&max_count=5" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -135,7 +135,7 @@ curl -X POST "https://api.cortex.com/user_memory/retrieve_user_memory?tenant_id=
   }'
 
 # Find project-related memories
-curl -X POST "https://api.cortex.com/user_memory/retrieve_user_memory?tenant_id=company_123&sub_tenant_id=product_team&max_count=3" \
+curl -X POST "https://api.usecortex.ai/user_memory/retrieve_user_memory?tenant_id=company_123&sub_tenant_id=product_team&max_count=3" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -148,7 +148,7 @@ curl -X POST "https://api.cortex.com/user_memory/retrieve_user_memory?tenant_id=
 When you want Cortex to intelligently select the most relevant memories without specifying a count:
 
 ```bash
-curl -X POST "https://api.cortex.com/user_memory/retrieve_user_memory?tenant_id=company_123&sub_tenant_id=engineering_team&max_count=0" \
+curl -X POST "https://api.usecortex.ai/user_memory/retrieve_user_memory?tenant_id=company_123&sub_tenant_id=engineering_team&max_count=0" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
