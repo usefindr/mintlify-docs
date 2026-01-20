@@ -15,21 +15,26 @@ import TryIt from '/snippets/try-it.mdx'
 <Tabs>
   <Tab title="API Request">
     ```bash
-    curl -X 'POST' \
-  'https://api.usecortex.ai/ingestion/upload-document' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: multipart/form-data' \
-  -F 'tenant_metadata=string' \
-  -F 'document_metadata_list=string' \
-  -F 'upsert=true' \
-  -F 'tenant_id=string' \
-  -F 'sub_tenant_id=' \
-  -F 'document_metadata=string' \
-  -F 'relations=false' \
-  -F 'files=@temp-test.pdf;type=application/pdf' \
-  -F 'tenant_metadata_list=string' \
-  -F 'file_id=string'
-      ```
+    curl -X POST https://api.usecortex.ai/upload-document \
+  -F "tenant_id=tenant_123" \
+  -F "upsert=true" \
+  -F "files=@a.pdf" \
+  -F "files=@b.pdf" \
+  -F 'file_metadata=[
+    {
+      "file_id": "doc_a",
+      "tenant_metadata": { "dept": "sales" },
+      "document_metadata": { "author": "Alice" },
+      "relations": false
+    },
+    {
+      "file_id": "doc_b",
+      "tenant_metadata": { "dept": "marketing" },
+      "document_metadata": { "author": "Bob" },
+      "relations": true
+    }
+  ]'
+    ```
   </Tab>
   <Tab title="TypeScript">
     ```ts
@@ -64,7 +69,76 @@ import TryIt from '/snippets/try-it.mdx'
 
 Upload documents to your tenant's knowledge base for processing, chunking, and indexing to enable search and retrieval.
 
+## Metadata Parameters
 
+When uploading multiple files, you can provide metadata for each file using the `file_metadata` parameter. This allows you to associate custom metadata, organize documents, and control processing behavior on a per-file basis.
+
+### `file_metadata` Array
+
+The `file_metadata` parameter accepts a JSON array where each object corresponds to one of the uploaded files. The order of metadata objects should match the order of files in the `files` parameter.
+
+**Structure:**
+```json
+[
+  {
+    "file_id": "string",
+    "tenant_metadata": {},
+    "document_metadata": {},
+    "relations": boolean
+  }
+]
+```
+
+### Metadata Fields
+
+#### `file_id` (string, optional)
+- **Description**: A unique identifier for the document. If not provided, the system will auto-generate one.
+- **Use Case**: Use this to reference the document later, enable idempotent uploads, or maintain your own document naming scheme.
+- **Example**: `"doc_a"`, `"invoice_2024_001"`, `"manual_v2.3"`
+
+#### `tenant_metadata` (object, optional)
+- **Description**: Key-value pairs that represent tenant-level metadata. This metadata is shared across all documents within the tenant and is useful for organization-wide filtering and categorization.
+- **Use Case**: Store department information, project tags, organizational units, or any tenant-scoped attributes that help organize and filter documents.
+- **Example**: 
+  ```json
+  {
+    "dept": "sales",
+    "project": "Q4_2024",
+    "region": "us-west"
+  }
+  ```
+- **Note**: This metadata is indexed and can be used for filtering in search queries.
+
+#### `document_metadata` (object, optional)
+- **Description**: Key-value pairs that represent document-specific metadata. This metadata is unique to each document and provides context about the document itself.
+- **Use Case**: Store document-specific information like author, creation date, document type, version, or any attributes that describe the individual document.
+- **Example**: 
+  ```json
+  {
+    "author": "Alice",
+    "created_date": "2024-01-15",
+    "document_type": "invoice",
+    "version": "1.0"
+  }
+  ```
+- **Note**: This metadata is indexed and can be used for filtering in search queries.
+
+#### `relations` (boolean, optional)
+- **Description**: Controls whether the system should extract and index relationships between entities in the document. When set to `true`, the system will analyze the document for entity relationships and create a knowledge graph.
+- **Use Case**: Enable relationship extraction for documents where understanding connections between entities (people, places, concepts) is important for your use case.
+- **Default**: `false`
+- **Example**: 
+  - `true`: Extract relationships for documents like organizational charts, knowledge bases, or interconnected documentation
+  - `false`: Skip relationship extraction for simple documents or when graph features aren't needed
+
+
+<Info>
+**Metadata Ordering**: The order of objects in the `file_metadata` array should match the order of files in the `files` parameter. The first metadata object applies to the first file, the second to the second file, and so on.
+</Info>
+
+<Note>
+**Metadata Indexing**: Both `tenant_metadata` and `document_metadata` are indexed and can be used to filter search results. This enables powerful query capabilities like "find all sales documents from Q4" or "retrieve documents authored by Alice".
+</Note>
 
 ## Supported file formats
 <Info>
@@ -82,7 +156,7 @@ When you upload a document, it goes through a comprehensive processing pipeline 
 ### 1. **Immediate Upload & Queue**
 - Your document is immediately accepted and stored securely
 - It's added to our processing queue for background processing
-- You receive a confirmation response with a `file_id` for tracking
+- You receive a confirmation response with a `source_id` for tracking
 
 ### 2. **Processing Phase**
 Our system automatically handles:
@@ -121,8 +195,7 @@ Our system automatically handles:
 </Note>
 
 > **File ID Management**: The system uses a priority-based approach for file ID assignment:
-> 1. **First Priority**: If you provide a `file_id` as a direct body parameter, that specific ID will be used
-> 2. **Second Priority**: If no direct `file_id` is provided, the system checks for a `file_id` in the `document_metadata` object
+> 1. **First Priority**: If you provide a `file_id` in the `file_metadata`
 > 3. **Auto-Generation**: If neither source provides a `file_id`, the system will automatically generate a unique identifier
 
 ### **Duplicate File ID Behavior**
@@ -138,15 +211,6 @@ When you upload a document with a `file_id` that already exists in your tenant:
 **Important**: When overwriting an existing document, all previous chunks, embeddings, and search indexes associated with that `file_id` will be permanently removed and replaced. This action cannot be undone.
 </Warning>
 
-**Example Success Response for Duplicate File ID:**
-```json
-{
-  "message": "Document uploaded successfully. Existing document with file_id 'doc_123456' has been overwritten.",
-  "file_id": "doc_123456",
-  "status": "success"
-}
-```
-
 ## Processing Status & Monitoring
 
 After uploading, you can monitor your document's processing status:
@@ -155,8 +219,9 @@ After uploading, you can monitor your document's processing status:
 Upon successful upload, you'll receive:
 ```json
 {
-  "message": "Document uploaded successfully",
-  "file_id": "doc_123456"
+  "filename": "file_abc.pdf",
+  "source_id": "doc_123456",
+  "status": "queued"
 }
 ```
 
@@ -174,7 +239,6 @@ Your document will progress through these states:
 ### **When Your Document is Ready**
 Once processing is complete, your document will be:
 - ✅ **Searchable** via semantic search and Q&A endpoints
-- ✅ **Retrievable** through our retrieval APIs
 - ✅ **Available** for AI-powered applications
 - ✅ **Indexed** for fast query performance
 

@@ -161,7 +161,6 @@
           "ingestion"
         ],
         "summary": "Upload Document",
-        "description": "Upload one or more documents for ingestion.\nSupports both single and batch uploads.\nFor single file: send one file with the 'files' field.\nFor batch: send multiple files with the 'files' field (FastAPI will parse as list).",
         "operationId": "upload_document_ingestion_upload_document_post",
         "requestBody": {
           "content": {
@@ -259,11 +258,6 @@
           {
             "HTTPBearer": []
           }
-        ],
-        "x-fern-sdk-group-name": "upload",
-        "x-fern-sdk-method-name": "upload_document",
-        "x-fern-sdk-audience": [
-          "public"
         ]
       }
     },
@@ -2682,6 +2676,405 @@
         }
       }
     },
+    "/dashboard/resources/list/api_keys": {
+      "get": {
+        "tags": [
+          "dashboard"
+        ],
+        "summary": "List Apis",
+        "description": "List all API keys for dashboard view.\n\nUses Firebase authentication to identify the user and returns API keys\nassociated with that user.",
+        "operationId": "list_apis_dashboard_resources_list_api_keys_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DashboardApisResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cortex__models__response__commons__ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cortex__models__response__commons__ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cortex__models__response__commons__ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - Resource does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cortex__models__response__commons__ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity - Validation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cortex__models__response__commons__ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cortex__models__response__commons__ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cortex__models__response__commons__ActualErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/sources": {
+      "get": {
+        "tags": [
+          "dashboard"
+        ],
+        "summary": "List Sources",
+        "description": "List all sources for a tenant/sub-tenant combination.\n\nUses the same logic as the existing get_sources function.",
+        "operationId": "list_sources_dashboard_sources_get",
+        "parameters": [
+          {
+            "name": "tenant_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Tenant ID",
+              "title": "Tenant Id",
+              "example": "tenant_1234"
+            },
+            "description": "Tenant ID"
+          },
+          {
+            "name": "sub_tenant_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Sub-tenant ID",
+              "title": "Sub Tenant Id",
+              "example": "sub_tenant_4567"
+            },
+            "description": "Sub-tenant ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DashboardSourcesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cortex__models__response__commons__ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cortex__models__response__commons__ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cortex__models__response__commons__ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - Resource does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cortex__models__response__commons__ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity - Validation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cortex__models__response__commons__ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cortex__models__response__commons__ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cortex__models__response__commons__ActualErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/resources/list/tenant_ids": {
+      "get": {
+        "tags": [
+          "dashboard"
+        ],
+        "summary": "List Tenants",
+        "description": "List all tenants for dashboard view.\n\nUses Firebase authentication to identify the user and returns tenant\nmappings associated with that user's organization.",
+        "operationId": "list_tenants_dashboard_resources_list_tenant_ids_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DashboardTenantsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cortex__models__response__commons__ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cortex__models__response__commons__ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cortex__models__response__commons__ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - Resource does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cortex__models__response__commons__ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity - Validation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cortex__models__response__commons__ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cortex__models__response__commons__ActualErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cortex__models__response__commons__ActualErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/user/is_user_admin": {
+      "get": {
+        "tags": [
+          "dashboard"
+        ],
+        "summary": "Is Organization Admin",
+        "operationId": "is_organization_admin_dashboard_user_is_user_admin_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/user/user_details": {
+      "get": {
+        "tags": [
+          "dashboard"
+        ],
+        "summary": "User Details Ep",
+        "operationId": "user_details_ep_dashboard_user_user_details_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/user/create_user": {
+      "get": {
+        "tags": [
+          "dashboard"
+        ],
+        "summary": "Create User",
+        "operationId": "create_user_dashboard_user_create_user_get",
+        "parameters": [
+          {
+            "name": "full_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "title": "Full Name",
+              "example": "<str>"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/check_user_exists": {
+      "get": {
+        "tags": [
+          "dashboard"
+        ],
+        "summary": "Check User Exists",
+        "operationId": "check_user_exists_dashboard_check_user_exists_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
     "/": {
       "get": {
         "tags": [
@@ -2983,6 +3376,58 @@
           "created_at"
         ],
         "title": "ApiKeyCreateResponse"
+      },
+      "ApiKeyInfo": {
+        "properties": {
+          "api_key_id": {
+            "type": "string",
+            "title": "Api Key Id",
+            "description": "API key identifier",
+            "example": "<api_key_id>"
+          },
+          "user_email": {
+            "type": "string",
+            "title": "User Email",
+            "description": "Owner email",
+            "example": "<user_email>"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id",
+            "description": "User ID",
+            "example": "<user_id>"
+          },
+          "scopes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Scopes",
+            "description": "API key scopes",
+            "example": []
+          },
+          "is_valid": {
+            "type": "boolean",
+            "title": "Is Valid",
+            "description": "Whether the API key is valid",
+            "example": true
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At",
+            "description": "Creation timestamp",
+            "example": "<created_at>"
+          }
+        },
+        "type": "object",
+        "required": [
+          "api_key_id",
+          "user_email",
+          "user_id",
+          "is_valid",
+          "created_at"
+        ],
+        "title": "ApiKeyInfo"
       },
       "AppSourcesUploadData": {
         "properties": {
@@ -3366,21 +3811,13 @@
       "Body_upload_document_ingestion_upload_document_post": {
         "properties": {
           "files": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "binary"
-              },
-              {
-                "items": {
-                  "type": "string",
-                  "format": "binary"
-                },
-                "type": "array"
-              }
-            ],
+            "items": {
+              "type": "string",
+              "format": "binary"
+            },
+            "type": "array",
             "title": "Files",
-            "description": "The document file to upload (e.g., PDF, DOCX, TXT)"
+            "description": "Files to be uploaded"
           },
           "tenant_id": {
             "type": "string",
@@ -3395,89 +3832,23 @@
             "default": "",
             "example": "sub_tenant_4567"
           },
-          "file_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              }
-            ],
-            "title": "File Id",
-            "description": "Optional file ID (for single file upload)",
-            "example": "CortexDoc1234"
-          },
-          "tenant_metadata": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Tenant Metadata",
-            "description": "JSON string containing tenant-level document metadata (e.g., department, compliance_tag)\n\nExample: > \"{\"department\":\"Finance\",\"compliance_tag\":\"GDPR\"}\"\n\n For batch uploads, use tenant_metadata_list instead."
-          },
-          "document_metadata": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Document Metadata",
-            "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: > \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n For batch uploads, use document_metadata_list instead."
-          },
-          "tenant_metadata_list": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Tenant Metadata List",
-            "description": "JSON array of tenant metadata objects (one per file) for batch uploads. Must match the number of files. Example: [{{\"dept\": \"sales\"}}, {{\"dept\": \"marketing\"}}]"
-          },
-          "document_metadata_list": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Document Metadata List",
-            "description": "JSON array of document metadata objects (one per file) for batch uploads. Must match the number of files. Example: [{{\"author\": \"Alice\"}}, {{\"author\": \"Bob\"}}]"
-          },
-          "relations": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Relations",
-            "description": "Optional JSON string containing relations as key-value pairs",
-            "default": false
-          },
           "upsert": {
             "type": "boolean",
             "title": "Upsert",
-            "description": "If true, update existing sources with the same source_id. Defaults to True.",
             "default": true,
             "example": true
+          },
+          "file_metadata": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "File Metadata",
+            "description": "JSON Array of file metadata objects"
           }
         },
         "type": "object",
@@ -3574,10 +3945,7 @@
               }
             ],
             "title": "Source Id",
-            "description": "Optional unique identifier. Auto-generated if not provided.",
-            "examples": [
-              "doc_67890"
-            ],
+            "description": "Optional file ID (used for idempotency or re-uploads)",
             "example": "CortexDoc1234"
           },
           "title": {
@@ -3619,19 +3987,6 @@
             "title": "Document Metadata",
             "description": "JSON string containing document-specific metadata (e.g., title, author, file_id). If file_id is not provided, the system will generate an ID automatically.\n\nExample: > \"{\"title\":\"Q1 Report.pdf\",\"author\":\"Alice Smith\",\"file_id\":\"custom_file_123\"}\"\n\n\n"
           },
-          "file_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "File Id",
-            "description": "Optional file ID (used for idempotency or re-uploads)",
-            "example": "CortexDoc1234"
-          },
           "content": {
             "type": "string",
             "title": "Content",
@@ -3671,18 +4026,107 @@
       },
       "ContentUploadRequest": {
         "properties": {
-          "contents": {
+          "docs": {
             "items": {
               "$ref": "#/components/schemas/ContentUploadItem"
             },
             "type": "array",
-            "title": "Contents",
+            "title": "Docs",
             "description": "List of text/markdown content to upload.",
             "example": []
           }
         },
         "type": "object",
         "title": "ContentUploadRequest"
+      },
+      "DashboardApisResponse": {
+        "properties": {
+          "api_keys": {
+            "items": {
+              "$ref": "#/components/schemas/ApiKeyInfo"
+            },
+            "type": "array",
+            "title": "Api Keys",
+            "description": "List of API keys",
+            "example": []
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count",
+            "description": "Total number of API keys",
+            "example": 1
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "description": "Response message",
+            "default": "Successfully retrieved API keys"
+          }
+        },
+        "type": "object",
+        "required": [
+          "count"
+        ],
+        "title": "DashboardApisResponse"
+      },
+      "DashboardSourcesResponse": {
+        "properties": {
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/SourceModel-Output"
+            },
+            "type": "array",
+            "title": "Sources",
+            "description": "List of sources"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count",
+            "description": "Total number of sources",
+            "example": 1
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "description": "Response message",
+            "default": "Successfully retrieved sources"
+          }
+        },
+        "type": "object",
+        "required": [
+          "count"
+        ],
+        "title": "DashboardSourcesResponse"
+      },
+      "DashboardTenantsResponse": {
+        "properties": {
+          "tenants": {
+            "items": {
+              "$ref": "#/components/schemas/TenantInfo"
+            },
+            "type": "array",
+            "title": "Tenants",
+            "description": "List of tenants",
+            "example": []
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count",
+            "description": "Total number of tenants",
+            "example": 1
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "description": "Response message",
+            "default": "Successfully retrieved tenants"
+          }
+        },
+        "type": "object",
+        "required": [
+          "count"
+        ],
+        "title": "DashboardTenantsResponse"
       },
       "DeleteResult": {
         "properties": {
@@ -3913,6 +4357,20 @@
         "type": "object",
         "title": "GraphContext",
         "description": "Graph context containing query-based paths and chunk-based relations."
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail",
+            "example": []
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
       },
       "HybridSearchRequest": {
         "properties": {
@@ -5477,6 +5935,35 @@
         ],
         "title": "TenantCreateResponse"
       },
+      "TenantInfo": {
+        "properties": {
+          "tenant_id": {
+            "type": "string",
+            "title": "Tenant Id",
+            "description": "Organization tenant ID",
+            "example": "tenant_1234"
+          },
+          "organisation": {
+            "type": "string",
+            "title": "Organisation",
+            "description": "Organization name",
+            "example": "<organisation>"
+          },
+          "timestamp": {
+            "type": "string",
+            "title": "Timestamp",
+            "description": "Creation timestamp",
+            "example": "<timestamp>"
+          }
+        },
+        "type": "object",
+        "required": [
+          "tenant_id",
+          "organisation",
+          "timestamp"
+        ],
+        "title": "TenantInfo"
+      },
       "TenantStatsResponse": {
         "properties": {
           "tenant_id": {
@@ -5563,6 +6050,42 @@
           "assistant"
         ],
         "title": "UserAssistantPair"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location",
+            "example": []
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message",
+            "example": "<msg>"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type",
+            "example": "<type>"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
       },
       "VectorStoreChunk": {
         "properties": {
